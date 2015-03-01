@@ -11,7 +11,7 @@
 void main(){
 	
 	int i;
-	double time;
+	double time, diff, micro;
 	//measuring time
 	clock_t c0,c1;
 	
@@ -47,10 +47,20 @@ void main(){
 	gpioUnexport(69);
 	
 	c1=clock();
+	
+	diff = (double)(c1-c0);
+	
+	time =(diff/1000)/CLOCKS_PER_SEC;
+	micro = time/1000;
+	
+	printf ("CLOCKS PER SEC : %d", CLOCKS_PER_SEC);
+	printf("pulsos de clock : %lf\n", diff);
+	printf("tempo de execucao : %lf segundos\n", (time*1000));
+	printf("tempo de execucao : %lf millisegundos\n", time);
+	printf("tempo de execucao : %lf microsegundos\n", micro);
 
-	time =(double)((c1-c0)/CLOCKS_PER_SEC);
 
-	printf("tempo de execucao em segundos : %lf segundos", time);
+
 
 
 }

@@ -61,7 +61,7 @@ void gpioSetDirection(unsigned int gpio, PIN_DIR flag){
 	int fd;
 	char buf[MAX];
 
-	snprintf(buf, sizeof(buf), GPIO_LOCATION "gpio%d/direction", gpio);
+	snprintf(buf, sizeof(buf), GPIO_LOCATION "/gpio%d/direction", gpio);
 
 	if((fd = open(buf, O_WRONLY)) < 0) {
 		perror("gpio/direction");
