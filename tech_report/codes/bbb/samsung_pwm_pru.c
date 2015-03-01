@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 	if (pruio_config(Io, 1, 0x1FE, 0, 4)) 
 		return pruio_error(Io, "Config failed ");
 
-	for(j=0; j<3; j++) {
+	for(j=0; j<5; j++) {
 		mark(Io, 4500);
 		space(Io, 4500);
 		for(i=1; i<34; i++) {

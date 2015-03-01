@@ -60,7 +60,8 @@ int main(int argc, char **argv)
 {
 	pruIo *io = pruio_new(PRUIO_DEF_ACTIVE, 0x98, 0, 1); //! create new driver structure
 
-	int high, low;
+	struct timeval stop_l, start_l;
+	struct timeval stop_h, start_h;
 
 	do {
 		if (io->Errr) {
@@ -69,18 +70,17 @@ int main(int argc, char **argv)
 		if (pruio_config(io, 1, 0x1FE, 0, 4)) {
 			printf("config failed (%s)\n", io->Errr); break;}
 
-		while(!isleep(1)) { //                      run loop until keystroke
-			low = 0; high = 0;
+		//while(!isleep(1)) { //                      run loop until keystroke
+		while(1) { 
+			gettimeofday(&start_l, NULL);
+			while(((int) pruio_gpio_Value(io, PIN)) == 1);
+			gettimeofday(&stop_l, NULL);
 
-			while(((int) pruio_gpio_Value(io, PIN)) == 1) 
-				if(low++ > 900000) 
-					break;
+			gettimeofday(&start_h, NULL);
+			while(((int) pruio_gpio_Value(io, PIN)) == 0);
+			gettimeofday(&stop_h, NULL);
 
-			while(((int) pruio_gpio_Value(io, PIN)) == 0) 
-				if(high++ > 900000) 
-					break;
-
-			printf("%d %d\n", low, high);
+			printf("%lu %lu\n", (stop_l.tv_usec-start_l.tv_usec), (stop_h.tv_usec-start_h.tv_usec));
 		}//close while sleep
 	} while (0);
 
