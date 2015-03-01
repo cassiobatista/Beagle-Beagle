@@ -1,4 +1,8 @@
 /*
+ * Author: May 2015
+ * Cassio Trindade Batista
+ * cassio.batista.13@gmail.com
+ * 
  * 1st: connect to MySQL on bash terminal 
  * root@beagle # mysql -u root -p 
  * password: beagle1234 
@@ -20,7 +24,7 @@ on_off varchar(40),
 primary key(marca) 
 );
 
--- 35 bits command length
+-- 35 bits Samsung command length
 INSERT into tv(marca, vol_mais, vol_menos, ch_mais, ch_menos, on_off) values (
 "samsung",
 "1111000001110000011100000000111110", -- volume mais
@@ -30,7 +34,7 @@ INSERT into tv(marca, vol_mais, vol_menos, ch_mais, ch_menos, on_off) values (
 "1111000001110000001000000101111110"  -- on/off
 );
 
--- 22 bits command length
+-- 22 bits RC-6 command length
 INSERT into tv(marca, vol_mais, vol_menos, ch_mais, ch_menos, on_off) 
 values (
 "philips",

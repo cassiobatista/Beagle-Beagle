@@ -1,8 +1,8 @@
 #include "nada.h"
 #include <signal.h>
+
 #define CARRIER_FREQ 37900
-#define period 26385
-#define TRANSMIT_PWM "ehrpwm.1:0"
+#define PERIOD 26385
 
 void mark(int us);
 void space(int us);
@@ -40,11 +40,11 @@ int main()
 }
 
 void mark(int us) {
-	pwm_duty(period/3); //set duty period to 1/3 of the PWM period <-> 33%
+	pwm_duty(PERIOD/3); //set duty period to 1/3 of the PWM period <-> 33%
 	usleep(us-150);
 }
 
 void space(int us) {
-	pwm_duty(period); //set duty period to 1/1 of the PWM period <-> 100% 
+	pwm_duty(PERIOD); //set duty period to 1/1 of the PWM period <-> 100% 
 	usleep(us-150);
 }

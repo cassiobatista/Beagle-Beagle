@@ -1,4 +1,4 @@
-/*! \file button.c
+/*! \file ir_dump.c
   \brief Example: get state of a button.
 
   This file contains an example on how to use libpruio to get the state
@@ -9,9 +9,9 @@
 Licence: GPLv3
 
 Copyright 2014 by Thomas{ dOt ]Freiherr[ At ]gmx[ DoT }net
+          2015 by Cassio{ dOt ]Batista{ dOt ]13[ At ]gmail[ DoT }com
 
-
-Compile by: `gcc -Wall -o button button.c -lpruio`
+Compile by: `gcc -Wall -o ir_dump ir_dump.c -lpruio`
 
  */
 
@@ -25,8 +25,9 @@ Compile by: `gcc -Wall -o button button.c -lpruio`
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/time.h>
-#include "../c_wrapper/pruio.h"
-#include "../c_wrapper/pruio_pins.h"
+
+#include "pruio.h"
+#include "pruio_pins.h"
 
 //! The header pin to use.
 #define PIN P8_16
@@ -51,9 +52,7 @@ int isleep(unsigned int mseconds)
 	timeout.tv_sec = 0;
 	timeout.tv_usec = mseconds * 1000;
 
-	return TEMP_FAILURE_RETRY(select(FD_SETSIZE,
-				&set, NULL, NULL,
-				&timeout));
+	return TEMP_FAILURE_RETRY(select(FD_SETSIZE, &set, NULL, NULL, &timeout));
 }
 
 //! The main function.
@@ -62,7 +61,6 @@ int main(int argc, char **argv)
 	pruIo *io = pruio_new(PRUIO_DEF_ACTIVE, 0x98, 0, 1); //! create new driver structure
 
 	int high, low;
-	int count = 0;
 
 	do {
 		if (io->Errr) {
@@ -72,21 +70,16 @@ int main(int argc, char **argv)
 			printf("config failed (%s)\n", io->Errr); break;}
 
 		while(!isleep(1)) { //                      run loop until keystroke
-		//while(count++ < 100) { //                      run loop until keystroke
-			low = 0;
-			high = 0;
+			low = 0; high = 0;
 
-			while(((int) pruio_gpio_Value(io, PIN)) == 1) {
+			while(((int) pruio_gpio_Value(io, PIN)) == 1) 
 				if(low++ > 900000) 
 					break;
-			}//close while low
 
-			while(((int) pruio_gpio_Value(io, PIN)) == 0) {
+			while(((int) pruio_gpio_Value(io, PIN)) == 0) 
 				if(high++ > 900000) 
 					break;
-			}//close while low
 
-			//usleep(120);
 			printf("%d %d\n", low, high);
 		}//close while sleep
 	} while (0);
