@@ -1,0 +1,139 @@
+\documentclass{article}
+\usepackage[latin1]{inputenc}
+\usepackage{graphicx} 
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage[left=2.7cm, right=2.7cm, bottom=3cm]{geometry}
+\usepackage{caption}
+\usepackage{subcaption}
+
+
+\renewcommand*{\refname}{Referências Bibliográficas}
+\renewcommand*{\contentsname}{Sumário}
+\renewcommand*{\listfigurename}{Lista de Figuras}
+
+\title{
+	\vspace{40pt}
+	Controle de TV e Servidor LAMP em Sistemas Embarcados: Uma 
+	Solução em BeagleBone Black para Clientes Desktop e Android 
+	com Suporte à Reconhecimento e Síntese de Voz
+	\vspace{25pt}
+}
+
+\author{
+	Cassio Trindade Batista\\
+	\texttt{cassio.batista.13@gmail.com}\\
+	\texttt{201106840003}
+	\and
+	Gabriel Peixoto de Carvalho\\
+	\texttt{gaburiero.c@gmail.com}\\
+	\texttt{201106840010}
+	\and
+	Pedro Henrique C. F. Soares\\
+	\texttt{pedrofigueiredoc@gmail.com}\\
+	\texttt{201106840007}
+	\and
+	Thiago Barros Coelho\\
+	\texttt{tbarroscoelho@gmail.com}\\
+	\texttt{201106840040}
+}
+
+\date{
+\vspace{100pt}
+\begin{table}[!h]
+	\begin{tabular*}{.9\linewidth}{p{.45\linewidth}p{.45\linewidth}}
+	& Projeto apresentado à disciplina Projeto de Harware de Interfaceamento 
+	como requisito de avaliação.
+	Professores: Jeferson Leite e Adalbery Castro.
+	\end{tabular*}
+\end{table}
+\vfill
+Belem -- Brazil\\
+\vspace{2pt}
+Abril/2015
+}
+
+\begin{document}
+
+% cover ------------------------------------------------------------------------
+\thispagestyle{empty}
+\input{cover}
+
+% title and preamble stuff -----------------------------------------------------
+\newpage
+\maketitle
+\thispagestyle{empty}
+
+% summary, table of contents and list of figures -------------------------------
+\newpage
+\tableofcontents 
+\listoffigures
+
+% Introduction -----------------------------------------------------------------
+\newpage
+\section{Introdução}
+Automação Residencial\\
+Confortabilidade\\
+Open source\\
+Servidor próprio de voz, independente de internet\\
+
+A~\cite{Huang01}.
+
+\section{Objetivos}
+O Objetivo principal consiste em criar um protótipo portável que envie sinais à
+um aparelho de televisão e seja capaz de controlá-lo por meio do envio de sinais
+advindos de leds infra-vermelhos. Além disso, o sistema será configurado como um
+servidor capaz de disponibilizar um serviço genérico de reconhecimento e voz,
+de modo que o aparelho de TV mencionado possa ser controlado remotamente através
+da voz do usuário, o qual deverá ser portador de um smartphone da plataforma 
+Android como ``controle remoto''.
+
+\section{Justificativa}
+
+
+\section{Revisão Teórica}
+
+\section{Metodologia}
+\subsection{Preparação do servidor}
+O servidor, por ser o elemento chave na consolidação do projeto, deve ser o 
+módulo a ser prioritariamente configurado, afim de ser preparado para atender
+às devidas requisições, bem como executar qualquer tipo de aplicação solicitada.
+Sendo assim, a instalação da plataforma Angstrom foi tomada como o primeiro
+passo. Angstrom~\cite{angstrom} é um sistema operacional, baseado em Linux,
+preparado exclusivamente para plataformas embarcadas, tais como o Raspberry Pi
+ou a própria Beagle Board.
+
+% http://stackoverflow.com/questions/2661129/espeak-sapi-dll-usage-on-windows
+% sudo apt-get install libespeak1 libespeak-dev 
+% sudo apt-get install libportaudio2 libportaudio-dev 
+% sudo apt-get install libasound2 libasound2-dev 
+
+\section{Orçamento}
+Mano foi tudo mt barato porque é tudo soft saco tipo comprei uns sensor no 
+aliexpress mas a dilma me taxou fiquei boladu
+\begin{table}[!h]
+\centering
+\begin{tabular}{l|c}
+	\hline
+	Produto & Preço (Total em R\$)\\
+	\hline
+	1 $\times$ BeagleBone Board Black & 700,00 \\
+	2 $\times$ InfraRed Leds & 2,50\\
+	\hline
+\end{tabular}
+\end{table}
+
+\section{Dificuldades e Soluções}
+
+% Bibliography and References --------------------------------------------------
+\bibliographystyle{ieeetr}
+\bibliography{tech_report}
+
+% Codes, Math Background and so on ---------------------------------------------
+\newpage
+\appendix
+\end{document}
+%%% EOF %%%
