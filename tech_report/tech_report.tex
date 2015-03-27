@@ -10,7 +10,6 @@
 \usepackage{caption}
 \usepackage{subcaption}
 
-
 \renewcommand*{\refname}{Referências Bibliográficas}
 \renewcommand*{\contentsname}{Sumário}
 \renewcommand*{\listfigurename}{Lista de Figuras}
@@ -18,7 +17,7 @@
 \title{
 	\vspace{40pt}
 	Controle de TV e Servidor LAMP em Sistemas Embarcados: Uma 
-	Solução em BeagleBone Black para Clientes Desktop e Android 
+	Solução para Clientes Web e Android 
 	com Suporte à Reconhecimento e Síntese de Voz
 	\vspace{25pt}
 }
@@ -57,7 +56,6 @@ Abril/2015
 }
 
 \begin{document}
-
 % cover ------------------------------------------------------------------------
 \thispagestyle{empty}
 \input{cover}
@@ -74,29 +72,102 @@ Abril/2015
 
 % Introduction -----------------------------------------------------------------
 \newpage
-\section{Introdução}
-Automação Residencial\\
-Confortabilidade\\
+\begin{section}{Introdução}
+Tecnologias Assistias\\
+A automação residencial está cada dia facilitando mais a vida dos moradores. 
+Atualmente, boa parte das tarefas do cotidiano são realizadas através de
+soluções automáticas e práticas, resultando em um ambiente confortável e 
+agradável.
+
 Open source\\
 Servidor próprio de voz, independente de internet\\
 
 A~\cite{Huang01}.
+\end{section}
 
-\section{Objetivos}
-O Objetivo principal consiste em criar um protótipo portável que envie sinais à
-um aparelho de televisão e seja capaz de controlá-lo por meio do envio de sinais
-advindos de leds infra-vermelhos. Além disso, o sistema será configurado como um
-servidor capaz de disponibilizar um serviço genérico de reconhecimento e voz,
-de modo que o aparelho de TV mencionado possa ser controlado remotamente através
-da voz do usuário, o qual deverá ser portador de um smartphone da plataforma 
-Android como ``controle remoto''.
+% Goals ------------------------------------------------------------------------
+\begin{section}{Objetivos}
+%http://www.laps.ufpa.br/falabrasil/
+O objetivo principal consiste em criar um protótipo portável que seja capaz de
+controlar um aparelho de televisão através do envio remoto de sinais. Além
+disso, o sistema será configurado como um servidor que disponibiliza um
+serviço genérico de reconhecimento de fala, de modo que o aparelho de TV
+mencionado possa ser controlado remotamente através da voz do usuário; e um
+serviço de síntese de fala, provendo feedback das ações de acordo com o
+entendimento do sistema ASR.
 
-\section{Justificativa}
+\subsection{Reconhecimento Automático de Voz}
+Para que o reconhecimento automático de voz seja possível, o \textit{software}
+Julius deverá ser instalado no servidor. Julius é um software capaz de processar
+e decodificar áudio em aproximadamente tempo real para tarefas de ditado de até
+60 mil palavras.
 
+Para que o Julius possa realizar o reconhecimento em Português Brasileiro, serão
+são necessários basicamente dois recursos: um modelo acústico e um dicionário
+fonético. Modelos acústicos genéricos para PT\_BR podem ser encontrados na
+página do Grupo FalaBrasil, bem como o software que cria o dicionário fonético
+(conversor grafema-fonema ou G2P). Entretanto, embora a taxa de acerto dos
+modelos seja razoavelmente boa, é possível melhorá-la através da criação
+ou treino de novos modelos.
 
-\section{Revisão Teórica}
+O processo de treino será realizado pelo software HTK (acrônimo para kit de
+ferramentas dos modelos ocultos de Markov, livremente traduzido do inglês), o
+qual é capaz de extrair segmentos de fala de um arquivo de áudio e assinalar uma
+referência à ele. Tal referência é retirada do dicionário fonético, previamente
+criado com o software G2P.
 
-\section{Metodologia}
+\subsection{Síntese de Voz}
+O software eSpeak é a principal referência em síntese de voz em ambientes Linux.
+Graças à disponibilização de uma API do eSpeak no site oficial do desenvolvedor,
+o sistema, além de conseguir ``ouvir e entender'', também será capaz de 
+``falar''. O download dos modelos para PT\_BR é feito automaticamente com o das
+bibliotecas necessárias.
+
+\subsection{Servidor LAMP}
+\textcolor{red}{***PResdro***}\\
+\textcolor{red}{***Predro***}\\
+\textcolor{red}{***Pesro***}\\
+\textcolor{red}{***Porredo***}\\
+\textcolor{red}{***PResdro***}\\
+\end{section}
+
+% Why? -------------------------------------------------------------------------
+\begin{section}{Justificativa}
+% [IBGE'10] ftp://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Caracteristicas_Gerais_Religiao_Deficiencia/tab1_3.pdf
+% http://g1.globo.com/brasil/noticia/2012/04/239-dos-brasileiros-declaram-ter-alguma-deficiencia-diz-ibge.html
+Segundo o Instituto Brasileiro de Geografia e Estatística, no censo realizado em
+2010, aproximadamente 23,9\% dos brasileiros declaram ter alguma deficiência.
+Esse número ainda é mais impressionante quando se pensa que cerca de um quarto
+de uma população de 190 milhões de habitantes é portadora de alguma necessidade 
+especial. Ainda segundo os dados, 6,9\% (13,3~mi) dos brasileiros apresentam algum
+grau de deficiência motora, enquanto 18,8\% (35,7~mi) afirmam serem cegas ou
+terem alguma dificuldade para enxergar.
+
+Essa pesquisa tem como finalidade diminuir a exclusão digital vivenciada
+especialmente por pessoas com alguma necessidade motora ou visual, as quais
+estão à margem da utilização de alguns dispositivos eletrônicos por conta da
+falta de acessibilidade. A tecnologia de reconhecimento de fala torna acessível
+a utilização de qualquer dispositivo eletrônico por usuários incapazes de
+realizar movimentos específicos com membros superiores, como segurar um controle
+físico e apertar botões ou digitar, por exemplo. Além disso, 
+
+\end{section}
+
+% Theory Revision --------------------------------------------------------------
+\begin{section}{Revisão Teórica}
+% [IEEE'11] Designing Android Applications with both Online and Offline Voice Control of Household Devices
+% http://makezine.com/2013/04/15/arduino-uno-vs-beaglebone-vs-raspberry-pi/
+Arduino vs BeagleBoneBlack:
+
+\textcolor{red}{**thaigo**}\\
+\textcolor{red}{**thaigo**}\\
+\textcolor{red}{**thaigo**}\\
+\textcolor{red}{**thaigo**}\\
+\textcolor{red}{**thaigo**}\\
+\end{section}
+
+% Methodology ------------------------------------------------------------------
+\begin{section}{Metodologia}
 \subsection{Preparação do servidor}
 O servidor, por ser o elemento chave na consolidação do projeto, deve ser o 
 módulo a ser prioritariamente configurado, afim de ser preparado para atender
@@ -107,13 +178,10 @@ preparado exclusivamente para plataformas embarcadas, tais como o Raspberry Pi
 ou a própria Beagle Board.
 
 % http://stackoverflow.com/questions/2661129/espeak-sapi-dll-usage-on-windows
-% sudo apt-get install libespeak1 libespeak-dev 
-% sudo apt-get install libportaudio2 libportaudio-dev 
-% sudo apt-get install libasound2 libasound2-dev 
+\end{section}
 
-\section{Orçamento}
-Mano foi tudo mt barato porque é tudo soft saco tipo comprei uns sensor no 
-aliexpress mas a dilma me taxou fiquei boladu
+% Prices -----------------------------------------------------------------------
+\begin{section}{Orçamento}
 \begin{table}[!h]
 \centering
 \begin{tabular}{l|c}
@@ -122,11 +190,16 @@ aliexpress mas a dilma me taxou fiquei boladu
 	\hline
 	1 $\times$ BeagleBone Board Black & 700,00 \\
 	2 $\times$ InfraRed Leds & 2,50\\
+	1 $\times$ Smartphone com Android & 800,00\\
 	\hline
 \end{tabular}
 \end{table}
+\end{section}
 
-\section{Dificuldades e Soluções}
+% Prices -----------------------------------------------------------------------
+\begin{section}{Dificuldades e Soluções}
+Mano
+\end{section}
 
 % Bibliography and References --------------------------------------------------
 \bibliographystyle{ieeetr}
