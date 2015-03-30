@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[latin1]{inputenc}
-\usepackage{graphicx} 
+\usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{amsmath}
@@ -16,9 +16,8 @@
 
 \title{
 	\vspace{40pt}
-	Controle de TV e Servidor LAMP em Sistemas Embarcados: Uma 
-	Solução para Clientes Web e Android 
-	com Suporte à Reconhecimento e Síntese de Voz
+	Controle de TV e Servidor LAMP em Sistemas Embarcados: Uma Solução para
+	Clientes Web e Android com Suporte à Reconhecimento e Síntese de Voz
 	\vspace{25pt}
 }
 
@@ -67,22 +66,44 @@ Abril/2015
 
 % summary, table of contents and list of figures -------------------------------
 \newpage
-\tableofcontents 
+\tableofcontents
 \listoffigures
 
 % Introduction -----------------------------------------------------------------
 \newpage
 \begin{section}{Introdução}
-Tecnologias Assistivas\\
-A automação residencial está cada dia facilitando mais a vida dos moradores. 
-Atualmente, boa parte das tarefas do cotidiano são realizadas através de
-soluções automáticas e práticas, resultando em um ambiente confortável e 
-agradável.
+A interface homem-máquina encontra-se cada vez mais amigável. O que antes era
+portado somente por empresas e pessoas com poder financeiro diferenciado e acima
+da média, em termos de tecnologia, é hoje muito mais simples e agradável para
+usuários domésticos sem profundo conhecimento no assunto. Diversos estudos vêm
+sendo desenvolvidos a fim de melhorar ainda mais essa comunicação, de modo que a
+máquina se aproxime mais de ações como pensar e falar, típicas do ser humano.
 
-Open source\\
+Síntese e reconhecimento automático de voz (do inglês \textit{text-to-speech} e
+\textit{automatic speech recognition}, respectivamente, TTS e
+ASR)~\cite{taylor,Huang01} tornam a interface citada acima muito mais prática e
+natural, de forma que a comunicação de fato se assemelha àquela estabelecida
+entre duas pessoas. O ASR refere-se ao sistema que, tomando o sinal de fala
+digitalizado como entrada, é capaz de gerar o texto transcrito na saída. Já um
+sistema TTS realiza a função contrária, na qual um sinal analógico de voz é
+sintetizado de acordo com o texto posto na entrada. São inúmeras as aplicações
+que utilizam tais sistemas envolvendo processamento de voz. Este trabalho tem um
+foco em uma área especial: automação doméstica com foco em acessibilidade.
+
+% Ref.: Comitê de Ajudas Técnicas (CAT) -- TA
+% http://www.assistiva.com.br/tassistiva.html
+De acordo com \cite{cat}, tecnologias assistivas (TA) ``englobam produtos,
+recursos, metodologias, estratégias, práticas e serviços que objetivam promover
+a funcionalidade, relacionada à atividade e participação de pessoas com
+deficiência, incapacidades ou mobilidade reduzida, visando sua autonomia,
+independência, qualidade de vida e inclusão social''.
+
 Servidor próprio de voz, independente de internet\\
 
-A~\cite{Huang01}.
+Vale ressaltar que todas as APIs e softwares utilizados para criação dos
+sistemas e dos recursos utilizados (com exceção do HTK, o qual será visto mais
+adiante) possuem licença \textit{open source} e são encontrados disponíveis
+livremente na Internet.
 \end{section}
 
 % Goals ------------------------------------------------------------------------
@@ -153,13 +174,42 @@ segurar um controle físico e apertar botões ou digitar, por exemplo. Além disso,
 os portadores de necessidades visuais também poderão ser ajudados, já que nem
 todos os controles possuem referências reconhecíveis pelo tato.
 
+
+% Ref.: ADA - American with Disabilities Act
+% regula os direitos dos cidadãos com deficiência nos EUA, além de prover a
+% base legal dos fundos públicos para compra dos recursos que estes necessitam.
+
+\begin{itemize}
+	\item Recursos de Acesssibilidade ao computador
+	\begin{itemize}
+		\item Equipamentos de entrada e saída (síntese de voz, Braille),
+		auxílios alternativos de acesso (ponteiras de cabeça, de luz), teclados
+		modificados ou alternativos, acionadores, softwares especiais (de 
+		reconhecimento de voz, etc.), que permitem as pessoas com deficiência 
+		a usarem o computador.
+	\end{itemize}
+	\item Sistemas de Controle de Ambiente
+	\begin{itemize}
+		\item Sistemas eletrônicos que permitem as pessoas com limitações
+		moto-locomotoras, controlar remotamente aparelhos eletro-eletrônicos, 
+		sistemas de segurança, entre outros, localizados em seu quarto, sala, 
+		escritório, casa e arredores.
+	\end{itemize}
+	\item Auxílios para cegos ou com visão subnormal
+	\begin{itemize}
+		\item Auxílios para grupos específicos que inclui lupas e lentes,
+		Braille para equipamentos com síntese de voz, grandes telas de 
+		impressão, sistema de TV com aumento para leitura de documentos, 
+		publicações etc.
+	\end{itemize}
+\end{itemize}
 \end{section}
 
 % Theory Revision --------------------------------------------------------------
 \begin{section}{Revisão Teórica}
 % [IEEE'11] Designing Android Applications with both Online and Offline Voice Control of Household Devices
 % http://makezine.com/2013/04/15/arduino-uno-vs-beaglebone-vs-raspberry-pi/
-Arduino vs BeagleBoneBlack:
+Arduino vs BeagleBoneBlack vs Raspberry Pi:
 
 \textcolor{red}{**thaigo**}\\
 \textcolor{red}{**thaigo**}\\
@@ -188,13 +238,13 @@ ou a própria Beagle Board.
 \centering
 \begin{tabular}{l|c}
 	\hline
-	Produto & Preço (Total em R\$)\\
+	Produto & Preço (Convertido em R\$)\\
 	\hline
 	1 $\times$ BeagleBone Board Black & 200,00\\
-	1 $\times$ Smartphone com Android & 100,00\\
+	1 $\times$ Smartphone com Android & 200,00\\
 	2 $\times$ InfraRed Leds & 2,50\\
 	\hline
-	Total & 1502.50\\
+	Total & 402.50\\
 	\hline
 \end{tabular}
 \end{table}
