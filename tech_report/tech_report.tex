@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[latin1]{inputenc}
+\usepackage[brazil]{babel}
 \usepackage{graphicx}
 \usepackage{listings}
 \usepackage{xcolor}
@@ -9,15 +10,19 @@
 \usepackage[left=2.7cm, right=2.7cm, bottom=3cm]{geometry}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage{fancyhdr}
 
-\renewcommand*{\refname}{Referências Bibliográficas}
-\renewcommand*{\contentsname}{Sumário}
-\renewcommand*{\listfigurename}{Lista de Figuras}
+%\renewcommand*{\refname}{Referências Bibliográficas}
+
+%\fancyfoot[c]{\thepage}
+%\fancyhead[ro,le]{}
+%\fancyhead[lo]{\leftmark}
+%\fancyhead[re]{\rightmark}
 
 \title{
 	\vspace{40pt}
-	Controle de TV e Servidor LAMP em Sistemas Embarcados: Uma Solução para
-	Clientes Android com Suporte à Reconhecimento e Síntese de Voz
+	Controle de Aparelhos Eletrônicos por Sistemas Embarcados: Uma 
+	Solução com Suporte à Reconhecimento e Síntese de Voz
 	\vspace{25pt}
 }
 
@@ -71,6 +76,7 @@ Abril/2015
 
 % Introduction -----------------------------------------------------------------
 \newpage
+%\pagestyle{fancy}
 \begin{section}{Introdução}
 A interface homem-máquina encontra-se cada vez mais amigável. O que antes era
 portado somente por empresas e pessoas com poder financeiro diferenciado e acima
@@ -92,6 +98,7 @@ destacar a automação residencial com foco em acessibilidade.
 
 % Ref.: Comitê de Ajudas Técnicas (CAT) -- TA
 % http://www.assistiva.com.br/tassistiva.html
+% The Assessment of Assistive Technology: Outcomes, Effects and Costs
 De acordo com \cite{cat, gelderblom}, tecnologia assistiva (TA) é um campo da
 engenharia biomédica dedicada à aumentar a independência e mobilidade de pessoas
 com deficiência, englobando metodologias, práticas e serviços que objetivam
@@ -138,8 +145,8 @@ necessários basicamente dois recursos: um modelo acústico e um dicionário
 fonético. Modelos acústicos genéricos para PT\_BR podem ser encontrados na
 página do Grupo FalaBrasil~\cite{falabrasil}, bem como o software que cria o
 dicionário fonético (conversor grafema-fonema ou G2P)~\cite{lapsg2p}.
-Entretanto, embora a taxa de acerto dos modelos seja satisfatória, é
-possível melhorá-la através da criação ou treino de novos modelos.
+Entretanto, embora a taxa de acerto dos modelos seja satisfatória, é possível
+melhorá-la através da criação ou treino de modelos específicos para a aplicação.
 
 O processo de treino será realizado pelo software HTK (acrônimo para kit de
 ferramentas dos modelos ocultos de Markov, livremente traduzido do inglês), o
@@ -154,11 +161,11 @@ o sistema, além de conseguir ``ouvir e entender'', também será capaz de
 ``falar''. O download dos modelos para PT\_BR é feito juntamente com o das
 bibliotecas necessárias.
 
-Para que a BeagleBone seja capaz de reproduzir o som sintetizado, é necessário
-um cartão de som com um auto-falante. Embora o cartão possa ser comprado, a 
-opção mais barata é construí-lo. O circuito é bem simples, sendo constituído
-basicamente por um \textit{speaker}, um amplificador operacional LM386, além de
-alguns resistores e capacitores.
+%Para que a BeagleBone seja capaz de reproduzir o som sintetizado, é necessário
+%um cartão de som com um auto-falante. Embora o cartão possa ser comprado, a 
+%opção mais barata é construí-lo. O circuito a ser projetado é bem simples, sendo
+%constituído basicamente por resistores, capacitores, um \textit{speaker} e um
+%amplificador operacional.
 
 \subsection{Servidor LAMP}
 \textcolor{red}{***PResdro***}\\
@@ -176,7 +183,8 @@ dessa forma, transmitir uma informação binária para o circuito localizado na
 parte frontal da TV. Esse circuito possui um sensor infravermelho (IR sensor), o
 qual, atuando como o receptor da comunicação, é capaz de receber os bits
 transmitidos e repassá-los para o processador do circuito, o qual executará a
-tarefa relacionada à decodificação dos bits.
+tarefa relacionada à decodificação dos bits (diminuir o volume, trocar de canal,
+etc).
 
 Nesse sentido, o \textit{datasheet} de uma TV específica será estudado para que
 a BBB possa transmitir o conjunto de bits exatos, reconhecíveis
@@ -199,19 +207,20 @@ portadora de alguma necessidade especial. Ainda segundo os dados, 6,9\%
 Essa pesquisa tem como finalidade apresentar uma solução para diminuir a
 exclusão digital vivenciada especialmente por pessoas com necessidade motora ou
 visual, as quais estão à margem da utilização de dispositivos eletrônicos
-por conta da falta de acessibilidade. A tecnologia de reconhecimento de fala
-torna acessível a utilização de qualquer dispositivo eletrônico por usuários
-incapazes de realizar movimentos específicos com membros superiores, como
-segurar um controle físico e apertar botões ou digitar, por exemplo. Além disso,
-os portadores de necessidades visuais também poderão ser ajudados, já que nem
-todos os controles possuem referências reconhecíveis pelo tato.
+por conta da ausência se soluções que os adaptem às suas necessidades. A
+tecnologia de reconhecimento de fala torna acessível a utilização de qualquer
+dispositivo eletrônico por usuários incapazes de realizar movimentos específicos
+com membros superiores, como segurar um controle físico e apertar botões ou
+digitar, por exemplo. Além disso, os portadores de necessidades visuais também
+poderão ser ajudados, já que nem todos os controles possuem referências
+reconhecíveis pelo tato.
 
 % Ref.: ADA - American with Disabilities Act
-O Ato de Americanos com Deficiência (ADA)~\cite{ada} regula os direitos dos
-cidadãos com deficiência nos EUA, além de prover a base legal dos fundos
-públicos para compra dos recursos que estes necessitam. Algumas categorias de TA
-foram criadas com base nas diretrizes gerais da ADA, das quais podemos salientar
-três como justificativa do trabalho: 
+O Ato de Americanos com Deficiência (ADA)~\cite{ada} é um documento que regula
+os direitos dos cidadãos com deficiência nos EUA, além de prover a base legal
+dos fundos públicos para compra dos recursos que estes necessitam. Algumas
+categorias de TA foram criadas com base nas diretrizes gerais da ADA, das quais
+podemos salientar três como justificativa do trabalho:
 
 \begin{enumerate}
 	\item Recursos de acessibilidade ao computador
@@ -225,7 +234,7 @@ três como justificativa do trabalho:
 	\item Sistemas de controle de ambiente
 	\begin{itemize}
 		\item Sistemas eletrônicos que permitem as pessoas com limitações
-		moto-locomotoras, controlar remotamente aparelhos eletro-eletrônicos,
+		moto-locomotoras controlar remotamente aparelhos eletro-eletrônicos,
 		sistemas de segurança, entre outros, localizados em seu quarto, sala,
 		escritório, casa e arredores.
 	\end{itemize}
@@ -239,39 +248,98 @@ três como justificativa do trabalho:
 \end{enumerate}
 \end{section}
 
+\textcolor{red}{*Add some conclusion to the section here*}
+
 % Theory Revision --------------------------------------------------------------
 \begin{section}{Revisão Teórica}
 % [IEEE'11] Designing Android Applications with both Online and Offline Voice Control of Household Devices
-% http://makezine.com/2013/04/15/arduino-uno-vs-beaglebone-vs-raspberry-pi/
-% http://tecnologia.hsw.uol.com.br/controle-remoto.htm
-% http://mundoestranho.abril.com.br/materia/como-funciona-o-controle-remoto
-% http://arduino.cc/en/Tutorial/SimpleAudioPlayer
+A ideia de aplicar acessibilidade no controle de equipamentos eletrônicos é
+relativamente recente, trazendo resultados concretos a partir de 2006 (?). 
+Em~\cite{ieee11}, o decodificador PocketSphinx~\cite{cmusphinx} foi
+embarcado em um smartphone android para que pudesse controlar aparelhos
+domésticos através da interface de voz. O resultado era enviado para uma
+SparkFun IOIO Board, a qual disparava o \textit{trigger} para o controle de uma
+TV. O foco do trabalho era ajudar pessoas afetadas com tetraplegia a serem mais
+independentes, além de avaliar o desempenho de decodificadores embarcados e
+distribuídos, claro.
 
-O Arduino é uma plataforma flexível com grande capacidade de interfaceamento com
-quase qualquer coisa, porém é uma plataforma simples, ótima para projetos
-menores já que o Arduino é um microcontrolador e não um microprocessador, ele
-pode ser programado em C mas não roda nenhum sistema operacional.
+%Ao passo que o Pocketsphinx funcionava offline, a API \emph{SpeechRecognizer}
+%que a empresa Google disponibiliza para os desenvolvedores adicionem
+%reconhecimento à seus aplicativos Android provia reconhecimento de voz online,
+%ou seja, através da Internet.
 
-O Raspberry Pi, por ser bastante completo, pode ser considerado um mini 
-computador. Todo o seu armazenado é fornecido por um cartão SD, além de ser
-possível se conectar à Internet através de um conector Ethernet. Sendo
-necessário a instalação de um sistema operacional, o Raspberry Pi ainda possui
-interface de saída HDMI e é muito útil para aplicações gráficas
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.65\textwidth]{Figures/asr_sch}
+	\caption{Esquemático de um sistema ASR}
+	\label{fig:asr_sch}
+\end{figure}
 
-A BeagleBone é comparável ao Raspberry Pi. Entretanto, por ter mais pinos
-(GPIO) e um processador mais poderoso, a BeagleBone é uma escolha óbvia para
-projetos mais elaborados. Além de possuir diversas opções de conexão, a
-BeagleBone une a flexibilidade de interfaceamento do arduino com a capacidade
-de processamento rápido do Raspberry Pi. A principal desvantagem é o preço.
+Os fundamentos do reconhecimento automático de voz, assim como os da síntese de
+voz são descritos com bastante detalhes em~\cite{Huang01}. A arquitetura mais
+geral e aceita na literatura é mostrada na Figura~\ref{fig:asr_sch}. Vale
+salientar que, ao invés do uso de modelos mais gerais, que descrevem a maior
+parte de uma linguagem, serão utilizadas gramáticas livres de contexto, as quais
+limitam o vocabulário utilizado a apenas um conjunto de sentenças possíveis,
+escolhidas pelo desenvolvedor do sistema. A construção do dicionário fonético
+para PT\_BR dar-se-á através do software descrito em~\cite{lapsg2p}; o tutorial
+para o treino do modelo acústico encontra-se disponível na página do
+projeto Voxforge~\cite{voxforge}, bem como capítulo 3 do livro do
+HTK~\cite{htk_book}; a gramática reconhecida pelo Julius é criada manualmente de 
+acordo com o descrito na página oficial~\cite{julius_site}.
+Instruções de configuração e utilização do Julius encontram-se na documentação
+oficial~\cite{julius_book}.
 
-Uma comparação entre os três equipamentos é dado abaixo na
-Tabela~\ref{comparison}:
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=.6\textwidth]{Figures/soundcard_sch}
+%	\caption{Esquemático de um circuito com auto-falante utilizando o
+%	amplificador LM386.}
+%	\label{fig:sc_sch}
+%\end{figure}
+
+% http://andicelabs.com/2014/03/usb-audio-beaglebone/
+Como saída analógica do sistema TTS, a voz sintetizada deve ser reproduzida por
+um dispositivo externo à BeagleBone, já que esta não possui auto-falantes
+próprios. Como visto em~\cite{andicelabs}, o dispositivo primário de saída de
+áudio da BeagleBone é o HDMI, o qual pode ser desabilitado mediante modificações
+em parâmetros do kernel. Feito isso, o USB, que é o dispositivo secundário, se
+torna o principal. Assim, a solução mais simples é plugar um auto-falante USB,
+já que a saída de áudio será automaticamente redirecionada para esta saída.
+Na página oficial do eSpeak, um arquivo de cabeçalho (\textit{header}) permite a
+utilização de uma API em C/C++, a qual facilita o acesso aos módulos do software
+que permitem que a BeagleBone ``fale''~\cite{eSpeak}.
+
+%% http://arduino.cc/en/Tutorial/SimpleAudioPlayer
+%% http://www.instructables.com/id/Simple-Wav-Player-Using-Arduino/?lang=pt&ALLSTEPS
+%% http://forum.arduino.cc/index.php?topic=49654.0 -- can arduino talk without shield?
+%% http://www.instructables.com/id/Twitter-Enabled-Text-to-Speech/
+%Links úteis podem ser encontrados em~\cite{arduino_player}
+%e~\cite{instructables_player}, os quais ensinam o passo-a-passo para o projeto e
+%construção de um circuito amplificador. 
 
 % http://michaelhleonard.com/raspberry-pi-or-beaglebone-black/
 % http://randomnerdtutorials.com/arduino-vs-raspberry-pi-vs-beaglebone-vs-pcduino/
 % http://makezine.com/2013/04/15/arduino-uno-vs-beaglebone-vs-raspberry-pi/
+A escolha da plataforma foi fundamental para a esquematização do projeto.
+Arduino, Raspberry Pi e BeagleBone Black foram as três principais plataformas a
+serem escolhidas. Há muitos tutoriais de comparação entre as plataformas na 
+Internet~\cite{mhl,randomnerd,makezine}.
+O Arduino, apesar de ser uma plataforma flexível e com grande capacidade de 
+interfaceamento com uma vasta quantidade de dispositivos, é uma plataforma 
+simples, porém ótima para projetos menores. O microcontrolador pode ser
+programado em C, mas se torna muito limitado quando o projeto requer um servidor
+estável e razoavelmente potente;
+O Raspberry Pi, por ser bastante completo, pode ser considerado um mini 
+computador. Todo o seu armazenado é fornecido por um cartão SD, além de ser
+possível se conectar à Internet através de um conector Ethernet. Sendo
+necessário a instalação de um sistema operacional, o Raspberry Pi ainda possui
+interface de saída HDMI e é muito útil para aplicações gráficas.
+
 \begin{table}[!h]
 \centering
+\caption{Comparação entre as três principais plataformas}
+\label{comparison}
 \begin{tabular}{c|c c c}
 \hline
 				& Arduino UNO	& BeagleBone Black	& Raspberry Pi \\
@@ -288,13 +356,31 @@ Amperagem (mA)	& 42 & 210-460 & 150-350 \\
 Voltagem (V)	& 7-12 & 5 & 5 \\
 USB				& - & 1 Host, 1 Mini Client  & 2 Hosts, 1 Micro Power\\
 Ethernet		& - & 1 10/100 Mbps & 1 10/100 Mbps \\
+Preço 			& 5 conto & 300 conto & 200 conto \\
 %Resolução		& - & 1280x1024 (5:4), 1024x768 (4:3), 1280x720 (16:9), 1440x900 (16:10) all at 16 bit	& 	Extensive from 640x350 up to 1920x1200, this includes 1080p\\
 %Camera connector & - & - & Rpi \\
 \hline
 \end{tabular}
-\caption{Comparação entre três principais plataformas}
-\label{comparison}
 \end{table}
+
+A BeagleBone é comparável ao Raspberry Pi. Entretanto, por ter mais pinos
+(GPIO) e um processador mais poderoso, a BeagleBone é uma escolha óbvia para
+projetos mais elaborados. Além de possuir diversas opções de conexão, a
+BeagleBone une a flexibilidade de interfaceamento do Arduino com a capacidade
+de processamento rápido do Raspberry Pi. Apesar da desvantagem no preço, não
+restaram muitas dúvidas no momento da escolha dessa plataforma para o projeto.
+Uma comparação entre os três equipamentos é dado na Tabela~\ref{comparison}:
+
+O cliente Android foi criado também em~\cite{cassio14}. A interface será
+redefinida e métodos serão criados para que haja interação com o banco de dados
+a ser instalado no servidor BeagleBone.
+
+% http://tecnologia.hsw.uol.com.br/controle-remoto.htm
+% http://mundoestranho.abril.com.br/materia/como-funciona-o-controle-remoto
+O funcionamento de controles remotos, com ênfase nos baseados em luz
+infravermelha para televisores, é explicado de de forma clara e detalhada em
+diversos tutoriais para ``curiosos'' disponíveis na internet, como é o caso
+de~\cite{mundoestranho} e~\cite{uol_hsw}.
 \end{section}
 
 % Methodology ------------------------------------------------------------------
@@ -311,10 +397,10 @@ própria BeagleBone.
 \subsection{Reconhecimento de Voz}
 % http://eda.eme.ro/handle/10598/28187
 Em~\cite{cassio14}, o Julius foi configurado para funcionar em modo servidor
-através da opção nativa ``-adinnet'' (A/D Input from Network, conversão A/D com
-entrada pela rede). Isso permite que o Julius receba amostras de áudio via
-streaming pela rede através de uma comunicação com um cliente genérico via
-socket.
+através da opção nativa ``-adinnet'' (A/D \textit{Input from Network}, conversão 
+A/D com entrada pela rede). Isso permite que o Julius receba amostras de áudio
+via \textit{streaming} através de uma comunicação com um cliente genérico via
+\textit{socket}.
 
 \subsection{Síntese de Voz}
 % http://stackoverflow.com/questions/2661129/espeak-sapi-dll-usage-on-windows
@@ -322,6 +408,14 @@ socket.
 \subsection{Servidor LAMP}
 
 \subsection{Cliente Android}
+Também em~\cite{cassio14}, 
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.90\textwidth]{Figures/csr}
+	\caption{Esquemático do Cliente LaPS CSR.}
+	\label{fig:asr_sch}
+\end{figure}
 
 \end{section}
 
@@ -340,10 +434,10 @@ socket.
 	Smartphone &\\
 	IR Led &\\
 	IR Sensor &\\
-	Capacitor &\\
-	Resistor &\\
-	Speaker 8~$\Omega$ &\\
-	LM386 amplifier&\\
+	% Capacitor &\\
+	% Resistor &\\
+	USB Speaker 8~$\Omega$ &\\
+	% LM386 amplifier&\\
 	\hline
 	Total & & & & 500 conto\\
 \end{tabular}
