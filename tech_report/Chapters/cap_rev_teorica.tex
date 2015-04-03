@@ -1,0 +1,139 @@
+\begin{section}{Revisão Teórica}
+% [IEEE'11] Designing Android Applications with both Online and Offline Voice Control of Household Devices
+% [IEEE'13] Designing Android Applications Using Voice Controlled Commands: For Hands Free Interaction with Common Household Devices
+% [IEEE'10] Smart Home Control System for the disabled using the head and the mouth movement
+% [IJERA'15] Wi-Fi and Android Based Smart Home Automation for People with Disabilities
+ 
+Como o iOS e o Android foram lançados, respectivamente, em 2007 e 2008, e sendo 
+a ascensão dos smartphones é relativamente recente, a ideia de aplicar
+acessibilidade no controle de equipamentos eletrônicos através desse tipo de
+equipamento somente começou a revelar resultados concretos a partir de 2010. 
+Em~\cite{ieee11}, o decodificador PocketSphinx foi
+embarcado em um smartphone android para que pudesse controlar aparelhos
+domésticos através da interface de voz. O resultado era enviado para uma
+SparkFun IOIO Board, a qual disparava o \textit{trigger} para o controle de uma
+TV. O foco do trabalho era ajudar pessoas afetadas com tetraplegia a serem mais
+independentes, além de avaliar o desempenho de decodificadores embarcados e
+distribuídos, claro.
+
+%Ao passo que o Pocketsphinx funcionava offline, a API \emph{SpeechRecognizer}
+%que a empresa Google disponibiliza para os desenvolvedores adicionem
+%reconhecimento à seus aplicativos Android provia reconhecimento de voz online,
+%ou seja, através da Internet.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.65\textwidth]{Figures/asr_sch}
+	\caption{Esquemático de um sistema ASR}
+	\label{fig:asr_sch}
+\end{figure}
+
+Os fundamentos do reconhecimento automático de voz, assim como os da síntese de
+voz são descritos com bastante detalhes em~\cite{Huang01}. A arquitetura mais
+geral e aceita na literatura é mostrada na Figura~\ref{fig:asr_sch}. Vale
+salientar que, ao invés do uso de modelos mais gerais, que descrevem a maior
+parte de uma linguagem, serão utilizadas gramáticas livres de contexto, as quais
+limitam o vocabulário utilizado a apenas um conjunto de sentenças possíveis,
+escolhidas pelo desenvolvedor do sistema. A construção do dicionário fonético
+para PT\_BR dar-se-á através do software descrito em~\cite{lapsg2p}; o tutorial
+para o treino do modelo acústico encontra-se disponível na página do
+projeto Voxforge~\cite{voxforge}, bem como capítulo 3 do livro do
+HTK~\cite{htk_book}; a gramática reconhecida pelo Julius é criada manualmente de 
+acordo com o descrito na página oficial~\cite{julius_site}.
+Instruções de configuração e utilização do Julius encontram-se na documentação
+oficial~\cite{julius_book}.
+
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=.6\textwidth]{Figures/soundcard_sch}
+%	\caption{Esquemático de um circuito com auto-falante utilizando o
+%	amplificador LM386.}
+%	\label{fig:sc_sch}
+%\end{figure}
+
+% http://andicelabs.com/2014/03/usb-audio-beaglebone/
+Como saída analógica do sistema TTS, a voz sintetizada deve ser reproduzida por
+um dispositivo externo à BeagleBone, já que esta não possui auto-falantes
+próprios. Como visto em~\cite{andicelabs}, o dispositivo primário de saída de
+áudio da BeagleBone é o HDMI, o qual pode ser desabilitado mediante modificações
+em parâmetros do kernel. Feito isso, o USB, que é o dispositivo secundário, se
+torna o principal, fazendo com que a solução mais simples seja plugar um 
+auto-falante (\textit{speaker}) na porta USB.
+Na página oficial do eSpeak, um arquivo de cabeçalho (\textit{header}) permite a
+utilização de uma API em C/C++, a qual facilita o acesso aos módulos do software
+que permitem que a BeagleBone ``fale''~\cite{eSpeak}.
+
+%% http://arduino.cc/en/Tutorial/SimpleAudioPlayer
+%% http://www.instructables.com/id/Simple-Wav-Player-Using-Arduino/?lang=pt&ALLSTEPS
+%% http://forum.arduino.cc/index.php?topic=49654.0 -- can arduino talk without shield?
+%% http://www.instructables.com/id/Twitter-Enabled-Text-to-Speech/
+%Links úteis podem ser encontrados em~\cite{arduino_player}
+%e~\cite{instructables_player}, os quais ensinam o passo-a-passo para o projeto e
+%construção de um circuito amplificador. 
+
+% http://michaelhleonard.com/raspberry-pi-or-beaglebone-black/
+% http://randomnerdtutorials.com/arduino-vs-raspberry-pi-vs-beaglebone-vs-pcduino/
+% http://makezine.com/2013/04/15/arduino-uno-vs-beaglebone-vs-raspberry-pi/
+A escolha da plataforma foi fundamental para a esquematização do projeto.
+Arduino, Raspberry Pi e BeagleBone Black foram as três principais plataformas a
+serem escolhidas. Diversos tutoriais de comparação entre as plataformas estão
+disponíveis na Internet~\cite{mhl,randomnerd,makezine}.
+O Arduino, apesar de ser uma plataforma flexível e com grande capacidade de
+interfaceamento com uma vasta quantidade de dispositivos, é uma plataforma
+simples, recomendada para projetos de menor porte. O microcontrolador pode ser
+programado em C, mas se torna muito limitado quando o projeto requer um servidor
+estável e relativamente potente;
+O Raspberry Pi, por ser bastante completo, pode ser considerado um mini 
+computador. Todo o seu armazenamento é fornecido por um cartão SD, além de ser
+possível conectar-se à Internet através de um conector Ethernet. Sendo
+necessário a instalação de um sistema operacional, o Raspberry Pi ainda possui
+interface de saída HDMI e é muito útil para aplicações gráficas.
+
+\begin{table}[!h]
+\centering
+\caption{Comparação entre as três principais plataformas}
+\label{comparison}
+\begin{tabular}{c|c c c}
+\hline
+				& Arduino UNO & BeagleBone Black & Raspberry Pi \\
+\hline
+Chip			& - & TI AM3359 & BCM2835 SoC full HD \\
+CPU				& ATMega328	& 1 GHz ARM Cortex-A8 & 700 MHz ARM1176JZ-F \\
+GPU				& - & PowerVR SGX530 & Dual Core VideoCore IV \\
+Armazenamento	& 2 kB SRAM & 512 MB DDR3 & 512 MB SDRAM\\
+Flash			& 32 kB & 2 GB on-board eMMC, MicroSD & SD, MMC, SDIO card slot\\
+GPIO			& 14 & 65 & 8 \\
+Video			& - & mini HDMI & HDMI\\
+OS				& - & Linux & Linux \\
+Amperagem (mA)	& 42 & 210-460 & 150-350 \\
+Voltagem (V)	& 7-12 & 5 & 5 \\
+USB				& - & 1 Host, 1 Mini Client  & 2 Hosts, 1 Micro Power\\
+Ethernet		& - & 1 10/100 Mbps & 1 10/100 Mbps \\
+Preço 			& 5 conto & 300 conto & 200 conto \\
+%Resolução		& - & 1280x1024 (5:4), 1024x768 (4:3), 1280x720 (16:9), 1440x900 (16:10) all at 16 bit	& 	Extensive from 640x350 up to 1920x1200, this includes 1080p\\
+%Camera connector & - & - & Rpi \\
+\hline
+\end{tabular}
+\end{table}
+
+A BeagleBone é comparável ao Raspberry Pi. Entretanto, por ter mais pinos
+(GPIO) e um processador mais poderoso, a BeagleBone é uma escolha óbvia para
+projetos mais elaborados. Além de possuir diversas opções de conexão, a
+BeagleBone une a flexibilidade de interfaceamento do Arduino com a capacidade
+de processamento rápido do Raspberry Pi. Apesar da desvantagem no preço, não
+restaram muitas dúvidas no momento da escolha dessa plataforma para o projeto.
+Uma comparação entre os principais parâmetros dos três equipamentos é dada na
+Tabela~\ref{comparison}:
+
+%O cliente Android foi criado também em~\cite{cassio14}. A interface será
+%redefinida e métodos serão criados para que haja interação com o banco de dados
+%a ser instalado no servidor BeagleBone, o qual ficará encarregado de armazenar
+%os dados relacionados à diferentes modelos ou fabricantes de televisores.
+
+% http://tecnologia.hsw.uol.com.br/controle-remoto.htm
+% http://mundoestranho.abril.com.br/materia/como-funciona-o-controle-remoto
+O funcionamento de controles remotos, com ênfase nos baseados em luz
+infravermelha para televisores, é explicado de de forma clara e detalhada em
+diversos tutoriais para ``curiosos'' disponíveis na internet, como é o caso
+de~\cite{mundoestranho} e~\cite{uol_hsw}.
+\end{section}

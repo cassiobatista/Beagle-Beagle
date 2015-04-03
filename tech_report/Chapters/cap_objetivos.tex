@@ -1,0 +1,74 @@
+\begin{section}{Objetivos}
+%http://www.laps.ufpa.br/falabrasil/
+O objetivo principal consiste em criar um protótipo portável, baseado em uma
+plataforma embarcada, que seja capaz de controlar um aparelho de televisão
+através do envio remoto de sinais. O sistema será configurado como um servidor
+que disponibiliza um serviço genérico de reconhecimento de fala, de modo que o
+aparelho de TV mencionado possa ser remotamente controlado através da voz do
+usuário; e um serviço de síntese de fala, provendo \textit{feedback} das ações
+de acordo com o entendimento do sistema ASR. 
+%Além disso, a informação a ser enviada para a TV deve ser armazenada em um banco
+%de dados, também configurado no mesmo servidor.
+
+\subsection{Reconhecimento Automático de Voz}
+Para que o reconhecimento automático de voz seja possível, o \textit{software}
+Julius deverá ser instalado no servidor. Julius é um software capaz de processar
+e decodificar áudio em aproximadamente tempo real para tarefas de ditado de até
+60 mil palavras.
+
+Para que o Julius possa realizar o reconhecimento em Português Brasileiro, serão
+necessários basicamente dois recursos: um modelo acústico e um dicionário
+fonético. Modelos acústicos genéricos para PT\_BR podem ser encontrados na
+página do Grupo FalaBrasil~\cite{falabrasil}, bem como o software que cria o
+dicionário fonético (conversor grafema-fonema ou G2P)~\cite{lapsg2p}.
+Entretanto, embora a taxa de acerto dos modelos seja satisfatória, é possível
+melhorá-la através da criação ou treino de modelos específicos para a aplicação.
+
+O processo de treino será realizado pelo software HTK (acrônimo para kit de
+ferramentas dos modelos ocultos de Markov, livremente traduzido do inglês), o
+qual é capaz de extrair segmentos de fala de um arquivo de áudio e assinalar uma
+referência à ele. Tal referência é retirada do dicionário fonético, previamente
+criado com o software G2P.
+
+\subsection{Síntese de Voz}
+O software eSpeak é a principal referência em síntese de voz em ambientes Linux.
+Graças à disponibilização de uma API do eSpeak no site oficial do desenvolvedor,
+o sistema, além de conseguir ``ouvir e entender'', também será capaz de 
+``falar''. O download dos modelos para PT\_BR é feito juntamente com o das
+bibliotecas necessárias. Como a BBB não possui saída de audio nativa, será feito
+o uso de um auto-falante USB.
+
+%Para que a BeagleBone seja capaz de reproduzir o som sintetizado, é necessário
+%um cartão de som com um auto-falante. Embora o cartão possa ser comprado, a 
+%opção mais barata é construí-lo. O circuito a ser projetado é bem simples, sendo
+%constituído basicamente por resistores, capacitores, um \textit{speaker} e um
+%amplificador operacional.
+
+\subsection{Servidor LAMP}
+\textcolor{red}{***PResdro***}\\
+\textcolor{red}{***Predro***}\\
+\textcolor{red}{***Pesro***}\\
+\textcolor{red}{***Porredo***}\\
+\textcolor{red}{***PResdro***}\\
+
+\subsection{Controle Remoto de TV}
+Os aparelhos televisivos atuais, assim como a grande maioria dos dispositivos
+eletrônicos domésticos, possuem a tecnologia de controle remoto baseada em luz
+infravermelha. Pode-se observar que na extremidade superior dos controles
+remotos, há pelo menos um led infravermelho (IR Led) capaz de emitir luz e,
+dessa forma, transmitir uma informação binária para o circuito localizado na 
+parte frontal da TV. Esse circuito possui um sensor infravermelho (IR sensor), o
+qual, atuando como o receptor da comunicação, é capaz de receber os bits
+transmitidos e repassá-los para o processador do circuito, o qual executará a
+tarefa relacionada à decodificação dos bits (diminuir o volume, trocar de canal,
+etc).
+
+Nesse sentido, o \textit{datasheet} de uma TV específica será estudado para que
+a BBB possa transmitir o conjunto de bits exatos, reconhecíveis pela TV em
+questão, para a execução de determinadas tarefas, como ``aumentar volume'' ou
+``mudar para o canal 18'', por exemplo.
+%Além disso, será adicionado um módulo receptor também na BeagleBone, para que
+%ela seja capaz de captar informações de outros controles remotos e, assim,
+%armazená-las no banco de dados.
+\end{section}
+%%% EOF %%%

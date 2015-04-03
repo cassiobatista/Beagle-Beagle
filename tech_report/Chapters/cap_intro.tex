@@ -1,0 +1,47 @@
+\begin{section}{Introdução}
+A interface homem-máquina encontra-se cada vez mais amigável. O que antes era
+portado somente por empresas e pessoas com poder financeiro diferenciado e acima
+da média, em termos de tecnologia, é hoje muito mais acessível e simples para
+usuários domésticos sem profundo conhecimento no assunto. Diversos estudos vêm
+sendo desenvolvidos a fim de melhorar ainda mais essa comunicação, de modo que a
+máquina se aproxime mais de ações típicas do ser humano, como pensar e falar.
+
+Síntese e reconhecimento automático de voz (do inglês \textit{text-to-speech} e
+\textit{automatic speech recognition}, respectivamente, TTS e
+ASR)~\cite{taylor,Huang01} tornam a interface citada acima muito mais prática e
+natural, de forma que a comunicação de fato se assemelha àquela estabelecida
+entre duas pessoas. O ASR refere-se ao sistema que, tomando o sinal de fala
+digitalizado como entrada, é capaz de gerar o texto transcrito na saída. Já um
+sistema TTS realiza a função contrária, na qual um sinal analógico de voz é
+sintetizado de acordo com o texto posto na entrada. São inúmeras as aplicações
+que utilizam tais sistemas envolvendo processamento de voz. Dentre elas, pode-se
+destacar a automação residencial com foco em acessibilidade.
+
+% Ref.: Comitê de Ajudas Técnicas (CAT) -- TA
+% http://www.assistiva.com.br/tassistiva.html
+% The Assessment of Assistive Technology: Outcomes, Effects and Costs
+% Components of Quality of Life for Persons With a Quadriplegic and Paraplegic Spinal Cord Injury
+De acordo com \cite{cat, gelderblom}, tecnologia assistiva (TA) é um campo da
+engenharia biomédica dedicada à aumentar a independência e mobilidade de pessoas
+com deficiência, englobando metodologias, práticas e serviços que objetivam
+promover sua autonomia, qualidade de vida e inclusão social. Tal tecnologia
+busca reduzir a necessidade vivenciada por pessoas que precisam de soluções que
+não as deixem à margem da utilização de dispositivos eletrônicos. Em outras
+palavras, para diminuir a exclusão digital imposta pela incapacidade de
+manipular certos dispositivos, a acessibilidade é vista como elemento
+fundamental para elevar a autoestima e o grau de independência dessas pessoas.
+Além disso, a implementação da acessibilidade também pode ser útil para os
+não portadoras de necessidades especiais, já que o controle de equipamentos se
+torna mais prático e confortável.
+
+Nesse sentido, este trabalho busca preparar um servidor local portátil de
+reconhecimento de voz em Português Brasileiro (PT\_BR) e de síntese de voz
+baseado no microcomputador BeagleBone Black de modo que, quando acessado pelo
+dispositivo que agirá como controle remoto --- no caso, um smartphone com
+sistema operacional Android ---, seja capaz de acessar as funções mais básicas
+de um aparelho televisivo.  Vale ressaltar que todas as APIs e softwares
+utilizados para criação dos sistemas e dos recursos utilizados (com exceção do
+HTK, o qual será visto mais adiante) possuem licença \textit{open source} e são
+encontrados disponíveis livremente na Internet.
+\end{section}
+

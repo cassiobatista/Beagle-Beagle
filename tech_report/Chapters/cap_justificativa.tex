@@ -1,0 +1,69 @@
+\begin{section}{Justificativa}
+% [IBGE'10] ftp://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Caracteristicas_Gerais_Religiao_Deficiencia/tab1_3.pdf
+% http://g1.globo.com/brasil/noticia/2012/04/239-dos-brasileiros-declaram-ter-alguma-deficiencia-diz-ibge.html
+Segundo o Instituto Brasileiro de Geografia e Estatística (IBGE), no censo
+realizado em 2010, aproximadamente 23,9\% dos brasileiros declaram ter alguma
+deficiência~\cite{ibge10}. Esse número ainda é mais impressionante quando se
+pensa que cerca de um quarto de uma população de 190 milhões de habitantes é
+portadora de alguma necessidade especial. Ainda segundo os dados, 6,9\%
+(13,3~mi) dos brasileiros apresentam algum grau de deficiência motora, enquanto
+18,8\% (35,7~mi) afirmam serem cegas ou terem alguma dificuldade para enxergar.
+
+Essa pesquisa tem como finalidade apresentar uma solução para diminuir a
+exclusão digital vivenciada especialmente por pessoas com necessidade motora ou
+visual, as quais estão à margem da utilização de dispositivos eletrônicos
+por conta da ausência se soluções que os adaptem às suas necessidades. A
+tecnologia de reconhecimento de fala torna acessível a utilização de qualquer
+dispositivo eletrônico por usuários incapazes de realizar movimentos específicos
+com membros superiores, como segurar um controle físico e apertar botões ou
+digitar, por exemplo. Além disso, os portadores de necessidades visuais também
+poderão ser ajudados, já que nem todos os controles possuem referências
+reconhecíveis pelo tato. A síntese de fala também se torna muito importante no
+contexto da dificuldade visual, já que um \textit{feedback} via texto, nesse
+sentido, seria pouco útil.
+
+% Ref.: ADA - American with Disabilities Act
+O Ato de Americanos com Deficiência (ADA)~\cite{ada} é um documento que regula
+os direitos dos cidadãos com deficiência nos EUA, além de prover a base legal
+dos fundos públicos para compra dos recursos que estes necessitam. Algumas
+categorias de TA foram criadas com base nas diretrizes gerais da ADA, das quais
+podemos salientar três como justificativa do trabalho:
+
+\begin{enumerate}
+	\item Recursos de acessibilidade ao computador
+	\begin{itemize}
+		\item Equipamentos de entrada e saída (\underline{síntese de voz}, 
+		Braille), auxílios alternativos de acesso (ponteiras de cabeça, de luz),
+		teclados modificados, softwares especiais (\underline{reconhecimento de 
+		voz}, etc.), que permitem as pessoas com deficiência a usarem o 
+		computador.
+	\end{itemize}
+	\item Sistemas de controle de ambiente
+	\begin{itemize}
+		\item Sistemas eletrônicos que permitem as pessoas com limitações
+		moto-locomotoras controlar remotamente aparelhos eletro-eletrônicos,
+		sistemas de segurança, entre outros, localizados em seu quarto, sala,
+		escritório, casa e arredores.
+	\end{itemize}
+	\item Auxílios para cegos ou com visão subnormal
+	\begin{itemize}
+		\item Auxílios para grupos específicos que inclui lupas e lentes,
+		Braille para equipamentos com \underline{síntese de voz}, grandes telas 
+		de impressão, sistema de TV com aumento para leitura de documentos, 
+		publicações etc.
+	\end{itemize}
+\end{enumerate}
+
+A decisão de criar um servidor próprio de síntese e reconhecimento de voz
+baseia-se principalmente na possibilidade de usufruir de tais recursos de forma
+offline, ou seja, sem a necessidade de conexão com a Internet. No caso do
+sistema ASR, pode-se também citar a vantagem de limitar o vocabulário de
+palavras utilizados através da implementação de uma gramática, já que serviços
+online de reconhecimento (como o disponibilizado pelo Google, por exemplo),
+trabalham com a inteira modelagem das palavras do idioma, impossibilitando a
+criação de um contexto específico para a aplicação. Além disso, o uso de APIs
+externas não resulta no aprendizado sobre a filosofia do reconhecimento de fala,
+o que tornaria o trabalho menos interessante.
+
+\textcolor{red}{*Add some conclusion to the section here*}
+\end{section}
