@@ -1,34 +1,74 @@
 \begin{section}{Metodologia}
-\subsection{Preparação do Servidor}
 O servidor, por ser o elemento chave na consolidação do projeto, deve ser o 
 módulo a ser prioritariamente configurado, a fim de ser preparado para atender
 às devidas requisições, bem como executar qualquer tipo de aplicação solicitada.
 Sendo assim, a instalação da plataforma Ångstr\"{o}m foi tomada como o primeiro
 passo. Ångstr\"{o}m~\cite{angstrom} é um sistema operacional, baseado em Linux,
 preparado exclusivamente para plataformas embarcadas, sendo o padrão para a 
-própria BeagleBone.
+própria BeagleBone. 
+As dependências a serem instaladas são listadas na Lista~\ref{lst:dependences}.
 
-\subsection{Reconhecimento de Voz}
+\begin{lstlisting}[language=bash, caption={Pre-instalação de dependências no
+servidor}, label={lst:dependences}]
+# eSpeak dependences
+libespeak-dev libportaudio2 libportaudio-dev
+
+# Julius dependences
+libasound2 libasound2-dev
+
+# LAMP dependences
+apache2 libapache2-mod-fastcgi
+php5 libapache2-mod-php5 php5-mcrypt # PHP
+mysql-server libapache2-mod-auth-mysql php5-mysql # MySQL
+phpmyadmin
+libmysqlclient-dev # C
+libmysqlcppconn7 libmysqlcppconn-dev # C++
+\end{lstlisting}
+
 % http://eda.eme.ro/handle/10598/28187
 Em~\cite{cassio14}, o Julius foi configurado para funcionar em modo servidor
 através da opção nativa ``-adinnet'' (A/D \textit{Input from Network}, conversão 
 A/D com entrada pela rede). Isso permite que o Julius receba amostras de áudio
 via \textit{streaming} através de uma comunicação com um cliente genérico via
+\textit{socket}. O código foi alterado para que o resultado gerado pelo Julius,
+também conhecido como sentença, seja retornado ao cliente através desse mesmo
 \textit{socket}.
 
-\subsection{Síntese de Voz}
+\begin{minipage}[t]{.50\textwidth}
+\begin{lstlisting}
+<s> aumentar volume </s>
+<s> diminuir volume </s>
+<s> canal mais </s>
+<s> canal menos </s>
+<s> canal <número> </s>
+<s> ligar televisão </s>
+<s> desligar televisão </s>
+<s> cadastrar controle </s>
+...
+\end{lstlisting}
+\end{minipage}
+\begin{minipage}[t]{.50\textwidth}
+\begin{lstlisting}
+aumentar	a u~ m e~  t a X  
+diminuir	dZ i~ m i~ n u j X  
+televisão	t e l e v i z a~ w~   
+volume		v o l u~ m i  
+canal		k a n a w  
+um			u~   
+dois		d o j s  
+três		t r e j s
+...
+\end{lstlisting}
+\end{minipage}
+
 % http://stackoverflow.com/questions/2661129/espeak-sapi-dll-usage-on-windows
-
-\subsection{Servidor LAMP}
-
-\subsection{Cliente Android}
-Também em~\cite{cassio14}, 
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=.90\textwidth]{Figures/csr}
+	\includegraphics[width=.85\textwidth]{Figures/csr}
 	\caption{Esquemático do Cliente LaPS CSR.}
-	\label{fig:asr_sch}
+	\label{fig:lapscsr_sch}
 \end{figure}
 
 \end{section}
+%%% EOF %%%

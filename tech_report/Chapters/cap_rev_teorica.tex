@@ -5,21 +5,17 @@
 % [IJERA'15] Wi-Fi and Android Based Smart Home Automation for People with Disabilities
  
 Como o iOS e o Android foram lançados, respectivamente, em 2007 e 2008, e sendo 
-a ascensão dos smartphones é relativamente recente, a ideia de aplicar
+a ascensão dos smartphones relativamente recente, a ideia de aplicar
 acessibilidade no controle de equipamentos eletrônicos através desse tipo de
 equipamento somente começou a revelar resultados concretos a partir de 2010. 
-Em~\cite{ieee11}, o decodificador PocketSphinx foi
-embarcado em um smartphone android para que pudesse controlar aparelhos
-domésticos através da interface de voz. O resultado era enviado para uma
-SparkFun IOIO Board, a qual disparava o \textit{trigger} para o controle de uma
-TV. O foco do trabalho era ajudar pessoas afetadas com tetraplegia a serem mais
-independentes, além de avaliar o desempenho de decodificadores embarcados e
-distribuídos, claro.
+Em~\cite{ieee11}, o decodificador PocketSphinx foi embarcado em um smartphone
+android para que este pudesse controlar aparelhos domésticos através da
+interface de voz. O resultado era enviado para uma SparkFun IOIO Board, a qual
+disparava o \textit{trigger} para o controle de uma TV. O foco do trabalho era
+ajudar pessoas afetadas com tetraplegia a serem mais independentes, além de
+avaliar o desempenho de decodificadores embarcados e distribuídos, claro.
 
-%Ao passo que o Pocketsphinx funcionava offline, a API \emph{SpeechRecognizer}
-%que a empresa Google disponibiliza para os desenvolvedores adicionem
-%reconhecimento à seus aplicativos Android provia reconhecimento de voz online,
-%ou seja, através da Internet.
+\textcolor{red}{*Add another reference here*}
 
 \begin{figure}[!h]
 	\centering
@@ -29,7 +25,7 @@ distribuídos, claro.
 \end{figure}
 
 Os fundamentos do reconhecimento automático de voz, assim como os da síntese de
-voz são descritos com bastante detalhes em~\cite{Huang01}. A arquitetura mais
+voz, são descritos com bastante detalhes em~\cite{Huang01}. A arquitetura mais
 geral e aceita na literatura é mostrada na Figura~\ref{fig:asr_sch}. Vale
 salientar que, ao invés do uso de modelos mais gerais, que descrevem a maior
 parte de uma linguagem, serão utilizadas gramáticas livres de contexto, as quais
@@ -76,16 +72,16 @@ que permitem que a BeagleBone ``fale''~\cite{eSpeak}.
 % http://makezine.com/2013/04/15/arduino-uno-vs-beaglebone-vs-raspberry-pi/
 A escolha da plataforma foi fundamental para a esquematização do projeto.
 Arduino, Raspberry Pi e BeagleBone Black foram as três principais plataformas a
-serem escolhidas. Diversos tutoriais de comparação entre as plataformas estão
-disponíveis na Internet~\cite{mhl,randomnerd,makezine}.
-O Arduino, apesar de ser uma plataforma flexível e com grande capacidade de
+serem escolhidas. Diversos tutoriais de comparação entre as plataformas foram
+consultados e estão disponíveis na Internet~\cite{mhl,randomnerd,makezine}.
+O Arduino, apesar de ser uma ferramenta flexível e com grande capacidade de
 interfaceamento com uma vasta quantidade de dispositivos, é uma plataforma
-simples, recomendada para projetos de menor porte. O microcontrolador pode ser
-programado em C, mas se torna muito limitado quando o projeto requer um servidor
+simples, recomendada para projetos de menor porte. O microcontrolador, que pode 
+ser programado em C, se torna muito limitado quando o projeto requer um servidor
 estável e relativamente potente;
 O Raspberry Pi, por ser bastante completo, pode ser considerado um mini 
 computador. Todo o seu armazenamento é fornecido por um cartão SD, além de ser
-possível conectar-se à Internet através de um conector Ethernet. Sendo
+possível conectá-lo à Internet através de um conector Ethernet. Sendo
 necessário a instalação de um sistema operacional, o Raspberry Pi ainda possui
 interface de saída HDMI e é muito útil para aplicações gráficas.
 
@@ -134,6 +130,8 @@ Tabela~\ref{comparison}:
 % http://mundoestranho.abril.com.br/materia/como-funciona-o-controle-remoto
 O funcionamento de controles remotos, com ênfase nos baseados em luz
 infravermelha para televisores, é explicado de de forma clara e detalhada em
-diversos tutoriais para ``curiosos'' disponíveis na internet, como é o caso
-de~\cite{mundoestranho} e~\cite{uol_hsw}.
+diversos tutoriais para ``curiosos'' disponíveis na Internet, como os da revista
+Mundo Estranho~\cite{mundoestranho} e do blog \textit{How Stuff Works?} da
+UOL~\cite{uol_hsw}.
 \end{section}
+%%% EOF %%%

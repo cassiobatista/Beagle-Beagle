@@ -12,6 +12,7 @@
 \usepackage{subcaption}
 \usepackage{lipsum}
 \usepackage{fancyhdr}
+\usepackage{listing}
 
 %\renewcommand*{\refname}{Referências Bibliográficas}
 
@@ -19,6 +20,34 @@
 \fancyhead[ro,le]{}
 \fancyhead[lo]{\leftmark}
 \fancyhead[re]{\rightmark}
+
+\lstset{%                                                                     
+	linewidth=\textwidth,%framed box is the text size                         
+	xleftmargin=.25in,                                                        
+	xrightmargin=.25in,                                                       
+	frame=trbl,                                                               
+	columns=flexible,                                                         
+	captionpos=t,                                                             
+	upquote=false,                                                            
+	basicstyle=\small\ttfamily,                                        
+	firstnumber=1,%                                                           
+	numberfirstline=false,%                                                   
+	numbers=left,%                                                            
+	numberstyle=\tiny,%                                                       
+	stepnumber=5,%                                                            
+	numbersep=5pt,%                                                           
+	backgroundcolor=\color{blue!10},%                                         
+	tabsize=4,%                                                               
+	keywordstyle=\color{green!65!black},%                                     
+	commentstyle=\color{blue},%                                               
+	stringstyle=\color{magenta},%                                             
+	breaklines=true,%                                                         
+	emph={label},%                                                            
+	abovecaptionskip=10pt,%                                                   
+	belowcaptionskip={\abovecaptionskip},%                                    
+	showstringspaces=false,                                                   
+	literate={Ê}{{\^{E}}}1                                                    
+}%
 
 \title{
 	\vspace{40pt}
