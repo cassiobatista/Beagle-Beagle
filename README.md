@@ -10,7 +10,7 @@ Projeto de Hardware e Interfaceamento
 	* apt-get install libespeak-dev libportaudio2 libportaudio-dev
 
 # Julius dependences
-	* apt-get install libasound2 libasound2-dev
+	* apt-get install libasound2 libasound2-dev alsa-tools sox
 
 # [LAMP](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu)
 	* apt-get install apache2 
