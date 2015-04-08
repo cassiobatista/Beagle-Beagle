@@ -1,0 +1,13 @@
+-h am_model/hmmdefs-64bits_simon.bin
+-hlist am_model/tiedlist_simon
+-smpFreq 16000
+-gram gram/gram
+-norealtime
+-separatescore
+-rejectshort 900ms
+-rejectlong 1800ms
+#-nolog 
+#-quiet
+-input mic
+#-input adinnet
+#-adport 15001

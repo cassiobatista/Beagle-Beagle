@@ -1,0 +1,33 @@
+% NS_B
+<s>			sil
+
+% NS_E
+</s>		sil
+
+% ACAO_VOL
+aumentar	a u~ m e~  t a X
+diminuir	dZ i~ m i~ n u j X
+
+% VOLUME 
+volume		v o l u~ m i
+
+% ACAO_CH
+mais		m a j s  
+menos		m e~ n u s  
+
+% CANAL
+canal		k a n a w  
+
+% ACAO_TV
+ligar		l i g a X
+desligar	d e s l i g a X
+
+% TV
+televisão	t e l e v i z a~ w~
+
+% ACAO_CONTROL  
+cadastrar	k a d a s t r a X  
+selecionar	s e l e s i o n a X  
+
+% CONTROLE
+controle	k o~  t r o l i  
