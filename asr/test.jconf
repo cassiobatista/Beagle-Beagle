@@ -1,4 +1,4 @@
--h am_model/hmmdefs-64bits_simon.bin
+-h am_model/simon_16k_64b.bin
 -hlist am_model/tiedlist_simon
 -smpFreq 16000
 -gram gram/gram

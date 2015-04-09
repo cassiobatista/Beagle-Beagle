@@ -1,6 +1,5 @@
 \begin{section}{Revisão Teórica}
 % [IEEE'11] Designing Android Applications with both Online and Offline Voice Control of Household Devices
-% [IEEE'13] Designing Android Applications Using Voice Controlled Commands: For Hands Free Interaction with Common Household Devices
 % [IEEE'10] Smart Home Control System for the disabled using the head and the mouth movement
 % [IJERA'15] Wi-Fi and Android Based Smart Home Automation for People with Disabilities
  
@@ -31,11 +30,11 @@ salientar que, ao invés do uso de modelos mais gerais, que descrevem a maior
 parte de uma linguagem, serão utilizadas gramáticas livres de contexto, as quais
 limitam o vocabulário utilizado a apenas um conjunto de sentenças possíveis,
 escolhidas pelo desenvolvedor do sistema. A construção do dicionário fonético
-para PT\_BR dar-se-á através do software descrito em~\cite{Siravenha08}; o tutorial
-para o treino do modelo acústico encontra-se disponível na página do
+para PT\_BR dar-se-á através do software descrito em~\cite{Siravenha08}; o
+tutorial para o treino do modelo acústico encontra-se disponível na página do
 projeto Voxforge~\cite{voxforge}, bem como capítulo 3 do livro do
-HTK~\cite{Young00}; a gramática reconhecida pelo Julius é criada manualmente de 
-acordo com o descrito na página oficial~\cite{juliussite}.
+HTK~\cite[p.~22--42]{Young00}; a gramática reconhecida pelo Julius é criada
+manualmente de acordo com o descrito na página oficial~\cite{juliussite}.
 Instruções de configuração e utilização do Julius encontram-se na documentação
 oficial~\cite{julius_book}.
 
@@ -67,9 +66,6 @@ que permitem que a BeagleBone ``fale''~\cite{eSpeak}.
 %e~\cite{instructables_player}, os quais ensinam o passo-a-passo para o projeto e
 %construção de um circuito amplificador. 
 
-% http://michaelhleonard.com/raspberry-pi-or-beaglebone-black/
-% http://randomnerdtutorials.com/arduino-vs-raspberry-pi-vs-beaglebone-vs-pcduino/
-% http://makezine.com/2013/04/15/arduino-uno-vs-beaglebone-vs-raspberry-pi/
 A escolha da plataforma foi fundamental para a esquematização do projeto.
 Arduino, Raspberry Pi e BeagleBone Black foram as três principais plataformas a
 serem escolhidas. Diversos tutoriais de comparação entre as plataformas foram
@@ -119,19 +115,26 @@ BeagleBone une a flexibilidade de interfaceamento do Arduino com a capacidade
 de processamento rápido do Raspberry Pi. Apesar da desvantagem no preço, não
 restaram muitas dúvidas no momento da escolha dessa plataforma para o projeto.
 Uma comparação entre os principais parâmetros dos três equipamentos é dada na
-Tabela~\ref{comparison}:
+Tabela~\ref{comparison}.
 
 %O cliente Android foi criado também em~\cite{cassio14}. A interface será
 %redefinida e métodos serão criados para que haja interação com o banco de dados
 %a ser instalado no servidor BeagleBone, o qual ficará encarregado de armazenar
 %os dados relacionados à diferentes modelos ou fabricantes de televisores.
 
-% http://tecnologia.hsw.uol.com.br/controle-remoto.htm
-% http://mundoestranho.abril.com.br/materia/como-funciona-o-controle-remoto
 O funcionamento de controles remotos, com ênfase nos baseados em luz
 infravermelha para televisores, é explicado de de forma clara e detalhada em
 diversos tutoriais para ``curiosos'' disponíveis na Internet, como os da revista
 Mundo Estranho~\cite{mundoestranho} e do blog \textit{How Stuff Works?} da
-UOL~\cite{uol_hsw}.
+UOL~\cite{uol_hsw}. A maioria dos aparelhos eletrônicos atualmente recebe
+informação através de sensores infravermelhos localizados em painéis frontais.
+Um grande problema é a inteferência que surge com a vasta transferência de
+informação via IR. Devido à isso, a comunicação entre o controle remoto e a
+televisão ocorre em 4 passos: um comando \textit{start} inicia a transferência,
+seguido dos bits do comando específico (como aumentar o volume, por exemplo) e
+do endereço do aparelho. Por fim, um comando de \textit{stop} encerra o envio de
+bits. Dessa forma, a chance de a informação ser reconhecida por mais de um
+aparelho é baixa (salvo o caso de serem dois equipamentos do mesmo tipo e da
+mesma empresa).
 \end{section}
 %%% EOF %%%
