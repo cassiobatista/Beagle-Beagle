@@ -1,15 +1,5 @@
 \begin{section}{Dificuldades e Soluções}
 \begin{itemize}
-\item I was thinking about use the LAMP server to store data transferred from
-different kinds of remote controllers, so we could have a database fulfilled
-with information that would allow us to control a great range of TV devices.
-However I don't know how hard is to access the database from the Julius source.
-I mean, the default way to access a database is from PHP Code. I've seen Java
-for web that can incorporate SQL commands into the code, json and stuff like
-that, but I think to implement a code in C/C++ to push and pull data to a
-database is a monkey job. If some of you can try to deal with databases managed
-by C++ I would be glad.
-
 \item There's no sound output on BBB. The default audio device, as mentioned in
 some foruns on the web, is through the HDMI connector. The same forum has said
 that we can disable the HDMI as audio device by changing some kernel parameters,
@@ -28,16 +18,14 @@ through a BBB GPIO, but...
 \begin{itemize}
 \item I don't know how to manipulate the TTS output to put in that pin
 \item Even If I could do that, It's hard to play a sound with PWM. A chunck of
-code, size dependent of the sampling rate, should be put in that GPIO in a slot
+audio, size dependent of the sampling rate, should be put in that GPIO in a slot
 of time. And I think it's not as simple as this description.
 \item The arduino codes I've found that play sound through a pin have the
 craziest codes I've ever seen. Almost everything is manually done.
+\item I think the output is gonna be terrible and polyphonic
+\item The PCM2707 DAC is around 10 USD and will also need an amplifier circuit
+with LM386
 \end{itemize}
-
-\item There's an arduino code that is capable to ``hack'' the information coming
-from any remote control. It acts as the receiver that we find in front of any TV
-device by using an IR sensor. Besides that, we could read the datasheet of the
-TV we're gonna use.
 \end{itemize}
 \end{section}
 %%% EOF %%%

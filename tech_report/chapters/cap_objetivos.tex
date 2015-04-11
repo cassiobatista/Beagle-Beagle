@@ -1,6 +1,6 @@
 \begin{section}{Objetivos}
 O objetivo principal consiste em criar um protótipo portável, baseado em uma
-plataforma embarcada, que seja capaz de controlar um aparelho de televisão
+microcomputador embarcado, que seja capaz de controlar um aparelho de televisão
 através do envio remoto de sinais. O sistema será configurado como um servidor
 que disponibiliza um serviço genérico de reconhecimento de fala, de modo que o
 aparelho de TV mencionado possa ser remotamente controlado através da voz do
@@ -20,7 +20,8 @@ de dados, também configurado no mesmo servidor.
 Para que o reconhecimento automático de voz seja possível, o \textit{software}
 Julius deverá ser instalado no servidor. Julius é um software capaz de processar
 e decodificar áudio em aproximadamente tempo real para tarefas de ditado de até
-60 mil palavras.
+60 mil palavras. Este também será o principal programa do sistema, o qual
+receberá em seu código nativo todos os outros módulos.
 
 Para que o Julius possa realizar o reconhecimento em Português Brasileiro, serão
 necessários basicamente dois recursos: um modelo acústico e um dicionário
@@ -50,11 +51,11 @@ no servidor para armazenar dados do controle da TV principal, bem como de outros
 controles que vierem a ser cadastrados pelo usuário. Para isso, um sensor
 infravermelho será utilizado para ``hackear'' os sinais advindos de diversos
 controles, atuando como o receptor presente na parte frontal dos aparelhos
-televisivos, e guardado a informação recebida no banco de dados. Toda a
-informação de saída a ser enviada como comando para os leds infravermelhos deve
-ser oriunda do banco de dados. Além disso, bibliotecas que permitem o acesso ao
-MySQL por códigos em C serão instaladas, já que essa é a principal linguagem do
-software do servidor.
+televisivos, e guardando a informação recebida no banco de dados. Toda a
+informação de saída, a qual deverá ser enviada como comando para os leds 
+infravermelhos, deve ser oriunda do banco de dados. Além disso, bibliotecas que
+permitem o acesso ao MySQL por códigos em C serão instaladas, já que essa é a
+principal linguagem do software do servidor.
 
 \subsection{Controle Remoto de TV}
 Os aparelhos televisivos atuais, assim como a grande maioria dos dispositivos
@@ -65,15 +66,17 @@ dessa forma, transmitir uma informação binária para o circuito localizado na
 parte frontal da TV. Esse circuito possui um sensor infravermelho (IR sensor), o
 qual, atuando como o receptor da comunicação, é capaz de receber os bits
 transmitidos e repassá-los para o processador do circuito, o qual executará a
-tarefa relacionada à decodificação dos bits (diminuir o volume, trocar de canal,
+tarefa relacionada à decodificação dos bits (desligar a TV, mostrar o menu,
 etc).
 
-Nesse sentido, o \textit{datasheet} de uma TV específica será estudado para que
-a BBB possa transmitir o conjunto de bits exatos, reconhecíveis pela TV em
-questão, para a execução de determinadas tarefas, como ``aumentar volume'' ou
-``mudar para o canal 18'', por exemplo. Além disso, como mencionado na subseção
-anterior, um módulo receptor também será adicionado na BeagleBone para que ela
-seja capaz de captar informações de outros controles remotos e, assim,
-armazená-las no banco de dados.
+%Nesse sentido,  \textit{datasheet} de uma TV específica será estudado para que
+%a BBB possa transmitir o conjunto de bits exatos, reconhecíveis pela TV em
+%questão, para a execução de determinadas tarefas, como ``aumentar volume'' ou
+%``mudar para o canal 18'', por exemplo. 
+Nesse sentido, um módulo receptor será adicionado à BeagleBone para que esta
+seja capaz de captar informações de outros controles remotos, dado que o acesso
+aos \textit{datasheets} de diversos aparelhos não é trivial. Assim, o código
+binário relacionado às ações como ``aumentar volume'' ou ``canal mais'' será
+lido e armazenado no banco de dados.
 \end{section}
 %%% EOF %%%
