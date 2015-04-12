@@ -1,33 +1,52 @@
 \begin{section}{Justificativa}
-% [IBGE'10] ftp://ftp.ibge.gov.br/Censos/Censo_Demografico_2010/Caracteristicas_Gerais_Religiao_Deficiencia/tab1_3.pdf
-% http://g1.globo.com/brasil/noticia/2012/04/239-dos-brasileiros-declaram-ter-alguma-deficiencia-diz-ibge.html
 Segundo o Instituto Brasileiro de Geografia e Estatística (IBGE), no censo
 realizado em 2010, aproximadamente 23,9\% dos brasileiros declaram ter alguma
-deficiência~\cite{IBGE10}. Esse número ainda é mais impressionante quando se
-pensa que cerca de um quarto de uma população de 190 milhões de habitantes é
-portadora de alguma necessidade especial. Ainda segundo os dados, 6,9\%
+deficiência~\cite{IBGE10}. Esse número é realmente impressionante, pois revela
+que cerca de um quarto de uma população de 190 milhões de habitantes é
+portadora de necessidades especiais. Ainda segundo os dados, 6,9\%
 (13,3~mi) dos brasileiros apresentam algum grau de deficiência motora, enquanto
 18,8\% (35,7~mi) afirmam serem cegas ou terem alguma dificuldade para enxergar.
 
+% [IEEE'09] Accessibility in Digital Television: Designing Remote Controls
+Em~\cite{Laisa09}, uma pesquisa foi realizada com brasileiros portadores de
+necessidades especiais para se determinar quais as características que esses
+cidadãos gostariam de adicionar, se pudessem, em controles remotos
+convencionais, visando minimizar suas dificuldades em utilizá-los. A sugestão 
+de um \textit{design} mais limpo foi unânime, enquanto os deficientes visuais,
+em particular,
+apontaram a necessidade de algum tipo de \textit{feedback} quando os botões
+fossem pressionados e a implementação de alguma referência reconhecível pelo
+tato nos botões. Já os deficientes motores desejam um dispositivo menor, que não
+escorregasse facilmente das mãos, contendo um ângulo de controle mais abrangente
+e com botões maiores para aqueles que não conseguem ter controle absoluto sobre
+as mãos e/ou dedos.  O estudo também mostrou que as referências sentidas pelo
+tato não foram incorporadas no design a fim de se manter o baixo custo.
+
+% [IEEE'09] Evaluating a Multimodal Remote Control: The Interplay Between User Experience and Usability 
 Essa pesquisa tem como finalidade apresentar uma solução para diminuir a
 exclusão digital vivenciada especialmente por pessoas com necessidade motora ou
 visual, as quais estão à margem da utilização de dispositivos eletrônicos
-por conta da ausência se soluções que os adaptem às suas necessidades. A
+por conta da ausência de soluções que os adaptem às suas necessidades. A
 tecnologia de reconhecimento de fala torna acessível a utilização de qualquer
 dispositivo eletrônico por usuários incapazes de realizar movimentos específicos
 com membros superiores, como segurar um controle físico e apertar botões ou
-digitar, por exemplo. Além disso, os portadores de necessidades visuais também
+digitar, por exemplo.  Além disso, os portadores de necessidades visuais também
 poderão ser ajudados, já que nem todos os controles possuem referências
-reconhecíveis pelo tato. A síntese de fala também se torna muito importante no
-contexto da dificuldade visual, já que um \textit{feedback} via texto, nesse
-sentido, seria pouco útil.
+hápticas. A síntese de fala também se torna muito importante no contexto da
+dificuldade visual, já que, nesse sentido, um \textit{feedback} por fala será
+muito mais útil do que via texto. Em~\cite{Wechsung09} é sugerido que as
+interfaces multimodais (métodos alternativos de controle, como voz, escrita,
+gestos, etc) associadas ao controle de equipamentos provêem uma experiência
+muito mais prazerosa e prática ao usuário do que os métodos convencionais
+(botões), apesar de diminuir a usabilidade e aumentar o tempo de execução da
+tarefa.
 
 % Ref.: ADA - American with Disabilities Act
 O Ato de Americanos com Deficiência (ADA)~\cite{ada} é um documento que regula
 os direitos dos cidadãos com deficiência nos EUA, além de prover a base legal
 dos fundos públicos para compra dos recursos que estes necessitam. Algumas
 categorias de TA foram criadas com base nas diretrizes gerais da ADA, das quais
-podemos salientar três como justificativa do trabalho:
+podemos ressaltar três como justificativa do trabalho:
 
 \begin{enumerate}
 	\item Recursos de acessibilidade ao computador
@@ -55,14 +74,13 @@ podemos salientar três como justificativa do trabalho:
 
 A decisão de criar um servidor próprio de síntese e reconhecimento de voz
 baseia-se principalmente na possibilidade de usufruir de tais recursos de forma
-offline, ou seja, sem a necessidade de conexão com a Internet. No caso do
+offline, ou seja, sem a necessidade de conexão com a Internet. O fato de as
+comunicações ocorrerem em LAN diminui muito o tempo de espera do usuário, já
+que o áudio não precisa acessar servidores de voz distantes. Ainda sobre o
 sistema ASR, pode-se também citar a vantagem de limitar o vocabulário de
 palavras utilizados através da implementação de uma gramática, já que serviços
 online de reconhecimento (como o disponibilizado pelo Google, por exemplo),
 trabalham com a inteira modelagem das palavras do idioma, impossibilitando a
-criação de um contexto específico para a aplicação. Além disso, o uso de APIs
-externas não resulta no aprendizado sobre a filosofia do reconhecimento de fala,
-o que tornaria o trabalho menos interessante.
-
-\textcolor{red}{*Add some conclusion to the section here*}
+criação de um contexto específico para a aplicação. 
 \end{section}
+%%% EOF %%%

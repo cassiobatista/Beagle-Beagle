@@ -7,14 +7,15 @@ Como o iOS e o Android foram lançados, respectivamente, em 2007 e 2008, e
 a ascensão dos smartphones é relativamente recente, a ideia de aplicar
 acessibilidade no controle de equipamentos eletrônicos através desse tipo de
 equipamento somente começou a revelar resultados concretos a partir de 2010. 
-Em~\cite{ieee11}, o decodificador PocketSphinx foi embarcado em um smartphone
-android para que este pudesse controlar aparelhos domésticos através da
-interface de voz. O resultado era enviado para uma SparkFun IOIO Board, a qual
-disparava o \textit{trigger} para o controle de uma TV. O foco do trabalho era
-ajudar pessoas afetadas com tetraplegia a serem mais independentes, além de
-avaliar o desempenho de decodificadores embarcados e distribuídos, claro.
+Em~\cite{Barrena11}, o decodificador PocketSphinx foi embarcado em um smartphone
+Android para que este pudesse controlar aparelhos domésticos através da
+interface de voz. O resultado era enviado para uma SparkFun IOIO Board, a qual,
+estando fisicamente conectada ao controle da TV, disparava um determinado 
+\textit{trigger}. A justificativa do trabalho era ajudar pessoas afetadas com 
+tetraplegia a serem mais independentes; os testes avaliaram o desempenho de
+decodificadores embarcados e distribuídos. 
 
-\textcolor{red}{*Add another reference here*}
+\textcolor{red}{*Cassio: Add another reference here*}
 
 \begin{figure}[!h]
 	\centering
@@ -37,14 +38,6 @@ HTK~\cite[p.~22--42]{Young00}; a gramática reconhecida pelo Julius é criada
 manualmente de acordo com o descrito na página oficial~\cite{juliussite}.
 Instruções de configuração e utilização do Julius encontram-se na documentação
 oficial~\cite{julius_book}.
-
-%\begin{figure}[!h]
-%	\centering
-%	\includegraphics[width=.6\textwidth]{Figures/soundcard_sch}
-%	\caption{Esquemático de um circuito com auto-falante utilizando o
-%	amplificador LM386.}
-%	\label{fig:sc_sch}
-%\end{figure}
 
 % http://andicelabs.com/2014/03/usb-audio-beaglebone/
 Como saída analógica do sistema TTS, a voz sintetizada deve ser reproduzida por
@@ -122,6 +115,9 @@ Tabela~\ref{comparison}.
 %a ser instalado no servidor BeagleBone, o qual ficará encarregado de armazenar
 %os dados relacionados à diferentes modelos ou fabricantes de televisores.
 
+\noindent
+\textcolor{red}{$\downarrow$ Thiago: LIRC $\downarrow$ Gabriel: IR theory $\downarrow$ References + Figures + Tables $\downarrow$} 
+
 O funcionamento de controles remotos, com ênfase nos baseados em luz
 infravermelha para televisores, é explicado de de forma clara e detalhada em
 diversos tutoriais para ``curiosos'' disponíveis na Internet, como os da revista
@@ -138,8 +134,13 @@ aparelho é baixa (salvo o caso de serem dois equipamentos do mesmo tipo e da
 mesma empresa).
 
 \subsection{Produtos Relacionados}
+\noindent
+\textcolor{red}{* Procurar *}\\
 Existe uma série de produtos disponíveis no mercado com a finalidade de tornar o
 controle de equipamentos eletrônicos mais prático. 
-Harmony Smart Control\\
+\begin{itemize}
+	\item Harmony Smart Control
+	\item IRdroid
+\end{itemize}
 \end{section}
 %%% EOF %%%

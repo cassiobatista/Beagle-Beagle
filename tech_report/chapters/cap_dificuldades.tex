@@ -1,5 +1,6 @@
 \begin{section}{Dificuldades e Soluções}
 \begin{itemize}
+
 \item There's no sound output on BBB. The default audio device, as mentioned in
 some foruns on the web, is through the HDMI connector. The same forum has said
 that we can disable the HDMI as audio device by changing some kernel parameters,
@@ -26,6 +27,17 @@ craziest codes I've ever seen. Almost everything is manually done.
 \item The PCM2707 DAC is around 10 USD and will also need an amplifier circuit
 with LM386
 \end{itemize}
+
+\item BBB não tem conexão wifi e é difícil atualizar o kernel pra receber um
+shield/case. Além do mais, tal shield/case seria plugado na porta USB, a qual 
+já estaria sendo usada pelo auto-falante. Portanto, a solução mais fácil foi
+conectar um roteador wifi à porta Ethernet da BBB através de um cabo RJ45.
+
+\item O Angstrom é PODRE. (Gabriel)
+
+\item O código do Arduino que hackeia as paradas é PODRE. (Thiago)
+
+\item Acessar MySQL from C é PODRE (Pedro)
 \end{itemize}
 \end{section}
 %%% EOF %%%

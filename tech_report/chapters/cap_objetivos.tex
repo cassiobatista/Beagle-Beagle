@@ -16,7 +16,7 @@ de dados, também configurado no mesmo servidor.
 	\label{fig:sch}
 \end{figure}
 
-\subsection{Reconhecimento Automático de Voz}
+\subsection{Reconhecimento e Síntese de Voz}
 Para que o reconhecimento automático de voz seja possível, o \textit{software}
 Julius deverá ser instalado no servidor. Julius é um software capaz de processar
 e decodificar áudio em aproximadamente tempo real para tarefas de ditado de até
@@ -31,33 +31,19 @@ dicionário fonético (conversor grafema-fonema ou G2P)~\cite{Siravenha08}.
 Entretanto, embora a taxa de acerto dos modelos seja satisfatória, é possível
 melhorá-la através da criação ou treino de modelos específicos para a aplicação.
 
-O processo de treino será realizado pelo software HTK (acrônimo para kit de
-ferramentas dos modelos ocultos de Markov, livremente traduzido do inglês), o
-qual é capaz de extrair segmentos de fala de um arquivo de áudio e assinalar uma
-referência à ele. Tal referência é retirada do dicionário fonético, previamente
-criado com o software G2P.
+O processo de treino poderá ser realizado pelo software HTK (\textit{Hidden 
+Markov Models Toolkit}), o qual é capaz de extrair segmentos de fala de um
+arquivo de áudio e assinalar uma referência à ele. Tal referência é retirada do
+dicionário fonético, previamente criado com o software G2P.
 
-\subsection{Síntese de Voz}
 O software eSpeak é a principal referência em síntese de voz em ambientes Linux.
-Graças à disponibilização de uma API do eSpeak no site oficial do desenvolvedor,
+Graças à disponibilização de uma API no site oficial do desenvolvedor,
 o sistema, além de conseguir ``ouvir e entender'', também será capaz de 
 ``falar''. O download dos modelos para PT\_BR é feito juntamente com o das
-bibliotecas necessárias. Como a BBB não possui saída de audio nativa, será feito
-o uso de um auto-falante USB.
+bibliotecas necessárias. Como a BBB não possui saída de áudio nativa, um
+auto-falante USB será utilizado.
 
-\subsection{Servidor LAMP}
-O sistema de gerenciamento de banco de dados MySQL será instalado e configurado
-no servidor para armazenar dados do controle da TV principal, bem como de outros
-controles que vierem a ser cadastrados pelo usuário. Para isso, um sensor
-infravermelho será utilizado para ``hackear'' os sinais advindos de diversos
-controles, atuando como o receptor presente na parte frontal dos aparelhos
-televisivos, e guardando a informação recebida no banco de dados. Toda a
-informação de saída, a qual deverá ser enviada como comando para os leds 
-infravermelhos, deve ser oriunda do banco de dados. Além disso, bibliotecas que
-permitem o acesso ao MySQL por códigos em C serão instaladas, já que essa é a
-principal linguagem do software do servidor.
-
-\subsection{Controle Remoto de TV}
+\subsection{Controle Remoto de TV e Servidor LAMP}
 Os aparelhos televisivos atuais, assim como a grande maioria dos dispositivos
 eletrônicos domésticos, possuem a tecnologia de controle remoto baseada em luz
 infravermelha. Pode-se observar que na extremidade superior dos controles
@@ -69,14 +55,16 @@ transmitidos e repassá-los para o processador do circuito, o qual executará a
 tarefa relacionada à decodificação dos bits (desligar a TV, mostrar o menu,
 etc).
 
-%Nesse sentido,  \textit{datasheet} de uma TV específica será estudado para que
-%a BBB possa transmitir o conjunto de bits exatos, reconhecíveis pela TV em
-%questão, para a execução de determinadas tarefas, como ``aumentar volume'' ou
-%``mudar para o canal 18'', por exemplo. 
 Nesse sentido, um módulo receptor será adicionado à BeagleBone para que esta
-seja capaz de captar informações de outros controles remotos, dado que o acesso
-aos \textit{datasheets} de diversos aparelhos não é trivial. Assim, o código
-binário relacionado às ações como ``aumentar volume'' ou ``canal mais'' será
-lido e armazenado no banco de dados.
+seja capaz de ``hackear'', através de um sensor infravermelho, informações dos
+controles remotos, dado que o acesso aos \textit{datasheets} de diversos
+aparelhos não é trivial.  O sistema de gerenciamento de banco de dados MySQL
+será instalado e configurado no servidor para armazenar o código, o qual é
+relacionado a ações como ``aumentar volume'' ou ``desligar'' da TV principal e
+dos demais aparelhos que vierem a ser cadastrados no banco.  Toda a informação
+de saída a ser enviada para a TV através dos IR leds deve ser oriunda do banco
+de dados. 
+% Além disso, bibliotecas que permitem o acesso ao MySQL por códigos em
+% C serão instaladas, já que essa é a principal linguagem do software do servidor.
 \end{section}
 %%% EOF %%%

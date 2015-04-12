@@ -9,14 +9,6 @@ passo.
 %própria BeagleBone. 
 As dependências a serem instaladas são listadas na Lista~\ref{lst:dependences}.
 
-É importante ressaltar que os sistemas operacionais embarcados são
-simplificações de sistemas operacionais mais robustos, tendo a maior parte das
-suas funcionalidades reduzidas ou simplificadas para se adequar à uma plataforma
-de menor porte. Por isso, a preparação deve ocorrer a partir dos pacotes mais
-básicos, como o GCC, por exemplo. Outros pacotes devem ser instalados de forma
-gradual, tais quais os requeridos pelo Julius, eSpeak e os necessários para a
-implementação do servidor LAMP em C.
-
 \begin{lstlisting}[language=bash, caption={Pre-instalação de dependências no
 servidor}, label={lst:dependences}]
 # general dependences
@@ -29,13 +21,28 @@ libespeak-dev libportaudio2 libportaudio-dev
 libasound2 libasound2-dev 
 
 # LAMP dependences
-apache2 libapache2-mod-fastcgi
-php5 libapache2-mod-php5 php5-mcrypt # PHP (opcional?)
+apache2 libapache2-mod-fastcgi # apache server
 mysql-server libapache2-mod-auth-mysql php5-mysql # MySQL
-phpmyadmin (opcional?)
 libmysqlclient-dev # C
+phpmyadmin # (opcional?)
+php5 libapache2-mod-php5 php5-mcrypt # PHP (opcional?)
 libmysqlcppconn7 libmysqlcppconn-dev # C++ (opcional?)
 \end{lstlisting}
+
+É importante ressaltar que os sistemas operacionais embarcados são
+simplificações de sistemas operacionais mais robustos, tendo a maior parte das
+suas funcionalidades reduzidas ou simplificadas para se adequar à uma plataforma
+de menor porte. Por isso, a preparação deve ocorrer a partir dos pacotes mais
+básicos, como o GCC, por exemplo. Outros pacotes devem ser instalados de forma
+gradual, tais quais os requeridos pelo Julius, eSpeak e os necessários para a
+implementação do servidor LAMP em C.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.80\textwidth]{Figures/csr}
+	\caption{Esquemático do Cliente LaPS CSR.}
+	\label{fig:lapscsr_sch}
+\end{figure}
 
 % http://eda.eme.ro/handle/10598/28187
 Em~\cite{cassio14}, o Julius foi configurado para funcionar em modo servidor
@@ -50,13 +57,6 @@ amostras de áudio obtidas pelo microfone do aparelho são enviadas, enquanto são
 paralelamente analisadas a fim de se detectar o silêncio do fim da fala do
 usuário. Feito isso, o aplicativo apenas aguarda a sentença a ser enviada pelo
 servidor.
-
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=.80\textwidth]{Figures/csr}
-	\caption{Esquemático do Cliente LaPS CSR.}
-	\label{fig:lapscsr_sch}
-\end{figure}
 
 A construção do dicionário fonético para o PT\_BR se dá por meio do
 \textit{software} \texttt{lapsg2p}, o qual recebe uma lista de palavras como
@@ -91,6 +91,7 @@ televisão	t e l e v i z a~ w~
 \end{lstlisting}
 \end{minipage}
 
+% http://stackoverflow.com/questions/2661129/espeak-sapi-dll-usage-on-windows
 A proposta do trabalho é adicionar funcionalidades ao código do Julius,
 permitindo a produção de voz sintetizada através da incorporação da API do 
 eSpeak e a transmissão de informação para a TV através de um led IR conectado
@@ -98,7 +99,9 @@ a um GPIO. Um sensor IR ficará encarregado de receber informações de diferentes
 controles remotos para que sejam guardadas como registros no banco de dados.
 
 Toda a organização do trabalho será feita através da plataforma
-Trello~\cite{trello}.
-% http://stackoverflow.com/questions/2661129/espeak-sapi-dll-usage-on-windows
+Trello~\cite{trello}.\\
+
+\noindent
+\textcolor{red}{*Predro: Detalhes da modelagem do DB*}
 \end{section}
 %%% EOF %%%
