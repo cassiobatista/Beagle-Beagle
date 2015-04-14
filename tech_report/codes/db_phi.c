@@ -4,6 +4,8 @@
 #include <my_global.h>
 #include <mysql.h>
 
+#define DEBUG 0
+
 int get_element(char *column, char *target, MYSQL *con); // Get element from table and store in an INT variable, pass the column and the row ("volume+","sony",con)
 int insert_element(char *column, char *value, char *target, MYSQL *con); // Insert element in the table, pass the column and and the row ("volume+","11111","lg", con);
 int insert_table(char *column, char *field ,MYSQL *con); // Insert row in the table, pass the column and the field ("marca","lg",con)
@@ -18,12 +20,13 @@ int main(int argc, char **argv)
 	MYSQL *con = mysql_init(NULL);
 	int i =0;
 
-	if(con==NULL){
+	if(con == NULL){
 		fprintf(stderr,"%s\n",mysql_error(con));
 		exit(1);
 	}
 
-	create_db("y","root","pwd",con); /* Executar apenas uma vez para criar o db */
+	/* Executar apenas uma vez para criar o db */
+	create_db("y","root","pwd",con);
 	
 	create_table("tv","y","root","pwd",con);
 	insert_table("marca","sony",con);
@@ -42,81 +45,86 @@ int main(int argc, char **argv)
 
 int get_element(char *column, char *target, MYSQL *con)
 {
-	int i = 0;
-	char *cmd1 = "SELECT `";
-	char *cmd2 = "` FROM tv WHERE marca='";
-	char *cmd3 = "'";
+	char *cmd_arr[] = {"SELECT `", column, "` FROM tv WHERE marca='", target, "'"};
 	char *str_value;
 
-	size_t get_len = strlen(cmd1)+strlen(column)+strlen(cmd2)+strlen(target)+strlen(cmd3);
-	char *len_cmd = (char *) malloc((get_len+1) * sizeof(char));
+	int i;
+	size_t len = 0;
+	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
+		len+= strlen(cmd_arr[i]);
 
-	sprintf(len_cmd, "%s%s%s%s%s", cmd1,column,cmd2,target,cmd3);
-	printf("%s\n",len_cmd);
+	char *cmd = (char *) malloc ((len+1) * sizeof(char));
+	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
+		sprintf(cmd, "%s%s", cmd, cmd_arr[i]);
 
-	if(mysql_query(con, len_cmd)){
+	if(DEBUG)
+		printf("%s\n", cmd);
+
+	if(mysql_query(con, cmd))
 		finish_with_error(con);
-	}
    
 	MYSQL_RES *result = mysql_store_result(con);
-	if(result == NULL){ 
+	if(result == NULL)
 		finish_with_error(con);
-	}
 
 	MYSQL_FIELD *field;
 	int num_fields = mysql_num_fields(result);
 	MYSQL_ROW row;
 	
-	while((row = mysql_fetch_row(result))){
+	while((row = mysql_fetch_row(result)))
 		str_value = (row[0] ? row[0] : "NULL");
-	}
 
 	mysql_free_result(result);
 
-	free(len_cmd);
+	free(cmd);
 	return atoi(str_value);
 }
 
 int insert_element(char *column, char *value, char *target, MYSQL *con)
 {
-	char *cmd1 = "UPDATE tv SET `";
-	char *cmd2 = "`=";
-	char *cmd3 = " WHERE marca='";
-	char *cmd4 = "'";
+	char *cmd_arr[] = {"UPDATE tv SET `", column ,"`=", value, " WHERE marca='", target, "'"};
+	char *cmd = "";
 
-	size_t iel_len = strlen(cmd1)+strlen(column)+strlen(cmd2)+strlen(value)+strlen(cmd3)+strlen(target)+strlen(cmd4);
-	char *iel_cmd = (char *) malloc ((iel_len+1) * sizeof(char));
+	int i;
+	size_t len = 0;
+	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
+		len+= strlen(cmd_arr[i]);
 
-	sprintf(iel_cmd,"%s%s%s%s%s%s%s",cmd1,column,cmd2,value,cmd3,target,cmd4);
+	char *cmd = (char *) malloc ((len+1) * sizeof(char));
+	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
+		sprintf(cmd, "%s%s", cmd, cmd_arr[i]);
 
-	printf("%s\n", iel_cmd);
+	if(DEBUG)
+		printf("%s\n", cmd);
 
-	if(mysql_query(con,iel_cmd)){
+	if(mysql_query(con, cmd))
 		finish_with_error(con);
-	}
 
-	free(iel_cmd);
+	free(cmd);
 	return 0;
 }
 
 int insert_table(char *column, char *field,MYSQL *con)
 {
-	char *i_cmd1 = "INSERT INTO tv(";
-	char *i_cmd2 = ") VALUES ('";
-	char *i_cmd3= "')";
+	char *cmd_arr[] = {"INSERT INTO tv(", column, ") VALUES ('", field, "')"};
+	char *cmd = "";
 
-	size_t i_len = strlen(i_cmd1)+strlen(column)+strlen(i_cmd2)+strlen(field)+strlen(i_cmd3);
-	char *insert_cmd = (char *) malloc ((i_len+1) * sizeof(char));
+	int i;
+	size_t len = 0;
+	for(i=0; i<sizeof(cmd_arr)/(8*sizeof(char)); i++)
+		len+= strlen(cmd_arr[i]);
 
-	sprintf(insert_cmd,"%s%s%s%s%s",i_cmd1,column,i_cmd2,field,i_cmd3);
+	cmd = (char *) malloc ((len+1) * sizeof(char));
+	for(i=0; i<sizeof(cmd_arr)/(8*sizeof(char)); i++)
+		sprintf(cmd, "%s%s", cmd, cmd_arr[i]);
 	
-	printf("%s\n", insert_cmd);
+	if(DEBUG)
+		printf("%s\n", cmd);
 
-	if(mysql_query(con,insert_cmd)){
+	if(mysql_query(con, insert_cmd))
 		finish_with_error(con);
-	}
 	
-	free(insert_cmd);
+	free(cmd);
 	return 0;
 }
 
@@ -137,45 +145,39 @@ int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con)
 	sprintf(drop_command, "%s%s",d_command, table);
 	sprintf(create_command,"%s%s%s%s%s",c_command,table,table1,table2,table3);
 
-
-	if(mysql_real_connect(con,"localhost",user,pwd,db,0,NULL,0) == NULL){
+	if(mysql_real_connect(con,"localhost",user,pwd,db,0,NULL,0) == NULL)
 		finish_with_error(con);
-	}
 
-	if(mysql_query(con, drop_command)){
+	if(mysql_query(con, drop_command))
 		finish_with_error(con);
-	}
 
-	if(mysql_query(con,create_command)){
+	if(mysql_query(con,create_command))
 		finish_with_error(con);
-	}
 
-	printf("%s\n%s\n",drop_command,create_command);
+	if(DEBUG)
+		printf("%s\n%s\n",drop_command,create_command);
 
 	free(drop_command);
 	free(create_command);
 	return 0;
 }
 
-
 int create_db (char *name, char *user, char *pwd,  MYSQL *con)
 {
-	char create_command[17] = "CREATE DATABASE ";
+	char *create_command = "CREATE DATABASE ";
 
-	if(mysql_real_connect(con,"localhost",user,pwd,NULL,0,NULL,0) == NULL){
+	if(mysql_real_connect(con,"localhost",user,pwd,NULL,0,NULL,0) == NULL)
 		finish_with_error(con);
-	}
 
-	if(mysql_query(con, strcat(create_command, name))){
+	if(mysql_query(con, strcat(create_command, name)))
 		finish_with_error(con);
-	}
 
-	exit(0);
+	return 0;
 }
 
 void finish_with_error(MYSQL *con)
 {
-	fprintf(stderr,"%s\n",mysql_error(con));
+	fprintf(stderr, "%s\n", mysql_error(con));
 	mysql_close(con);
 	exit(1);
 }
@@ -189,10 +191,7 @@ char *handle_string(char *user)
 	result = (char *) malloc (strlen(old)+3 * sizeof(char));
 	sprintf(result, "%s%s%s",handle,old,handle);
 
-
 	printf("%s\n",result);
-
-	//free(str2);
 
 	return result;
 }
@@ -212,17 +211,16 @@ int grant_db(char *user, char *db, MYSQL *con){
 	printf("user_handle = %s\n",user_handle);
 	printf("%s\n",grant_command);
 */
-	if(mysql_query(con,"GRANT ALL ON y TO GUEST IDENTIFIED BY \"phy_dev\"")){
+	if(mysql_query(con, "GRANT ALL ON y TO GUEST IDENTIFIED BY \"phy_dev\""))
 		finish_with_error(con);
-	}
 
 	printf("Grant Sucess!\n");
 	
-	if(mysql_query(con,"FLUSH PRIVILEGES")){
+	if(mysql_query(con,"FLUSH PRIVILEGES"))
 		finish_with_error(con);
-	}
 
 	//free(result);
 	//free(grant_command);	
-	exit(0);
+	return 0;
+	//exit(0);
 }
