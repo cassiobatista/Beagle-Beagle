@@ -1,5 +1,7 @@
 # Beagle-Beagle
 Projeto de Hardware e Interfaceamento
+	* apt-get install git
+	* git clone https://github.com/cassiobatista/Beagle-Beagle.git
 
 # Latex on Linux
 	* apt-get install texlive-full

@@ -4,9 +4,9 @@
 % [IJERA'15] Wi-Fi and Android Based Smart Home Automation for People with Disabilities
  
 Como o iOS e o Android foram lançados, respectivamente, em 2007 e 2008, e 
-a ascensão dos smartphones é relativamente recente, a ideia de aplicar
-acessibilidade no controle de equipamentos eletrônicos através desse tipo de
-equipamento somente começou a revelar resultados concretos a partir de 2010. 
+a ascensão dos smartphones é relativamente recente, a ideia de adicionar a eles 
+a acessibilidade no controle de equipamentos eletrônicos somente começou a 
+revelar resultados concretos a partir de 2010. 
 Em~\cite{Barrena11}, o decodificador PocketSphinx foi embarcado em um smartphone
 Android para que este pudesse controlar aparelhos domésticos através da
 interface de voz. O resultado era enviado para uma SparkFun IOIO Board, a qual,
@@ -60,19 +60,19 @@ que permitem que a BeagleBone ``fale''~\cite{eSpeak}.
 %construção de um circuito amplificador. 
 
 A escolha da plataforma foi fundamental para a esquematização do projeto.
-Arduino, Raspberry Pi e BeagleBone Black foram as três principais plataformas a
+Arduino, Raspberry Pi e BeagleBone Black foram as três principais opções a
 serem escolhidas. Diversos tutoriais de comparação entre as plataformas foram
 consultados e estão disponíveis na Internet~\cite{mhl,randomnerd,makezine}.
 O Arduino, apesar de ser uma ferramenta flexível e com grande capacidade de
 interfaceamento com uma vasta quantidade de dispositivos, é uma plataforma
 simples, recomendada para projetos de menor porte. O microcontrolador, que pode 
-ser programado em C, se torna muito limitado quando o projeto requer um servidor
+ser programado em C, torna-se muito limitado quando o projeto requer um servidor
 estável e relativamente potente;
-O Raspberry Pi, por ser bastante completo, pode ser considerado um mini 
-computador. Todo o seu armazenamento é fornecido por um cartão SD, além de ser
-possível conectá-lo à Internet através de um conector Ethernet. Sendo
+O Raspberry Pi, por ser bastante completo, já se enquadra no conceito de 
+mini computador. Todo o seu armazenamento é fornecido por um cartão SD, além de 
+ser possível conectá-lo à Internet através de um conector Ethernet. Sendo
 necessário a instalação de um sistema operacional, o Raspberry Pi ainda possui
-interface de saída HDMI e é muito útil para aplicações gráficas.
+interface de saída HDMI, tornando-se muito útil para aplicações gráficas.
 
 \begin{table}[!h]
 \centering
@@ -133,14 +133,47 @@ bits. Dessa forma, a chance de a informação ser reconhecida por mais de um
 aparelho é baixa (salvo o caso de serem dois equipamentos do mesmo tipo e da
 mesma empresa).
 
+Uma das grandes dificuldades relacionadas à comunicação IR para controle de
+equipamentos é que cada empresa praticamente segue o seu próprio padrão de
+transmissão de informação: o número, a ordem e o significado dos bits é variado, 
+a frequência dos pulsos oscila entre 32~kHz e 40~kHz, chegando a 50~kHz em
+determinados aparelhos mais modernos. Além disso, a disponibilização de
+documentação pelos fabricantes é muito rara. 
+
+Neste trabalho, será aborado o protocolo RC-5, desenvolvido pela Philips. O
+protocolo teve sua última documentação liberada em 1992, quando não existiam
+home theaters, DVDs e outra vasta gama de dispositivos eletrônicos modernos
+remotamente controlados. MAS EU ESPERO QUE FUNCIONE NESSA TV DE JESUS.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.85\textwidth]{Figures/sch_rc5}
+	\caption{Esquemático do protocolo RC-5 da Philips.}
+	\label{fig:sch_rc5}
+\end{figure}
+
 \subsection{Produtos Relacionados}
-\noindent
-\textcolor{red}{* Procurar *}\\
-Existe uma série de produtos disponíveis no mercado com a finalidade de tornar o
-controle de equipamentos eletrônicos mais prático. 
-\begin{itemize}
-	\item Harmony Smart Control
-	\item IRdroid
-\end{itemize}
+Existem alguns produtos disponíveis no mercado com a finalidade de tornar o
+controle de equipamentos eletrônicos mais prático. Um deles é o \textit{Harmony
+Smart Control}, o qual possui em seu ``pacote'' um aplicativo para iOS e Android
+(porém sem versão para tablets; somente smartphones), um hub e um controle
+remoto genérico. Segundo o review da cnet, vale a pena pagar US\$ 130 por todas
+as funcionalidades que o sistema apresenta, como usar uma conexão RF entre o
+smartphone/controle com o hub (que, infelizmente, ainda não conseguiu se livrar
+do tão antiquado IR), o que faz com que o usuário não precise apontar o controle
+para o dispositivo que precisa controlar. Todavia, o hub precisa estar numa boa
+posição para conseguir emitir a informação de forma clara para o aparelho 
+desejado.
+
+IRdroid é outro aplicativo que permite o controle de aparelhos televisivos com o
+celular. Como o próprio nome sugere, funciona apenas em dispositivos Android,
+desde que seu módulo de hardware esteja acoplado na saída de audio jack do
+smartphone. Versões mais recentes já possuem o hardware que pode ser acessado
+via bluetooth, custando US\$ 60 o mais caro. A grande vantagem é que o IRdroid,
+além de ser baseado na biblioteca LIRC, a qual possui uma vasta quantidade de
+equipamentos em seu banco de dados, possui código livre e disponível.
+
+Nenhuma das soluções possui suporte à reconhecimento e síntese de voz offline em
+PT\_BR. CHUPA!!!
 \end{section}
 %%% EOF %%%
