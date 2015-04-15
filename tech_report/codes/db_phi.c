@@ -21,7 +21,7 @@ int main(int argc, char **argv)
 	int i =0;
 
 	if(con == NULL){
-		fprintf(stderr,"%s\n",mysql_error(con));
+		fprintf(stderr, "%s\n", mysql_error(con));
 		exit(1);
 	}
 
@@ -90,7 +90,7 @@ int insert_element(char *column, char *value, char *target, MYSQL *con)
 	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
 		len+= strlen(cmd_arr[i]);
 
-	char *cmd = (char *) malloc ((len+1) * sizeof(char));
+	cmd = (char *) malloc ((len+1) * sizeof(char));
 	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
 		sprintf(cmd, "%s%s", cmd, cmd_arr[i]);
 
@@ -104,7 +104,7 @@ int insert_element(char *column, char *value, char *target, MYSQL *con)
 	return 0;
 }
 
-int insert_table(char *column, char *field,MYSQL *con)
+int insert_table(char *column, char *field, MYSQL *con)
 {
 	char *cmd_arr[] = {"INSERT INTO tv(", column, ") VALUES ('", field, "')"};
 	char *cmd = "";
@@ -121,7 +121,7 @@ int insert_table(char *column, char *field,MYSQL *con)
 	if(DEBUG)
 		printf("%s\n", cmd);
 
-	if(mysql_query(con, insert_cmd))
+	if(mysql_query(con, cmd))
 		finish_with_error(con);
 	
 	free(cmd);
@@ -162,7 +162,7 @@ int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con)
 	return 0;
 }
 
-int create_db (char *name, char *user, char *pwd,  MYSQL *con)
+int create_db(char *name, char *user, char *pwd,  MYSQL *con)
 {
 	char *create_command = "CREATE DATABASE ";
 
