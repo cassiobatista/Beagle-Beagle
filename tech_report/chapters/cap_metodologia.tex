@@ -3,16 +3,13 @@ O servidor, por ser o elemento chave na consolidação do projeto, deve ser o
 módulo a ser prioritariamente configurado, a fim de ser preparado para atender
 às devidas requisições, bem como executar qualquer tipo de aplicação solicitada.
 Sendo assim, a instalação do sistema operacional Ubuntu foi tomada como primeiro
-passo. 
-%Ångstr\"{o}m~\cite{angstrom} é um sistema operacional, baseado em Linux,
-%preparado exclusivamente para plataformas embarcadas, sendo o padrão para a 
-%própria BeagleBone. 
-As dependências a serem instaladas são listadas na Lista~\ref{lst:dependences}.
+passo.  As dependências a serem instaladas são mostradas na
+Lista~\ref{lst:dependences}.
 
 \begin{lstlisting}[language=bash, caption={Pre-instalação de dependências no
 servidor}, label={lst:dependences}]
 # general dependences
-build-essential alsa-tools sox
+build-essential alsa-tools alsa-base alsa-utils sox
 
 # eSpeak dependences
 libespeak-dev libportaudio2 libportaudio-dev
@@ -25,8 +22,6 @@ apache2 libapache2-mod-fastcgi # apache server
 mysql-server libapache2-mod-auth-mysql php5-mysql # MySQL
 libmysqlclient-dev # C
 phpmyadmin # (opcional?)
-php5 libapache2-mod-php5 php5-mcrypt # PHP (opcional?)
-libmysqlcppconn7 libmysqlcppconn-dev # C++ (opcional?)
 \end{lstlisting}
 
 É importante ressaltar que os sistemas operacionais embarcados são
@@ -40,7 +35,7 @@ implementação do servidor LAMP em C.
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=.80\textwidth]{Figures/csr}
-	\caption{Esquemático do Cliente LaPS CSR.}
+	\caption{Esquemático do cliente Android.}
 	\label{fig:lapscsr_sch}
 \end{figure}
 
@@ -102,6 +97,8 @@ Toda a organização do trabalho será feita através da plataforma
 Trello~\cite{trello}.\\
 
 \noindent
-\textcolor{red}{*Predro: Detalhes da modelagem do DB*}
+\textcolor{red}{*Predro: Detalhes sobre a modelagem do DB*}\\
+\textcolor{red}{*Thiago: Detalhes sobre o que foi feito com o Arduino*}\\
+\textcolor{red}{*Gabriel: Detalhes sobre o que foi convertido do Arduino para a BBB*}
 \end{section}
 %%% EOF %%%

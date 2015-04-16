@@ -1,43 +1,26 @@
 \begin{section}{Dificuldades e Soluções}
-\begin{itemize}
+\begin{enumerate}
 
-\item There's no sound output on BBB. The default audio device, as mentioned in
-some foruns on the web, is through the HDMI connector. The same forum has said
-that we can disable the HDMI as audio device by changing some kernel parameters,
-then the second device would become the main one. In this case, the USB would be
-the principal sound card. The easist way, then, would be attach an USB speaker
-to the connector, because the TTS would automatically output the result to that
-port. My point about the USB speaker:
-\begin{itemize}
-\item It must be low power consuming
-\item Its size must be limited. If the project was to build a thermistor plugged
-on the wall, we could not put a big speaker there. The circuit must be smaller
-than the BBB itself.
-\end{itemize}
-It would be nice if we could build an amplifier and put the sinthesized audio  
-through a BBB GPIO, but...
-\begin{itemize}
-\item I don't know how to manipulate the TTS output to put in that pin
-\item Even If I could do that, It's hard to play a sound with PWM. A chunck of
-audio, size dependent of the sampling rate, should be put in that GPIO in a slot
-of time. And I think it's not as simple as this description.
-\item The arduino codes I've found that play sound through a pin have the
-craziest codes I've ever seen. Almost everything is manually done.
-\item I think the output is gonna be terrible and polyphonic
-\item The PCM2707 DAC is around 10 USD and will also need an amplifier circuit
-with LM386
-\end{itemize}
+\item A BeagleBone não possui saída de áudio nativa, tampouco conectores do tipo
+audio jack. No Debian, a saída padrão de áudio é pelo conector HDMI, mas pode
+ser substituída pelo USB mediante modificações em parâmetros do kernel. O modo
+mais fácil, considerando que redirecionar a saída do eSpeak para um GPIO seria
+muito trabalhoso, seria conectar um auto-falante USB à BeagleBone. Em se
+tratando de um protótipo, um headphone faz o papel de um speaker que deve
+consumir pouca energia e ter um tamanho limitado. Foi-se cogitada a construção
+de um circuito com um amplificador LM386 para o speaker, porém a obtenção de um
+D/A PCM2707 não custaria menos de US\$ 15.
 
-\item BBB não tem conexão wifi e é difícil atualizar o kernel pra receber um
-shield/case. Além do mais, tal shield/case seria plugado na porta USB, a qual 
-já estaria sendo usada pelo auto-falante. Portanto, a solução mais fácil foi
-conectar um roteador wifi à porta Ethernet da BBB através de um cabo RJ45.
+\item A BeagleBone não possui conexão wifi. Além da dificuldade em atualizar o
+kernel pra receber um shield/case, o mesmo teria de ser conectado na porta USB,
+a qual já estaria sendo usada pelo auto-falante. Portanto, a solução mais fácil
+foi conectar um roteador wifi à porta Ethernet da BBB através de um cabo RJ-45.
 
 \item O Angstrom é PODRE. (Gabriel)
 
 \item O código do Arduino que hackeia as paradas é PODRE. (Thiago)
 
 \item Acessar MySQL from C é PODRE (Pedro)
-\end{itemize}
+\end{enumerate}
 \end{section}
 %%% EOF %%%

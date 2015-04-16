@@ -34,8 +34,9 @@ escolhidas pelo desenvolvedor do sistema. A construção do dicionário fonético
 para PT\_BR dar-se-á através do software descrito em~\cite{Siravenha08}; o
 tutorial para o treino do modelo acústico encontra-se disponível na página do
 projeto Voxforge~\cite{voxforge}, bem como capítulo 3 do livro do
-HTK~\cite[p.~22--42]{Young00}; a gramática reconhecida pelo Julius é criada
-manualmente de acordo com o descrito na página oficial~\cite{juliussite}.
+HTK~\cite[p.~22--42]{Young00} (lembrando que o modelo acústico utilizado também
+está disponível na página do FalaBrasil); a gramática reconhecida pelo Julius é
+criada manualmente de acordo com o descrito na página oficial~\cite{juliussite}.
 Instruções de configuração e utilização do Julius encontram-se na documentação
 oficial~\cite{julius_book}.
 
@@ -126,31 +127,46 @@ UOL~\cite{uol_hsw}. A maioria dos aparelhos eletrônicos atualmente recebe
 informação através de sensores infravermelhos localizados em painéis frontais.
 Um grande problema é a inteferência que surge com a vasta transferência de
 informação via IR. Devido à isso, a comunicação entre o controle remoto e a
-televisão ocorre em 4 passos: um comando \textit{start} inicia a transferência,
-seguido dos bits do comando específico (como aumentar o volume, por exemplo) e
-do endereço do aparelho. Por fim, um comando de \textit{stop} encerra o envio de
-bits. Dessa forma, a chance de a informação ser reconhecida por mais de um
-aparelho é baixa (salvo o caso de serem dois equipamentos do mesmo tipo e da
-mesma empresa).
+televisão ocorre geralmente em 4 passos: um comando \textit{start} inicia a
+transferência, seguido dos bits do comando específico (como aumentar o volume,
+por exemplo) e do endereço do aparelho. Por fim, um comando de \textit{stop}
+encerra o envio de bits. Dessa forma, a chance de a informação ser reconhecida
+por mais de um aparelho é baixa (salvo o caso de serem dois equipamentos do
+mesmo tipo e da mesma empresa).
 
 Uma das grandes dificuldades relacionadas à comunicação IR para controle de
 equipamentos é que cada empresa praticamente segue o seu próprio padrão de
 transmissão de informação: o número, a ordem e o significado dos bits é variado, 
-a frequência dos pulsos oscila entre 32~kHz e 40~kHz, chegando a 50~kHz em
-determinados aparelhos mais modernos. Além disso, a disponibilização de
-documentação pelos fabricantes é muito rara. 
-
-Neste trabalho, será aborado o protocolo RC-5, desenvolvido pela Philips. O
-protocolo teve sua última documentação liberada em 1992, quando não existiam
-home theaters, DVDs e outra vasta gama de dispositivos eletrônicos modernos
-remotamente controlados. MAS EU ESPERO QUE FUNCIONE NESSA TV DE JESUS.
+a modulação e codificação usada são diferentes e a frequência dos pulsos pode
+oscilar entre 32~kHz e 40~kHz, chegando a 50~kHz em determinados aparelhos mais
+modernos. Além disso, tão raro quanto o seguimento de uma comunicação IR
+padronizada, a disponibilização de documentação pelos fabricantes também é
+bastante escassa. A Philips, por exemplo, utiliza seu próprio protocolo de
+comunicação chamado RC-5. A última documentação foi liberada em 1992, quando
+ainda não existiam muitos dos equipamentos eletrônicos atuais, como \textit{home
+theaters} ou DVDs. Nesse padrão, os bits são codificados de acordo com o código
+de Manchester, onde cada bit, transmitido dentro de um período fixo, é
+representado por uma transição \textit{high-to-low} (0) ou \textit{low-to-high}
+(1).  Esses padrões de dados são obtidos através de uma operação do tipo XOR
+(OU-Exclusivo) realizada entre o clock do dispositivo e o dado propriamente
+dito.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=.85\textwidth]{Figures/sch_rc5}
+	\includegraphics[width=.88\textwidth]{Figures/sch_rc5}
 	\caption{Esquemático do protocolo RC-5 da Philips.}
 	\label{fig:sch_rc5}
 \end{figure}
+
+A Figura~\ref{fig:sch_rc5} mostra a informação referente ao comando ``diminuir
+volume'' contida num vetor de 14 bits. Os 11 últimos bits definem o endereço do
+aparelho de destino e o comando em si. Pode-se observar que qualquer bit é
+representado por duas partes, sendo uma metade em nível baixo e a outra, em
+nível alto. Cada nível ocorre num intervalo de 32 perídos. O nível alto é gerado
+por um PWM de \textit{duty cycle} igual a 25\% do período do pulso. Essa
+percentagem define o tempo em que o IR Led permance aceso, ou seja, no nível
+alto, o IR Led permanece ligado por período de $0,25\times1/38~kHz$ e desligado
+por $0,75\times1/38~kHz$, sendo o processo repetido 32 vezes.
 
 \subsection{Produtos Relacionados}
 Existem alguns produtos disponíveis no mercado com a finalidade de tornar o
@@ -173,10 +189,9 @@ via bluetooth, custando US\$ 60 o mais caro. A grande vantagem é que o IRdroid,
 além de ser baseado na biblioteca LIRC, a qual possui uma vasta quantidade de
 equipamentos em seu banco de dados, possui código livre e disponível.
 
-Há também o projeto Google TV Remote, porém este é limitado apenas ao controle 
-de uma Google TV.
-
-Nenhuma das soluções possui suporte à reconhecimento e síntese de voz offline em
-PT\_BR. CHUPA!!!
+Outras diversas soluções são aplicadas apenas à \textit{smart TVs}, onde a
+informação de controle é transmitida por wifi. Nenhuma das aplicações
+encontradas para TVs convencionais possui suporte à reconhecimento e síntese de
+voz offline em PT\_BR.
 \end{section}
 %%% EOF %%%
