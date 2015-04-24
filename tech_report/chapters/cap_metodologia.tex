@@ -6,6 +6,14 @@ Sendo assim, a instalação do sistema operacional Ubuntu foi tomada como primeiro
 passo.  As dependências a serem instaladas são mostradas na
 Lista~\ref{lst:dependences}.
 
+É importante ressaltar que os sistemas operacionais embarcados são
+simplificações de sistemas operacionais mais robustos, tendo a maior parte das
+suas funcionalidades reduzidas ou simplificadas para se adequar à uma plataforma
+de menor porte. Por isso, a preparação deve ocorrer a partir dos pacotes mais
+básicos, como o GCC, por exemplo. Outros pacotes devem ser instalados de forma
+gradual, tais quais os requeridos pelo Julius, eSpeak e os necessários para a
+implementação do servidor LAMP em C.
+
 \begin{lstlisting}[language=bash, caption={Pre-instalação de dependências no
 servidor}, label={lst:dependences}]
 # general dependences
@@ -24,20 +32,12 @@ libmysqlclient-dev # C
 phpmyadmin # (opcional?)
 \end{lstlisting}
 
-É importante ressaltar que os sistemas operacionais embarcados são
-simplificações de sistemas operacionais mais robustos, tendo a maior parte das
-suas funcionalidades reduzidas ou simplificadas para se adequar à uma plataforma
-de menor porte. Por isso, a preparação deve ocorrer a partir dos pacotes mais
-básicos, como o GCC, por exemplo. Outros pacotes devem ser instalados de forma
-gradual, tais quais os requeridos pelo Julius, eSpeak e os necessários para a
-implementação do servidor LAMP em C.
-
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=.80\textwidth]{Figures/csr}
-	\caption{Esquemático do cliente Android.}
-	\label{fig:lapscsr_sch}
-\end{figure}
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=.80\textwidth]{Figures/csr}
+%	\caption{Esquemático do cliente Android.}
+%	\label{fig:lapscsr_sch}
+%\end{figure}
 
 % http://eda.eme.ro/handle/10598/28187
 Em~\cite{cassio14}, o Julius foi configurado para funcionar em modo servidor
@@ -93,8 +93,36 @@ eSpeak e a transmissão de informação para a TV através de um led IR conectado
 a um GPIO. Um sensor IR ficará encarregado de receber informações de diferentes
 controles remotos para que sejam guardadas como registros no banco de dados.
 
-Toda a organização do trabalho será feita através da plataforma
+Toda a organização do trabalho, bem como a comunicação entre os membros sobre os
+passos tomados no decorrer do trabalho será feita através da plataforma
 Trello~\cite{trello}.\\
+
+Um controle para a TV Philips 39PFL3008D/78 foi usado como base para a análise
+do sinal emitido. Inicialmente, um arduino UNO fui utilizado para verificar
+o tempo em que o IR led permanecia ativo e inativo, armazenando-o
+em uma matriz de duas colunas. O Matlab foi utilizado para converter a matriz em
+um vetor único, no qual os índices ímpares representavam o tempo de duração do
+modo \textit{burst} do IR led e as posições pares, o tempo em que o IR led
+permanecia \textit{idle}. Sendo assim, o vetor no qual as durações dos nívels
+altos e baixos alternavam-se entre si foi convertido para uma forma de onda
+quadrada, semelhante à mostrada na Figura~\ref{fig:rc6}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{Figures/cmds}
+	\caption{Mudança nos bits de comando após pressionar NÃO consecutivamente 
+			4 botões diferentes.}
+	\label{fig:cmds_sch}
+\end{figure}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{Figures/volume+}
+	\caption{Mudança no bit de Toggle após pressionar o botão ``Volume Mais'' por
+			4 vezes consecutivas.}
+	\label{fig:vol+}
+\end{figure}
+
 
 \noindent
 \textcolor{red}{*Predro: Detalhes sobre a modelagem do DB*}\\

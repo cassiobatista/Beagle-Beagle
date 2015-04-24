@@ -155,18 +155,41 @@ dito~\cite{rc5_wiki}.
 	\centering
 	\includegraphics[width=.88\textwidth]{Figures/sch_rc5}
 	\caption{Esquemático do protocolo RC-5 da Philips.}
-	\label{fig:sch_rc5}
+	\label{fig:rc5}
 \end{figure}
 
-A Figura~\ref{fig:sch_rc5} mostra a informação referente ao comando ``diminuir
+A Figura~\ref{fig:rc5} mostra a informação referente ao comando ``diminuir
 volume'' contida num vetor de 14 bits. Os 11 últimos bits definem o endereço do
 aparelho de destino e o comando em si. Pode-se observar que qualquer bit é
 representado por duas partes, sendo uma metade em nível baixo e a outra, em
 nível alto. Cada nível ocorre num intervalo de 32 perídos. O nível alto é gerado
 por um PWM de \textit{duty cycle} igual a 25\% do período do pulso. Essa
 percentagem define o tempo em que o IR Led permance aceso, ou seja, no nível
-alto, o IR Led permanece ligado por período de $0,25\times1/38~kHz$ e desligado
-por $0,75\times1/38~kHz$, sendo o processo repetido 32 vezes.
+alto, o IR Led permanece ligado por período de $0,25\times1/36~kHz$ e desligado
+por $0,75\times1/36~kHz$, sendo o processo repetido 32 vezes.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.65\textwidth]{Figures/rc6}
+	\caption{Esquemático do protocolo RC-6 da Philips.}
+	\label{fig:rc6}
+\end{figure}
+
+Os aparelhos mais novos já implementam a versão atualizada desse protocolo,
+chamado de RC-6. Embora a Philips não tenha disponibilizado qualquer
+documentação sobre este protocolo, há fóruns na Internet que, através da
+aplicação de engenharia reversa, conseguem descrever o padrão utilizado na
+construção do sinal. Pela Figura~\ref{fig:rc6}, é fácil notar que a quantidade
+de bits carregada pelo sinal (em comparação com o RC-5) aumentou de 14 para 22.
+O código Manchester também aparece invertido, já que valor lógico alto passa
+agora a ser representado pela transição \textit{high-to-low} (1), enquanto o
+valor baixo (0) é definido por uma mudança \textit{low-to-high}. O primeiro bit
+de \textit{start} tem uma duração maior, para garantir o ganho do AGC no
+circuito receptor; já o segundo, também de \textit{start}, é sempre mantido em
+valor alto. O bit de \textit{toggle}, o qual muda de estado caso uma tecla deixe
+de ser pressionada, também possui uma duração mais longa do que os outros bits
+comuns.  Por fim, os últimos 14 bits representam o endereço do aparelho e o
+referido comando a ser transmitido, respectivamente.
 
 \subsection{Produtos Relacionados}
 Existem alguns produtos disponíveis no mercado com a finalidade de tornar o
@@ -182,12 +205,13 @@ estar numa boa posição para conseguir emitir a informação de forma clara para o
 aparelho desejado.
 
 IRdroid é outro aplicativo que permite o controle de aparelhos televisivos com o
-celular~\cite{irdroid}. Como o próprio nome sugere, funciona apenas em dispositivos Android,
-desde que seu módulo de hardware esteja acoplado na saída de audio jack do
-smartphone. Versões mais recentes já possuem o hardware que pode ser acessado
-via bluetooth, custando US\$ 60 o mais caro. A grande vantagem é que o IRdroid,
-além de ser baseado na biblioteca LIRC, a qual possui uma vasta quantidade de
-equipamentos em seu banco de dados, possui código livre e disponível.
+celular~\cite{irdroid}. Como o próprio nome sugere, funciona apenas em
+dispositivos Android, desde que seu módulo de hardware esteja acoplado na saída
+de audio jack do smartphone. Versões mais recentes já possuem o hardware que
+pode ser acessado via bluetooth, custando US\$ 60 o mais caro. A grande vantagem
+é que o IRdroid, além de ser baseado na biblioteca LIRC, a qual possui uma vasta
+quantidade de equipamentos em seu banco de dados, possui código livre e
+disponível.
 
 Outras diversas soluções são aplicadas apenas à \textit{smart TVs}, onde a
 informação de controle é transmitida por wifi. Nenhuma das aplicações
