@@ -123,38 +123,44 @@ quadrada, semelhante à mostrada na Figura~\ref{fig:rc6}.
 	\label{fig:vol+}
 \end{figure}
 
+Como o sistema foi projetado para, futuramente, dar suporte ao controle de 
+diversos aparelhos eletrônicos, a adoção de um banco de dados foi vista como 
+solução para facilitar o acesso à uma maior variedade de dispositivos e, assim,
+tornar o projeto em um sistema de propósito mais geral. Além disso, a segurança
+dos dados, que serão constantemente manipulados, será mantida, podendo estes ser
+recuperados apenas olhando para o banco. (????)
 
-Como o sistema foi projetado visando o controle de diversos aparelhos eletrônicos, em que cada aparelho eletrônico 
-detém um conjunto de comandos, sendo cada comando composto de vários campos (bitstreams), a adoção de um banco de 
-dados vem como solução para facilitar o acesso à todos esses comandos, bem como manter com segurança uma série de 
-dados que serão constantemente manipulados e podem sempre ser recuperados apenas olhando para o banco.
+Inicialmente, apenas a entidade TELEVISÃO foi criada, onde uma
+tabela entitulada ``TV'' têm os atributos ``marca'' e os campos dos comandos
+a serem transmitidos ao aparelho: ``volume+'', ``volume-'', ``canal+'',
+``canal-'', ``ligar'', ``desligar'', ``endereço'', ``start''. Com isso,
+quaisquer campos podem ser satisfatoriamente acessados através de um simples
+código SQL (como o mostrado abaixo), a fim de se montar um determinado comando.
+Assim, podemos concatenar os bits e, posteriormente, enviar para o led IR.
 
-Inicialmente, usamos no banco apenas uma tabela que é para a televisão, esta tabela entitulada "TV" têm como 
-atributos a sua marca e os campos dos comandos que usaremos para reenviar à tv, sendo eles "volume+", 
-"volume-","canal+", "canal-","ligar","desligar", "endereço", "start", "stop". Com isso, podemos satisfatoriamente 
-acessar quaisquer campos para montar um determinado comando, apenas com um simples SELECT campo FROM TV WHERE 
-$marca='marca\_da\_tv'$, com isso podemos concatenar estas bitstreams e mandar posteriormente para o led IR.
+\begin{lstlisting}[language=sql]
+SELECT campo FROM TV WHERE marca='marca_da_tv' 
+\end{lstlisting}
 
-O acesso ao banco de dados é todo feito por meio da linguagem C, para tal foi usado uma biblioteca especial chamada 
-$my\_sql.h$, em que conseguimos fazer queries passando o comando em mysql como uma string.
+O acesso ao banco de dados é todo feito por meio da linguagem C, para tal foi
+usado uma biblioteca especial chamada \texttt{my\_sql.h}, na qual as
+\textit{queries} são feitas pela passagem de um comando SQL como uma
+\textit{string}.
 
 \begin{table}[h]
 \centering
-\caption{Tabela TV do nosso BD}
-\begin{tabular}{cccccccccc}
-%\hline
-%Tabela TV
+\caption{Tabela TV}
+\begin{tabular}{c|cccccccc}
 \hline
-marca & volume+ & volume- & canal+ & canal- & ligar & desligar & endereço & start & stop \\
+marca & volume+ & volume- & canal+ & canal- & ligar & endereço & start \\
 \hline
-lg & 10111011 & 11110110 & 11000010 & 00010111 & 01011111 & 11000000 & 11011010 & 11010111 & 00011111 \\
-sony & 11110110 & 01011111 & 00011111 & 10111011 & 11000000 & 11011010 & 11010111 & 00010111 & 11010111 \\
-samsung & 00110111 & 11000010 & 11010000 & 11011110 & 11011100 & 01010111 & 11011010 & 11010111 & 01011111 \\
-phillips & 00011111 & 10111011 & 11000000 & 11011010 & 11010111 & 00010111 & 11000010 & 00010111 & 10101010 \\
+lg       & 10111011 & 11110110 & 11000010 & 00010111 & 01011111 & 11011010 & 11010111 \\
+sony     & 11110110 & 01011111 & 00011111 & 10111011 & 11000000 & 11010111 & 00010111 \\
+samsung  & 00110111 & 11000010 & 11010000 & 11011110 & 11011100 & 11011010 & 11010111 \\
+phillips & 00011111 & 10111011 & 11000000 & 11011010 & 11010111 & 11000010 & 00010111 \\
 \hline
 \end{tabular}
 \end{table}
-
 
 \noindent
 \textcolor{red}{*Thiago: Detalhes sobre o que foi feito com o Arduino*}\\

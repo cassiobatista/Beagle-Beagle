@@ -1,31 +1,41 @@
 \begin{section}{Pedro: Codigos LAMP}
 \end{section}
 
-Com a sens\'{i}vel complexidade dos comandos usados para a comunica\c{a}\~ {a}o com a TV, devido ao n\'{u}mero de 
-campos presente em cada comando e a diferen\c{c}a existente entre cada campo, bem como evitar poss\'{i}veis problemas 
-de escalabilidade quando o sistema evoluir para o controle de diversos equipamentos eletr\^{o}nicos, adotamos um 
-banco de dados para armazenar todas essas informa\c{c}\~{o}es quanto aos aparelhos e seus comandos.
+Com a sens\'{i}vel complexidade dos comandos usados para a comunica\c{a}\~ {a}o
+com a TV, devido ao n\'{u}mero de campos presente em cada comando e a
+diferen\c{c}a existente entre cada campo, bem como evitar poss\'{i}veis
+problemas de escalabilidade quando o sistema evoluir para o controle de diversos
+equipamentos eletr\^{o}nicos, adotamos um banco de dados para armazenar todas
+essas informa\c{c}\~{o}es quanto aos aparelhos e seus comandos.
 
-Al\'{e}m disso, visando uma integra\c{c}\~{a}o maior do sistema implementado no BeagleBone Black\textregistered, com 
-as interfaces dispon\'{i}veis ao usu\'{a}rio e aos desenvolvedores como a web, a ado\c{c}ao de um servidor Apache e 
-PHP foi necess\'{a}ria. Essa integra\c{c}\~{a}o se d\`{a} pela cria\c{c}\~{a}o de uma p\'{a}gina web onde ser\~{a}o 
-armazenados dados provenientes das intera\c{c}\~{o}es do sistema, por exemplo, caso o usu\'{a}rio tenha ligado a TV, 
-aumentado o volume, mudado de canal todas essas informa\c{c}\~{o}es podem ir para um log de uma p\'{a}gina web em que 
-pode ser acessado pelo desenvolvedor para investigar a performance do sistema. Al\'{e}m do log de comandos executados 
-pelo usu\'{a}rio, podemos guardar erros cometidos pelo Julius, ou eSpeak ou ainda falha no envio do comando para o 
-aparelho eletr\^{o}nico, em casos mais espec\'{i}ficos o usu\'{a}rio poder\'{a} at\'{e} ligar aparelhos remotamente 
-ou o desenvolvedor avaliar o desempenho do sistema e identificando problemas antes de uma visita t\'{e}cnica. 
+Al\'{e}m disso, visando uma integra\c{c}\~{a}o maior do sistema implementado no
+BeagleBone Black\textregistered, com as interfaces dispon\'{i}veis ao
+usu\'{a}rio e aos desenvolvedores como a web, a ado\c{c}ao de um servidor Apache
+e PHP foi necess\'{a}ria. Essa integra\c{c}\~{a}o se d\`{a} pela cria\c{c}\~{a}o
+de uma p\'{a}gina web onde ser\~{a}o armazenados dados provenientes das
+intera\c{c}\~{o}es do sistema, por exemplo, caso o usu\'{a}rio tenha ligado a
+TV, aumentado o volume, mudado de canal todas essas informa\c{c}\~{o}es podem ir
+para um log de uma p\'{a}gina web em que pode ser acessado pelo desenvolvedor
+para investigar a performance do sistema. Al\'{e}m do log de comandos executados
+pelo usu\'{a}rio, podemos guardar erros cometidos pelo Julius, ou eSpeak ou
+ainda falha no envio do comando para o aparelho eletr\^{o}nico, em casos mais
+espec\'{i}ficos o usu\'{a}rio poder\'{a} at\'{e} ligar aparelhos remotamente ou
+o desenvolvedor avaliar o desempenho do sistema e identificando problemas antes
+de uma visita t\'{e}cnica. 
 
-Para integrar todos estes recursos \'{e} necess\'{a}rio um sistema operacional, que no nosso caso foi usado um Linux 
-Debian, configurando assim o servidor LAMP (Linux, Apache HTTP Server, MySQL e PHP).
+Para integrar todos estes recursos \'{e} necess\'{a}rio um sistema operacional,
+que no nosso caso foi usado um Linux Debian, configurando assim o servidor LAMP
+(Linux, Apache HTTP Server, MySQL e PHP).
 
-Depois de instalar as depend\^{e}ncias e configurar o Linux, Apache, MySQL e PHP, temos que acessar e comunicar com o 
-MySQL por interm\'{e}dio da linguagem C, para tal a biblioteca $my\_sql.h$ \'{e} usada. No c\'{o}digo em C para a 
-comunica\c{c}\~{a}o temos 9 fun\c{c}\~{o}es al\'{e}m da \textit{main}, sendo elas: \textit{$get\_element()$, 
-$insert\_element()$, $insert\_table()$}, \textit{$finish\_with\_error(), *handle\_string(), create\_db()$}, 
+Depois de instalar as depend\^{e}ncias e configurar o Linux, Apache, MySQL e
+PHP, temos que acessar e comunicar com o MySQL por interm\'{e}dio da linguagem
+C, para tal a biblioteca $my\_sql.h$ \'{e} usada. No c\'{o}digo em C para a
+comunica\c{c}\~{a}o temos 9 fun\c{c}\~{o}es al\'{e}m da \textit{main}, sendo
+elas: \textit{$get\_element()$, $insert\_element()$, $insert\_table()$},
+\textit{$finish\_with\_error(), *handle\_string(), create\_db()$},
 \textit{$grant\_db(), create\_table()$}.
 
-\begin{lstlisting}[language=c, caption={db on c general structure}, label={lst:dbphi1}]
+\begin{lstlisting}[language=c, caption={db on c general structure}, label={lst:dbphi1}, basicstyle=\ttfamily\scriptsize]
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -34,14 +44,22 @@ $insert\_element()$, $insert\_table()$}, \textit{$finish\_with\_error(), *handle
 
 #define DEBUG 0
 
-int get_element(char *column, char *target, MYSQL *con); // Get element from table and store in an INT variable, pass the column and the row ("volume+","sony",con)
-int insert_element(char *column, char *value, char *target, MYSQL *con); // Insert element in the table, pass the column and and the row ("volume+","11111","lg", con);
-int insert_table(char *column, char *field ,MYSQL *con); // Insert row in the table, pass the column and the field ("marca","lg",con)
-void finish_with_error(MYSQL *con); // Default exit if mysql_query returns an error
-char *handle_string(char *user); // Function that transforms string user into "user", not used now (was used by grant_db to grant database access to a user)
-int create_db(char *name, char *user, char *pwd, MYSQL *con);// Creates the database, pass the name, user accessing and pwd of the user ("phi_project","root","pwd",con);
-int grant_db(char *user, char *db, MYSQL *con); // Grant database access to a specific user, not being used right now due to seg fault.
-int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con); // Create a table in the database, right now is a default table defined by the strings on the function
+/* Get element from table and store in an INT variable, pass the column and the row ("volume+","sony",con) */
+int get_element(char *column, char *target, MYSQL *con);
+/* Insert element in the table, pass the column and and the row ("volume+","11111","lg", con) */
+int insert_element(char *column, char *value, char *target, MYSQL *con); 
+/* Insert row in the table, pass the column and the field ("marca","lg",con) */
+int insert_table(char *column, char *field ,MYSQL *con); 
+/* Default exit if mysql_query returns an error */
+void finish_with_error(MYSQL *con);
+/* Function that transforms string user into "user", not used now (was used by grant_db to grant database access to a user) */
+char *handle_string(char *user);
+/* Creates the database, pass the name, user accessing and pwd of the user ("phi_project","root","pwd",con) */
+int create_db(char *name, char *user, char *pwd, MYSQL *con);
+/* Grant database access to a specific user, not being used right now due to seg fault. */
+int grant_db(char *user, char *db, MYSQL *con);
+/* Create a table in the database, right now is a default table defined by the strings on the function */
+int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con);
 
 int main(int argc, char **argv)
 {
@@ -72,12 +90,15 @@ int main(int argc, char **argv)
 }
 \end{lstlisting}
 
-Aqui detalhamos o escopo de todas as fun\c{c}\~{o}es sendo usadas e a \textit{main()}, onde estamos conectando no 
-banco de dados (\textit{$mysql\_init()$}), criando um banco chamado \textit{y} com o usu\'{a}rio \textit{root} 
-(\textit{$create\_db()$}). Depois a tabela chamada \textit{tv} (\textit{$create\_table()$}) \'{e} criada e logo 
-ap\'{o} os atributos est\~{a}o sendo inseridos (\textit{$insert\_table()$}). Com \textit{$insert\_element()$} 
-atribuimos um valor a um atributo espec\'{i}fico e usamos \textit{$get\_element()$} para retirar da tabela o valor de 
-um atributo, que no caso \'{e} \textit{volume+} da marca lg.
+Aqui detalhamos o escopo de todas as fun\c{c}\~{o}es sendo usadas e a
+\textit{main()}, onde estamos conectando no banco de dados
+(\textit{$mysql\_init()$}), criando um banco chamado \textit{y} com o
+usu\'{a}rio \textit{root} (\textit{$create\_db()$}). Depois a tabela chamada
+\textit{tv} (\textit{$create\_table()$}) \'{e} criada e logo ap\'{o} os
+atributos est\~{a}o sendo inseridos (\textit{$insert\_table()$}). Com
+\textit{$insert\_element()$} atribuimos um valor a um atributo espec\'{i}fico e
+usamos \textit{$get\_element()$} para retirar da tabela o valor de um atributo,
+que no caso \'{e} \textit{volume+} da marca lg.
 
 \begin{lstlisting}[language=c, caption={fun\c{c}\~{a}o $get\_element()$}, label={lst:dbphi2}]
 int get_element(char *column, char *target, MYSQL *con)
@@ -118,13 +139,16 @@ int get_element(char *column, char *target, MYSQL *con)
 }
 \end{lstlisting}
 
-Esta fun\c{c}\~{a}o \'{e} respons\'{a}vel por fazer a \textit{query} no banco de dados que retornar\'{a} o valor do 
-atributo espec\'{i}fico que queremos obter. Ela recebe como entrada o atributo (\textit{$*column$}), a marca "alvo" 
-(\textit{$*target$}), pode ser qualquer marca, e a conex\~{a}o com o MySQL (\textit{$*con$}), com 
-isso podemos selecionar o atributo \textit{column} onde a marca \'{e} igual ao \textit{alvo} passado \`{a} 
-fun\c{c}\~{a}o. Ap\'{o}s a montagem da sintaxe da \textit{query}, usamos \textit{$mysql\_fetch\_row()$} para pegarmos 
-todos os valores que satisfazem a condi\c{c}\~{a}o exigida por nossa \textit{query}, esta por sua vez retorna apenas 
-um valor, o qual \'{e} retornado pela fun\c{c}\~{a}o.
+Esta fun\c{c}\~{a}o \'{e} respons\'{a}vel por fazer a \textit{query} no banco de
+dados que retornar\'{a} o valor do atributo espec\'{i}fico que queremos obter.
+Ela recebe como entrada o atributo (\textit{$*column$}), a marca "alvo"
+(\textit{$*target$}), pode ser qualquer marca, e a conex\~{a}o com o MySQL
+(\textit{$*con$}), com isso podemos selecionar o atributo \textit{column} onde a
+marca \'{e} igual ao \textit{alvo} passado \`{a} fun\c{c}\~{a}o. Ap\'{o}s a
+montagem da sintaxe da \textit{query}, usamos \textit{$mysql\_fetch\_row()$}
+para pegarmos todos os valores que satisfazem a condi\c{c}\~{a}o exigida por
+nossa \textit{query}, esta por sua vez retorna apenas um valor, o qual \'{e}
+retornado pela fun\c{c}\~{a}o.
 
 \begin{lstlisting}[language=c, caption={fun\c{c}\~{a}o $insert\_element()$}, label={lst:dbphi3}]
 int insert_element(char *column, char *value, char *target, MYSQL *con)
@@ -152,11 +176,12 @@ int insert_element(char *column, char *value, char *target, MYSQL *con)
 }
 \end{lstlisting}
 
-Esta fun\c{c}\~{a}o tem como finalidade inserir o valor de um atributo da tabela, ela recebe o atributo 
-(\textit{$*column$}), o valor (\textit{$*value$}), a marca "alvo" (\textit{$*target$}) e a conex\~{a}o MySQL 
-(\textit{$*con$}). Ela ir\'{a} montar a sintaxe da \textit{query}, onde iremos atualizar a tabela \textit{tv} 
-atribuindo \`{a} coluna \textit{$*column$} o valor \textit{$*value$} onde a marca \'{e} igual ao alvo 
-\textit{$*target$}.
+Esta fun\c{c}\~{a}o tem como finalidade inserir o valor de um atributo da
+tabela, ela recebe o atributo (\textit{$*column$}), o valor (\textit{$*value$}),
+a marca "alvo" (\textit{$*target$}) e a conex\~{a}o MySQL (\textit{$*con$}). Ela
+ir\'{a} montar a sintaxe da \textit{query}, onde iremos atualizar a tabela
+\textit{tv} atribuindo \`{a} coluna \textit{$*column$} o valor \textit{$*value$}
+onde a marca \'{e} igual ao alvo \textit{$*target$}.
 
 \begin{lstlisting}[language=c, caption={fun\c{c}\~{a}o $create\_table()$}, label={lst:dbphi4}]
 int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con)
@@ -194,10 +219,12 @@ int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con)
 }
 \end{lstlisting}
 
-Esta fun\c{c}\~{a}o tem como finalidade a cria\c{c}\~{a}o de tabelas, ela recebe o nome da tabela a ser criada
-(\textit{$*table$}), o banco de dados aonde ela ser\'{a} criada (\textit{$*db$}), o usu\'{a}rio (\textit{$*user$}), a 
-senha desse usu\'{a}rio (\textit{$*pwd$}) e a conex\~{a}o MySQL (\textit{$*con$}). Ela ir\'{a} montar com uma sintaxe 
-pr\'{e} definida a tabela com os atributos \textit{marca, volume+, volume-, canal+, canal-, on, off, address}.
+Esta fun\c{c}\~{a}o tem como finalidade a cria\c{c}\~{a}o de tabelas, ela recebe
+o nome da tabela a ser criada (\textit{$*table$}), o banco de dados aonde ela
+ser\'{a} criada (\textit{$*db$}), o usu\'{a}rio (\textit{$*user$}), a senha
+desse usu\'{a}rio (\textit{$*pwd$}) e a conex\~{a}o MySQL (\textit{$*con$}). Ela
+ir\'{a} montar com uma sintaxe pr\'{e} definida a tabela com os atributos
+\textit{marca, volume+, volume-, canal+, canal-, on, off, address}.
 
 \begin{lstlisting}[language=c, caption={fun\c{c}\~{a}o $create\_db()$}, label={lst:dbphi5}]
 int create_db(char *name, char *user, char *pwd,  MYSQL *con)
@@ -214,8 +241,11 @@ int create_db(char *name, char *user, char *pwd,  MYSQL *con)
 }
 \end{lstlisting}
 
-Esta fun\c{c}\~{a}o tem como finalidade a cria\c{c}\~{a}o do banco de dados, ela recebe o nome do banco a ser criado
-(\textit{$*name$}), o usu\'{a}rio (\textit{$*user$}), a senha desse usu\'{a}rio (\textit{$*pwd$}) e a conex\~{a}o MySQL (\textit{$*con$}). Ela usa o nome \textit{$*name$} para organizar a sintaxe que cria o banco.
+Esta fun\c{c}\~{a}o tem como finalidade a cria\c{c}\~{a}o do banco de dados, ela
+recebe o nome do banco a ser criado (\textit{$*name$}), o usu\'{a}rio
+(\textit{$*user$}), a senha desse usu\'{a}rio (\textit{$*pwd$}) e a conex\~{a}o
+MySQL (\textit{$*con$}). Ela usa o nome \textit{$*name$} para organizar a
+sintaxe que cria o banco.
 
 \begin{lstlisting}[language=c, caption={fun\c{c}\~{a}o $finish\_with\_error()$}, label={lst:dbphi6}]
 void finish_with_error(MYSQL *con)
@@ -226,8 +256,9 @@ void finish_with_error(MYSQL *con)
 }
 \end{lstlisting}
 
-Esta fun\c{c}\~{a}o apenas oferece o erro padr\~{a}o para caso a conex\~{a}o MySQL passada seja executada com 
-erro.Ela recebe a conex\~{a}o MySQL (\textit{$*con$}).
+Esta fun\c{c}\~{a}o apenas oferece o erro padr\~{a}o para caso a conex\~{a}o
+MySQL passada seja executada com erro.Ela recebe a conex\~{a}o MySQL
+(\textit{$*con$}).
 
 \begin{lstlisting}[language=c, caption={fun\c{c}\~{a}o $handle\_string()$}, label={lst:dbphi7}]
 char *handle_string(char *user)
@@ -245,10 +276,12 @@ char *handle_string(char *user)
 }
 \end{lstlisting}
 
-Em algumas sintaxes do MySQL os atributos s\~{a}o passados como "nome", ou seja, entre aspas duplas, entretanto para 
-inserir estas aspas duplas em C n\~{a}o \'{e} t\~{a}o trivial assim caso queiramos automatizar o processo de 
-adi\c{c}\~{a}o, portanto, esta fun\c{c}\~{a}o foi criada com a finalidade espec\'{i}fica de adicionar e manipular 
-esta string para que ela saia "string". Ela recebe apenas a string alvo (no caso \textit{$*user$}, pois o caso onde a 
+Em algumas sintaxes do MySQL os atributos s\~{a}o passados como "nome", ou seja,
+entre aspas duplas, entretanto para inserir estas aspas duplas em C n\~{a}o
+\'{e} t\~{a}o trivial assim caso queiramos automatizar o processo de
+adi\c{c}\~{a}o, portanto, esta fun\c{c}\~{a}o foi criada com a finalidade
+espec\'{i}fica de adicionar e manipular esta string para que ela saia "string".
+Ela recebe apenas a string alvo (no caso \textit{$*user$}, pois o caso onde a
 usamos \'{e} para garantir acesso a algum usu\'{a}rio ao banco de dados.
 
 \begin{lstlisting}[language=c, caption={fun\c{c}\~{a}o $grant\_db()$}, label={lst:dbphi8}]
@@ -281,8 +314,9 @@ int grant_db(char *user, char *db, MYSQL *con){
 }
 \end{lstlisting}
 
-Aqui garantimos ao usu\'{a}rio \textit{$*user$} acesso ao banco de dados \textit{$*db$}, por meio de uma conex\~{a}o 
-MySQL \textit{$*con$}. Nela usamos a fun\c{c}\~{a}o \textit{$handle\_user()$} para modificar a string do usu\'{a}rio 
+Aqui garantimos ao usu\'{a}rio \textit{$*user$} acesso ao banco de dados
+\textit{$*db$}, por meio de uma conex\~{a}o MySQL \textit{$*con$}. Nela usamos a
+fun\c{c}\~{a}o \textit{$handle\_user()$} para modificar a string do usu\'{a}rio
 e posteriormente us\'{a}-la para montar a sintaxe da \textit{query}.
 
 \begin{section}{Thiago: Codigos Arduino/C for IR Tx/Rx}
