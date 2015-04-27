@@ -6,20 +6,27 @@
 
 #define DEBUG 0
 
-int get_element(char *column, char *target, MYSQL *con); // Get element from table and store in an INT variable, pass the column and the row ("volume+","sony",con)
-int insert_element(char *column, char *value, char *target, MYSQL *con); // Insert element in the table, pass the column and and the row ("volume+","11111","lg", con);
-int insert_table(char *column, char *field ,MYSQL *con); // Insert row in the table, pass the column and the field ("marca","lg",con)
-void finish_with_error(MYSQL *con); // Default exit if mysql_query returns an error
-char *handle_string(char *user); // Function that transforms string user into "user", not used now (was used by grant_db to grant database access to a user)
-int create_db(char *name, char *user, char *pwd, MYSQL *con);// Creates the database, pass the name, user accessing and pwd of the user ("phi_project","root","pwd",con);
-int grant_db(char *user, char *db, MYSQL *con); // Grant database access to a specific user, not being used right now due to seg fault.
-int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con); // Create a table in the database, right now is a default table defined by the strings on the function
+/* Get element from table and store in an INT variable, pass the column and the row ("volume+","sony",con) */
+int get_element(char *column, char *target, MYSQL *con); 
+/* Insert element in the table, pass the column and the row ("volume+","11111","lg", con); */
+int insert_element(char *column, char *value, char *target, MYSQL *con);
+/* Insert row in the table, pass the column and the field ("marca","lg",con) */
+int insert_table(char *column, char *field ,MYSQL *con); 
+/* Default exit if mysql_query returns an error */
+void finish_with_error(MYSQL *con);
+/* Transforms string user into "user", (used by grant_db to grant database access to a user) */
+char *handle_string(char *user); 
+/* Creates the database, pass the name, user accessing and pwd of the user ("phi_project","root","pwd",con); */
+int create_db(char *name, char *user, char *pwd, MYSQL *con);
+/* Grant database access to a specific user, not being used right now due to seg fault. */
+int grant_db(char *user, char *db, MYSQL *con); 
+/* Create a table in the database, right now is a default table defined by the strings on the function */
+int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con); 
 
 int main(int argc, char **argv)
 {
+	/* Pedro: comenta aqui uma linha só */
 	MYSQL *con = mysql_init(NULL);
-	int i =0;
-
 	if(con == NULL){
 		fprintf(stderr, "%s\n", mysql_error(con));
 		exit(1);
@@ -38,21 +45,25 @@ int main(int argc, char **argv)
 	insert_element("on","100000111","sony",con);
 	int on_sony = get_element("on","sony",con);
 
-	printf("volume+ of lg = %d\non of sony = %d\n", vol_lg,on_sony);
+	if (debug)
+		printf("volume+ of lg = %d\non of sony = %d\n", vol_lg,on_sony);
+
 	mysql_close(con);
-	exit(0);
+	return EXIT_SUCCESS;
 }
 
 int get_element(char *column, char *target, MYSQL *con)
 {
-	char *cmd_arr[] = {"SELECT `", column, "` FROM tv WHERE marca='", target, "'"};
-	char *str_value;
+	char *str_value; // pedro: no malloc?
+	char *cmd_arr[] = {"SELECT `", column, 
+				"` FROM tv WHERE marca='", target, "'"};
 
-	int i;
-	size_t len = 0;
+	/* compute size of command for malloc */
+	short int i, len = 0;
 	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
-		len+= strlen(cmd_arr[i]);
+		len += strlen(cmd_arr[i]);
 
+	/* allocate space to and compose the string command */
 	char *cmd = (char *) malloc ((len+1) * sizeof(char));
 	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
 		sprintf(cmd, "%s%s", cmd, cmd_arr[i]);
@@ -63,14 +74,17 @@ int get_element(char *column, char *target, MYSQL *con)
 	if(mysql_query(con, cmd))
 		finish_with_error(con);
    
+	/* pedro: comenta aqui em uma linha só */
 	MYSQL_RES *result = mysql_store_result(con);
 	if(result == NULL)
 		finish_with_error(con);
 
+	/* pedro: comenta aqui em uma linha só */
 	MYSQL_FIELD *field;
 	int num_fields = mysql_num_fields(result);
 	MYSQL_ROW row;
 	
+	/* pedro: funciona sem alloc pra str_value? row[0] é string? */
 	while((row = mysql_fetch_row(result)))
 		str_value = (row[0] ? row[0] : "NULL");
 
@@ -82,14 +96,16 @@ int get_element(char *column, char *target, MYSQL *con)
 
 int insert_element(char *column, char *value, char *target, MYSQL *con)
 {
-	char *cmd_arr[] = {"UPDATE tv SET `", column ,"`=", value, " WHERE marca='", target, "'"};
 	char *cmd = "";
+	char *cmd_arr[] = {"UPDATE tv SET `", column ,"`=", value, 
+				" WHERE marca='", target, "'"};
 
-	int i;
-	size_t len = 0;
+	/* compute size of command for malloc */
+	short int i, len = 0;
 	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
-		len+= strlen(cmd_arr[i]);
+		len += strlen(cmd_arr[i]);
 
+	/* allocate space to and compose the string command */
 	cmd = (char *) malloc ((len+1) * sizeof(char));
 	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
 		sprintf(cmd, "%s%s", cmd, cmd_arr[i]);
@@ -106,14 +122,15 @@ int insert_element(char *column, char *value, char *target, MYSQL *con)
 
 int insert_table(char *column, char *field, MYSQL *con)
 {
-	char *cmd_arr[] = {"INSERT INTO tv(", column, ") VALUES ('", field, "')"};
 	char *cmd = "";
+	char *cmd_arr[] = {"INSERT INTO tv(", column, ") VALUES ('", field, "')"};
 
-	int i;
-	size_t len = 0;
+	/* compute size of command for malloc */
+	short int i, len = 0;
 	for(i=0; i<sizeof(cmd_arr)/(8*sizeof(char)); i++)
-		len+= strlen(cmd_arr[i]);
+		len += strlen(cmd_arr[i]);
 
+	/* allocate space to and compose the string command */
 	cmd = (char *) malloc ((len+1) * sizeof(char));
 	for(i=0; i<sizeof(cmd_arr)/(8*sizeof(char)); i++)
 		sprintf(cmd, "%s%s", cmd, cmd_arr[i]);
@@ -128,6 +145,8 @@ int insert_table(char *column, char *field, MYSQL *con)
 	return 0;
 }
 
+/* pedro: dividir em duas funções: create e drop */
+/* pedro: usar vetor de string e for para cmd e length. Ver outras func como exemplo */
 int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con)
 {
 	char d_command[22] = "DROP TABLE IF EXISTS ";
@@ -151,7 +170,7 @@ int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con)
 	if(mysql_query(con, drop_command))
 		finish_with_error(con);
 
-	if(mysql_query(con,create_command))
+	if(mysql_query(con, create_command))
 		finish_with_error(con);
 
 	if(DEBUG)
@@ -169,6 +188,7 @@ int create_db(char *name, char *user, char *pwd,  MYSQL *con)
 	if(mysql_real_connect(con,"localhost",user,pwd,NULL,0,NULL,0) == NULL)
 		finish_with_error(con);
 
+	/* pedro: esse strcat funciona sem malloc?? */
 	if(mysql_query(con, strcat(create_command, name)))
 		finish_with_error(con);
 
@@ -182,6 +202,7 @@ void finish_with_error(MYSQL *con)
 	exit(1);
 }
 
+/* pedro: não serve pra nada. Apaga */
 char *handle_string(char *user)
 {
 	char *old  = user;
@@ -196,7 +217,8 @@ char *handle_string(char *user)
 	return result;
 }
 
-int grant_db(char *user, char *db, MYSQL *con){
+/* pedro: se não servir apaga. Se sim, ajeita */
+int grant_db(char *user, char *db, MYSQL *con) {
 /*  char *grantall = "GRANT ALL ON y.* TO GUEST IDENTIFIED BY ";
 	char *flush_command = "FLUSH PRIVILEGES";
 
