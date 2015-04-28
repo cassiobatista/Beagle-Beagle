@@ -138,7 +138,7 @@ Uma das grandes dificuldades relacionadas à comunicação IR para controle de
 equipamentos é que cada empresa praticamente segue o seu próprio padrão de
 transmissão de informação: o número, a ordem e o significado dos bits é variado, 
 a modulação e codificação usada são diferentes e a frequência dos pulsos pode
-oscilar entre 32~kHz e 40~kHz, chegando a 50~kHz em determinados aparelhos mais
+oscilar entre 32~kHz e 42~kHz, chegando a 50~kHz em determinados aparelhos mais
 modernos. Além disso, tão raro quanto o seguimento de uma comunicação IR
 padronizada, a disponibilização de documentação pelos fabricantes também é
 bastante escassa. A Philips, por exemplo, utiliza seu próprio protocolo de
@@ -166,7 +166,9 @@ nível alto. Cada nível ocorre num intervalo de 32 perídos. O nível alto é gerado
 por um PWM de \textit{duty cycle} igual a 25\% do período do pulso. Essa
 percentagem define o tempo em que o IR Led permance aceso, ou seja, no nível
 alto, o IR Led permanece ligado por período de $0,25\times1/36~kHz$ e desligado
-por $0,75\times1/36~kHz$, sendo o processo repetido 32 vezes.
+por $0,75\times1/36~kHz$, sendo o processo repetido 32 vezes. A economia de 
+energia é mostrada como justificativa para explicar o motivo de o led piscar ao 
+invés de se manter aceso por 100\% do período do pulso.
 
 \begin{figure}[!h]
 	\centering

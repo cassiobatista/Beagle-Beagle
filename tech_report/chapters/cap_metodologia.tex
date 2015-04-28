@@ -2,8 +2,9 @@
 O servidor, por ser o elemento chave na consolidação do projeto, deve ser o 
 módulo a ser prioritariamente configurado, a fim de ser preparado para atender
 às devidas requisições, bem como executar qualquer tipo de aplicação solicitada.
-Sendo assim, a instalação do sistema operacional Ubuntu foi tomada como primeiro
-passo.  As dependências a serem instaladas são mostradas na
+Sendo assim, a instalação do sistema operacional Debian foi tomada como primeiro
+passo, visto que houveram muitos problemas na instalação do Ubuntu e do 
+Angstrom. As dependências a serem instaladas são mostradas na 
 Lista~\ref{lst:dependences}.
 
 É importante ressaltar que os sistemas operacionais embarcados são
@@ -148,10 +149,10 @@ Assim, podemos concatenar os bits e, posteriormente, enviar para o led IR.
 SELECT campo FROM TV WHERE marca='marca_da_tv' 
 \end{lstlisting}
 
-O acesso ao banco de dados é todo feito por meio da linguagem C, para tal foi
-usado uma biblioteca especial chamada \texttt{my\_sql.h}, na qual as
+O acesso ao banco de dados é todo feito por meio da linguagem C. Para tal, foi-se
+utilizada uma biblioteca especial chamada \texttt{mysql.h}, na qual as
 \textit{queries} são feitas pela passagem de um comando SQL como uma
-\textit{string}.
+\textit{string} (Vide apêndice~\ref{app:db}).
 
 \begin{table}[h]
 \centering
