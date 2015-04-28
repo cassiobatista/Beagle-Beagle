@@ -6,26 +6,25 @@
 
 #define DEBUG 0
 
-/* Get element from table and store in an INT variable, pass the column and the row ("volume+","sony",con) */
+/* Get element from table, pass the column and the row ("volume+","sony",con) */
 int get_element(char *column, char *target, MYSQL *con); 
-/* Insert element in the table, pass the column and the row ("volume+","11111","lg", con); */
+/* Insert element into table, pass the column and the row ("volume+","11111","lg", con); */
 int insert_element(char *column, char *value, char *target, MYSQL *con);
 /* Insert row in the table, pass the column and the field ("marca","lg",con) */
 int insert_table(char *column, char *field ,MYSQL *con); 
 /* Default exit if mysql_query returns an error */
 void finish_with_error(MYSQL *con);
-/* Transforms string user into "user", (used by grant_db to grant database access to a user) */
-char *handle_string(char *user); 
-/* Creates the database, pass the name, user accessing and pwd of the user ("phi_project","root","pwd",con); */
+/* Creates the database, pass name, user and password of the user ("PHI","root","pwd",con); */
 int create_db(char *name, char *user, char *pwd, MYSQL *con);
-/* Grant database access to a specific user, not being used right now due to seg fault. */
+/* Grant database access to a specific user */
 int grant_db(char *user, char *db, MYSQL *con); 
-/* Create a table in the database, right now is a default table defined by the strings on the function */
+/* Create a table in the database */
 int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con); 
+///* Transforms string user into "user", (used by grant_db to grant database access to a user) */
+//char *handle_string(char *user); 
 
-int main(int argc, char **argv)
-{
-	/* Pedro: comenta aqui uma linha só */
+int main(int argc, char **argv) {
+	/* Pedro: comenta aqui uma linha soh */
 	MYSQL *con = mysql_init(NULL);
 	if(con == NULL){
 		fprintf(stderr, "%s\n", mysql_error(con));
@@ -52,8 +51,7 @@ int main(int argc, char **argv)
 	return EXIT_SUCCESS;
 }
 
-int get_element(char *column, char *target, MYSQL *con)
-{
+int get_element(char *column, char *target, MYSQL *con) {
 	char *str_value; // pedro: no malloc?
 	char *cmd_arr[] = {"SELECT `", column, 
 				"` FROM tv WHERE marca='", target, "'"};
@@ -74,12 +72,12 @@ int get_element(char *column, char *target, MYSQL *con)
 	if(mysql_query(con, cmd))
 		finish_with_error(con);
    
-	/* pedro: comenta aqui em uma linha só */
+	/* pedro: comenta aqui em uma linha soh */
 	MYSQL_RES *result = mysql_store_result(con);
 	if(result == NULL)
 		finish_with_error(con);
 
-	/* pedro: comenta aqui em uma linha só */
+	/* pedro: comenta aqui em uma linha soh */
 	MYSQL_FIELD *field;
 	int num_fields = mysql_num_fields(result);
 	MYSQL_ROW row;
@@ -94,8 +92,7 @@ int get_element(char *column, char *target, MYSQL *con)
 	return atoi(str_value);
 }
 
-int insert_element(char *column, char *value, char *target, MYSQL *con)
-{
+int insert_element(char *column, char *value, char *target, MYSQL *con) {
 	char *cmd = "";
 	char *cmd_arr[] = {"UPDATE tv SET `", column ,"`=", value, 
 				" WHERE marca='", target, "'"};
@@ -120,8 +117,7 @@ int insert_element(char *column, char *value, char *target, MYSQL *con)
 	return 0;
 }
 
-int insert_table(char *column, char *field, MYSQL *con)
-{
+int insert_table(char *column, char *field, MYSQL *con) {
 	char *cmd = "";
 	char *cmd_arr[] = {"INSERT INTO tv(", column, ") VALUES ('", field, "')"};
 
@@ -145,10 +141,9 @@ int insert_table(char *column, char *field, MYSQL *con)
 	return 0;
 }
 
-/* pedro: dividir em duas funções: create e drop */
+/* pedro: dividir em duas funcoes: create e drop */
 /* pedro: usar vetor de string e for para cmd e length. Ver outras func como exemplo */
-int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con)
-{
+int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con) {
 	char d_command[22] = "DROP TABLE IF EXISTS ";
 	char c_command[13] = "CREATE TABLE ";
 	char table1[50] = "(`marca` VARCHAR(40) NOT NULL,`volume+` INT,";
@@ -181,8 +176,7 @@ int create_table(char *table, char *db, char *user, char *pwd, MYSQL *con)
 	return 0;
 }
 
-int create_db(char *name, char *user, char *pwd,  MYSQL *con)
-{
+int create_db(char *name, char *user, char *pwd,  MYSQL *con) {
 	char *create_command = "CREATE DATABASE ";
 
 	if(mysql_real_connect(con,"localhost",user,pwd,NULL,0,NULL,0) == NULL)
@@ -195,27 +189,26 @@ int create_db(char *name, char *user, char *pwd,  MYSQL *con)
 	return 0;
 }
 
-void finish_with_error(MYSQL *con)
-{
+void finish_with_error(MYSQL *con) {
 	fprintf(stderr, "%s\n", mysql_error(con));
 	mysql_close(con);
 	exit(1);
 }
 
-/* pedro: não serve pra nada. Apaga */
-char *handle_string(char *user)
-{
-	char *old  = user;
-	char *handle = "\"";
-	char *result;
-
-	result = (char *) malloc (strlen(old)+3 * sizeof(char));
-	sprintf(result, "%s%s%s",handle,old,handle);
-
-	printf("%s\n",result);
-
-	return result;
-}
+///* pedro: não serve pra nada. Apaga */
+//char *handle_string(char *user)
+//{
+//	char *old  = user;
+//	char *handle = "\"";
+//	char *result;
+//
+//	result = (char *) malloc (strlen(old)+3 * sizeof(char));
+//	sprintf(result, "%s%s%s",handle,old,handle);
+//
+//	printf("%s\n",result);
+//
+//	return result;
+//}
 
 /* pedro: se não servir apaga. Se sim, ajeita */
 int grant_db(char *user, char *db, MYSQL *con) {
