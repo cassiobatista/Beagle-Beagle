@@ -20,7 +20,21 @@ foi conectar um roteador wifi à porta Ethernet da BBB através de um cabo RJ-45.
 
 \item O código do Arduino que hackeia as paradas é PODRE. (Thiago)
 
-\item Acessar MySQL from C é PODRE (Pedro)
+\item Outra dificuldade consistiu no fato de que para acessarmos o MySQL através da linguagem C precisamos passar a 
+sintaxe correta para a função em C que faz a query (\textit{$mysql\_query()$}), para isto ocorrer a sintaxe passada 
+deve ser uma string bem espec\'{i}fica contendo o comando para o MySQL. Entretanto, a fim de automatizarmos essas 
+queries, devemos manipular constantemente essas strings contendo a sintaxe, por exemplo, caso queiramos mudar o valor 
+de um atributo em uma tabela espec\'{i}fica, apenas passamos o valor, o atributo e a tabela. Com isso, temos que usar 
+diversas vezes alocaç\~{o}es de mem\'{o}ria (\textit{*malloc()}) e \textit{sprintf()}s, tornando o c\'{o}digo, em 
+mais espec\'{i}fico o gerenciamento dos campos da mem\'{o}ria, ca\'{o}tico, apresentando algumas vezes falha de 
+segmentaç\~{a}o. Posteriormente, com a adiç\~{a}o de outros aparelhos e mais tabelas, estas queries ficaram cada vez 
+mais recorrentes e mais falhas poderam acontecer. 
+
+Al\'{e}m disso, por estarmos acessando o MySQL por meio de uma outra linguagem (no caso C), n\~{a}o podemos prever 
+agora poss\'{i}veis custos computacionais que essas diversas e constantes queries poder\~{a}o gerar nas threads 
+dentro do BeagleBone Black\textregistered. Numa poss\'{i}vel e vindoura utilizaç\~{a}o de um servidor Apache com o 
+PHP essa comunicaç\~{a}o adicional e constante poder\'{a} resultar em significante custo computacional tornando-se um 
+efeito \textit{snowball}, bola de neve.
 \end{enumerate}
 \end{section}
 %%% EOF %%%
