@@ -131,9 +131,8 @@ dos dados, que serão constantemente manipulados, será mantida, podendo estes ser
 recuperados apenas olhando para o banco. (????)
 
 Inicialmente, apenas a entidade TELEVISÃO foi criada, onde uma
-tabela entitulada ``TV'' têm os atributos ``marca'' e os campos dos comandos
-a serem transmitidos ao aparelho: ``volume+'', ``volume-'', ``canal+'',
-``canal-'', ``ligar'', ``desligar'', ``endereço'', ``start''. Com isso,
+tabela entitulada ``TV'' contém atributos como a marca do aparelho e os comandos
+a serem transmitidos, como visto na Tabela~\ref{tab:tv}. Com isso,
 quaisquer campos podem ser satisfatoriamente acessados através de um simples
 código SQL (como o mostrado abaixo), a fim de se montar um determinado comando.
 Assim, podemos concatenar os bits e, posteriormente, enviar para o led IR.
@@ -150,6 +149,7 @@ usado uma biblioteca especial chamada \texttt{my\_sql.h}, na qual as
 \begin{table}[h]
 \centering
 \caption{Tabela TV}
+\label{tab:tv}
 \begin{tabular}{c|cccccccc}
 \hline
 marca & volume+ & volume- & canal+ & canal- & ligar & endereço & start \\
