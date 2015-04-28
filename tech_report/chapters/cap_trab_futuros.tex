@@ -2,35 +2,36 @@
 % http://www.nngroup.com/articles/remote-control-anarchy/
 De acordo com o relato disponível em~\cite{nielsen04}: ``Dado que o meu home
 theater é modesto, ele requer que eu consiga manejar APENAS 6 controles remotos
-para a simples tarefa de assistir a um filme''. Seria marveolous se houvesse um
+para a simples tarefa de assistir a um filme''. Seria ótimo se houvesse um
 controle remoto universal que permitisse acesso à TODOS os aparelhos do 
 ambiente residencial, mesmo os que estão em cômodos diferentes do que eu estou
 agora. Seria mais maravilhoso que esse controle estivesse sempre com você. E que
 pudesse usá-lo mesmo quando estivesse fora de casa. E que fosse acessível por
-uma tecnologia hands free. Compre já o seu!
+uma tecnologia \textit{hands free}.
 
 \begin{itemize}
-	\item Expandir para vários aparelhos, tornando a beagle beagle um servidor
-	centralizado no ambiente doméstico. Isso também acarretará em um número maior
-	e mais complexo de tabelas no banco de dados, contendo os diversos aparelhos
-	e seus comandos.
+	\item Expandir para vários aparelhos, tornando a BeagleBone um servidor
+	centralizado no ambiente doméstico. Isso também acarretará em um número 
+	maior e mais complexo de tabelas no banco de dados, contendo os diversos 
+	aparelhos e seus comandos;
 	
 	\item Em cada compartimento onde houvesse um aparelho eletrônico a ser
 	controlado, haveria um microcontrolador (a ser avaliado, preferencialmente 
-	mais barato que o arduino) capaz de controlar determinado(s) aparelhos
+	mais barato que o arduino) capaz de controlar determinado(s) aparelhos;
 
-	\item A beagle beagle e todos os outros microcontroladores estariam
-	conectados à mesma rede LAN. Somente a beagle beagle precisaria estar
-	conectada à internet, de modo que não houvesse limitação de distância para a
-	conexão com o smartphone.
+	\item A BeagleBone e todos os outros microcontroladores estariam
+	conectados à mesma rede LAN. Somente a BBB precisaria estar conectada à 
+	Internet, de modo que não houvesse limitação de distância para a conexão 
+	com o \textit{smartphone};
 	
 	\item Utilizar de forma eficiente o servidor Apache com o PHP, para que uma
-	página web seja criada e por meio dela informações de análise do sistema possam
-	ser guardadas e acessadas remotamente pelo desenvolvedor, para que haja um
-	algoritmo de detecção e análise de problemas mais eficiente ao usuário. Essa nova
-	funcionalidade também poderá disponibilzar um registro das atividades do usuário
-	com o sistema, podendo ficar disponível pelo usuário para monitoramento em
-	\textit{high-level} ou para que o usuário até mesmo possa ligar aparelhos remotamente.
+	página web seja criada e por meio dela informações de análise do sistema 
+	possam ser guardadas e acessadas remotamente pelo desenvolvedor, para que 
+	haja um algoritmo de detecção e análise de problemas mais eficiente ao 
+	usuário. Essa nova funcionalidade também poderá disponibilzar um registro 
+	das atividades do usuário com o sistema, podendo ficar disponível para
+	monitoramento em \textit{high-level} ou para que os aparelhos possam ser
+	controlados remotamente à uma distância maior do que a limitada pela LAN.
 \end{itemize}
 	
 \end{section}

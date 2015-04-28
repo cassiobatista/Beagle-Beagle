@@ -93,33 +93,40 @@ eSpeak e a transmissão de informação para a TV através de um led IR conectado
 a um GPIO. Um sensor IR ficará encarregado de receber informações de diferentes
 controles remotos para que sejam guardadas como registros no banco de dados.
 
-Toda a organização do trabalho, bem como a comunicação entre os membros sobre os
-passos tomados no decorrer do trabalho será feita através da plataforma
-Trello~\cite{trello}.\\
+%Toda a organização do trabalho, bem como a comunicação entre os membros sobre os
+%passos tomados no decorrer do trabalho será feita através da plataforma
+%Trello~\cite{trello}.\\
 
 Um controle para a TV Philips 39PFL3008D/78 foi usado como base para a análise
 do sinal emitido. Inicialmente, um arduino UNO fui utilizado para verificar
 o tempo em que o IR led permanecia ativo e inativo, armazenando-o
-em uma matriz de duas colunas. O Matlab foi utilizado para converter a matriz em
+em uma matriz de duas colunas. O Octave foi utilizado para converter a matriz em
 um vetor único, no qual os índices ímpares representavam o tempo de duração do
 modo \textit{burst} do IR led e as posições pares, o tempo em que o IR led
-permanecia \textit{idle}. Sendo assim, o vetor no qual as durações dos nívels
-altos e baixos alternavam-se entre si foi convertido para uma forma de onda
-quadrada, semelhante à mostrada na Figura~\ref{fig:rc6}.
+permanecia \textit{idle}. Sendo assim, o vetor no qual as durações dos níveis
+altos e baixos alternam-se entre si foi convertido para uma forma de onda
+quadrada, semelhante à mostrada na Figura~\ref{fig:rc6}. A Figura~\ref{fig:cmds} 
+mostra a forma de onda quadrada para 4 botões diferentes pressionados de forma
+não consecutiva. Pode-se notar que os sinais são exatamente iguais até 
+aproximadamente $t=15ms$, onde começam a ser exibidos os bits referentes ao
+comando específico. Já na Figura~\ref{fig:vol+}, o botão ``volume mais'' foi 
+pressionado por quatro vezes consecutivas. Percebe-se que os sinais são
+completamente idênticos, exceto o bit de \textit{toggle}, o qual muda sempre que 
+um botão é solto.
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=\textwidth]{Figures/cmds}
 	\caption{Mudança nos bits de comando após pressionar NÃO consecutivamente 
 			4 botões diferentes.}
-	\label{fig:cmds_sch}
+	\label{fig:cmds}
 \end{figure}
 
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=\textwidth]{Figures/volume+}
-	\caption{Mudança no bit de Toggle após pressionar o botão ``Volume Mais'' por
-			4 vezes consecutivas.}
+	\caption{Mudança no bit de \textit{toggle}(T) após pressionar o botão 
+			``volume+'' por 4 vezes consecutivas.}
 	\label{fig:vol+}
 \end{figure}
 
