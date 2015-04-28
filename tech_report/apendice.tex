@@ -320,5 +320,147 @@ fun\c{c}\~{a}o \textit{$handle\_user()$} para modificar a string do usu\'{a}rio
 e posteriormente us\'{a}-la para montar a sintaxe da \textit{query}.
 
 \begin{section}{Thiago: Codigos Arduino/C for IR Tx/Rx}
+\begin{lstlisting}[language=c, caption={fun\c{c}\~{a}o $grant\_db()$}, label={lst:dbphi8}]
+/* Código arduino de decodificação de comandos infravermelhos
+ *
+ * O programa decodifica os comandos enviados por um controle remoto (TV, DVD,
+ * Ar condicionado...) recebidos por um receptor IR ligado ao arduino e 
+ * redireciona o comando usando um transmissor IR 'imitando' os comandos 
+ * decodificados. A decodificação é feita captando a duração em que o LED IR
+ * ficou ligado transmitindo ou desligado e armazenando essa informação em uma
+ * matriz.
+ * */
+
+/* É necessario usar a leitura direta dos pinos do arduino, ja que a funcão
+ * digitalRead() é lenta e o timing é muito importante aqui.
+ * */
+
+#include <math.h>
+#define IRpin_PIN      PIND
+#define IRpin          2
+
+int IRledPin = 13;
+
+// Pulso máximo de 65 milisegundos
+#define MAXPULSE 65000
+
+// Se a resolução for grande demais o timing não será preciso
+#define RESOLUTION 20 
+
+// 100 pares de pulsos armazenados (on-off)
+uint16_t pulses[100][2];  // par de pulsos high e low 
+uint8_t currentpulse = 0; // index dos pulsos sendo armazenados
+int pulsedb[200]; // vetor de pulsos em milisegundos que será usado para 
+				  // enviar os comandos
+
+void setup(void) {
+		pinMode(IRledPin, OUTPUT);
+		Serial.begin(9600);
+		Serial.println("Pronto para decodificar IR!");
+}
+
+void loop(void) {
+		uint16_t highpulse, lowpulse;  
+		highpulse = lowpulse = 0; 
+
+		//  IRpin_PIN & (1 << IRpin) = leitura direta do pino 
+		while (IRpin_PIN & (1 << IRpin)) {
+				// Pino ainda high
+
+				highpulse++;
+				delayMicroseconds(RESOLUTION);
+
+				/* Se o pulso for muito longo, ou nada ocorreu ou o código
+				 * terminou. Mostra os tempos de pulso no monitor serial.
+				 * */
+				if ((highpulse >= MAXPULSE) && (currentpulse != 0)) {
+						printpulses();
+						currentpulse=0;
+						return;
+				}
+		}
+		// Pulso nao foi muito longo, armazena na matriz
+		pulses[currentpulse][0] = highpulse;
+
+		// Mesmo que o anterior
+		while (! (IRpin_PIN & _BV(IRpin))) {
+				// Pino ainda low
+				lowpulse++;
+				delayMicroseconds(RESOLUTION);
+				if ((lowpulse >= MAXPULSE)  && (currentpulse != 0)) {
+						printpulses();
+						currentpulse=0;
+						return;
+				}
+		}
+		pulses[currentpulse][1] = lowpulse;
+
+		/* Armazenando a matriz de duas colunas em um vetor com os valores
+		 * alternados de cada coluna para, possivelmente, serem enviados
+		 * a um banco de dados.
+		 * */
+		int i=0;
+		for(int j=0; j<100; j++){
+				pulsedb[i] = pulses[j][0]*RESOLUTION;
+				i+=2; 
+		}
+		i=0;
+		for(int j=0; j<100; j++){
+				pulsedb[i+1] = pulses[j][1]*RESOLUTION;
+				i+=2; 
+		}
+
+		// Pulso lido corretamente. 
+		currentpulse++;
+
+}
+
+// Função para mostrar o tempo dos pulsos no monitor serial
+void printpulses(void) {
+		Serial.println("\n\r\n\rRecebido: \n\rOFF \tON");
+		for (uint8_t i = 0; i < currentpulse; i++) {
+				Serial.print(pulses[i][0] * RESOLUTION, DEC);
+				Serial.print(" usec, ");
+				Serial.print(pulses[i][1] * RESOLUTION, DEC);
+				Serial.print(" usec\t");
+		}
+
+		delay(1000);
+		// Chama a função que manda o comando pelo led IR
+		SendCommand(currentpulse);
+}
+
+/* Esse procedimento manda um pulso de 38KHz para o IRledPin durande alguns 
+ * microsegundos para reproduzir o comando decodificado (PWM).
+ * */
+void pulseIR(long microsecs) {
+
+		cli();  // Desliga interrupções de background
+
+		while (microsecs > 0) {
+				// 38 kHz é aproximadamente 13 microsegundos high e 13 microsegundos low
+				digitalWrite(IRledPin, HIGH);  // digitalWrite dura 3 microsegundos
+				delayMicroseconds(10);         // esperar 10 microsegundos
+				digitalWrite(IRledPin, LOW);   // 3 microsegundos
+				delayMicroseconds(10);         // espeera mais 10 microsegundos
+
+				// então diminuímos 26 microsegundos do pulso
+				microsecs -= 26;
+		}
+
+		sei();  // Liga as interrupções
+}
+
+/* Função que reproduz o comando no led IR utilizando a matriz de microsegundos
+ * 'on' e 'off'
+ */
+void SendCommand(uint8_t cp) {
+		for (uint8_t i = 0; i < cp; i++){
+				delayMicroseconds((pulses[i][0] * RESOLUTION)); // off
+				pulseIR((pulses[i][1] * RESOLUTION));           // on
+		}
+		Serial.println("Comando enviado!");
+}
+\end{lstlisting}
 \end{section}
 %%% EOF %%%
