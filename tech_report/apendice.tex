@@ -1,5 +1,5 @@
 % Pedro
-\begin{section}{Codigos LAMP}
+\begin{section}{C: LAMP}
 Com a sensível complexidade dos comandos usados para a comunicação com a TV,
 devido ao número de campos presente em cada comando e a diferença existente
 entre cada campo, bem como evitar possíveis problemas de escalabilidade quando o
@@ -109,7 +109,7 @@ Esta função apenas oferece o erro padrão para caso a conexão MySQL passada seja
 executada com erro.Ela recebe a conexão MySQL (\textit{$*con$}).
 
 % Code
-\textcolor{red}{*Pedro: escrota essa função handle n gostei elimine*}
+% Pedro: escrota essa função handle n gostei elimine
 Em algumas sintaxes do MySQL os atributos são passados como ``nome'', ou seja,
 entre aspas duplas, entretanto para inserir estas aspas duplas em C não
 é tão trivial assim caso queiramos automatizar o processo de
@@ -118,9 +118,8 @@ específica de adicionar e manipular esta string para que ela saia "string".
 Ela recebe apenas a string alvo (no caso \textit{$*user$}, pois o caso onde a
 usamos é para garantir acesso a algum usuário ao banco de dados.
 
-\textcolor{red}{*Pedro: ajeita essa função GRANT no .c e inclui ela da forma que
-incluí as outras aí em cima*}
-
+% Pedro: ajeita essa função GRANT no .c e inclui ela da forma que incluí 
+% as outras aí em cima
 \begin{lstlisting}[style=code, language=c, caption={função $grant\_db()$}, label={lst:dbphi8}]
 int grant_db(char *user, char *db, MYSQL *con){
     char *grantall = "GRANT ALL ON y.* TO GUEST IDENTIFIED BY ";
@@ -158,17 +157,12 @@ e posteriormente usá-la para montar a sintaxe da \textit{query}.
 
 \end{section}
 
-% Thiago
-\begin{section}{Codigos Arduino/C for IR Tx/Rx}
-\textcolor{red}
-{*
-\large
-Thiago: Olha no tex do apendice os exemplos de como os arquivos foram incluídos
-antes de copiar todo o código aqui. Ou seja, usa lstinputlisting ao invés de
-lstlisting, especifica as linhas. Separa as funções que nem o Pedro fez. Achei
-melhor colocar a explicação dentro de comentários dentro do próprio código, do
-jeito que estás fazendo. Indentação é um tab de 4 espaços, ajeita.
-*}
+% Thiago: Olha no tex do apendice os exemplos de como os arquivos foram incluídos
+% antes de copiar todo o código aqui. Ou seja, usa lstinputlisting ao invés de
+% lstlisting, especifica as linhas. Separa as funções que nem o Pedro fez. Achei
+% melhor colocar a explicação dentro de comentários dentro do próprio código, do
+% jeito que estás fazendo. Indentação é um tab de 4 espaços, ajeita.
+\begin{section}{Arduino: IR Tx/Rx}
 \begin{lstlisting}[style=code, language=c]
 /* C\'{o}digo arduino de decodifica\c{c}\~{a}o de comandos infravermelhos
  *
@@ -313,8 +307,8 @@ void SendCommand(uint8_t cp) {
 \end{lstlisting}
 \end{section}
 
-% cassio
-\begin{section}{Codigo Arduino Analisador de Onda Quadrada}
+% Cassio
+\begin{section}{Matlab/Octave: Analisador de Onda Quadrada}
 \lstinputlisting[style=code, language=matlab, firstline=4, lastline=62]
 {codes/myanalyze.m}
 \end{section}
