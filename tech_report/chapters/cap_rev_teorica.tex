@@ -1,4 +1,5 @@
 \begin{section}{Revisão Teórica}
+% [IEEE'14] Implementation of vision based intelligent home automation and security system
 % [IEEE'11] Designing Android Applications with both Online and Offline Voice Control of Household Devices
 % [IEEE'10] Smart Home Control System for the disabled using the head and the mouth movement
 % [IJERA'15] Wi-Fi and Android Based Smart Home Automation for People with Disabilities
@@ -14,8 +15,19 @@ estando fisicamente conectada ao controle da TV, disparava um determinado
 \textit{trigger}. A justificativa do trabalho era ajudar pessoas afetadas com 
 tetraplegia a serem mais independentes; os testes avaliaram o desempenho de
 decodificadores embarcados e distribuídos. 
+Já em~\cite{Sefat14}, um sistema inteligente de segurança foi implementado na
+BeagleBone, a qual utilizava o pacote OpenCV para contar quantos indivíduos
+encontravam-se próximo à entrada do ambiente a ser vigiado. Um módulo de
+reconhecimento de fala, também basedo no PocketSphinx, foi utilizado para
+receber comandos do usuário, enquanto o software eSpeak foi encarregado de
+prover as respostas dadas pela BeagleBone via voz sintetizada. Um aparelho
+celular qualquer poderia se comunicar com o sistema via SMS graças à adição de
+um módulo GSM à BBB. A desvantagem é que, apesar de o controle poder ser
+executado não necessariamente por um \textit{smartphone}, além de necessitar de
+um cartão SIM para fazer a comuncação via SMS funcionar, os comandos de voz não
+poderiam ser dados diretamente do aparelho móvel, e sim pessoal e diretamente à
+BeagleBone, a qual possuía um microfone conectado à porta USB.
 
-% Cassio: Add another reference here
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=.65\textwidth]{Figures/asr_sch}
