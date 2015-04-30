@@ -13,69 +13,36 @@ end
 % threshold: expecting specify a enough range to get the entire signal
 myend = 43;
 
+% Append All vector into one cell
 % inside the range, extracts exactly the signal that matters without repeating
-[m, id] = max(a(2:myend));
-a = a(2:id);
-
-[m, id] = max(b(2:myend));
-b = b(2:id);
-
-[m, id] = max(c(2:myend));
-c = c(2:id);
-
-[m, id] = max(d(2:myend));
-d = d(2:id);
+x = {a, b, c, d};
+for i=1:length(x)
+	[mx, idx] = max(x{i}(2:myend));
+	x{i} = x{i}(2:idx);
+end
 
 % Converting from vector of durations into step function
 % if a piece lasts n usecs then it'll become a step with n ones or zeros
-x_a = x_b = x_c = x_d = [];
-for i=1:length(a)
-	if rem(i, 2) == 1 % odd .:. high peak
-		x_a = [x_a ones(1, a(i))];
-	else % even .:. low peak
-		x_a = [x_a zeros(1, a(i))];
-	end
-end
-
-for i=1:length(b)
-	if rem(i, 2) == 1 % odd .:. high peak
-		x_b = [x_b ones(1, b(i))];
-	else % even .:. low peak
-		x_b = [x_b zeros(1, b(i))];
-	end
-end
-
-for i=1:length(c)
-	if rem(i, 2) == 1 % odd .:. high peak
-		x_c = [x_c ones(1, c(i))];
-	else % even .:. low peak
-		x_c = [x_c zeros(1, c(i))];
-	end
-end
-
-for i=1:length(d)
-	if rem(i, 2) == 1 % odd .:. high peak
-		x_d = [x_d ones(1, d(i))];
-	else % even .:. low peak
-		x_d = [x_d zeros(1, d(i))];
+y = {[], [], [], []};
+for i=1:length(x)
+	for j=1:length(x{i})
+		if rem(j, 2) == 1 % odd .:. high peak
+			y{i} = [y{i} ones(1, x{i}(j))];
+		else % even .:. low peak
+			y{i} = [y{i} zeros(1, x{i}(j))];
+		end
 	end
 end
 
 % plot' em all
-myend=23000;
+myend = 23000;
+color = {'b', 'r', 'g', 'k'};
 figure;
-subplot(4,1,1);
-plot(x_a, 'b', 'LineWidth', 5);
-xlim([0 myend]); set(gca, 'XTick', [0:2000:myend]); grid on; set(gca, 'YTick', [0:1]);
-subplot(4,1,2);
-plot(x_b, 'r', 'LineWidth', 5);
-xlim([0 myend]); set(gca, 'XTick', [0:2000:myend]); grid on; set(gca, 'YTick', [0:1]);
-subplot(4,1,3);
-plot(x_c, 'g', 'LineWidth', 5);
-xlim([0 myend]); set(gca, 'XTick', [0:2000:myend]); grid on; set(gca, 'YTick', [0:1]);
-subplot(4,1,4);
-plot(x_d, 'k', 'LineWidth', 5);
-xlim([0 myend]); set(gca, 'XTick', [0:2000:myend]); grid on; set(gca, 'YTick', [0:1]);
+for i=1:length(y)
+	subplot(length(y), 1, i);
+	plot(y{i}, color{i}, 'LineWidth', 5);
+	xlim([0 myend]); set(gca, 'XTick', [0:2000:myend]); grid on;
+end
 
 % return the mean of the duration of all signals
-y = mean([sum(a) sum(b) sum(c) sum(d)])/1000;
+% y = mean([sum(a) sum(b) sum(c) sum(d)])/1000;
