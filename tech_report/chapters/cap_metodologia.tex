@@ -41,14 +41,14 @@ phpmyadmin # (opcional?)
 %\end{figure}
 
 % http://eda.eme.ro/handle/10598/28187
-Em~\cite{cassio14}, o Julius foi configurado para funcionar em modo servidor
+Em~\cite{Cassio14}, o Julius foi configurado para funcionar em modo servidor
 através da opção nativa ``-adinnet'' (A/D \textit{Input from Network}, conversão 
 A/D com entrada pela rede). Isso permite que o Julius receba amostras de áudio
 via \textit{streaming} através de uma comunicação com um cliente genérico via
 \textit{socket}. O código foi alterado para que o resultado gerado pelo Julius,
 também conhecido como sentença, seja retornado ao cliente através desse mesmo
 \textit{socket}. Além disso, uma aplicação foi construída sobre a plataforma
-Android 2.3 exclusivamente para se comunicar com o servidor. Basicamente, as 
+Android exclusivamente para se comunicar com o servidor. Basicamente, as 
 amostras de áudio obtidas pelo microfone do aparelho são enviadas, enquanto são
 paralelamente analisadas a fim de se detectar o silêncio do fim da fala do
 usuário. Feito isso, o aplicativo apenas aguarda a sentença a ser enviada pelo
@@ -100,20 +100,21 @@ controles remotos para que sejam guardadas como registros no banco de dados.
 
 Um controle para a TV Philips 39PFL3008D/78 foi usado como base para a análise
 do sinal emitido. Inicialmente, um arduino UNO fui utilizado para verificar
-o tempo em que o IR led permanecia ativo e inativo, armazenando-o
-em uma matriz de duas colunas. O Octave foi utilizado para converter a matriz em
-um vetor único, no qual os índices ímpares representavam o tempo de duração do
-modo \textit{burst} do IR led e as posições pares, o tempo em que o IR led
-permanecia \textit{idle}. Sendo assim, o vetor no qual as durações dos níveis
+o tempo em que o IR led permanecia ativo e inativo, armazenando-o em uma matriz
+de duas colunas, como visto no Apêndice~\ref{app:arduino}. O Octave foi
+utilizado para converter a matriz em um vetor único, no qual os índices ímpares
+representavam o tempo de duração do modo \textit{burst} do IR led e as posições
+pares, o tempo em que o IR led permanecia \textit{idle} (Vide
+Apêndice~\ref{app:matlab}). Sendo assim, o vetor no qual as durações dos níveis
 altos e baixos alternam-se entre si foi convertido para uma forma de onda
-quadrada, semelhante à mostrada na Figura~\ref{fig:rc6}. A Figura~\ref{fig:cmds} 
-mostra a forma de onda quadrada para 4 botões diferentes pressionados de forma
-não consecutiva. Pode-se notar que os sinais são exatamente iguais até 
-aproximadamente $t=15ms$, onde começam a ser exibidos os bits referentes ao
-comando específico. Já na Figura~\ref{fig:vol+}, o botão ``volume mais'' foi 
-pressionado por quatro vezes consecutivas. Percebe-se que os sinais são
-completamente idênticos, exceto o bit de \textit{toggle}, o qual muda sempre que 
-um botão é solto.
+quadrada, semelhante à mostrada na Figura~\ref{fig:rc6}.  A
+Figura~\ref{fig:cmds} mostra a forma de onda quadrada para 4 botões diferentes
+pressionados de forma não consecutiva. Pode-se notar que os sinais são
+exatamente iguais até aproximadamente $t=15ms$, onde começam a ser exibidos os
+bits referentes ao comando específico. Já na Figura~\ref{fig:vol+}, o botão
+``volume mais'' foi pressionado por quatro vezes consecutivas. Percebe-se que os
+sinais são completamente idênticos, exceto o bit de \textit{toggle}, o qual muda
+sempre que um botão é solto.
 
 \begin{figure}[!h]
 	\centering
@@ -152,7 +153,7 @@ SELECT campo FROM TV WHERE marca='marca_da_tv'
 O acesso ao banco de dados é todo feito por meio da linguagem C. Para tal, foi-se
 utilizada uma biblioteca especial chamada \texttt{mysql.h}, na qual as
 \textit{queries} são feitas pela passagem de um comando SQL como uma
-\textit{string} (Vide apêndice~\ref{app:db}).
+\textit{string} (Vide Apêndice~\ref{app:lamp}).
 
 \begin{table}[h]
 \centering
@@ -165,13 +166,12 @@ marca & volume+ & volume- & canal+ & canal- & ligar & endereço & start \\
 lg       & 10111011 & 11110110 & 11000010 & 00010111 & 01011111 & 11011010 & 11010111 \\
 sony     & 11110110 & 01011111 & 00011111 & 10111011 & 11000000 & 11010111 & 00010111 \\
 samsung  & 00110111 & 11000010 & 11010000 & 11011110 & 11011100 & 11011010 & 11010111 \\
-phillips & 00011111 & 10111011 & 11000000 & 11011010 & 11010111 & 11000010 & 00010111 \\
+philips & 00011111 & 10111011 & 11000000 & 11011010 & 11010111 & 11000010 & 11 \\
 \hline
 \end{tabular}
 \end{table}
 
-\noindent
-\textcolor{red}{*Thiago: Detalhes sobre o que foi feito com o Arduino*}\\
-\textcolor{red}{*Gabriel: Detalhes sobre o que foi convertido do Arduino para a BBB*}
+% Thiago: Detalhes sobre o que foi feito com o Arduino
+% Gabriel: Detalhes sobre o que foi convertido do Arduino para a BBB
 \end{section}
 %%% EOF %%%

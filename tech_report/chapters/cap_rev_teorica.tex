@@ -1,30 +1,29 @@
 \begin{section}{Revisão Teórica}
 % [IEEE'14] Implementation of vision based intelligent home automation and security system
 % [IEEE'11] Designing Android Applications with both Online and Offline Voice Control of Household Devices
-% [IEEE'10] Smart Home Control System for the disabled using the head and the mouth movement
-% [IJERA'15] Wi-Fi and Android Based Smart Home Automation for People with Disabilities
+% [IEEE'10] Smart Home Control System for the disabled using the head and the mouth movement (CHINESE)
+% [IJERA'15] Wi-Fi and Android Based Smart Home Automation for People with Disabilities (UNAUTHORIZED)
  
-Como o iOS e o Android foram lançados, respectivamente, em 2007 e 2008, e 
-a ascensão dos smartphones é relativamente recente, a ideia de adicionar a eles 
-a acessibilidade no controle de equipamentos eletrônicos somente começou a 
-revelar resultados concretos a partir de 2010. 
-Em~\cite{Barrena11}, o decodificador PocketSphinx foi embarcado em um smartphone
-Android para que este pudesse controlar aparelhos domésticos através da
-interface de voz. O resultado era enviado para uma SparkFun IOIO Board, a qual,
-estando fisicamente conectada ao controle da TV, disparava um determinado 
-\textit{trigger}. A justificativa do trabalho era ajudar pessoas afetadas com 
-tetraplegia a serem mais independentes; os testes avaliaram o desempenho de
-decodificadores embarcados e distribuídos. 
+Como o iOS e o Android foram lançados, respectivamente, em 2007 e 2008, e a
+ascensão dos \textit{smartphones} é relativamente recente, a ideia de adicionar
+a eles a acessibilidade no controle de equipamentos eletrônicos somente começou
+a revelar resultados concretos a partir de 2010.
+Em~\cite{Barrena11}, o decodificador PocketSphinx foi embarcado em um
+\textit{smartphone} Android para que este pudesse controlar aparelhos domésticos
+através da interface de voz. O resultado era enviado para uma SparkFun IOIO
+Board, a qual, estando fisicamente conectada ao controle da TV, disparava um
+determinado \textit{trigger}. A justificativa do trabalho era ajudar pessoas
+afetadas com tetraplegia a serem mais independentes; os testes avaliaram o
+desempenho de decodificadores embarcados e distribuídos.
 Já em~\cite{Sefat14}, um sistema inteligente de segurança foi implementado na
-BeagleBone, a qual utilizava o pacote OpenCV para contar quantos indivíduos
+BeagleBone, a qual utilizava a biblioteca OpenCV para contar quantos indivíduos
 encontravam-se próximo à entrada do ambiente a ser vigiado. Um módulo de
 reconhecimento de fala, também basedo no PocketSphinx, foi utilizado para
 receber comandos do usuário, enquanto o software eSpeak foi encarregado de
 prover as respostas dadas pela BeagleBone via voz sintetizada. Um aparelho
 celular qualquer poderia se comunicar com o sistema via SMS graças à adição de
-um módulo GSM à BBB. A desvantagem é que, apesar de o controle poder ser
-executado não necessariamente por um \textit{smartphone}, além de necessitar de
-um cartão SIM para fazer a comuncação via SMS funcionar, os comandos de voz não
+um módulo GSM à BBB. A desvantagem é que, apesar de o controle não ter de ser
+executado necessariamente por um \textit{smartphone}, os comandos de voz não
 poderiam ser dados diretamente do aparelho móvel, e sim pessoal e diretamente à
 BeagleBone, a qual possuía um microfone conectado à porta USB.
 
@@ -106,7 +105,7 @@ Amperagem (mA)	& 42 & 210-460 & 150-350 \\
 Voltagem (V)	& 7-12 & 5 & 5 \\
 USB				& - & 1 Host, 1 Mini Client  & 2 Hosts, 1 Micro Power\\
 Ethernet		& - & 1 10/100 Mbps & 1 10/100 Mbps \\
-Preço 			& 5 conto & 300 conto & 200 conto \\
+%Preço 			& 5 conto & 300 conto & 200 conto \\
 %Resolução		& - & 1280x1024 (5:4), 1024x768 (4:3), 1280x720 (16:9), 1440x900 (16:10) all at 16 bit	& 	Extensive from 640x350 up to 1920x1200, this includes 1080p\\
 %Camera connector & - & - & Rpi \\
 \hline
@@ -122,13 +121,7 @@ restaram muitas dúvidas no momento da escolha dessa plataforma para o projeto.
 Uma comparação entre os principais parâmetros dos três equipamentos é dada na
 Tabela~\ref{comparison}.
 
-%O cliente Android foi criado também em~\cite{cassio14}. A interface será
-%redefinida e métodos serão criados para que haja interação com o banco de dados
-%a ser instalado no servidor BeagleBone, o qual ficará encarregado de armazenar
-%os dados relacionados à diferentes modelos ou fabricantes de televisores.
-
-\noindent
-\textcolor{red}{$\downarrow$ Thiago: LIRC $\downarrow$} 
+% Thiago: LIRC
 
 O funcionamento de controles remotos, com ênfase nos baseados em luz
 infravermelha para televisores, é explicado de de forma clara e detalhada em
@@ -158,7 +151,7 @@ ainda não existiam muitos dos equipamentos eletrônicos atuais, como \textit{home
 theaters} ou DVDs. Nesse padrão, os bits são codificados de acordo com o código
 de Manchester, onde cada bit, transmitido dentro de um período fixo, é
 representado por uma transição \textit{high-to-low} (0) ou \textit{low-to-high}
-(1).  Esses padrões de dados são obtidos através de uma operação do tipo XOR
+(1). Esses padrões de dados são obtidos através de uma operação do tipo XOR
 (OU-Exclusivo) realizada entre o clock do dispositivo e o dado propriamente
 dito~\cite{rc5_wiki}.
 
@@ -196,7 +189,7 @@ construção do sinal. Pela Figura~\ref{fig:rc6}, é fácil notar que a quantidade
 de bits carregada pelo sinal (em comparação com o RC-5) aumentou de 14 para 22.
 O código Manchester também aparece invertido, já que valor lógico alto passa
 agora a ser representado pela transição \textit{high-to-low} (1), enquanto o
-valor baixo (0) é definido por uma mudança \textit{low-to-high}. O primeiro bit
+valor baixo é definido por uma mudança \textit{low-to-high} (0). O primeiro bit
 de \textit{start} tem uma duração maior, para garantir o ganho do AGC no
 circuito receptor; já o segundo, também de \textit{start}, é sempre mantido em
 valor alto. O bit de \textit{toggle}, o qual muda de estado caso uma tecla deixe
@@ -206,16 +199,16 @@ referido comando a ser transmitido, respectivamente.
 
 \subsection{Produtos Relacionados}
 Existem alguns produtos disponíveis no mercado com a finalidade de tornar o
-controle de equipamentos eletrônicos mais prático. Um deles é o \textit{Harmony
-Smart Control}~\cite{harmonysc}, o qual possui em seu ``pacote'' um aplicativo
-para iOS e Android (porém sem versão para tablets; somente smartphones), um hub
+controle de equipamentos eletrônicos mais prático. Um deles é o Harmony Smart 
+Control~\cite{harmonysc}, o qual possui em seu ``pacote'' um aplicativo para 
+\textit{smartphones} iOS e Android (sem versão para tablets, todavia), um hub
 e um controle remoto genérico. Segundo a revisão da CNET, vale a pena pagar US\$
 130 por todas as funcionalidades que o sistema apresenta, como usar uma conexão
-RF entre o smartphone/controle com o hub (que, infelizmente, ainda não conseguiu
-se livrar do tão antiquado IR), o que faz com que o usuário não precise apontar
-o controle para o dispositivo que precisa controlar. Todavia, o hub precisa
-estar numa boa posição para conseguir emitir a informação de forma clara para o
-aparelho desejado.
+RF entre o \textit{smartphone}/controle com o hub (que, infelizmente, ainda não
+conseguiu se livrar do tão antiquado IR), o que faz com que o usuário não
+precise apontar o controle para o dispositivo que precisa controlar. Todavia, o
+hub precisa estar numa boa posição para conseguir emitir a informação de forma
+clara para o aparelho desejado.
 
 IRdroid é outro aplicativo que permite o controle de aparelhos televisivos com o
 celular~\cite{irdroid}. Como o próprio nome sugere, funciona apenas em

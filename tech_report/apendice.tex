@@ -1,193 +1,186 @@
-% Pedro
+% Pedro ------------------------------------------------------------------------
 \begin{section}{C: LAMP}
-Com a sensível complexidade dos comandos usados para a comunicação com a TV,
-devido ao número de campos presente em cada comando e a diferença existente
-entre cada campo, bem como evitar possíveis problemas de escalabilidade quando o
-sistema evoluir para o controle de diversos equipamentos eletrônicos, adotamos
-um banco de dados para armazenar todas essas informações quanto aos aparelhos e
-seus comandos.
+\label{app:lamp}
+Com a sensível complexidade dos comandos usados para a comunicação com a TV
+devido ao número de campos e a diferença entre eles, foi-se adotado um banco de
+ados para armazenar informações sobre os aparelhos, bem como seus comandos. Isso
+evitará possíveis problemas de esvalabilidade quando o sistema evoluir para o
+controle de diversos equipamentos eletrônicos.
 
+% Pedro: o abaixo deveria estar em 'trabalhos futuros'
 Além disso, visando uma integração maior do sistema implementado no BeagleBone
-Black$^{\small{\textregistered}}$, com as interfaces disponíveis ao usuário e
-aos desenvolvedores como a web, a adoção de um servidor Apache e PHP foi
-necessária. Essa integração se dá pela criação de uma página web onde serão
+Black$^{\scriptsize{\textregistered}}$, a adoção de um servidor Apache com PHP 
+será necessária. Essa integração se dá pela criação de uma página web onde serão
 armazenados dados provenientes das interação do sistema, por exemplo, caso o
-usuário tenha ligado a TV, aumentado o volume, mudado de canal todas essas
-informação podem ir para um log de uma página web em que pode ser acessado pelo
-desenvolvedor para investigar a performance do sistema. Além do log de comandos
-executados pelo usuário, podemos guardar erros cometidos pelo Julius, ou eSpeak
-ou ainda falha no envio do comando para o aparelho eletrônico, em casos mais
-específicos o usuário poderá até ligar aparelhos remotamente ou o desenvolvedor
-avaliar o desempenho do sistema e identificando problemas antes de uma visita
-técnica. 
+usuário tenha ligado a TV, mudado de canal ou desligado o ar condicionado, todas 
+essas informação poderão ir para um log de uma página web em que pode ser
+acessado pelo desenvolvedor para investigar a performance do sistema. Além do
+log de comandos executados pelo usuário, podemos guardar erros cometidos pelo
+Julius, ou eSpeak ou ainda falha no envio do comando para o aparelho eletrônico,
+em casos mais específicos o usuário poderá até ligar aparelhos remotamente ou o
+desenvolvedor avaliar o desempenho do sistema e identificando problemas antes de
+uma visita técnica. 
 
-Para integrar todos estes recursos é necessário um sistema operacional, que no
-nosso caso foi usado um Linux Debian, configurando assim o servidor LAMP (Linux,
-Apache HTTP Server, MySQL e PHP).
-
-Depois de instalar as dependências e configurar o Linux, Apache, MySQL e PHP,
-temos que acessar e comunicar com o MySQL por intermédio da linguagem C, para
-tal a biblioteca $my\_sql.h$ é usada. No código em C para a comunicação temos 9
-funções além da \textit{main}, sendo elas mostradas na Lista~\ref{lst:dbphi0}.
+Para integrar todos estes recursos é necessário um sistema operacional que, no
+caso, é um Linux Debian, configurando assim o servidor LAMP (Linux,
+Apache HTTP Server, MySQL e PHP). Após a instalação das dependências e
+subsequente configuração, o acesso e comunicação com o MySQL via códigos em C
+foi necessário. Para tal, a biblioteca \texttt{mysql.h} é usada. No código em C
+para a comunicação, foram criadas 8 funções específicas, sendo elas mostradas na
+Lista~\ref{lst:dbphi0}.
 
 % Code
-\lstinputlisting[style=code, language=c, firstline=9, lastline=24,
+\lstinputlisting[style=code, language=c, firstline=9, lastline=22,
 caption={Functions Definitions}, label={lst:dbphi0}]
 {codes/db_phi.c}
 
-Aqui detalhamos o escopo de todas as funções sendo usadas e a \textit{main()},
-onde estamos conectando no banco de dados (\textit{$mysql\_init()$}), criando um
-banco chamado \textit{y} com o usu\'{a}rio \textit{root}
-(\textit{$create\_db()$}). Depois a tabela chamada \textit{tv}
-(\textit{$create\_table()$}) é criada e logo após os atributos estão sendo
-inseridos (\textit{$insert\_table()$}). Com \textit{$insert\_element()$}
-atribuimos um valor a um atributo específico e usamos \textit{$get\_element()$}
+A Lista~\ref{lst:dbphi1} mostra a função main, onde a conexão com o banco de 
+dados é dada pela função \texttt{mysql\_init()}. Já a função \texttt{create\_db()} 
+cria um banco chamado \textit{y} com o usuário \textit{root}. Depois, a tabela 
+\textit{tv} (\texttt{create\_table()}) é criada e logo após os atributos 
+vão sendo inseridos (\texttt{insert\_table()}). Com \texttt{insert\_element()}
+atribuimos um valor a um atributo específico e usamos \texttt{get\_element()}
 para retirar da tabela o valor de um atributo, que no caso é \textit{volume+} da
 marca LG.
 
 % Code
-\lstinputlisting[style=code, language=c, firstline=26, lastline=52, 
+\lstinputlisting[style=code, language=c, firstline=24, lastline=56, 
 caption={Main}, label={lst:dbphi1}]
 {codes/db_phi.c}
 
+A Lista~\ref{lst:dbphi2} mostra a função responsável por fazer a \textit{query} 
+no banco de dados. Ela retornará o valor do atributo específico que se deseja 
+obter, recebendo como parâmetros a coluna e a marca, bem como a conexão com o 
+MySQL. Com isso,
+pode-se selecionar o atributo \textit{column} onde a marca é igual ao
+\textit{target} passado à função. Feito isso, a função \texttt{mysql\_fetch\_row()}
+é chamada para retornar todos os valores que satisfazem a condição exigida pela 
+\textit{query}, o qual, para esse caso especifico, será um valor único.
+
 % Code
-\lstinputlisting[style=code, language=c, firstline=54, lastline=93, 
-caption={Função $get\_element()$}, label={lst:dbphi2}]
+\lstinputlisting[style=code, language=c, firstline=58, lastline=98, 
+caption={Função \texttt{get\_element()}}, label={lst:dbphi2}]
 {codes/db_phi.c}
 
-Esta função é responsável por fazer a \textit{query} no banco de dados que
-retornará o valor do atributo específico que queremos obter.  Ela recebe como
-entrada o atributo (\textit{$*column$}), a marca "alvo" (\textit{$*target$}),
-pode ser qualquer marca, e a conexão com o MySQL (\textit{$*con$}), com isso
-podemos selecionar o atributo \textit{column} onde a marca é igual ao
-\textit{alvo} passado à função. Após a montagem da sintaxe da \textit{query},
-usamos \textit{$mysql\_fetch\_row()$} para pegarmos todos os valores que
-satisfazem a condição exigida por nossa \textit{query}, esta por sua vez retorna
-apenas um valor, o qual é retornado pela função.
+A função que assinala um valor um atributo da tabela é mostrada na
+Lista~\ref{lst:dbphi3}. Os parâmetros irão montar a sintaxe da \textit{query}
+para que a tabela ``TV'' seja atualizada com o valor equivalente à
+\textit{value}, na interseção linha ``marca'' equivalente à \textit{target} com 
+a coluna do comando equivalente à \textit{column}. 
 
 % Code
-\lstinputlisting[style=code, language=c, firstline=95, lastline=118, 
+\lstinputlisting[style=code, language=c, firstline=100, lastline=124, 
 caption={função {\tt insert\_element()}}, label={lst:dbphi3}]
 {codes/db_phi.c}
 
-Esta função tem como finalidade inserir o valor de um atributo da tabela, ela
-recebe o atributo (\textit{$*column$}), o valor (\textit{$*value$}), a marca
-``alvo'' (\textit{$*target$}) e a conexão MySQL (\textit{$*con$}). Ela irá
-montar a sintaxe da \textit{query}, onde iremos atualizar a tabela \textit{tv}
-atribuindo à coluna \textit{$*column$} o valor \textit{$*value$} onde a marca é
-igual ao alvo \textit{$*target$}.
+A função \texttt{create\_table()}, mostrada na Lista~\ref{lst:dbphi4}, tem como 
+finalidade criar as tabelas. Ela recebe o nome da tabela a ser criada
+(\textit{table}), o nome do banco de dados onde ela será criada (\textit{db}), o
+usuário (\textit{user}), a senha desse usuário (\textit{pwd}) e a conexão
+MySQL (\textit{con}). Ela irá montar com uma sintaxe pré definida a tabela
+com os atributos \textit{marca, volume+, volume-, canal+, canal-, on, off,
+address}.
 
 % Code
-\lstinputlisting[style=code, language=c, firstline=144, lastline=177, 
+\lstinputlisting[style=code, language=c, firstline=154, lastline=187, 
 caption={função {\tt create\_table()}}, label={lst:dbphi4}]
 {codes/db_phi.c}
 
-Esta função tem como finalidade a criação de tabelas, ela recebe
-o nome da tabela a ser criada (\textit{$*table$}), o banco de dados aonde ela
-será criada (\textit{$*db$}), o usuário (\textit{$*user$}), a senha
-desse usuário (\textit{$*pwd$}) e a conexão MySQL (\textit{$*con$}). Ela
-irá montar com uma sintaxe pré definida a tabela com os atributos
-\textit{marca, volume+, volume-, canal+, canal-, on, off, address}.
+A Lista~\ref{lst:dbphi5} mostra a função \texttt{create\_db()}, a qual tem como 
+finalidade a criação do banco de dados.  O nome do banco a ser criado, o usuário
+e a senha desse usuário são passadas como parâmetro, bem como e a conexão com o
+MySQL. Ela usa o nome \textit{name} para organizar a sintaxe que cria o banco.
 
 % Code
-\lstinputlisting[style=code, language=c, firstline=179, lastline=190,
+\lstinputlisting[style=code, language=c, firstline=189, lastline=202,
 caption={função {\tt create\_db()}}, label={lst:dbphi5}]
 {codes/db_phi.c}
 
-Esta função tem como finalidade a criação do banco de dados, ela
-recebe o nome do banco a ser criado (\textit{$*name$}), o usuário
-(\textit{$*user$}), a senha desse usu\'{a}rio (\textit{$*pwd$}) e a conexão
-MySQL (\textit{$*con$}). Ela usa o nome \textit{$*name$} para organizar a
-sintaxe que cria o banco.
+%% Code
+%\lstinputlisting[style=code, language=c, firstline=205, lastline=210, 
+%caption={função {\tt finish\_with\_error()}}, label={lst:dbphi6}]
+%{codes/db_phi.c}
+%
+%A função \texttt{finish\_with\_error()}, mostrada na Lista~\ref{lst:db_6}, 
+%apenas oferece o erro padrão para o caso de a conexão MySQL seja executada com
+%erro.
 
-% Code
-\lstinputlisting[style=code, language=c, firstline=192, lastline=196, 
-caption={função {\tt finish\_with\_error()}}, label={lst:dbphi6}]
-{codes/db_phi.c}
+%% Pedro: escrota essa função handle n gostei elimine
+%Em algumas sintaxes do MySQL os atributos são passados como ``nome'', ou seja,
+%entre aspas duplas, entretanto para inserir estas aspas duplas em C não
+%é tão trivial assim caso queiramos automatizar o processo de
+%adição, portanto, esta função foi criada com a finalidade
+%específica de adicionar e manipular esta string para que ela saia "string".
+%Ela recebe apenas a string alvo (no caso \textit{$*user$}, pois o caso onde a
+%usamos é para garantir acesso a algum usuário ao banco de dados.
 
-Esta função apenas oferece o erro padrão para caso a conexão MySQL passada seja
-executada com erro.Ela recebe a conexão MySQL (\textit{$*con$}).
-
-% Code
-% Pedro: escrota essa função handle n gostei elimine
-Em algumas sintaxes do MySQL os atributos são passados como ``nome'', ou seja,
-entre aspas duplas, entretanto para inserir estas aspas duplas em C não
-é tão trivial assim caso queiramos automatizar o processo de
-adição, portanto, esta função foi criada com a finalidade
-específica de adicionar e manipular esta string para que ela saia "string".
-Ela recebe apenas a string alvo (no caso \textit{$*user$}, pois o caso onde a
-usamos é para garantir acesso a algum usuário ao banco de dados.
-
-% Pedro: ajeita essa função GRANT no .c e inclui ela da forma que incluí 
-% as outras aí em cima
-\begin{lstlisting}[style=code, language=c, caption={função $grant\_db()$}, label={lst:dbphi8}]
-int grant_db(char *user, char *db, MYSQL *con){
-    char *grantall = "GRANT ALL ON y.* TO GUEST IDENTIFIED BY ";
-	char *flush_command = "FLUSH PRIVILEGES";
-
-	char *user_handle = handle_string(user);
-
-	size_t grant_len = strlen(grantall)+strlen(user_handle);
-
-	char *grant_command = (char *) malloc((grant_len+1)* sizeof (char));
-
-	sprintf(grant_command, "%s%s", grantall,user_handle);
-
-	printf("user_handle = %s\n",user_handle);
-	printf("%s\n",grant_command);
-
-	if(mysql_query(con, "GRANT ALL ON y TO GUEST IDENTIFIED BY \"phy_dev\""))
-		finish_with_error(con);
-
-	printf("Grant Success!\n");
-	
-	if(mysql_query(con,"FLUSH PRIVILEGES"))
-		finish_with_error(con);
-
-	free(result);
-	free(grant_command);	
-	exit(0);
-}
-\end{lstlisting}
-
-Aqui garantimos ao usuário \textit{$*user$} acesso ao banco de dados
-\textit{$*db$}, por meio de uma conex\~{a}o MySQL \textit{$*con$}. Nela usamos a
-função \textit{$handle\_user()$} para modificar a string do usuário
-e posteriormente usá-la para montar a sintaxe da \textit{query}.
-
+%% Pedro: ajeita essa função GRANT no .c e inclui ela da forma que incluí 
+%% as outras aí em cima
+%\begin{lstlisting}[style=code, language=c, caption={função $grant\_db()$}, label={lst:dbphi8}]
+%int grant_db(char *user, char *db, MYSQL *con){
+%    char *grantall = "GRANT ALL ON y.* TO GUEST IDENTIFIED BY ";
+%	char *flush_command = "FLUSH PRIVILEGES";
+%
+%	char *user_handle = handle_string(user);
+%
+%	size_t grant_len = strlen(grantall)+strlen(user_handle);
+%
+%	char *grant_command = (char *) malloc((grant_len+1)* sizeof (char));
+%
+%	sprintf(grant_command, "%s%s", grantall,user_handle);
+%
+%	printf("user_handle = %s\n",user_handle);
+%	printf("%s\n",grant_command);
+%
+%	if(mysql_query(con, "GRANT ALL ON y TO GUEST IDENTIFIED BY \"phy_dev\""))
+%		finish_with_error(con);
+%
+%	printf("Grant Success!\n");
+%	
+%	if(mysql_query(con,"FLUSH PRIVILEGES"))
+%		finish_with_error(con);
+%
+%	free(result);
+%	free(grant_command);	
+%	exit(0);
+%}
+%\end{lstlisting}
+%
+%Aqui garantimos ao usuário \textit{$*user$} acesso ao banco de dados
+%\textit{$*db$}, por meio de uma conexão MySQL \textit{$*con$}. Nela usamos a
+%função \textit{$handle\_user()$} para modificar a string do usuário
+%e posteriormente usá-la para montar a sintaxe da \textit{query}.
 \end{section}
 
-% Thiago: Olha no tex do apendice os exemplos de como os arquivos foram incluídos
-% antes de copiar todo o código aqui. Ou seja, usa lstinputlisting ao invés de
-% lstlisting, especifica as linhas. Separa as funções que nem o Pedro fez. Achei
-% melhor colocar a explicação dentro de comentários dentro do próprio código, do
-% jeito que estás fazendo. Indentação é um tab de 4 espaços, ajeita.
+% Thiago -----------------------------------------------------------------------
+\newpage
 \begin{section}{Arduino: IR Tx/Rx}
-
-\lstinputlisting[style=code, language=c, firstline=1, lastline=36,
-caption={Declarações globais e função {\tt setup()}}, label={lst:dbphi0}]
+\label{app:arduino}
+\lstinputlisting[style=code, language=c, firstline=12, lastline=26,
+caption={Declarações globais}, label={lst:ard_1}]
 {codes/arduino_IR.c}
 
-\lstinputlisting[style=code, language=c, firstline=38, lastline=92,
-caption={Função {\tt loop()}}, label={lst:dbphi0}]
+\lstinputlisting[style=code, language=c, firstline=34, lastline=68,
+caption={Função {\tt loop()}}, label={lst:ard_2}]
 {codes/arduino_IR.c}
 
-\lstinputlisting[style=code, language=c, firstline=94, lastline=107,
-caption={Função {\tt printPulses()}}, label={lst:dbphi0}]
+\lstinputlisting[style=code, language=c, firstline=70, lastline=83,
+caption={Função {\tt printPulses()}}, label={lst:ard_3}]
 {codes/arduino_IR.c}
 
-\lstinputlisting[style=code, language=c, firstline=109, lastline=128,
-caption={Função {\tt pulseIR()}}, label={lst:dbphi0}]
+\lstinputlisting[style=code, language=c, firstline=85, lastline=99,
+caption={Função {\tt pulseIR()}}, label={lst:ard_4}]
 {codes/arduino_IR.c}
 
-\lstinputlisting[style=code, language=c, firstline=130, lastline=139,
-caption={Função {\tt sendCommand()}}, label={lst:dbphi0}]
+\lstinputlisting[style=code, language=c, firstline=101, lastline=108,
+caption={Função {\tt sendCommand()}}, label={lst:ard_5}]
 {codes/arduino_IR.c}
 \end{section}
 
-% Cassio
+% Cassio -----------------------------------------------------------------------
+\newpage
 \begin{section}{Matlab/Octave: Analisador de Onda Quadrada}
-\lstinputlisting[style=code, language=matlab, firstline=4, lastline=45]
-{codes/myanalyze.m}
+\label{app:matlab}
+\lstinputlisting[style=code, language=matlab]{codes/myanalyze.m}
 \end{section}
 %%% EOF %%%
