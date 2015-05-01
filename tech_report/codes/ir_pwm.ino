@@ -17,7 +17,7 @@ on the RC-5 protocol.)
 #include <string.h>
 
 /* sending */
-void send(char *bitstream) {
+int send_rc5(char *bitstream) {
 	char *bitstream = "11011100010001";
 	short int f_khz = 38;
 	short int i, j;
@@ -50,4 +50,4 @@ void send(char *bitstream) {
 		}
 	}
 	return EXIT_SUCCESS;
-}//close main
+}//close send RC5
