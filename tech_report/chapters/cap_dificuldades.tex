@@ -16,7 +16,27 @@ kernel pra receber um shield/case, o mesmo teria de ser conectado na porta USB,
 a qual já estaria sendo usada pelo auto-falante. Portanto, a solução mais fácil
 foi conectar um roteador wifi à porta Ethernet da BBB através de um cabo RJ-45.
 
-\item Angstrom e Ubuntu na BBB . (Gabriel)
+\item Angstrom e Ubuntu na BBB .
+Durante a instalacao foram testados varios sistemas operacionais disponiveis
+para a Beagle Bone Black. O \textit{Angstrom} e o sistema operacional que vem embarcado
+de fabrica junto com a BBB, mas o sistema e nomenclatura de pacotes nao
+correspondiam com os usados nas distribuicoes \textit{Debian}, tal como
+\textit{Ubuntu} e o \textit{Angstrom} tambem consumia muito espaco de
+armazenamento na flash, 1.6GB de 2GB, porque vinha com interface grafica.
+A opcao seguinte foi o uso de uma distribuicao do \textit{Debian}, o
+\textit{Ubuntu}, pela similaridade do sistema de
+pacotes (apt-get) com a distribuicao Desktop, tornando a integracao mais facil,
+porem a instalacao \textit{Ubuntu 14.04} estava usando muito espaco na flash,
+aproximadamente 1.2GB de 2GB, restando pouco espaco para instalacao de pacotes,
+outro problema encontrado foi a conexao com a internet, de alguma forma a
+conexao convencional com o cabo RJ-45 nao estava funcionando, entao o servidor
+de pacotes nao podia ser acessado. Por ultimo recorremos ao uso do
+\textit{Debian} para
+BBB, apos a instalacao da versao minimal, foi notado que o \textit{Debian} e muito mais
+leve e enxuto que os sistemas anteriores, consumindo menos de 500mb da memoria,
+e sem problemas de conexao com a internet, entao adotamos \textit{Debian 7.8
+wheezy} como
+o OS de desenvolvimento do projeto.
 
 \item Código do Arduino. (Thiago)
 
