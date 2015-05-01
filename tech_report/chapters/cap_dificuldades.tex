@@ -1,41 +1,42 @@
 \begin{section}{Dificuldades e Soluções}
 \begin{enumerate}
+\item O Ångström é o sistema operacional de fábrica da BeagleBone, bastante
+referenciado em fóruns e candidato principal para ser a base do projeto.
+Entretanto, o sistema e a nomenclatura de pacotes não correspondiam com os
+usados nas distribuições Debian, o que impossibilitava a instalação das
+dependências necessárias para o uso das ferramentas de processamento de voz. 
+Além disso, o Ångström também consumia muito espaço de armazenamento na 
+\textit{flash}, ocupando sozinho 1.6~GB de 2~GB por conta de sua interface 
+gráfica.
+
+A opção seguinte foi o Ubuntu, pois a similaridade do sistema de pacotes
+\texttt{apt-get} com a distribuição \textit{desktop} tornaria a integração mais
+fácil. Porém, a instalação da versão 14.04 também ocupava espaço demais na
+memória \textit{flash}: aproximadamente 1.2~GB. Além do problema de espaço,
+outra dificuldade foi a conexão com a Internet, já que o acesso convencional ao
+repositório de pacotes não funcionava. 
+
+A solução veio com a instalação de um terceiro e último sistema operacional, o 
+Debian 7.8 wheezy. Este se mostrou muito mais leve e ``enxuto'' em sua versão 
+\textit{minimal}, ocupando menos de 500~MB da memória. Além disso, todos os 
+pacotes necessários para conexão com a Internet funcionaram perfeitamente.
 
 \item A BeagleBone não possui saída de áudio nativa, tampouco conectores do tipo
-audio jack. No Debian, a saída padrão de áudio é pelo conector HDMI, mas pode
-ser substituída pelo USB mediante modificações em parâmetros do kernel. O modo
-mais fácil, considerando que redirecionar a saída do eSpeak para um GPIO seria
-muito trabalhoso, seria conectar um auto-falante USB à BeagleBone. Em se
-tratando de um protótipo, um headphone faz o papel de um speaker que deve
-consumir pouca energia e ter um tamanho limitado. Foi-se cogitada a construção
-de um circuito com um amplificador LM386 para o speaker, porém a obtenção de um
-D/A PCM2707 não custaria menos de US\$ 15.
+\textit{audio jack}. No Debian, a saída padrão de áudio é pelo conector HDMI, 
+mas pode ser substituída pelo USB mediante modificações em parâmetros do kernel.
+O modo mais fácil, considerando que redirecionar a saída do eSpeak para um GPIO
+seria muito trabalhoso, seria conectar um auto-falante USB à BeagleBone. Em se
+tratando de um protótipo, um \textit{headphone} faz o papel de um
+\textit{speaker} que deve consumir pouca energia e ter um tamanho limitado.
+Foi-se cogitada a construção de um circuito com um amplificador LM386 para o
+\textit{speaker}, porém a obtenção de um D/A PCM2707 não custaria menos de 
+US\$ 15.
 
 \item A BeagleBone não possui conexão wifi. Além da dificuldade em atualizar o
-kernel pra receber um shield/case, o mesmo teria de ser conectado na porta USB,
-a qual já estaria sendo usada pelo auto-falante. Portanto, a solução mais fácil
-foi conectar um roteador wifi à porta Ethernet da BBB através de um cabo RJ-45.
-
-\item Durante a instalacao foram testados varios sistemas operacionais disponiveis
-para a Beagle Bone Black. O \textit{Angstrom} e o sistema operacional que vem embarcado
-de fabrica junto com a BBB, mas o sistema e nomenclatura de pacotes nao
-correspondiam com os usados nas distribuicoes \textit{Debian}, tal como
-\textit{Ubuntu} e o \textit{Angstrom} tambem consumia muito espaco de
-armazenamento na flash, 1.6GB de 2GB, porque vinha com interface grafica.
-A opcao seguinte foi o uso de uma distribuicao do \textit{Debian}, o
-\textit{Ubuntu}, pela similaridade do sistema de
-pacotes (apt-get) com a distribuicao Desktop, tornando a integracao mais facil,
-porem a instalacao \textit{Ubuntu 14.04} estava usando muito espaco na flash,
-aproximadamente 1.2GB de 2GB, restando pouco espaco para instalacao de pacotes,
-outro problema encontrado foi a conexao com a internet, de alguma forma a
-conexao convencional com o cabo RJ-45 nao estava funcionando, entao o servidor
-de pacotes nao podia ser acessado. Por ultimo recorremos ao uso do
-\textit{Debian} para
-BBB, apos a instalacao da versao minimal, foi notado que o \textit{Debian} e muito mais
-leve e enxuto que os sistemas anteriores, consumindo menos de 500mb da memoria,
-e sem problemas de conexao com a internet, entao adotamos \textit{Debian 7.8
-wheezy} como
-o OS de desenvolvimento do projeto.
+kernel pra receber um \textit{shield/case}, o mesmo teria de ser conectado na 
+porta USB, a qual já estaria sendo usada pelo auto-falante. Portanto, a solução
+mais fácil foi conectar um roteador wifi à porta Ethernet da BBB através de um
+cabo UTP.
 
 \item Código do Arduino. (Thiago)
 
