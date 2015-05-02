@@ -173,5 +173,70 @@ philips & 00011111 & 10111011 & 11000000 & 11011010 & 11010111 & 11000010 & 11 \
 
 % Thiago: Detalhes sobre o que foi feito com o Arduino
 % Gabriel: Detalhes sobre o que foi convertido do Arduino para a BBB
+\begin{subsection}{GPIO}
+
+Para implementar o controle por IR usando a Beagle Bone Black, o uso do GPIO e de 
+extrema importancia, como no arduino a Beagle Bone possui pinos de entrada e sai
+da para funcoes diversas, coisa que o Raspberry nao possui muitos. GPIO significa 
+\textit{General Pourpose Input/Output} ou Entrada/Saida de Proposito Geral, logo 
+pode ser usado da forma mais conveniente ao desenvolvedor, e possivel controlar a 
+tensao de saida, pegar feedback de sensores digitais e analogicos e muitas outras 
+funcionalidades.
+De acordo com o datasheet \cite{am335x}, o processador possui 128 pinos de GPIO 
+divididos em 4 modulos GPIO, com 32 pinos cada, mas o mapeamento dos pinos do 
+processador para os pinos de saida da Beagle Bone nao e exatamente igual a 
+disposicao no processador, logo e necessario saber como estao dispostos os pinos 
+na placa.
+
+\begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{Figures/BBBp8}
+        \caption{Mapeamento de Pinos do Header P8 da Beaglebone}
+        \label{fig:BBBp8}
+\end{figure}
+
+\begin{figure}[!h]
+        \centering
+        \includegraphics[width=\textwidth]{Figures/BBBp9}
+        \caption{Mapeamento de Pinos do Header P9 da Beaglebone}
+        \label{fig:BBBp9}
+\end{figure}
+
+Entender o mapeamento correto dos pinos e crucial para conseguir alguma saida 
+valida dos pinos da placa, ja que o objetivo nao e prototipar a partir do 
+processador, e sim usar a placa de desenvolvimento a qual possui pinos mais 
+acessiveis. Ao observar \ref{ig:BBBp8} e \ref{fig:BBBp9} pode se entender esse 
+mapeamento.
+Existem 3 formas de se acessar e controlar os pinos de GPIO, a primeira e
+atraves da IDE web que vem instalada no Angstrom de fabrica, mas como o OS foi 
+trocado pelo debian essa opcao nao e viavel. Outra forma, a mais complexa, e
+iniciar o modulo e atribuir valores atraves de registradores, processo tal e
+explicado no datasheet \cite{am335x}, mas despenderia muito tempo e seria pouco
+portavel. A ultima solucao foi introduzida com o kernel 3.8.x do linux embarcado,
+acessando as interfaces GPIO atraves do kernel, basicamente atribuindo valores a
+arquivos, tal processo so pode ser executado como root, entao deve se conhecer
+bem o que esta fazendo antes de executar tais comandos.
+
+\begin{lstlisting}[language=bash]
+echo 51 > /sys/class/gpio/export 
+\end{lstlisting}
+
+Os arquivos de Configuracao do GPIO pelo kernel estao localizados em
+\textit{/sys/class/gpio} e o arquivo export inicializa o pino para uso. ao
+modificar tal arquivo uma pasta para o pino sera criada, dentro da pasta estarao
+arquivos necessarios para a configuracao do pino, so e necessario o uso de dois
+arquivos desses para a tarefa de piscar um led IR, os arquivos direction e
+value.
+
+\begin{lstlisting}[language=bash]
+echo in > /sys/class/gpio/gpiochip51/direction
+echo 1 > /sys/class/gpio/gpiochip51/value
+\end{lstlisting}
+
+Os comandos listados acima sao o suficiente para acender um led conectado ao
+pino 51, ou pino 16 do header p9.
+
+\end{subsection}
+%END GPIO
 \end{section}
 %%% EOF %%%
