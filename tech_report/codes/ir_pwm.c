@@ -7,11 +7,11 @@
  * Protocol Description
  * The 36 kHz carrier frequency was chosen to render the system immune to
  * interference from TV scan lines. Since the repetition of the 36 kHz carrier
- * is 27.778 μs and the duty factor is 25%-33%, the carrier pulse duration is 
- * 6.944 μs Since the high half of each symbol of the RC-5 code word contains 32
- * carrier pulses, the symbol period is 64 x 27.778 μs = 1.778 ms, and the 22
- * symbols (bits) of a complete RC-5 code word takes 24.889 ms to transmit. The
- * code word is repeated every 113.778 ms (4096 / 36 kHz) as long as a key 
+ * is XXXX μs and the duty factor is 25%-33%, the carrier pulse duration is 
+ * XXXX μs Since the high half of each symbol of the RC-5 code word contains 32
+ * carrier pulses, the symbol period is XXXX, and the 22
+ * symbols (bits) of a complete RC-6 code word takes XXXX ms to transmit. The
+ * code word is repeated every XXXX ms (4096 / 36 kHz) as long as a key 
  * remains pressed. 
  */
 
@@ -21,7 +21,7 @@
 #include <unistd.h>
 #include <string.h>
 
-char *decode(int dur[]);
+char *decode(short int *dur, uint8_t size);
 void die(char *msg, uint8_t code);
 /* Tx and Rx */
 void send(char *stream);
@@ -29,7 +29,7 @@ void receive(int gpio);
 
 int main() {
 	// CANAL MAIS 
-	unsigned int a[] = { 
+	unsigned short int a[] = { 
 			42864, 2500, 940, 340, 960, 320, 520, 320, 540, 1180, 1400, 320,
 			540, 320, 520, 340, 520, 320, 540, 320, 540, 320, 520, 320, 540,
 			320, 520, 760, 960, 340, 520, 760, 520, 320, 960, 320, 540, 320,
@@ -39,7 +39,7 @@ int main() {
 	};
 
 	// CANAL MENOS
-	int b[] = { 
+	unsigned short int b[] = { 
 			39128, 2500, 940, 340, 960, 320, 520, 340, 520, 1180, 1400, 320,
 			540, 320, 540, 320, 520, 320, 540, 320, 520, 340, 520, 320, 540,
 			320, 540, 740, 960, 340, 520, 760, 520, 320, 960, 760, 16164, 2480,
@@ -49,7 +49,7 @@ int main() {
 	};
  
 	// LIGAR / DESLIGAR
-	int c[] = { 
+	unsigned short int c[] = { 
 			34160, 2500, 960, 320, 960, 320, 520, 340, 520, 1200, 1380, 340,
 			520, 320, 540, 320, 520, 340, 520, 320, 540, 320, 520, 340, 520,
 			320, 540, 320, 520, 340, 520, 320, 540, 760, 520, 320, 960, 320,
@@ -60,7 +60,7 @@ int main() {
 	};
 
 	// VOLUME MAIS
-	int d[] = { 
+	unsigned short int d[] = { 
 			46568, 2500, 960, 320, 940, 340, 520, 320, 540, 1200, 1380, 320,
 			540, 320, 540, 320, 520, 320, 540, 320, 520, 340, 520, 320, 540,
 			320, 520, 340, 520, 320, 540 , 760, 960, 320, 520, 340, 520, 320,
@@ -71,7 +71,7 @@ int main() {
 	};
 
 	// VOLUME MENOS
-	int e[] = { 
+	unsigned short int e[] = { 
 			6124, 2480, 920, 360, 960, 320, 520, 340, 520, 1200, 1380, 320, 540,
 			320, 540, 320, 520, 340, 520, 320, 520, 340, 520, 320, 540, 320,
 			540, 320, 520, 340, 520, 760, 960, 320, 520, 340, 520, 760, 16144,
@@ -80,36 +80,27 @@ int main() {
 			320, 540, 320, 520, 760, 960, 320, 540, 320, 520, 760
 	};
 
-	printf("%s\n", decode(a));
-	//printf("%s\n", decode(b));
-	//printf("%s\n", decode(c));
-	//printf("%s\n", decode(d));
-	//printf("%s\n", decode(e));
+	printf("%s\n", decode(a, sizeof(a)/sizeof(short)));
+	printf("%s\n", decode(b, sizeof(b)/sizeof(short)));
+	printf("%s\n", decode(c, sizeof(c)/sizeof(short)));
+	printf("%s\n", decode(d, sizeof(d)/sizeof(short)));
+	printf("%s\n", decode(e, sizeof(e)/sizeof(short)));
 
 	return EXIT_SUCCESS;
 }
 
 /* receives an duration vector and outputs a bit stream */
-char *decode(int dur[])
+char *decode(short int *dur, uint8_t size)
 {
-	//unsigned int dur[] = { 
-	//		42864, 2500, 940, 340, 960, 320, 520, 320, 540, 1180, 1400, 320,
-	//		540, 320, 520, 340, 520, 320, 540, 320, 540, 320, 520, 320, 540,
-	//		320, 520, 760, 960, 340, 520, 760, 520, 320, 960, 320, 540, 320,
-	//		15724, 2500, 940, 320, 960, 340, 520, 320, 540, 1180, 1400, 320,
-	//		540, 320, 520, 340, 520, 320, 520, 340, 520, 320, 540, 320, 540,
-	//		320, 520, 760, 960, 320, 540, 760, 520, 320, 960, 320, 540, 320
-	//};
-
 	uint8_t i, j;
 	char *bitstream = (char *) malloc((22+1) * sizeof(char));
 
 	uint8_t stay = 1; 
 	uint8_t high = 1;
 
-	for(i=0,j=0; i<sizeof(dur)/sizeof(int); i++) {
+	for(i=1,j=0; i<size; i++) {
 		/* check AGC bit */
-		if((dur[i]+dur[i+1])>3400) {
+		if((dur[i]+dur[i+1])>=3400) {
 			if(dur[i]>3000){ 
 				goto termina;
 			}

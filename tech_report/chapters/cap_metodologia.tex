@@ -33,14 +33,7 @@ libmysqlclient-dev # C
 phpmyadmin # (opcional?)
 \end{lstlisting}
 
-%\begin{figure}[!h]
-%	\centering
-%	\includegraphics[width=.80\textwidth]{Figures/csr}
-%	\caption{Esquemático do cliente Android.}
-%	\label{fig:lapscsr_sch}
-%\end{figure}
-
-% http://eda.eme.ro/handle/10598/28187
+\subsection{Entrada de Áudio e Reconhecimento de Voz}
 Em~\cite{Cassio14}, o Julius foi configurado para funcionar em modo servidor
 através da opção nativa ``-adinnet'' (A/D \textit{Input from Network}, conversão 
 A/D com entrada pela rede). Isso permite que o Julius receba amostras de áudio
@@ -88,23 +81,24 @@ televisão	t e l e v i z a~ w~
 \end{minipage}
 
 % http://stackoverflow.com/questions/2661129/espeak-sapi-dll-usage-on-windows
-A proposta do trabalho é adicionar funcionalidades ao código do Julius,
-permitindo a produção de voz sintetizada através da incorporação da API do 
-eSpeak e a transmissão de informação para a TV através de um led IR conectado
-a um GPIO. Um sensor IR ficará encarregado de receber informações de diferentes
-controles remotos para que sejam guardadas como registros no banco de dados.
+%A proposta do trabalho é adicionar funcionalidades ao código do Julius,
+%permitindo a produção de voz sintetizada através da incorporação da API do 
+%eSpeak e a transmissão de informação para a TV através de um led IR conectado
+%a um GPIO. Um sensor IR ficará encarregado de receber informações de diferentes
+%controles remotos para que sejam guardadas como registros no banco de dados.
 
 %Toda a organização do trabalho, bem como a comunicação entre os membros sobre os
 %passos tomados no decorrer do trabalho será feita através da plataforma
 %Trello~\cite{trello}.\\
 
-Um controle para a TV Philips 39PFL3008D/78 foi usado como base para a análise
-do sinal emitido. Inicialmente, um arduino UNO fui utilizado para verificar
-o tempo em que o IR led permanecia ativo e inativo, armazenando-o em uma matriz
-de duas colunas, como visto no Apêndice~\ref{app:arduino}. O Octave foi
-utilizado para converter a matriz em um vetor único, no qual os índices ímpares
-representavam o tempo de duração do modo \textit{burst} do IR led e as posições
-pares, o tempo em que o IR led permanecia \textit{idle} (Vide
+\subsection{Análise do Sinal IR}
+O controle RC2954201/01 da TV Philips 39PFL3008D/78 foi usado como base para a 
+análise do sinal emitido. Inicialmente, um arduino UNO fui utilizado para
+verificar o tempo em que o IR led permanecia ativo e inativo, armazenando-o em
+uma matriz de duas colunas, como visto no Apêndice~\ref{app:arduino}. O Octave
+foi utilizado para converter a matriz em um vetor único, no qual os índices
+ímpares representavam o tempo de duração do modo \textit{burst} do IR led e as
+posições pares, o tempo em que o IR led permanecia \textit{idle} (Vide
 Apêndice~\ref{app:matlab}). Sendo assim, o vetor no qual as durações dos níveis
 altos e baixos alternam-se entre si foi convertido para uma forma de onda
 quadrada, semelhante à mostrada na Figura~\ref{fig:rc6}.  A
@@ -132,6 +126,7 @@ sempre que um botão é solto.
 	\label{fig:vol+}
 \end{figure}
 
+\subsection{Banco de Dados MySQL}
 Como o sistema foi projetado para, futuramente, dar suporte ao controle de 
 diversos aparelhos eletrônicos, a adoção de um banco de dados foi vista como 
 solução para facilitar o acesso à uma maior variedade de dispositivos e, assim,
@@ -159,22 +154,21 @@ utilizada uma biblioteca especial chamada \texttt{mysql.h}, na qual as
 \centering
 \caption{Tabela TV}
 \label{tab:tv}
-\begin{tabular}{c|cccccccc}
+\begin{tabular}{c|ccccc}
 \hline
-marca & volume+ & volume- & canal+ & canal- & ligar & endereço & start \\
+Marca   & volume+  & volume-  & canal+   & canal-   & ligar    \\ 
 \hline
-lg       & 10111011 & 11110110 & 11000010 & 00010111 & 01011111 & 11011010 & 11010111 \\
-sony     & 11110110 & 01011111 & 00011111 & 10111011 & 11000000 & 11010111 & 00010111 \\
-samsung  & 00110111 & 11000010 & 11010000 & 11011110 & 11011100 & 11011010 & 11010111 \\
-philips & 00011111 & 10111011 & 11000000 & 11011010 & 11010111 & 11000010 & 11 \\
+Lg      & 10111011 & 11110110 & 11000010 & 00010111 & 01011111 \\
+Sony    & 11110110 & 01011111 & 00011111 & 10111011 & 11000000 \\
+Samsung & 00110111 & 11000010 & 11010000 & 11011110 & 11011100 \\
+Philips & 00011111 & 10111011 & 11000000 & 11011010 & 11010111 \\ 
 \hline
 \end{tabular}
 \end{table}
 
 % Thiago: Detalhes sobre o que foi feito com o Arduino
-% Gabriel: Detalhes sobre o que foi convertido do Arduino para a BBB
-\begin{subsection}{GPIO}
 
+\begin{subsection}{GPIO}
 Para implementar o controle por IR usando a Beagle Bone Black, o uso do GPIO e de 
 extrema importancia, como no arduino a Beagle Bone possui pinos de entrada e sai
 da para funcoes diversas, coisa que o Raspberry nao possui muitos. GPIO significa 

@@ -27,13 +27,7 @@ executado necessariamente por um \textit{smartphone}, os comandos de voz não
 poderiam ser dados diretamente do aparelho móvel, e sim pessoal e diretamente à
 BeagleBone, a qual possuía um microfone conectado à porta USB.
 
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=.65\textwidth]{Figures/asr_sch}
-	\caption{Esquemático de um sistema ASR}
-	\label{fig:asr_sch}
-\end{figure}
-
+\subsection{Reconhecimento e Síntese de Voz}
 Os fundamentos do reconhecimento automático de voz, assim como os da síntese de
 voz, são descritos com bastante detalhes em~\cite{Huang01}. A arquitetura mais
 geral e aceita na literatura é mostrada na Figura~\ref{fig:asr_sch}. Vale
@@ -49,6 +43,13 @@ está disponível na página do FalaBrasil); a gramática reconhecida pelo Julius é
 criada manualmente de acordo com o descrito na página oficial~\cite{juliussite}.
 Instruções de configuração e utilização do Julius encontram-se na documentação
 oficial~\cite{julius_book}.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.65\textwidth]{Figures/asr_sch}
+	\caption{Esquemático de um sistema ASR}
+	\label{fig:asr_sch}
+\end{figure}
 
 % http://andicelabs.com/2014/03/usb-audio-beaglebone/
 Como saída analógica do sistema TTS, a voz sintetizada deve ser reproduzida por
@@ -70,6 +71,7 @@ que permitem que a BeagleBone ``fale''~\cite{eSpeak}.
 %e~\cite{instructables_player}, os quais ensinam o passo-a-passo para o projeto e
 %construção de um circuito amplificador. 
 
+\subsection{Comparação entre Plataformas}
 A escolha da plataforma foi fundamental para a esquematização do projeto.
 Arduino, Raspberry Pi e BeagleBone Black foram as três principais opções a
 serem escolhidas. Diversos tutoriais de comparação entre as plataformas foram
@@ -107,7 +109,6 @@ USB				& - & 1 Host, 1 Mini Client  & 2 Hosts, 1 Micro Power\\
 Ethernet		& - & 1 10/100 Mbps & 1 10/100 Mbps \\
 %Preço 			& 5 conto & 300 conto & 200 conto \\
 %Resolução		& - & 1280x1024 (5:4), 1024x768 (4:3), 1280x720 (16:9), 1440x900 (16:10) all at 16 bit	& 	Extensive from 640x350 up to 1920x1200, this includes 1080p\\
-%Camera connector & - & - & Rpi \\
 \hline
 \end{tabular}
 \end{table}
@@ -123,37 +124,21 @@ Tabela~\ref{comparison}.
 
 % Thiago: LIRC
 
+\subsection{Protocolos IR: RC-5 e RC-6}
 O funcionamento de controles remotos, com ênfase nos baseados em luz
 infravermelha para televisores, é explicado de de forma clara e detalhada em
 diversos tutoriais para ``curiosos'' disponíveis na Internet, como os da revista
 Mundo Estranho~\cite{mundoestranho} e do blog \textit{How Stuff Works?} da
-UOL~\cite{uol_hsw}. A maioria dos aparelhos eletrônicos atualmente recebe
+UOL~\cite{uol_hsw}. Atualmente, a maioria dos aparelhos eletrônicos recebe
 informação através de sensores infravermelhos localizados em painéis frontais.
-Um grande problema é a inteferência que surge com a vasta transferência de
-informação via IR. Devido à isso, a comunicação entre o controle remoto e a
+Entretanto, devido à interferência que surge com a vasta transferência de
+informação via IR, a comunicação entre o controle remoto e a
 televisão ocorre geralmente em 4 passos: um comando \textit{start} inicia a
 transferência, seguido dos bits do comando específico (como aumentar o volume,
 por exemplo) e do endereço do aparelho. Por fim, um comando de \textit{stop}
 encerra o envio de bits. Dessa forma, a chance de a informação ser reconhecida
 por mais de um aparelho é baixa (salvo o caso de serem dois equipamentos do
 mesmo tipo e da mesma empresa).
-
-Uma das grandes dificuldades relacionadas à comunicação IR para controle de
-equipamentos é que cada empresa praticamente segue o seu próprio padrão de
-transmissão de informação: o número, a ordem e o significado dos bits é variado, 
-a modulação e codificação usada são diferentes e a frequência dos pulsos pode
-oscilar entre 32~kHz e 42~kHz, chegando a 50~kHz em determinados aparelhos mais
-modernos. Além disso, tão raro quanto o seguimento de uma comunicação IR
-padronizada, a disponibilização de documentação pelos fabricantes também é
-bastante escassa. A Philips, por exemplo, utiliza seu próprio protocolo de
-comunicação chamado RC-5. A última documentação foi liberada em 1992, quando
-ainda não existiam muitos dos equipamentos eletrônicos atuais, como \textit{home
-theaters} ou DVDs. Nesse padrão, os bits são codificados de acordo com o código
-de Manchester, onde cada bit, transmitido dentro de um período fixo, é
-representado por uma transição \textit{high-to-low} (0) ou \textit{low-to-high}
-(1). Esses padrões de dados são obtidos através de uma operação do tipo XOR
-(OU-Exclusivo) realizada entre o clock do dispositivo e o dado propriamente
-dito~\cite{rc5_wiki}.
 
 \begin{figure}[!h]
 	\centering
@@ -162,13 +147,31 @@ dito~\cite{rc5_wiki}.
 	\label{fig:rc5}
 \end{figure}
 
+Uma das grandes dificuldades relacionadas ao controle de equipamentos
+eletrônicos é que os 4 passos acima são apenas uma forma genérica de
+descrever a comunicação, ou seja, cada empresa praticamente segue o seu próprio
+padrão para estabelecer a comunicação entre os dispositivos: o número, a ordem e
+o significado dos bits é variado, a modulação e codificação usada são diferentes
+e a frequência dos pulsos pode oscilar entre 32~kHz e 42~kHz, chegando a 50~kHz
+em determinados aparelhos mais modernos. Além disso, tão raro quanto o
+seguimento de uma comunicação IR padronizada é a disponibilização de
+documentação pelos fabricantes, que também é bastante escassa. A Philips, por
+exemplo, utiliza seu próprio protocolo de comunicação chamado RC-5. A última
+documentação foi liberada em 1992, quando ainda não existiam muitos dos
+equipamentos eletrônicos atuais, como \textit{home theaters} ou DVDs. Nesse
+padrão, os bits são codificados de acordo com o código de Manchester, onde cada
+bit, transmitido dentro de um período fixo, é representado por uma transição
+\textit{high-to-low} (0) ou \textit{low-to-high} (1). Esses padrões de dados são
+obtidos através de uma operação do tipo XOR (OU-Exclusivo) realizada entre o
+clock do dispositivo e o dado propriamente dito~\cite{rc5_wiki}.
+
 A Figura~\ref{fig:rc5} mostra a informação referente ao comando ``diminuir
 volume'' contida num vetor de 14 bits. Os 11 últimos bits definem o endereço do
 aparelho de destino e o comando em si. Pode-se observar que qualquer bit é
 representado por duas partes, sendo uma metade em nível baixo e a outra, em
-nível alto. Cada nível ocorre num intervalo de 32 perídos. O nível alto é gerado
-por um PWM de \textit{duty cycle} igual a 25\% do período do pulso. Essa
-percentagem define o tempo em que o IR Led permance aceso, ou seja, no nível
+nível alto. Cada nível ocorre num intervalo de 32 períodos. O nível alto é 
+gerado por um PWM de \textit{duty cycle} igual a 25\% do período do pulso. Essa
+percentagem define o tempo em que o IR Led permanece aceso, ou seja, no nível
 alto, o IR Led permanece ligado por período de $0,25\times1/36~kHz$ e desligado
 por $0,75\times1/36~kHz$, sendo o processo repetido 32 vezes. A economia de 
 energia é mostrada como justificativa para explicar o motivo de o led piscar ao 
@@ -190,12 +193,14 @@ de bits carregada pelo sinal (em comparação com o RC-5) aumentou de 14 para 22.
 O código Manchester também aparece invertido, já que valor lógico alto passa
 agora a ser representado pela transição \textit{high-to-low} (1), enquanto o
 valor baixo é definido por uma mudança \textit{low-to-high} (0). O primeiro bit
-de \textit{start} tem uma duração maior, para garantir o ganho do AGC no
-circuito receptor; já o segundo, também de \textit{start}, é sempre mantido em
-valor alto. O bit de \textit{toggle}, o qual muda de estado caso uma tecla deixe
-de ser pressionada, também possui uma duração mais longa do que os outros bits
-comuns.  Por fim, os últimos 14 bits representam o endereço do aparelho e o
-referido comando a ser transmitido, respectivamente.
+de \textit{start} tem uma duração maior, para garantir o ganho do AGC
+(\textit{Automatic Gain Controller}) no circuito receptor; já o segundo, também
+de \textit{start}, é sempre mantido em valor alto. O bit de \textit{toggle}, o
+qual muda de estado caso uma tecla deixe de ser pressionada, também possui uma
+duração mais longa do que os outros bits comuns. O período de um bit passa de 32
+para 16 pulsos, exceto para os casos especiais (AGC e \textit{toggle}). Por fim,
+os últimos 16 bits representam o endereço do aparelho e o referido comando a ser
+transmitido, respectivamente.
 
 \subsection{Produtos Relacionados}
 Existem alguns produtos disponíveis no mercado com a finalidade de tornar o
