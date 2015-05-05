@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <my_global.h>
 #include <mysql.h>
-
 #define DEBUG 0
 
 /* Get element from table, pass the column and the row ("volume+", "sony", con) */
@@ -62,7 +62,7 @@ int get_element(char *column, char *target, MYSQL *con)
 	char *cmd_arr[] = {"SELECT `", column, "` FROM tv WHERE marca='", target, "'"};
 
 	/* compute size of each string on vector that'll compose the command for malloc */
-	short int i, len = 0;
+	uint8_t i, len = 0;
 	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
 		len += strlen(cmd_arr[i]);
 
@@ -104,7 +104,7 @@ int insert_element(char *column, char *value, char *target, MYSQL *con)
 	char *cmd_arr[] = {"UPDATE tv SET `", column ,"`=", value, " WHERE marca='", target, "'"};
 
 	/* compute size of each string on vector that'll compose the command for malloc */
-	short int i, len = 0;
+	uint8_t i, len = 0;
 	for(i=0; i<sizeof(cmd_arr)/(sizeof(char)*8); i++)
 		len += strlen(cmd_arr[i]);
 
@@ -130,7 +130,7 @@ int insert_table(char *column, char *field, MYSQL *con)
 	char *cmd_arr[] = {"INSERT INTO tv(", column, ") VALUES ('", field, "')"};
 
 	/* compute size of each string on vector that'll compose the command for malloc */
-	short int i, len = 0;
+	uint8_t i, len = 0;
 	for(i=0; i<sizeof(cmd_arr)/(8*sizeof(char)); i++)
 		len += strlen(cmd_arr[i]);
 
