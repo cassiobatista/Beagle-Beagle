@@ -142,7 +142,7 @@ código SQL (como o mostrado abaixo), a fim de se montar um determinado comando.
 Assim, podemos concatenar os bits e, posteriormente, enviar para o led IR.
 
 \begin{lstlisting}[language=sql]
-SELECT campo FROM TV WHERE marca='marca_da_tv' 
+SELECT campo FROM TV WHERE marca=`marca_da_tv' 
 \end{lstlisting}
 
 O acesso ao banco de dados é todo feito por meio da linguagem C. Para tal, foi-se
@@ -169,57 +169,77 @@ Philips & 00011111 & 10111011 & 11000000 & 11011010 & 11010111 \\
 % Thiago: Detalhes sobre o que foi feito com o Arduino
 
 \begin{subsection}{GPIO}
-Para implementar o controle por IR usando a Beagle Bone Black, o uso do GPIO e de 
-extrema importancia, como no arduino a Beagle Bone possui pinos de entrada e sai
-da para funcoes diversas, coisa que o Raspberry nao possui muitos. GPIO significa 
-\textit{General Pourpose Input/Output} ou Entrada/Saida de Proposito Geral, logo 
-pode ser usado da forma mais conveniente ao desenvolvedor, e possivel controlar a 
-tensao de saida, pegar feedback de sensores digitais e analogicos e muitas outras 
-funcionalidades.
+Para implementar o controle por IR usando a BeagleBone Black, o uso do GPIO é de 
+extrema importância, como no arduino a BeagleBone possui vários pinos de entrada 
+e saída para funções diversas, algo que o Raspberry carece. GPIO significa 
+\textit{General Pourpose Input/Output} ou Entrada/Saída de Propósito Geral, logo 
+pode ser usado da forma mais conveniente ao desenvolvedor, é possível controlar a 
+tensão de saída, receber feedback de sensores digitais e analógicos entre muitas 
+outras funcionalidades.
 De acordo com o datasheet \cite{am335x}, o processador possui 128 pinos de GPIO 
-divididos em 4 modulos GPIO, com 32 pinos cada, mas o mapeamento dos pinos do 
-processador para os pinos de saida da Beagle Bone nao e exatamente igual a 
-disposicao no processador, logo e necessario saber como estao dispostos os pinos 
+divididos em 4 módulos GPIO, com 32 pinos cada, mas o mapeamento dos pinos do 
+processador para os pinos de saída da BeagleBone não é exatamente igual a 
+disposição no processador, logo é necessário saber como estão dispostos os pinos 
 na placa.
 
 \begin{figure}[!h]
         \centering
         \includegraphics[width=\textwidth]{Figures/BBBp8}
-        \caption{Mapeamento de Pinos do Header P8 da Beaglebone}
+        \caption{Mapeamento de Pinos do Header P8 da BeagleBone}
         \label{fig:BBBp8}
 \end{figure}
+
+\begin{table}[h]
+\centering
+\caption{Tabela de Mapeamento de Pinos do \textit{Header} P8 da BeagleBone}
+\label{tab:BBBp8_tab}
+\begin{tabular}{ccccccc}
+\hline
+Head\_pin & \$PINS & ADDR/OFFSET & GPIO Number & Name & Mode7 & Pin \\ 
+\hline
+P8\_01 &  &  &  & DGND &  & \\
+P8\_02 &  &  &  & DGND &  & \\
+P8\_03 & 6 & 0x818/018 & 38 & GPIO\_6 & gpio1[6] & R9 \\
+P8\_04 & 7 & 0x81c/01c & 39 & GPIO\_7 & gpio1[7] & T9 \\ 
+P8\_05 & 2 & 0x808/008 & 34 & GPIO\_2 & gpio1[2] & R8 \\ 
+P8\_06 & 3 & 0x80c/00c & 35 & GPIO\_3 & gpio1[3] & T8 \\ 
+P8\_13 & 9 & 0x824/024 & 23 & EHRPWM2B & gpio0[23] & T10 \\
+P8\_19 & 8 & 0x820/020 & 22 & EHRPWM2A & gpio0[22] & U10 \\
+\hline
+\end{tabular}
+\end{table}
 
 \begin{figure}[!h]
         \centering
         \includegraphics[width=\textwidth]{Figures/BBBp9}
-        \caption{Mapeamento de Pinos do Header P9 da Beaglebone}
+        \caption{Mapeamento de Pinos do Header P9 da BeagleBone}
         \label{fig:BBBp9}
 \end{figure}
 
-Entender o mapeamento correto dos pinos e crucial para conseguir alguma saida 
-valida dos pinos da placa, ja que o objetivo nao e prototipar a partir do 
+Entender o mapeamento correto dos pinos é crucial para conseguir alguma saída 
+válida dos pinos da placa, já que o objetivo não é prototipar a partir do 
 processador, e sim usar a placa de desenvolvimento a qual possui pinos mais 
-acessiveis. Ao observar \ref{ig:BBBp8} e \ref{fig:BBBp9} pode se entender esse 
+acessíveis. Ao observar \ref{ig:BBBp8} e \ref{fig:BBBp9} pode se entender esse 
 mapeamento.
-Existem 3 formas de se acessar e controlar os pinos de GPIO, a primeira e
-atraves da IDE web que vem instalada no Angstrom de fabrica, mas como o OS foi 
-trocado pelo debian essa opcao nao e viavel. Outra forma, a mais complexa, e
-iniciar o modulo e atribuir valores atraves de registradores, processo tal e
+Existem 3 formas de se acessar e controlar os pinos de GPIO, a primeira é
+através da IDE web que vem instalada no Angstrom de fábrica, mas como o OS foi 
+trocado pelo debian essa opção não é viável. Outra forma, a mais complexa, é
+iniciar o módulo e atribuir valores através de registradores, tal processo é
 explicado no datasheet \cite{am335x}, mas despenderia muito tempo e seria pouco
-portavel. A ultima solucao foi introduzida com o kernel 3.8.x do linux embarcado,
-acessando as interfaces GPIO atraves do kernel, basicamente atribuindo valores a
-arquivos, tal processo so pode ser executado como root, entao deve se conhecer
-bem o que esta fazendo antes de executar tais comandos.
+portável. A última solução foi introduzida com o kernel 3.8.x do linux embarcado,
+acessando as interfaces GPIO através do kernel, basicamente atribuindo valores a
+arquivos, tal processo só pode ser executado como root, então deve se entender
+bem o que está fazendo antes de executar tais comandos.
 
 \begin{lstlisting}[language=bash]
 echo 51 > /sys/class/gpio/export 
 \end{lstlisting}
 
-Os arquivos de Configuracao do GPIO pelo kernel estao localizados em
-\textit{/sys/class/gpio} e o arquivo export inicializa o pino para uso. ao
-modificar tal arquivo uma pasta para o pino sera criada, dentro da pasta estarao
-arquivos necessarios para a configuracao do pino, so e necessario o uso de dois
-arquivos desses para a tarefa de piscar um led IR, os arquivos direction e
+Os arquivos de Configuração do GPIO pelo kernel estão localizados em
+\textit{/sys/class/gpio} e o arquivo export inicializa o pino para uso. Ao
+modificar tal arquivo uma pasta para o pino será criada, dentro da pasta estarão
+arquivos necessários para a configuração do pino, só é necessário o uso de dois
+desses arquivos para a tarefa de piscar um led IR, os arquivos direction e
 value.
 
 \begin{lstlisting}[language=bash]
@@ -227,7 +247,7 @@ echo in > /sys/class/gpio/gpiochip51/direction
 echo 1 > /sys/class/gpio/gpiochip51/value
 \end{lstlisting}
 
-Os comandos listados acima sao o suficiente para acender um led conectado ao
+Os comandos listados acima são o suficiente para acender um led conectado ao
 pino 51, ou pino 16 do header p9.
 
 \end{subsection}
