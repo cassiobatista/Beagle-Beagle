@@ -38,7 +38,13 @@ porta USB, a qual já estaria sendo usada pelo auto-falante. Portanto, a solução
 mais fácil foi conectar um roteador wifi à porta Ethernet da BBB através de um
 cabo UTP.
 
-\item Código do Arduino. (Thiago)
+\item O Código criado para Arduino utiliza a leitura do led infravermelho com base
+no tempo que ele passa ligado e desligado, salvando várias medidas de tempo que
+deixam o armazenamento dessa informação pouco viável. O ideal seria converter os
+valores de tempo para um array de bits (``110101010'') para que fosse mais fácil
+salvar no banco de dados. Esse problema foi solucionado mas ainda não é algo
+automatizado, é preciso rodar o código do arduino, salvar os tempos e depois rodar
+o código do octave.
 
 \item A função \texttt{mysql\_query()} recebe uma \textit{string} contendo o
 comando SQL para acessar o banco de dados MySQL. Caso se queira editar o valor
