@@ -7,19 +7,44 @@
  * Protocol Description
  * The 36 kHz carrier frequency was chosen to render the system immune to
  * interference from TV scan lines. Since the repetition of the 36 kHz carrier
- * is XXXX μs and the duty factor is 25%-33%, the carrier pulse duration is 
- * XXXX μs Since the high half of each symbol of the RC-6 code word contains 32
- * carrier pulses, the symbol period is XXXX, and the 22
- * symbols (bits) of a complete RC-6 code word takes XXXX ms to transmit. The
- * code word is repeated every XXXX ms (4096 / 36 kHz) as long as a key 
- * remains pressed. 
+ * is 27.78 μs and the duty factor is 25%-33%, the carrier pulse duration is 
+ * 6.95 μs. Since the high half of each symbol of the RC-6 code word contains 16
+ * carrier pulses, the symbol period is 888.9 μs, and the 22 symbols (bits) of a
+ * complete RC-6 code word takes 23.11 ms to transmit. The code word is repeated
+ * every XXXX ms (4096 / 36 kHz) as long as a key remains pressed. 
 
- *****************************************************************************
- *       .-----------.    .----.    .--------.    .----.    .--------.       *
- * RC -> | IR sensor | -> | Rx | -> | decode | -> | Tx | -> | IR Led | -> TV *
- *       '-----------'    '----'    '--------'    '----'    '--------'       *
- *                                                                           *
- *****************************************************************************
+ * Carrier Frequency: f = 36000 Hz 
+ * Normal bit half Period: t = 16 * (1/f) = 444.45 us
+
+ * H = |1 | L = | 1| = 2*t = 889 us
+ *     | 0|     |0 |
+
+ * Example: Command "Volume+" followed by "Volume-" (16, 17)
+ * .----------.------.----.----------------.----------------.
+ * |   4.45   | 2.67 |1.77|      7.11      |      7.11      |
+ * |    ms    |  ms  | ms |       ms       |       ms       |
+ * +----------+------+----+----------------+----------------+
+ * |   START  |  F.  | T. |     ADDRESS    |    COMMAND     |
+ * +----------+------+----+----------------+----------------+
+ * |111111  1 | 1 1 1|11  | 1 1 1 1 1 1 1 1| 1 1 11  1 1 1 1|
+ * |      00 0|0 0 0 |  00|0 0 0 0 0 0 0 0 |0 0 0  00 0 0 0 |
+ * +----------+------+----+----------------+----------------+
+ * |    11    |  000 |  1 |    00000000    |    00010000    |
+ * +----------+------+----+----------------+----------------+
+ * |111111  1 | 1 1 1|  11| 1 1 1 1 1 1 1 1| 1 1 11  1 1 11 |
+ * |      00 0|0 0 0 |00  |0 0 0 0 0 0 0 0 |0 0 0  00 0 0  0|
+ * +----------+------+----+----------------+----------------+
+ * |    11    |  000 |  0 |    00000000    |    00010001    |
+ * +----------+------+----+----------------+----------------+
+ * |                       23.11 ms                         |
+ * '--------------------------------------------------------'
+
+ * Block diagram of the program's functions
+ * .---------------------------------------------------------------------------.
+ * |       .-----------.    .----.    .--------.    .----.    .--------.       |
+ * | RC -> | IR sensor | -> | Rx | -> | decode | -> | Tx | -> | IR Led | -> TV |
+ * |       '-----------'    '----'    '--------'    '----'    '--------'       |
+ * '---------------------------------------------------------------------------'
 
  */
 
@@ -38,7 +63,7 @@ void die(char *msg, uint8_t code);
 /*Tx: Transmit info to IR Led (to TV) */
 void send(char *stream);
 
-/* Rx: Receive info read from Photosensor TSOP18xx (from RC) */
+/* Rx: Receive info read from Photosensor (from RC) */
 void receive(int gpio);
 
 int main() {
@@ -201,7 +226,7 @@ void send(char *stream)
 		die("AGC ou START errado", 1);
 
 	FILE* pin;
-	if(!(pin = fopen("/crl/porra/buceta/pin_8===D~", "w")))
+	if(!(pin = fopen("/sys/class/gpio/gpiochipXX/value", "w")))
 		die("impossivel abrir", 4);
 	
 	#define HIGH 5
@@ -257,7 +282,7 @@ void send(char *stream)
 void receive(int gpio) 
 {
 	FILE* pin;
-	if(!(pin = fopen("/crl/porra/buceta/pin_00", "r")))
+	if(!(pin = fopen("/sys/class/gpio/gpiochipXX/value", "r")))
 		die("impossivel abrir", 5);
 
 	uint8_t i, currentpulse = 0;

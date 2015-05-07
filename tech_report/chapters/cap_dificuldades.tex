@@ -33,18 +33,19 @@ Foi-se cogitada a construção de um circuito com um amplificador LM386 para o
 US\$ 15.
 
 \item A BeagleBone não possui conexão wifi. Além da dificuldade em atualizar o
-kernel pra receber um \textit{shield/case}, o mesmo teria de ser conectado na 
+kernel pra receber um \textit{shield/cape}, o mesmo teria de ser conectado na 
 porta USB, a qual já estaria sendo usada pelo auto-falante. Portanto, a solução
 mais fácil foi conectar um roteador wifi à porta Ethernet da BBB através de um
 cabo UTP.
 
-\item O Código criado para Arduino utiliza a leitura do led infravermelho com base
-no tempo que ele passa ligado e desligado, salvando várias medidas de tempo que
-deixam o armazenamento dessa informação pouco viável. O ideal seria converter os
-valores de tempo para um array de bits (``110101010'') para que fosse mais fácil
-salvar no banco de dados. Esse problema foi solucionado mas ainda não é algo
-automatizado, é preciso rodar o código do arduino, salvar os tempos e depois rodar
-o código do octave.
+\item O código criado para o Arduino faz um \textit{dump} da informação captada
+pelo photosensor, verificando o tempo que ele passa ligado e desligado e
+salvando várias medidas de tempo numa matriz de inteiros, o que deixa o
+armazenamento dessa informação pouco viável. Após traduzir o código para que
+seja executado na BBB, o ideal seria converter os valores de tempo para um
+\textit{array} de bits (``110101010'', por exemplo) para que fosse mais fácil
+salvar no banco de dados. Isso já funciona, porém somente para o protocolo
+RC-6.
 
 \item A função \texttt{mysql\_query()} recebe uma \textit{string} contendo o
 comando SQL para acessar o banco de dados MySQL. Caso se queira editar o valor

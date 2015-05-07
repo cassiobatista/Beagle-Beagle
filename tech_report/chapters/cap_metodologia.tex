@@ -129,25 +129,26 @@ sempre que um botão é solto.
 \subsection{Banco de Dados MySQL}
 Como o sistema foi projetado para, futuramente, dar suporte ao controle de 
 diversos aparelhos eletrônicos, a adoção de um banco de dados foi vista como 
-solução para facilitar o acesso à uma maior variedade de dispositivos e, assim,
-tornar o projeto em um sistema de propósito mais geral. Além disso, a segurança
+solução para facilitar o acesso a uma maior variedade de dispositivos e, assim,
+tornar o projeto um sistema de propósito mais geral. Além disso, a segurança
 dos dados, que serão constantemente manipulados, será mantida, podendo estes ser
-recuperados apenas olhando para o banco. (????)
+recuperados apenas olhando para o banco. %(????)
 
 Inicialmente, apenas a entidade TELEVISÃO foi criada, onde uma
-tabela entitulada ``TV'' contém atributos como a marca do aparelho e os comandos
+tabela intitulada ``TV'' contém atributos como a marca do aparelho e os comandos
 a serem transmitidos, como visto na Tabela~\ref{tab:tv}. Com isso,
 quaisquer campos podem ser satisfatoriamente acessados através de um simples
-código SQL (como o mostrado abaixo), a fim de se montar um determinado comando.
-Assim, podemos concatenar os bits e, posteriormente, enviar para o led IR.
+código SQL (como o mostrado abaixo). %a fim de se montar um determinado comando.
+Assim, podemos recuperar os bits de referência e, posteriormente, decodificá-los
+de acordo com o protocolo do aparelho para, finalmente, enviar para o led IR.
 
-\begin{lstlisting}[language=sql]
-SELECT campo FROM TV WHERE marca=`marca_da_tv' 
+\begin{lstlisting}[style=code, language=sql]
+SELECT campo FROM TV WHERE marca='marca_da_tv' 
 \end{lstlisting}
 
-O acesso ao banco de dados é todo feito por meio da linguagem C. Para tal, foi-se
-utilizada uma biblioteca especial chamada \texttt{mysql.h}, na qual as
-\textit{queries} são feitas pela passagem de um comando SQL como uma
+O acesso ao banco de dados é inteiramente intermediado pela linguagem C. Para 
+tal, uma biblioteca especial chamada \texttt{mysql.h} foi utilizada, na qual as
+\textit{queries} são realizadas pela passagem de um comando SQL como uma
 \textit{string} (Vide Apêndice~\ref{app:lamp}).
 
 \begin{table}[h]
@@ -169,88 +170,93 @@ Philips & 00011111 & 10111011 & 11000000 & 11011010 & 11010111 \\
 % Thiago: Detalhes sobre o que foi feito com o Arduino
 
 \begin{subsection}{GPIO}
-Para implementar o controle por IR usando a BeagleBone Black, o uso do GPIO é de 
-extrema importância, como no arduino a BeagleBone possui vários pinos de entrada 
-e saída para funções diversas, algo que o Raspberry carece. GPIO significa 
-\textit{General Pourpose Input/Output} ou Entrada/Saída de Propósito Geral, logo 
-pode ser usado da forma mais conveniente ao desenvolvedor, é possível controlar a 
-tensão de saída, receber feedback de sensores digitais e analógicos entre muitas 
-outras funcionalidades.
-De acordo com o datasheet \cite{am335x}, o processador possui 128 pinos de GPIO 
-divididos em 4 módulos GPIO, com 32 pinos cada, mas o mapeamento dos pinos do 
-processador para os pinos de saída da BeagleBone não é exatamente igual a 
-disposição no processador, logo é necessário saber como estão dispostos os pinos 
-na placa.
+Como no Arduino, a BeagleBone possui muitos pinos de entrada e saída para 
+diversas funções, algo que o Raspberry Pi carece. Os GPIOs (\textit{general
+purpose input/output}, ou pinos de entrada e saída de propósito geral) podem ser
+usados da forma mais conveniente ao desenvolvedor, sendo possível controlar a
+tensão de saída, receber \textit{feedback} de sensores digitais e analógicos,
+etc. De acordo com o \textit{datasheet}~\cite{am335x}, o processador possui 128
+pinos de GPIO divididos em 4 módulos de 32 pinos cada. Porém, o mapeamento
+entre os pinos da BeagleBone Black e os do processador não é exatamente igual 
+(da mesma forma que o número dos pinos do Arduino UNO não equivale aos do
+ATmega328, por exemplo). Portanto, é necessário saber como os pinos estão
+dispostos na placa.
 
-\begin{figure}[!h]
-        \centering
-        \includegraphics[width=\textwidth]{Figures/BBBp8}
-        \caption{Mapeamento de Pinos do Header P8 da BeagleBone}
-        \label{fig:BBBp8}
-\end{figure}
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=\textwidth]{Figures/BBBp8}
+%	\caption{Mapeamento de Pinos do Header P8 da BeagleBone}
+%	\label{fig:BBBp8}
+%\end{figure}
 
 \begin{table}[h]
 \centering
-\caption{Tabela de Mapeamento de Pinos do \textit{Header} P8 da BeagleBone}
-\label{tab:BBBp8_tab}
-\begin{tabular}{ccccccc}
+\caption{Mapeamento de Pinos do \textit{Header} P8 da BeagleBone}
+\label{tab:BBBp8}
+\begin{tabular}{cccccclc}
 \hline
-Head\_pin & \$PINS & ADDR/OFFSET & GPIO Number & Name & Mode7 & Pin \\ 
-\hline
-P8\_01 &  &  &  & DGND &  & \\
-P8\_02 &  &  &  & DGND &  & \\
-P8\_03 & 6 & 0x818/018 & 38 & GPIO\_6 & gpio1[6] & R9 \\
-P8\_04 & 7 & 0x81c/01c & 39 & GPIO\_7 & gpio1[7] & T9 \\ 
-P8\_05 & 2 & 0x808/008 & 34 & GPIO\_2 & gpio1[2] & R8 \\ 
-P8\_06 & 3 & 0x80c/00c & 35 & GPIO\_3 & gpio1[3] & T8 \\ 
-P8\_13 & 9 & 0x824/024 & 23 & EHRPWM2B & gpio0[23] & T10 \\
-P8\_19 & 8 & 0x820/020 & 22 & EHRPWM2A & gpio0[22] & U10 \\
+\textit{Head pin} & \$Pins & Endereço & \textit{offset} & N$\degree$ GPIO & Nome & Modo7 & Pino \\ 
+\hline \hline
+ 1,2 &   &       &     &    & DGND     &           &     \\
+ 3   & 6 & 0x818 & 018 & 38 & GPIO\_6  & gpio1[6]  & R9  \\
+ 4   & 7 & 0x81c & 01c & 39 & GPIO\_7  & gpio1[7]  & T9  \\ 
+ 5   & 2 & 0x808 & 008 & 34 & GPIO\_2  & gpio1[2]  & R8  \\ 
+ 6   & 3 & 0x80c & 00c & 35 & GPIO\_3  & gpio1[3]  & T8  \\ 
+13   & 9 & 0x824 & 024 & 23 & EHRPWM2B & gpio0[23] & T10 \\
+19   & 8 & 0x820 & 020 & 22 & EHRPWM2A & gpio0[22] & U10 \\
 \hline
 \end{tabular}
 \end{table}
 
 \begin{figure}[!h]
-        \centering
-        \includegraphics[width=\textwidth]{Figures/BBBp9}
-        \caption{Mapeamento de Pinos do Header P9 da BeagleBone}
-        \label{fig:BBBp9}
+	\centering
+	\includegraphics[width=\textwidth]{Figures/BBBp9}
+	\caption{Mapeamento de Pinos do Header P9 da BeagleBone}
+	\label{fig:BBBp9}
 \end{figure}
 
-Entender o mapeamento correto dos pinos é crucial para conseguir alguma saída 
-válida dos pinos da placa, já que o objetivo não é prototipar a partir do 
-processador, e sim usar a placa de desenvolvimento a qual possui pinos mais 
-acessíveis. Ao observar \ref{ig:BBBp8} e \ref{fig:BBBp9} pode se entender esse 
-mapeamento.
+Como o objetivo não é prototipar a partir do processador, o mapeamento correto 
+dos pinos é crucial para conseguir alguma saída válida dos pinos da placa. 
+% e sim usar a placa
+%de desenvolvimento a qual possui pinos mais acessíveis. 
+As Tabelas~\ref{tab:BBBp8} e~\ref{tab:BBBp9} mostram esse mapeamento.
+
 Existem 3 formas de se acessar e controlar os pinos de GPIO, a primeira é
 através da IDE web que vem instalada no Angstrom de fábrica, mas como o OS foi 
-trocado pelo debian essa opção não é viável. Outra forma, a mais complexa, é
+trocado pelo Debian essa opção não é viável. Outra forma, a mais complexa, é
 iniciar o módulo e atribuir valores através de registradores, tal processo é
-explicado no datasheet \cite{am335x}, mas despenderia muito tempo e seria pouco
-portável. A última solução foi introduzida com o kernel 3.8.x do linux embarcado,
-acessando as interfaces GPIO através do kernel, basicamente atribuindo valores a
-arquivos, tal processo só pode ser executado como root, então deve se entender
-bem o que está fazendo antes de executar tais comandos.
+explicado no \textit{datasheet}~\cite{am335x}, mas despenderia muito tempo e
+seria pouco portável. A última solução foi introduzida com o kernel 3.8.x do
+Linux embarcado, acessando as interfaces GPIO através do kernel, basicamente
+atribuindo valores a arquivos. Tal processo só pode ser executado como root,
+então deve se entender bem o que está fazendo antes de executar tais comandos.
+
+Os arquivos de configuração do GPIO pelo kernel estão localizados no caminho
+\texttt{/sys/class/gpio}. Ao se modificar o arquivo \texttt{export}, o qual 
+inicializa o pino, o diretório \texttt{gpiochipXX}, que contém os arquivos
+necessários para a configuração do pino, é criado. Apenas os arquivos
+\texttt{direction} e \texttt{value} são necessários para a tarefa de piscar um
+led, os quais indicam se o pino será de entrada ou saída e o valor que será
+atribuído ao pino, respectivamente.
 
 \begin{lstlisting}[language=bash]
-echo 51 > /sys/class/gpio/export 
+echo 51  > /sys/class/gpio/export # exporta o pino 51 / GPIO_19 / pino 16
+echo out > /sys/class/gpio/gpiochip51/direction # define o pino como saída
+for i in `seq 10`; do
+	echo 1 > /sys/class/gpio/gpiochip51/value # seta o valor alto no pino
+	sleep 1
+	echo 0 > /sys/class/gpio/gpiochip51/value # seta o valor baixo no pino
+	sleep 1
+done 
+echo 51 > /sys/class/gpio/unexport # libera o pino 51 / GPIO_19 / pino 16
 \end{lstlisting}
 
-Os arquivos de Configuração do GPIO pelo kernel estão localizados em
-\textit{/sys/class/gpio} e o arquivo export inicializa o pino para uso. Ao
-modificar tal arquivo uma pasta para o pino será criada, dentro da pasta estarão
-arquivos necessários para a configuração do pino, só é necessário o uso de dois
-desses arquivos para a tarefa de piscar um led IR, os arquivos direction e
-value.
+%\begin{equation}
+%	\text{GPIO Number on BBB} =  1 \times 32 + \text{GPIO Number on Mode7} \notag
+%\end{equation}
 
-\begin{lstlisting}[language=bash]
-echo in > /sys/class/gpio/gpiochip51/direction
-echo 1 > /sys/class/gpio/gpiochip51/value
-\end{lstlisting}
-
-Os comandos listados acima são o suficiente para acender um led conectado ao
-pino 51, ou pino 16 do header p9.
-
+Os comandos listados acima são o suficiente para piscar um led conectado ao
+pino 51, ou pino 16 do \textit{header} P9.
 \end{subsection}
-%END GPIO
 \end{section}
 %%% EOF %%%
