@@ -42,7 +42,7 @@ HTK~\cite[p.~22--42]{Young00} (lembrando que o modelo acústico utilizado também
 está disponível na página do FalaBrasil); a gramática reconhecida pelo Julius é
 criada manualmente de acordo com o descrito na página oficial~\cite{juliussite}.
 Instruções de configuração e utilização do Julius encontram-se na documentação
-oficial~\cite{julius_book}.
+oficial~\cite{Lee09}.
 
 \begin{figure}[!h]
 	\centering
@@ -95,20 +95,19 @@ interface de saída HDMI, tornando-se muito útil para aplicações gráficas.
 \hline
 				& Arduino UNO & BeagleBone Black & Raspberry Pi \\
 \hline
-Chip			& - & TI AM3359 & BCM2835 SoC full HD \\
-CPU				& 20 MHz ATMega328 & 1 GHz ARM Cortex-A8 & 700 MHz ARM1176JZ-F \\
-GPU				& - & PowerVR SGX530 & Dual Core VideoCore IV \\
-Mem. RAM	& 2 kB SRAM & 512 MB DDR3 & 512 MB SDRAM\\
-Armaz. Flash			& 32 kB & 2 GB eMMC, MicroSD & SD, MMC, SDIO card slot\\
-GPIO			& 14 & 65 & 8 \\
-Video			& - & mini HDMI & HDMI\\
-OS				& - & Linux & Linux \\
-Amperagem (mA)	& 42 & 210-460 & 150-350 \\
-Voltagem (V)	& 7-12 & 5 & 5 \\
-USB				& - & 1 Host, 1 Mini Client  & 2 Hosts, 1 Micro Power\\
-Ethernet		& - & 1 10/100 Mbps & 1 10/100 Mbps \\
-%Preço 			& 5 conto & 300 conto & 200 conto \\
-%Resolução		& - & 1280x1024 (5:4), 1024x768 (4:3), 1280x720 (16:9), 1440x900 (16:10) all at 16 bit	& 	Extensive from 640x350 up to 1920x1200, this includes 1080p\\
+Chip			& -          & TI AM3359              & BCM2835 \\
+CPU				& ATMega328  & ARM Cortex-A8          & ARM1176JZ-F \\
+CPU Freq.		& 20 MHz     & 1 GHz                  & 700 MHz \\
+GPU				& -          & PowerVR SGX530         & Dual Core VideoCore IV \\
+Memória. RAM	& 2 kB SRAM  & 512 MB DDR3            & 512 MB SDRAM \\
+Armaz. Flash	& 32 kB      & 2 GB eMMC, MicroSD     & SD, MMC, SDIO card slot \\
+Pinos			& 14         & 65                     & 8 \\
+Video			& -          & mini HDMI              & HDMI \\
+Sistema Op.		& -          & Linux                  & Linux \\
+Amperagem		& 42 mA      & 210-460 mA             & 150-350~mA \\
+Voltagem		& 7-12 V     & 5 V                    & 5 V \\
+USB				& -          & 1 Host, 1 Mini Client  & 2 Hosts, 1 Micro Power\\
+Ethernet		& -          & 1 10/100 Mbps          & 1 10/100 Mbps \\
 \hline
 \end{tabular}
 \end{table}
@@ -163,7 +162,7 @@ padrão, os bits são codificados de acordo com o código de Manchester, onde cada
 bit, transmitido dentro de um período fixo, é representado por uma transição
 \textit{high-to-low} (0) ou \textit{low-to-high} (1). Esses padrões de dados são
 obtidos através de uma operação do tipo XOR (OU-Exclusivo) realizada entre o
-clock do dispositivo e o dado propriamente dito~\cite{rc5_wiki}.
+clock do dispositivo e o dado propriamente dito~\cite{rc5}.
 
 A Figura~\ref{fig:rc5} mostra a informação referente ao comando ``diminuir
 volume'' contida num vetor de 14 bits. Os 11 últimos bits definem o endereço do
