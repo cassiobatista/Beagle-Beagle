@@ -318,7 +318,7 @@ void receive(int gpio)
 		pulses[currentpulse++] = low;
 	}
 
-	//save_to_db("philips", "volume+", 
-	//		decode(pulses, sizeof(pulses)/sizeof(uint16_t)));
+	//save_to_db("philips", "volume+", decode(pulses, sizeof(pulses)/sizeof(uint16_t)));
+
 }
 /* EOF */
