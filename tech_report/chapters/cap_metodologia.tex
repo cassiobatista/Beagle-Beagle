@@ -134,13 +134,13 @@ tornar o projeto um sistema de propósito mais geral. Além disso, a segurança
 dos dados, que serão constantemente manipulados, será mantida, podendo estes ser
 recuperados apenas olhando para o banco. %(????)
 
-Inicialmente, apenas a entidade TELEVISÃO foi criada, onde uma
-tabela intitulada ``TV'' contém atributos como a marca do aparelho e os comandos
-a serem transmitidos, como visto na Tabela~\ref{tab:tv}. Com isso,
-quaisquer campos podem ser satisfatoriamente acessados através de um simples
-código SQL (como o mostrado abaixo). %a fim de se montar um determinado comando.
-Assim, podemos recuperar os bits de referência e, posteriormente, decodificá-los
-de acordo com o protocolo do aparelho para, finalmente, enviar para o led IR.
+Inicialmente, apenas a entidade TELEVISÃO foi criada, onde uma tabela intitulada
+``TV'' contém atributos como a marca do aparelho e os comandos a serem
+transmitidos, como visto na Tabela~\ref{tab:tv}. Com isso, quaisquer campos
+podem ser satisfatoriamente acessados através de um simples código SQL (como o
+mostrado abaixo). Assim, pode-se recuperar os bits de referência para,
+posteriormente, decodificá-los de acordo com o protocolo do aparelho e,
+finalmente, construir a informação exata a ser passada para o IR Led.
 
 \begin{lstlisting}[style=code, language=sql]
 SELECT campo FROM TV WHERE marca='marca_da_tv' 
@@ -208,12 +208,12 @@ dispostos na placa.
 \end{tabular}
 \end{table}
 
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=\textwidth]{Figures/BBBp9}
-	\caption{Mapeamento de Pinos do Header P9 da BeagleBone}
-	\label{fig:BBBp9}
-\end{figure}
+%\begin{figure}[!h]
+%	\centering
+%	\includegraphics[width=\textwidth]{Figures/BBBp9}
+%	\caption{Mapeamento de Pinos do Header P9 da BeagleBone}
+%	\label{fig:BBBp9}
+%\end{figure}
 
 Como o objetivo não é prototipar a partir do processador, o mapeamento correto 
 dos pinos é crucial para conseguir alguma saída válida dos pinos da placa. 

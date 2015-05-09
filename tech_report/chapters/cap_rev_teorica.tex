@@ -5,8 +5,8 @@
 % [IJERA'15] Wi-Fi and Android Based Smart Home Automation for People with Disabilities (UNAUTHORIZED)
  
 Como o iOS e o Android foram lançados, respectivamente, em 2007 e 2008, e a
-ascensão dos \textit{smartphones} é relativamente recente, a ideia de adicionar
-a eles a acessibilidade no controle de equipamentos eletrônicos somente começou
+ascensão dos \textit{smartphones} é relativamente recente, a ideia de tornar
+acessível o controle de equipamentos eletrônicos somente começou
 a revelar resultados concretos a partir de 2010.
 Em~\cite{Barrena11}, o decodificador PocketSphinx foi embarcado em um
 \textit{smartphone} Android para que este pudesse controlar aparelhos domésticos
@@ -37,7 +37,7 @@ limitam o vocabulário utilizado a apenas um conjunto de sentenças possíveis,
 escolhidas pelo desenvolvedor do sistema. A construção do dicionário fonético
 para PT\_BR dar-se-á através do software descrito em~\cite{Siravenha08}; o
 tutorial para o treino do modelo acústico encontra-se disponível na página do
-projeto Voxforge~\cite{voxforge}, bem como capítulo 3 do livro do
+projeto Voxforge~\cite{voxforge}, bem como no capítulo 3 do livro do
 HTK~\cite[p.~22--42]{Young00} (lembrando que o modelo acústico utilizado também
 está disponível na página do FalaBrasil); a gramática reconhecida pelo Julius é
 criada manualmente de acordo com o descrito na página oficial~\cite{juliussite}.
@@ -80,12 +80,12 @@ O Arduino, apesar de ser uma ferramenta flexível e com grande capacidade de
 interfaceamento com uma vasta quantidade de dispositivos, é uma plataforma
 simples, recomendada para projetos de menor porte. O microcontrolador, que pode 
 ser programado em C, torna-se muito limitado quando o projeto requer um servidor
-estável e relativamente potente;
-O Raspberry Pi, por ser bastante completo, já se enquadra no conceito de 
-mini computador. Todo o seu armazenamento é fornecido por um cartão SD, além de 
-ser possível conectá-lo à Internet através de um conector Ethernet. Sendo
-necessário a instalação de um sistema operacional, o Raspberry Pi ainda possui
-interface de saída HDMI, tornando-se muito útil para aplicações gráficas.
+estável e relativamente potente.
+Já o Raspberry Pi, por ser bastante completo, enquadra-se no conceito de 
+mini computador, sendo necessário a instalação de um sistema operacional. Todo 
+o seu armazenamento é fornecido por um cartão SD, além de ser possível
+conectá-lo à Internet através de um conector Ethernet. O Raspberry Pi ainda
+possui interface de saída HDMI e é bastante útil para aplicações gráficas.
 
 \begin{table}[!h]
 \centering
@@ -152,10 +152,10 @@ descrever a comunicação, ou seja, cada empresa praticamente segue o seu próprio
 padrão para estabelecer a comunicação entre os dispositivos: o número, a ordem e
 o significado dos bits é variado, a modulação e codificação usada são diferentes
 e a frequência dos pulsos pode oscilar entre 32~kHz e 42~kHz, chegando a 50~kHz
-em determinados aparelhos mais modernos. Além disso, tão raro quanto o
+em determinados aparelhos mais modernos. Além disso, tão rara quanto o
 seguimento de uma comunicação IR padronizada é a disponibilização de
 documentação pelos fabricantes, que também é bastante escassa. A Philips, por
-exemplo, utiliza seu próprio protocolo de comunicação chamado RC-5. A última
+exemplo, utiliza seu próprio protocolo de comunicação, chamado RC-5. A última
 documentação foi liberada em 1992, quando ainda não existiam muitos dos
 equipamentos eletrônicos atuais, como \textit{home theaters} ou DVDs. Nesse
 padrão, os bits são codificados de acordo com o código de Manchester, onde cada
@@ -171,8 +171,8 @@ representado por duas partes, sendo uma metade em nível baixo e a outra, em
 nível alto. Cada nível ocorre num intervalo de 32 períodos. O nível alto é 
 gerado por um PWM de \textit{duty cycle} igual a 25\% do período do pulso. Essa
 percentagem define o tempo em que o IR Led permanece aceso, ou seja, no nível
-alto, o IR Led permanece ligado por período de $0,25\times1/36~kHz$ e desligado
-por $0,75\times1/36~kHz$, sendo o processo repetido 32 vezes. A economia de 
+alto, o IR Led permanece ligado por período de $0,25\times1/36000~s$ e desligado
+por $0,75\times1/36000~s$, sendo o processo repetido 32 vezes. A economia de 
 energia é mostrada como justificativa para explicar o motivo de o led piscar ao 
 invés de se manter aceso por 100\% do período do pulso.
 
@@ -200,6 +200,15 @@ duração mais longa do que os outros bits comuns. O período de um bit passa de 32
 para 16 pulsos, exceto para os casos especiais (AGC e \textit{toggle}). Por fim,
 os últimos 16 bits representam o endereço do aparelho e o referido comando a ser
 transmitido, respectivamente.
+
+%\begin{align*}
+\begin{gather*}
+	\text{T}      = 16 \times \frac{1}{f=36000Hz} = 444.45~\mu s \\\notag
+	\text{AGC}    = 6T + 2T = 3.556~m s \\\notag
+	\text{Toggle} = 2T + 2T = 1.778~m s \\\notag
+	\text{Bit}    = 1T + 1T = 888.9~\mu s \\\notag
+	\text{Total}  = 1*\text{AGC} + 1*\text{Toggle} + 20*\text{Bit} = 23.11~m s \\
+\end{gather*}
 
 \subsection{Produtos Relacionados}
 Existem alguns produtos disponíveis no mercado com a finalidade de tornar o
