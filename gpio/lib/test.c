@@ -6,7 +6,7 @@
 #include <sys/types.h>
 #include "bbbgpio.h"
 
-#define DELAY 3 
+#define DELAY 15 
 
 void main(){
 	
@@ -31,14 +31,21 @@ void main(){
 		gpioSetValue(66, HIGH);
 		gpioSetValue(67, HIGH);
 		gpioSetValue(69, HIGH);
-		//sleep(DELAY);
+		sleep(DELAY);
 
 		//gpioSetValue(,HIGH);                                            
                 //gpioSetValue(,HIGH);                                            
                 //gpioSetValue(,HIGH);                                            
                 //sleep(DELAY);
 	//}
+	gpioSetValue(66,LOW);
+	gpioSetValue(67,LOW);
+	gpioSetValue(69,LOW);
 
+	gpioUnexport(66);
+	gpioUnexport(67);
+	gpioUnexport(69);
+	
 	c1=clock();
 
 	time =(double)((c1-c0)/CLOCKS_PER_SEC);
