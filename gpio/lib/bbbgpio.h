@@ -10,15 +10,15 @@
 #define MAX 64
 #define GPIO_LOCATION "/sys/class/gpio"
 
-enum PIN_DIR {
-	INPUT  = 0;
-	OUTPUT = 1;
-};
+typedef enum{
+	INPUT=0,
+	OUTPUT=1
+}PIN_DIR;
 
-enum PIN_VALUE {
-	LOW  = 0;
-	HIGH = 1;
-};
+typedef enum{
+	LOW=0,
+	HIGH=1
+}PIN_VALUE;
 
 void gpioExport(unsigned int gpio);
 void gpioUnexport(unsigned int gpio);
