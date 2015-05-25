@@ -1,13 +1,13 @@
 \begin{section}{Dificuldades e Soluções}
 \begin{enumerate}
-\item O Ångström é o sistema operacional de fábrica da BeagleBone, bastante
-referenciado em fóruns e candidato principal para ser a base do projeto.
-Entretanto, o sistema e a nomenclatura de pacotes não correspondiam com os
-usados nas distribuições Debian, o que impossibilitava a instalação das
-dependências necessárias para o uso das ferramentas de processamento de voz. 
-Além disso, o Ångström também consumia muito espaço de armazenamento na 
-\textit{flash}, ocupando sozinho 1.6~GB de 2~GB por conta de sua interface 
-gráfica.
+\item O Ångström é o sistema operacional de fábrica da \textit{BeagleBone Black}
+$^{\scriptsize{\textregistered}}$, bastante referenciado em fóruns e candidato 
+principal para ser a base do projeto. Entretanto, o sistema e a nomenclatura de 
+pacotes não correspondiam com os usados nas distribuições Debian, o que 
+impossibilitava a instalação das dependências necessárias para o uso das 
+ferramentas de processamento de voz. Além disso, o Ångström também consumia 
+muito espaço de armazenamento na \textit{flash}, ocupando sozinho 1.6~GB de 2~GB 
+por conta de sua interface gráfica.
 
 A opção seguinte foi o Ubuntu, pois a similaridade do sistema de pacotes
 \texttt{apt-get} com a distribuição \textit{desktop} tornaria a integração mais
@@ -21,22 +21,24 @@ Debian 7.8 wheezy. Este se mostrou muito mais leve e ``enxuto'' em sua versão
 \textit{minimal}, ocupando menos de 500~MB da memória. Além disso, todos os 
 pacotes necessários para conexão com a Internet funcionaram perfeitamente.
 
-\item A BeagleBone não possui saída de áudio nativa, tampouco conectores do tipo
-\textit{audio jack}. No Debian, a saída padrão de áudio é pelo conector HDMI, 
-mas pode ser substituída pelo USB mediante modificações em parâmetros do kernel.
-O modo mais fácil, considerando que redirecionar a saída do eSpeak para um GPIO
-seria muito trabalhoso, seria conectar um auto-falante USB à BeagleBone. Em se
-tratando de um protótipo, um \textit{headphone} faz o papel de um
-\textit{speaker} que deve consumir pouca energia e ter um tamanho limitado.
-Foi-se cogitada a construção de um circuito com um amplificador LM386 para o
-\textit{speaker}, porém a obtenção de um D/A PCM2707 não custaria menos de 
-US\$ 15.
+\item A \textit{BeagleBone Black}$^{\scriptsize{\textregistered}}$ não possui 
+saída de áudio nativa, tampouco conectores do tipo \textit{audio jack}. No 
+Debian, a saída padrão de áudio é pelo conector HDMI, mas pode ser substituída 
+pelo USB mediante modificações em parâmetros do \textit{kernel}. O modo mais 
+fácil, considerando que redirecionar a saída do eSpeak para um GPIO seria muito 
+trabalhoso, seria conectar um alto-falante USB à \textit{BeagleBone Black}
+$^{\scriptsize{\textregistered}}$. Em se tratando de um protótipo, um 
+\textit{headphone} faz o papel de um \textit{speaker} que deve consumir pouca 
+energia e ter um tamanho limitado. Foi-se cogitada a construção de um circuito 
+com um amplificador LM386 para o \textit{speaker}, porém a obtenção de um D/A 
+PCM2707 não custaria menos de US\$ 15.
 
-\item A BeagleBone não possui conexão wifi. Além da dificuldade em atualizar o
-kernel pra receber um \textit{shield/cape}, o mesmo teria de ser conectado na 
-porta USB, a qual já estaria sendo usada pelo auto-falante. Portanto, a solução
-mais fácil foi conectar um roteador wifi à porta Ethernet da BBB através de um
-cabo UTP.
+\item A \textit{BeagleBone Black}$^{\scriptsize{\textregistered}}$ não possui 
+conexão \textit{wifi}. Além da dificuldade em atualizar o \textit{kernel} pra 
+receber um \textit{shield/cape}, o mesmo teria de ser conectado na  porta USB, 
+a qual já estaria sendo usada pelo auto-falante. Portanto, a solução mais fácil 
+foi conectar um roteador \textit{wifi} à porta \textit{Ethernet} da BBB através 
+de um cabo UTP.
 
 \item O código criado para o Arduino faz um \textit{dump} da informação captada
 pelo photosensor, verificando o tempo que ele passa ligado e desligado e

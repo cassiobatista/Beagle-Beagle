@@ -11,16 +11,16 @@ a revelar resultados concretos a partir de 2010.
 Em~\cite{Barrena11}, o decodificador PocketSphinx foi embarcado em um
 \textit{smartphone} Android para que este pudesse controlar aparelhos domésticos
 através da interface de voz. O resultado era enviado para uma SparkFun IOIO
-Board, a qual, estando fisicamente conectada ao controle da TV, disparava um
-determinado \textit{trigger}. A justificativa do trabalho era ajudar pessoas
-afetadas com tetraplegia a serem mais independentes; os testes avaliaram o
-desempenho de decodificadores embarcados e distribuídos.
+\textit{Board}, a qual, estando fisicamente conectada ao controle da TV, 
+disparava um determinado \textit{trigger}. A justificativa do trabalho era 
+ajudar pessoas afetadas com tetraplegia a serem mais independentes; os testes 
+avaliaram o desempenho de decodificadores embarcados e distribuídos.
 Já em~\cite{Sefat14}, um sistema inteligente de segurança foi implementado na
 BeagleBone, a qual utilizava a biblioteca OpenCV para contar quantos indivíduos
 encontravam-se próximo à entrada do ambiente a ser vigiado. Um módulo de
 reconhecimento de fala, também basedo no PocketSphinx, foi utilizado para
-receber comandos do usuário, enquanto o software eSpeak foi encarregado de
-prover as respostas dadas pela BeagleBone via voz sintetizada. Um aparelho
+receber comandos do usuário, enquanto o \textit{software} eSpeak foi encarregado 
+de prover as respostas dadas pela BeagleBone via voz sintetizada. Um aparelho
 celular qualquer poderia se comunicar com o sistema via SMS graças à adição de
 um módulo GSM à BBB. A desvantagem é que, apesar de o controle não ter de ser
 executado necessariamente por um \textit{smartphone}, os comandos de voz não
@@ -35,8 +35,8 @@ salientar que, ao invés do uso de modelos mais gerais, que descrevem a maior
 parte de uma linguagem, serão utilizadas gramáticas livres de contexto, as quais
 limitam o vocabulário utilizado a apenas um conjunto de sentenças possíveis,
 escolhidas pelo desenvolvedor do sistema. A construção do dicionário fonético
-para PT\_BR dar-se-á através do software descrito em~\cite{Siravenha08}; o
-tutorial para o treino do modelo acústico encontra-se disponível na página do
+para PT\_BR dar-se-á através do \textit{software} descrito em~\cite{Siravenha08}; 
+o tutorial para o treino do modelo acústico encontra-se disponível na página do
 projeto Voxforge~\cite{voxforge}, bem como no capítulo 3 do livro do
 HTK~\cite[p.~22--42]{Young00} (lembrando que o modelo acústico utilizado também
 está disponível na página do FalaBrasil); a gramática reconhecida pelo Julius é
@@ -60,8 +60,8 @@ em parâmetros do kernel. Feito isso, o USB, que é o dispositivo secundário, se
 torna o principal, fazendo com que a solução mais simples seja plugar um 
 auto-falante (\textit{speaker}) na porta USB.
 Na página oficial do eSpeak, um arquivo de cabeçalho (\textit{header}) permite a
-utilização de uma API em C/C++, a qual facilita o acesso aos módulos do software
-que permitem que a BeagleBone ``fale''~\cite{eSpeak}.
+utilização de uma API em C/C++, a qual facilita o acesso aos módulos do 
+\textit{software} que permitem que a BeagleBone ``fale''~\cite{eSpeak}.
 
 %% http://arduino.cc/en/Tutorial/SimpleAudioPlayer
 %% http://www.instructables.com/id/Simple-Wav-Player-Using-Arduino/?lang=pt&ALLSTEPS
@@ -225,15 +225,15 @@ clara para o aparelho desejado.
 
 IRdroid é outro aplicativo que permite o controle de aparelhos televisivos com o
 celular~\cite{irdroid}. Como o próprio nome sugere, funciona apenas em
-dispositivos Android, desde que seu módulo de hardware esteja acoplado na saída
-de audio jack do smartphone. Versões mais recentes já possuem o hardware que
-pode ser acessado via bluetooth, custando US\$ 60 o mais caro. A grande vantagem
-é que o IRdroid, além de ser baseado na biblioteca LIRC, a qual possui uma vasta
-quantidade de equipamentos em seu banco de dados, possui código livre e
-disponível.
+dispositivos Android, desde que seu módulo de \textit{hardware} esteja acoplado 
+na saída de audio \textit{jack} do \textit{smartphone}. Versões mais recentes 
+já possuem o \textit{hardware} que pode ser acessado via \textit{bluetooth}, 
+custando US\$ 60 o mais caro. A grande vantagemé que o IRdroid, além de ser 
+baseado na biblioteca LIRC, a qual possui uma vasta quantidade de equipamentos 
+em seu banco de dados, possui código livre e disponível.
 
 Outras diversas soluções são aplicadas apenas à \textit{smart TVs}, onde a
-informação de controle é transmitida por wifi. Nenhuma das aplicações
+informação de controle é transmitida por \textit{wifi}. Nenhuma das aplicações
 encontradas para TVs convencionais possui suporte à reconhecimento e síntese de
 voz offline em PT\_BR.
 \end{section}
