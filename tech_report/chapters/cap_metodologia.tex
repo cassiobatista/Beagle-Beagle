@@ -4,12 +4,12 @@ módulo a ser prioritariamente configurado, a fim de ser preparado para atender
 às devidas requisições, bem como executar qualquer tipo de aplicação solicitada.
 Sendo assim, a instalação do sistema operacional Debian foi tomada como primeiro
 passo, visto que houveram muitos problemas na instalação do Ubuntu e do 
-Angstrom. As dependências a serem instaladas são mostradas na 
+Ångström. As dependências a serem instaladas são mostradas na 
 Lista~\ref{lst:dependences}.
 
 É importante ressaltar que os sistemas operacionais embarcados são
 simplificações de sistemas operacionais mais robustos, tendo a maior parte das
-suas funcionalidades reduzidas ou simplificadas para se adequar à uma plataforma
+suas funcionalidades reduzidas para se adequar a uma plataforma
 de menor porte. Por isso, a preparação deve ocorrer a partir dos pacotes mais
 básicos, como o GCC, por exemplo. Outros pacotes devem ser instalados de forma
 gradual, tais quais os requeridos pelo Julius, eSpeak e os necessários para a
@@ -221,17 +221,18 @@ dos pinos é crucial para conseguir alguma saída válida dos pinos da placa.
 %de desenvolvimento a qual possui pinos mais acessíveis. 
 As Tabelas~\ref{tab:BBBp8} e~\ref{tab:BBBp9} mostram esse mapeamento.
 
-Existem 3 formas de se acessar e controlar os pinos de GPIO, a primeira é
-através da IDE web que vem instalada no Angstrom de fábrica, mas como o OS foi 
-trocado pelo Debian essa opção não é viável. Outra forma, a mais complexa, é
-iniciar o módulo e atribuir valores através de registradores, tal processo é
-explicado no \textit{datasheet}~\cite{am335x}, mas despenderia muito tempo e
-seria pouco portável. A última solução foi introduzida com o kernel 3.8.x do
-Linux embarcado, acessando as interfaces GPIO através do kernel, basicamente
-atribuindo valores a arquivos. Tal processo só pode ser executado como root,
-então deve se entender bem o que está fazendo antes de executar tais comandos.
+Existem 3 formas de se acessar e controlar os pinos de GPIO. A primeira, 
+através da IDE web que vem instalada no Ångström de fábrica, não é viável, visto
+que o OS trocado pelo Debian. A segunda consiste em iniciar o módulo e atribuir
+valores através de registradores, tal como explicado no
+\textit{datasheet}~\cite{am335x}, mas, por ser mais complexa, despenderia muito
+tempo e seria pouco portável. A última solução foi introduzida com o \textit{kernel}
+3.8.x do Linux embarcado, acessando as interfaces de GPIO através da simples 
+atribuição de valores a arquivos. Tal processo só pode ser executado como 
+\emph{root}, então deve-se entender bem o que está fazendo antes de executar
+tais comandos.
 
-Os arquivos de configuração do GPIO pelo kernel estão localizados no caminho
+Os arquivos de configuração do GPIO estão localizados no caminho
 \texttt{/sys/class/gpio}. Ao se modificar o arquivo \texttt{export}, o qual 
 inicializa o pino, o diretório \texttt{gpiochipXX}, que contém os arquivos
 necessários para a configuração do pino, é criado. Apenas os arquivos

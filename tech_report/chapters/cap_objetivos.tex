@@ -1,11 +1,12 @@
 \begin{section}{Objetivos}
 O objetivo principal consiste em criar um protótipo portável, baseado em um
 microcomputador embarcado, que seja capaz de controlar um aparelho de televisão
-através do envio remoto de sinais. O sistema será configurado como um servidor
-que disponibiliza um serviço genérico de reconhecimento de fala, de modo que o
-aparelho de TV mencionado possa ser remotamente controlado através da voz do
-usuário; e um serviço de síntese de fala, provendo \textit{feedback} das ações
-de acordo com o entendimento do sistema de ASR. 
+através do envio remoto de sinais, conforme mostrado na Figura~\ref{fig:sch}. 
+O sistema será configurado como um servidor que disponibiliza um serviço
+genérico de reconhecimento de fala, de modo que o aparelho de TV mencionado
+possa ser remotamente controlado através da voz do usuário; e um serviço de
+síntese de fala, provendo \textit{feedback} das ações de acordo com o
+entendimento do sistema de ASR. 
 Além disso, a informação a ser enviada para a TV deve ser armazenada em um banco
 de dados, também configurado no mesmo servidor.
 
@@ -26,34 +27,35 @@ o qual receberá em seu código nativo todos os outros módulos.
 Para que o Julius possa realizar o reconhecimento em Português Brasileiro, serão
 necessários basicamente dois recursos: um modelo acústico e um dicionário
 fonético. Modelos acústicos genéricos para PT\_BR podem ser encontrados na
-página do Grupo FalaBrasil~\cite{falabrasilsite}, bem como o software que cria o
-dicionário fonético (conversor grafema-fonema ou G2P)~\cite{Siravenha08}.
-Entretanto, embora a taxa de acerto dos modelos seja satisfatória, ainda há
-casos nos quais a acurácia do modelo não é suficiente. Nesse caso, é possível
-melhorá-la através da criação ou treino de modelos específicos para a aplicação.
-O processo de treino é realizado pelo \textit{software} HTK (\textit{Hidden 
-Markov Models Toolkit}), o qual é capaz de extrair segmentos de fala de um
-arquivo de áudio e assinalar uma referência à ele. Tal referência é retirada do
-dicionário fonético, previamente criado com o software G2P.
+página do Grupo FalaBrasil~\cite{falabrasilsite}, bem como o \textit{software}
+que cria o dicionário fonético (conversor grafema-fonema ou
+G2P)~\cite{Siravenha08}.  Entretanto, embora a taxa de acerto dos modelos seja
+satisfatória, ainda há casos nos quais a acurácia do modelo não é suficiente.
+Nesse caso, é possível melhorá-la através da criação ou treino de modelos
+específicos para a aplicação.  O processo de treino é realizado pelo
+\textit{software} HTK (\textit{Hidden Markov Models Toolkit}), o qual é capaz de
+extrair segmentos de fala de um arquivo de áudio e assinalar uma referência à
+ele. Tal referência é retirada do dicionário fonético, previamente criado com o
+\textit{software} G2P.
 
 O \textit{software} eSpeak é a principal referência em síntese de voz em 
 ambientes Linux. Graças à disponibilização de uma API no site oficial do 
 desenvolvedor, o sistema, além de conseguir ``ouvir e entender'', também será 
 capaz de ``falar''. O \textit{download} dos modelos para PT\_BR é feito 
-juntamente com o das bibliotecas necessárias. Como a BBB (\textit{BeagleBone 
-Black}) não possui saída de áudio nativa, um alto-falante USB será utilizado.
+juntamente com o das bibliotecas necessárias. Como a BeagleBone Black (BBB)
+não possui saída de áudio nativa, um alto-falante USB será utilizado.
 
 \subsection{Controle Remoto de TV e Servidor LAMP}
 Os aparelhos televisivos atuais, assim como a grande maioria dos dispositivos
 eletrônicos domésticos, possuem a tecnologia de controle remoto baseada em luz
 infravermelha. Pode-se observar que na extremidade superior dos controles
-remotos, há pelo menos um led infravermelho (IR Led) capaz de emitir luz e,
+remotos, há pelo menos um LED infravermelho (IR LED) capaz de emitir luz e,
 dessa forma, transmitir uma informação modulada para o circuito localizado na 
-parte frontal da TV. Esse circuito possui um sensor infravermelho (IR 
-\textit{sensor}), o qual, atuando como o receptor da comunicação, é capaz de 
+parte frontal da TV. Esse circuito possui um sensor infravermelho (IR sensor), 
+o qual, atuando como o receptor da comunicação, é capaz de 
 receber os bits transmitidos e repassá-los para o processador do circuito, o 
 qual executará a tarefa relacionada à decodificação dos bits (desligar a TV, 
-mostrar o \textit{menu}, etc).
+mostrar o menu, etc).
 
 Nesse sentido, um módulo receptor será adicionado à BBB para que esta seja capaz 
 de ``hackear'', através de um sensor infravermelho, informações dos controles 
@@ -62,8 +64,9 @@ trivial.  O sistema de gerenciamento de banco de dados MySQL será instalado e
 configurado no servidor para armazenar o código, o qual é relacionado a ações 
 como ``aumentar volume'' ou ``desligar'' da TV principal e dos demais aparelhos 
 que vierem a ser cadastrados no banco.  Toda a informação de saída a ser enviada 
-para a TV através dos IR leds deve ser oriunda do banco de dados. 
+para a TV através dos IR LEDs deve ser oriunda do banco de dados. 
 % Além disso, bibliotecas que permitem o acesso ao MySQL por códigos em
-% C serão instaladas, já que essa é a principal linguagem do software do servidor.
+% C serão instaladas, já que essa é a principal linguagem do \textit{software} 
+% do servidor.
 \end{section}
 %%% EOF %%%

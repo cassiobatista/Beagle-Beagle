@@ -15,17 +15,17 @@ através da interface de voz. O resultado era enviado para uma SparkFun IOIO
 disparava um determinado \textit{trigger}. A justificativa do trabalho era 
 ajudar pessoas afetadas com tetraplegia a serem mais independentes; os testes 
 avaliaram o desempenho de decodificadores embarcados e distribuídos.
-Já em~\cite{Sefat14}, um sistema inteligente de segurança foi implementado na
-BeagleBone, a qual utilizava a biblioteca OpenCV para contar quantos indivíduos
-encontravam-se próximo à entrada do ambiente a ser vigiado. Um módulo de
-reconhecimento de fala, também basedo no PocketSphinx, foi utilizado para
-receber comandos do usuário, enquanto o \textit{software} eSpeak foi encarregado 
-de prover as respostas dadas pela BeagleBone via voz sintetizada. Um aparelho
+Já em~\cite{Sefat14}, um sistema inteligente de segurança foi implementado em 
+uma BeagleBone Black, a qual utilizava a biblioteca OpenCV para contar quantos 
+indivíduos encontravam-se próximo à entrada do ambiente a ser vigiado. Um módulo
+de reconhecimento de fala, também basedo no PocketSphinx, foi utilizado para
+receber comandos, enquanto o \textit{software} eSpeak foi encarregado 
+de prover as respostas dadas ao usuário via voz sintetizada. Um aparelho
 celular qualquer poderia se comunicar com o sistema via SMS graças à adição de
 um módulo GSM à BBB. A desvantagem é que, apesar de o controle não ter de ser
 executado necessariamente por um \textit{smartphone}, os comandos de voz não
-poderiam ser dados diretamente do aparelho móvel, e sim pessoal e diretamente à
-BeagleBone, a qual possuía um microfone conectado à porta USB.
+poderiam ser dados diretamente do aparelho móvel, e sim pessoal e diretamente ao
+microcomputador, o qual possuía um microfone conectado à porta USB.
 
 \subsection{Reconhecimento e Síntese de Voz}
 Os fundamentos do reconhecimento automático de voz, assim como os da síntese de
@@ -53,12 +53,12 @@ oficial~\cite{Lee09}.
 
 % http://andicelabs.com/2014/03/usb-audio-beaglebone/
 Como saída analógica do sistema TTS, a voz sintetizada deve ser reproduzida por
-um dispositivo externo à BeagleBone, já que esta não possui auto-falantes
+um dispositivo externo à BeagleBone, já que esta não possui alto-falantes
 próprios. Como visto em~\cite{andicelabs}, o dispositivo primário de saída de
 áudio da BeagleBone é o HDMI, o qual pode ser desabilitado mediante modificações
-em parâmetros do kernel. Feito isso, o USB, que é o dispositivo secundário, se
+em parâmetros do \textit{kernel}. Feito isso, o USB, que é o dispositivo secundário, se
 torna o principal, fazendo com que a solução mais simples seja plugar um 
-auto-falante (\textit{speaker}) na porta USB.
+alto-falante (\textit{speaker}) na porta USB.
 Na página oficial do eSpeak, um arquivo de cabeçalho (\textit{header}) permite a
 utilização de uma API em C/C++, a qual facilita o acesso aos módulos do 
 \textit{software} que permitem que a BeagleBone ``fale''~\cite{eSpeak}.
@@ -97,7 +97,7 @@ possui interface de saída HDMI e é bastante útil para aplicações gráficas.
 \hline
 Chip			& -          & TI AM3359              & BCM2835 \\
 CPU				& ATMega328  & ARM Cortex-A8          & ARM1176JZ-F \\
-CPU Freq.		& 20 MHz     & 1 GHz                  & 700 MHz \\
+CPU Freq.		& 16 MHz     & 1 GHz                  & 700 MHz \\
 GPU				& -          & PowerVR SGX530         & Dual Core VideoCore IV \\
 Memória. RAM	& 2 kB SRAM  & 512 MB DDR3            & 512 MB SDRAM \\
 Armaz. Flash	& 32 kB      & 2 GB eMMC, MicroSD     & SD, MMC, SDIO card slot \\
@@ -194,47 +194,48 @@ agora a ser representado pela transição \textit{high-to-low} (1), enquanto o
 valor baixo é definido por uma mudança \textit{low-to-high} (0). O primeiro bit
 de \textit{start} tem uma duração maior, para garantir o ganho do AGC
 (\textit{Automatic Gain Controller}) no circuito receptor; já o segundo, também
-de \textit{start}, é sempre mantido em valor alto. O bit de \textit{toggle}, o
-qual muda de estado caso uma tecla deixe de ser pressionada, também possui uma
-duração mais longa do que os outros bits comuns. O período de um bit passa de 32
-para 16 pulsos, exceto para os casos especiais (AGC e \textit{toggle}). Por fim,
-os últimos 16 bits representam o endereço do aparelho e o referido comando a ser
-transmitido, respectivamente.
+de \textit{start}, é sempre mantido em valor alto para sincronização. O bit de 
+\textit{toggle}, o qual muda de estado caso uma tecla deixe de ser pressionada,
+também possui uma duração mais longa do que os outros bits comuns. O período de
+um bit passa de 32 para 16 pulsos, exceto para os casos especiais (AGC e
+\textit{toggle}). Por fim, os últimos 16 bits representam o endereço do aparelho
+e o referido comando a ser transmitido, respectivamente.
 
-%\begin{align*}
-\begin{gather*}
-	\text{T}      = 16 \times \frac{1}{f=36000Hz} = 444.45~\mu s \\\notag
-	\text{AGC}    = 6T + 2T = 3.556~m s \\\notag
-	\text{Toggle} = 2T + 2T = 1.778~m s \\\notag
-	\text{Bit}    = 1T + 1T = 888.9~\mu s \\\notag
-	\text{Total}  = 1*\text{AGC} + 1*\text{Toggle} + 20*\text{Bit} = 23.11~m s \\
-\end{gather*}
+%%\begin{align*}
+%\begin{gather*}
+%	\text{T}      = 16 \times \frac{1}{f=36000Hz} = 444.45~\mu s \\\notag
+%	\text{AGC}    = 6T + 2T = 3.556~m s \\\notag
+%	\text{Toggle} = 2T + 2T = 1.778~m s \\\notag
+%	\text{Bit}    = 1T + 1T = 888.9~\mu s \\\notag
+%	\text{Total}  = 1*\text{AGC} + 1*\text{Toggle} + 20*\text{Bit} = 23.11~m s \\
+%\end{gather*}
 
 \subsection{Produtos Relacionados}
 Existem alguns produtos disponíveis no mercado com a finalidade de tornar o
 controle de equipamentos eletrônicos mais prático. Um deles é o Harmony Smart 
 Control~\cite{harmonysc}, o qual possui em seu ``pacote'' um aplicativo para 
-\textit{smartphones} iOS e Android (sem versão para tablets, todavia), um hub
-e um controle remoto genérico. Segundo a revisão da CNET, vale a pena pagar US\$
-130 por todas as funcionalidades que o sistema apresenta, como usar uma conexão
-RF entre o \textit{smartphone}/controle com o hub (que, infelizmente, ainda não
-conseguiu se livrar do tão antiquado IR), o que faz com que o usuário não
-precise apontar o controle para o dispositivo que precisa controlar. Todavia, o
-hub precisa estar numa boa posição para conseguir emitir a informação de forma
-clara para o aparelho desejado.
+\textit{smartphones} iOS e Android (sem versão para tablets, todavia), um
+\textit{hub} e um controle remoto genérico. Segundo a revisão da CNET, vale a
+pena pagar US\$ 130 por todas as funcionalidades que o sistema apresenta, como
+usar uma conexão de rádio-frequência entre o \textit{smartphone}/controle com o
+\textit{hub} (que, infelizmente, ainda não conseguiu se livrar do tão antiquado
+infravermelho), o que faz com que o usuário não precise apontar o controle para
+o dispositivo que precisa controlar. Todavia, o \textit{hub} precisa estar numa
+boa posição para conseguir emitir a informação de forma clara para o aparelho
+desejado.
 
 IRdroid é outro aplicativo que permite o controle de aparelhos televisivos com o
 celular~\cite{irdroid}. Como o próprio nome sugere, funciona apenas em
 dispositivos Android, desde que seu módulo de \textit{hardware} esteja acoplado 
 na saída de audio \textit{jack} do \textit{smartphone}. Versões mais recentes 
 já possuem o \textit{hardware} que pode ser acessado via \textit{bluetooth}, 
-custando US\$ 60 o mais caro. A grande vantagemé que o IRdroid, além de ser 
+custando US\$ 60 o mais caro. A grande vantagem é que o IRdroid, além de ser 
 baseado na biblioteca LIRC, a qual possui uma vasta quantidade de equipamentos 
 em seu banco de dados, possui código livre e disponível.
 
 Outras diversas soluções são aplicadas apenas à \textit{smart TVs}, onde a
 informação de controle é transmitida por \textit{wifi}. Nenhuma das aplicações
 encontradas para TVs convencionais possui suporte à reconhecimento e síntese de
-voz offline em PT\_BR.
+voz \textit{offline} em PT\_BR.
 \end{section}
 %%% EOF %%%

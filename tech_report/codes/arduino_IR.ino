@@ -72,14 +72,14 @@ void printPulses(void) {
 	Serial.println("\n\r\n\rRecebido: \n\rOFF \tON");
 	for (uint8_t i = 0; i < currentpulse; i++) {
 		Serial.print(pulses[i][0] * RESOLUTION, DEC);
-		Serial.print("\t");
+		Serial.print(",");
 		Serial.print(pulses[i][1] * RESOLUTION, DEC);
 		Serial.println("");
 	}
 	delay(1000);
 
 	/* Envia o comando pelo led IR */
-	sendCommand(currentpulse);
+	//sendCommand(currentpulse);
 }
 
 /* Envia um pulso de 38kHz para o pin por x ms, reproduzindo o comando decodificado (PWM) */
