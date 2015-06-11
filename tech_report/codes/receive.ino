@@ -60,7 +60,7 @@ void loop(void) {
 	pulses[currentpulse][0] = highpulse;
  
 	// same as above
-	while (! (IRpin_PIN & BV(IRpin))) {
+	while (! (IRpin_PIN & _BV(IRpin))) {
 		// pin is still LOW
 		lowpulse++;
 		delayMicroseconds(RESOLUTION);

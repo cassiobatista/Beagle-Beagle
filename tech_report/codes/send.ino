@@ -32,60 +32,10 @@ void pulseIR(long microsecs) {
 	sei();  // this turns them back on
 }
  
+// This is the code for the CHANNEL + for the downstairs TV COMCAST
 void SendChannelUpCode() {
-  // This is the code for the CHANNEL + for the downstairs TV COMCAST
   delayMicroseconds(); //Time off (Left Column on serial monitor)
   pulseIR();           //Time on  (Right Column on serial monitor)
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
-  delayMicroseconds();
-  pulseIR();
   delayMicroseconds();
   pulseIR();
   delayMicroseconds();

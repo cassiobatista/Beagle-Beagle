@@ -83,7 +83,7 @@ televisão	t e l e v i z a~ w~
 % http://stackoverflow.com/questions/2661129/espeak-sapi-dll-usage-on-windows
 %A proposta do trabalho é adicionar funcionalidades ao código do Julius,
 %permitindo a produção de voz sintetizada através da incorporação da API do 
-%eSpeak e a transmissão de informação para a TV através de um led IR conectado
+%eSpeak e a transmissão de informação para a TV através de um LED IR conectado
 %a um GPIO. Um sensor IR ficará encarregado de receber informações de diferentes
 %controles remotos para que sejam guardadas como registros no banco de dados.
 
@@ -94,11 +94,11 @@ televisão	t e l e v i z a~ w~
 \subsection{Análise do Sinal IR}
 O controle RC2954201/01 da TV Philips 39PFL3008D/78 foi usado como base para a 
 análise do sinal emitido. Inicialmente, um arduino UNO fui utilizado para
-verificar o tempo em que o IR led permanecia ativo e inativo, armazenando-o em
+verificar o tempo em que o IR LED permanecia ativo e inativo, armazenando-o em
 uma matriz de duas colunas, como visto no Apêndice~\ref{app:arduino}. O Octave
 foi utilizado para converter a matriz em um vetor único, no qual os índices
-ímpares representavam o tempo de duração do modo \textit{burst} do IR led e as
-posições pares, o tempo em que o IR led permanecia \textit{idle} (Vide
+ímpares representavam o tempo de duração do modo \textit{burst} do IR LED e as
+posições pares, o tempo em que o IR LED permanecia \textit{idle} (Vide
 Apêndice~\ref{app:matlab}). Sendo assim, o vetor no qual as durações dos níveis
 altos e baixos alternam-se entre si foi convertido para uma forma de onda
 quadrada, semelhante à mostrada na Figura~\ref{fig:rc6}.  A
@@ -140,7 +140,7 @@ transmitidos, como visto na Tabela~\ref{tab:tv}. Com isso, quaisquer campos
 podem ser satisfatoriamente acessados através de um simples código SQL (como o
 mostrado abaixo). Assim, pode-se recuperar os bits de referência para,
 posteriormente, decodificá-los de acordo com o protocolo do aparelho e,
-finalmente, construir a informação exata a ser passada para o IR Led.
+finalmente, construir a informação exata a ser passada para o IR LED.
 
 \begin{lstlisting}[style=code, language=sql]
 SELECT campo FROM TV WHERE marca='marca_da_tv' 
@@ -170,12 +170,12 @@ Philips & 00011111 & 10111011 & 11000000 & 11011010 & 11010111 \\
 % Thiago: Detalhes sobre o que foi feito com o Arduino
 
 \begin{subsection}{GPIO}
-Como no Arduino, a BeagleBone possui muitos pinos de entrada e saída para 
+Como no Arduino, a BBB possui muitos pinos de entrada e saída para 
 diversas funções, algo que o Raspberry Pi carece. Os GPIOs (\textit{general
 purpose input/output}, ou pinos de entrada e saída de propósito geral) podem ser
 usados da forma mais conveniente ao desenvolvedor, sendo possível controlar a
 tensão de saída, receber \textit{feedback} de sensores digitais e analógicos,
-etc. De acordo com o \textit{datasheet}~\cite{am335x}, o processador possui 128
+etc. O processador possui 128
 pinos de GPIO divididos em 4 módulos de 32 pinos cada. Porém, o mapeamento
 entre os pinos da BeagleBone Black e os do processador não é exatamente igual 
 (da mesma forma que o número dos pinos do Arduino UNO não equivale aos do
@@ -223,21 +223,21 @@ As Tabelas~\ref{tab:BBBp8} e~\ref{tab:BBBp9} mostram esse mapeamento.
 
 Existem 3 formas de se acessar e controlar os pinos de GPIO. A primeira, 
 através da IDE web que vem instalada no Ångström de fábrica, não é viável, visto
-que o OS trocado pelo Debian. A segunda consiste em iniciar o módulo e atribuir
-valores através de registradores, tal como explicado no
+que o sistema operacional foi trocado pelo Debian. A segunda consiste em iniciar
+o módulo e atribuir valores através de registradores, tal como explicado no
 \textit{datasheet}~\cite{am335x}, mas, por ser mais complexa, despenderia muito
-tempo e seria pouco portável. A última solução foi introduzida com o \textit{kernel}
-3.8.x do Linux embarcado, acessando as interfaces de GPIO através da simples 
-atribuição de valores a arquivos. Tal processo só pode ser executado como 
-\emph{root}, então deve-se entender bem o que está fazendo antes de executar
-tais comandos.
+tempo e seria pouco portável. A última solução foi introduzida com o 
+\textit{kernel} 3.8.x do Linux embarcado, acessando as interfaces de GPIO
+através da simples atribuição de valores a arquivos. Tal processo só pode ser
+executado como \emph{root}, então deve-se entender bem o que está fazendo antes
+de executar tais comandos.
 
 Os arquivos de configuração do GPIO estão localizados no caminho
 \texttt{/sys/class/gpio}. Ao se modificar o arquivo \texttt{export}, o qual 
 inicializa o pino, o diretório \texttt{gpiochipXX}, que contém os arquivos
 necessários para a configuração do pino, é criado. Apenas os arquivos
 \texttt{direction} e \texttt{value} são necessários para a tarefa de piscar um
-led, os quais indicam se o pino será de entrada ou saída e o valor que será
+LED, os quais indicam se o pino será de entrada ou saída e o valor que será
 atribuído ao pino, respectivamente.
 
 \begin{lstlisting}[language=bash]
@@ -256,7 +256,7 @@ echo 51 > /sys/class/gpio/unexport # libera o pino 51 / GPIO_19 / pino 16
 %	\text{GPIO Number on BBB} =  1 \times 32 + \text{GPIO Number on Mode7} \notag
 %\end{equation}
 
-Os comandos listados acima são o suficiente para piscar um led conectado ao
+Os comandos listados acima são o suficiente para piscar um LED conectado ao
 pino 51, ou pino 16 do \textit{header} P9.
 \end{subsection}
 \end{section}

@@ -10,9 +10,9 @@ acessível o controle de equipamentos eletrônicos somente começou
 a revelar resultados concretos a partir de 2010.
 Em~\cite{Barrena11}, o decodificador PocketSphinx foi embarcado em um
 \textit{smartphone} Android para que este pudesse controlar aparelhos domésticos
-através da interface de voz. O resultado era enviado para uma SparkFun IOIO
-\textit{Board}, a qual, estando fisicamente conectada ao controle da TV, 
-disparava um determinado \textit{trigger}. A justificativa do trabalho era 
+através da interface de voz. O resultado do reconhecedor era enviado para placa 
+SparkFun IOIO Board, a qual, estando fisicamente conectada ao controle de uma TV, 
+acionava um determinado comando. A justificativa do trabalho era 
 ajudar pessoas afetadas com tetraplegia a serem mais independentes; os testes 
 avaliaram o desempenho de decodificadores embarcados e distribuídos.
 Já em~\cite{Sefat14}, um sistema inteligente de segurança foi implementado em 
@@ -55,13 +55,13 @@ oficial~\cite{Lee09}.
 Como saída analógica do sistema TTS, a voz sintetizada deve ser reproduzida por
 um dispositivo externo à BeagleBone, já que esta não possui alto-falantes
 próprios. Como visto em~\cite{andicelabs}, o dispositivo primário de saída de
-áudio da BeagleBone é o HDMI, o qual pode ser desabilitado mediante modificações
+áudio é o HDMI, o qual pode ser desabilitado mediante modificações
 em parâmetros do \textit{kernel}. Feito isso, o USB, que é o dispositivo secundário, se
 torna o principal, fazendo com que a solução mais simples seja plugar um 
 alto-falante (\textit{speaker}) na porta USB.
 Na página oficial do eSpeak, um arquivo de cabeçalho (\textit{header}) permite a
 utilização de uma API em C/C++, a qual facilita o acesso aos módulos do 
-\textit{software} que permitem que a BeagleBone ``fale''~\cite{eSpeak}.
+\textit{software} que permitem que a BBB ``fale''~\cite{eSpeak}.
 
 %% http://arduino.cc/en/Tutorial/SimpleAudioPlayer
 %% http://www.instructables.com/id/Simple-Wav-Player-Using-Arduino/?lang=pt&ALLSTEPS
@@ -84,8 +84,8 @@ estável e relativamente potente.
 Já o Raspberry Pi, por ser bastante completo, enquadra-se no conceito de 
 mini computador, sendo necessário a instalação de um sistema operacional. Todo 
 o seu armazenamento é fornecido por um cartão SD, além de ser possível
-conectá-lo à Internet através de um conector Ethernet. O Raspberry Pi ainda
-possui interface de saída HDMI e é bastante útil para aplicações gráficas.
+conectá-lo à Internet através de um conector Ethernet. O Raspberry Pi possui 
+ainda uma interface de saída HDMI e é bastante útil para aplicações gráficas.
 
 \begin{table}[!h]
 \centering
@@ -112,10 +112,10 @@ Ethernet		& -          & 1 10/100 Mbps          & 1 10/100 Mbps \\
 \end{tabular}
 \end{table}
 
-A BeagleBone é comparável ao Raspberry Pi. Entretanto, por ter mais pinos
-(GPIO) e um processador mais poderoso, a BeagleBone é uma escolha óbvia para
+A BeagleBone Black é comparável ao Raspberry Pi. Entretanto, por ter mais pinos
+(GPIO) e um processador mais poderoso, a plataforma é uma escolha óbvia para
 projetos mais elaborados. Além de possuir diversas opções de conexão, a
-BeagleBone une a flexibilidade de interfaceamento do Arduino com a capacidade
+BBB une a flexibilidade de interfaceamento do Arduino com a capacidade
 de processamento rápido do Raspberry Pi. Apesar da desvantagem no preço, não
 restaram muitas dúvidas no momento da escolha dessa plataforma para o projeto.
 Uma comparação entre os principais parâmetros dos três equipamentos é dada na
@@ -168,13 +168,14 @@ A Figura~\ref{fig:rc5} mostra a informação referente ao comando ``diminuir
 volume'' contida num vetor de 14 bits. Os 11 últimos bits definem o endereço do
 aparelho de destino e o comando em si. Pode-se observar que qualquer bit é
 representado por duas partes, sendo uma metade em nível baixo e a outra, em
-nível alto. Cada nível ocorre num intervalo de 32 períodos. O nível alto é 
-gerado por um PWM de \textit{duty cycle} igual a 25\% do período do pulso. Essa
-percentagem define o tempo em que o IR Led permanece aceso, ou seja, no nível
-alto, o IR Led permanece ligado por período de $0,25\times1/36000~s$ e desligado
-por $0,75\times1/36000~s$, sendo o processo repetido 32 vezes. A economia de 
-energia é mostrada como justificativa para explicar o motivo de o led piscar ao 
-invés de se manter aceso por 100\% do período do pulso.
+nível alto. Cada nível ocorre num intervalo de 32 períodos. O protocolo utiliza 
+a modulação por largura de pulsos (\textit{pulse width modulation} ou PWM). O 
+nível alto é gerado por um PWM de \textit{duty cycle} igual a 25\% do período do
+pulso. Essa percentagem define o tempo em que o IR LED permanece aceso, ou seja,
+no nível alto, o IR LED permanece ligado por período de $0,25\times1/36000~s$ e
+desligado por $0,75\times1/36000~s$, sendo o processo repetido 32 vezes. A
+economia de energia é mostrada como justificativa para explicar o motivo de o
+led piscar ao invés de se manter aceso por 100\% do período do pulso.
 
 \begin{figure}[!h]
 	\centering
