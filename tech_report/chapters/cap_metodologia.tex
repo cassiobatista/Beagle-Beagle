@@ -215,11 +215,31 @@ dispostos na placa.
 %	\label{fig:BBBp9}
 %\end{figure}
 
+\begin{table}[h]
+\centering
+\caption{Mapeamento de Pinos do \textit{Header} P9 da BeagleBone}
+\label{tab:BBBp9}
+\begin{tabular}{cccccclc}
+\hline
+\textit{Head pin} & \$Pins & Endereço & \textit{offset} & N$\degree$ GPIO & Nome & Modo7 & Pino \\ 
+\hline \hline
+ 1,2 & 	  &		  & 	& 	 & DGND        & 		   &	 \\
+ 3,4 & 	  & 	  & 	& 	 & DC\_3.3V    & 		   &	 \\
+ 5,6 & 	  & 	  & 	& 	 & VDD\_5V     & 		   &	 \\ 
+ 7,8 & 	  & 	  & 	& 	 & SYS\_5V 	   & 		   &	 \\ 
+ 9   & 	  & 	  & 	& 	 & PWR\_BUT    & 		   &	 \\ 
+10   & 	  & 	  & 	& 	 & SYS\_RESETn & 		   & A10 \\
+11   & 28 & 0x870 & 070 & 30 & UART4\_RXD  & gpio0[30] & T17 \\
+12   & 30 & 0x878 & 078 & 60 & GPIO1\_28   & gpio0[28] & U18 \\
+\hline
+\end{tabular}
+\end{table}
+
 Como o objetivo não é prototipar a partir do processador, o mapeamento correto 
 dos pinos é crucial para conseguir alguma saída válida dos pinos da placa. 
 % e sim usar a placa
 %de desenvolvimento a qual possui pinos mais acessíveis. 
-As Tabelas~\ref{tab:BBBp8} e~\ref{tab:BBBp9} mostram esse mapeamento.
+As Tabelas~\ref{tab:BBBp8} e~\ref{tab:BBBp9} mostram parte desse mapeamento.
 
 Existem 3 formas de se acessar e controlar os pinos de GPIO. A primeira, 
 através da IDE web que vem instalada no Ångström de fábrica, não é viável, visto
