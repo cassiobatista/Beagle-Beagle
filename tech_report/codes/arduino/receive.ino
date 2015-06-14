@@ -80,8 +80,8 @@ void printpulses(void) {
 	Serial.println("\n\r\n\rReceived: \n\rOFF \tON");
 	for (uint8_t i = 0; i < currentpulse; i++) {
 		Serial.print(pulses[i][0] * RESOLUTION, DEC);
-		Serial.print(" usec, ");
+		Serial.print(" ");
 		Serial.print(pulses[i][1] * RESOLUTION, DEC);
-		Serial.println(" usec");
+		Serial.println("");
 	}
 }

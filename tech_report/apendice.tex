@@ -4,22 +4,22 @@
 Com a sensível complexidade dos comandos usados para a comunicação com a TV
 devido ao número de campos e a diferença entre eles, foi-se adotado um banco de
 ados para armazenar informações sobre os aparelhos, bem como seus comandos. Isso
-evitará possíveis problemas de esvalabilidade quando o sistema evoluir para o
+evitará possíveis problemas de escalabilidade quando o sistema evoluir para o
 controle de diversos equipamentos eletrônicos.
 
 % Pedro: o abaixo deveria estar em 'trabalhos futuros'
 Além disso, visando uma integração maior do sistema implementado no BeagleBone
-Black$^{\scriptsize{\textregistered}}$, a adoção de um servidor Apache com PHP 
+Black$^{\scriptsize{\textregistered}}$, a adoção de um servidor Apache com PHP
 será necessária. Essa integração se dá pela criação de uma página web onde serão
 armazenados dados provenientes das interação do sistema, por exemplo, caso o
-usuário tenha ligado a TV, mudado de canal ou desligado o ar condicionado, todas 
-essas informação poderão ir para um log de uma página web em que pode ser
-acessado pelo desenvolvedor para investigar a performance do sistema. Além do
-log de comandos executados pelo usuário, podemos guardar erros cometidos pelo
-Julius, ou eSpeak ou ainda falha no envio do comando para o aparelho eletrônico,
-em casos mais específicos o usuário poderá até ligar aparelhos remotamente ou o
-desenvolvedor avaliar o desempenho do sistema e identificando problemas antes de
-uma visita técnica. 
+usuário tenha ligado a TV, mudado de canal ou desligado o ar condicionado, todas
+essas informação poderão ir para um \textit{log} de uma página web em que pode
+ser acessado pelo desenvolvedor para investigar a performance do sistema. Além
+do \textit{log} de comandos executados pelo usuário, podemos guardar erros
+cometidos pelo Julius, ou eSpeak ou ainda falha no envio do comando para o
+aparelho eletrônico, em casos mais específicos o usuário poderá até ligar
+aparelhos remotamente ou o desenvolvedor avaliar o desempenho do sistema e
+identificando problemas antes de uma visita técnica.
 
 Para integrar todos estes recursos é necessário um sistema operacional que, no
 caso, é um Linux Debian, configurando assim o servidor LAMP (Linux,
@@ -30,178 +30,113 @@ para a comunicação, foram criadas 8 funções específicas, sendo elas mostradas na
 Lista~\ref{lst:dbphi0}.
 
 % Code
-\lstinputlisting[style=code, language=c, firstline=9, lastline=22,
-caption={Functions Definitions}, label={lst:dbphi0}]
-{codes/db_phi.c}
+\lstinputlisting[style=code, language=c, firstline=8, lastline=32,
+caption={Definição das funções}, label={lst:dbphi0}]
+{codes/bbb/db_phi.c}
 
-A Lista~\ref{lst:dbphi1} mostra a função main, onde a conexão com o banco de 
-dados é dada pela função \texttt{mysql\_init()}. Já a função \texttt{create\_db()} 
-cria um banco chamado \textit{y} com o usuário \textit{root}. Depois, a tabela 
-\textit{tv} (\texttt{create\_table()}) é criada e logo após os atributos 
-vão sendo inseridos (\texttt{insert\_table()}). Com \texttt{insert\_element()}
-atribuimos um valor a um atributo específico e usamos \texttt{get\_element()}
-para retirar da tabela o valor de um atributo, que no caso é \textit{volume+} da
-marca LG.
+\newpage
+A Lista~\ref{lst:dbphi2} mostra a função \texttt{get\_element()}, responsável
+por fazer a \textit{fetch} no banco de dados. Ela retornará o valor do atributo
+específico que se deseja obter, recebendo como parâmetros a coluna e a marca,
+bem como a conexão com o MySQL. Com isso, pode-se selecionar o atributo
+\textit{field} onde a marca é igual ao \textit{branch} passado à função. Feito
+isso, a função \texttt{mysql\_fetch\_row()} é chamada para retornar todos os
+valores que satisfazem a condição exigida pela \textit{query}, o qual, para esse
+caso especifico, será um valor único. Pode-se notar que o comando passado à
+consulta é simplemente um \textit{select} filtrado com a cláusula
+\textit{where}, tal como mostrado abaixo:
 
-% Code
-\lstinputlisting[style=code, language=c, firstline=24, lastline=56, 
-caption={Main}, label={lst:dbphi1}]
-{codes/db_phi.c}
-
-A Lista~\ref{lst:dbphi2} mostra a função responsável por fazer a \textit{query} 
-no banco de dados. Ela retornará o valor do atributo específico que se deseja 
-obter, recebendo como parâmetros a coluna e a marca, bem como a conexão com o 
-MySQL. Com isso,
-pode-se selecionar o atributo \textit{column} onde a marca é igual ao
-\textit{target} passado à função. Feito isso, a função \texttt{mysql\_fetch\_row()}
-é chamada para retornar todos os valores que satisfazem a condição exigida pela 
-\textit{query}, o qual, para esse caso especifico, será um valor único.
+\begin{lstlisting}[language=sql]
+SELECT field FROM tv WHERE marca='branch'
+\end{lstlisting}
 
 % Code
-\lstinputlisting[style=code, language=c, firstline=58, lastline=98, 
+\lstinputlisting[style=code, language=c, firstline=39, lastline=76, 
 caption={Função \texttt{get\_element()}}, label={lst:dbphi2}]
-{codes/db_phi.c}
+{codes/bbb/db_phi.c}\vspace{.5cm}
 
-A função que assinala um valor um atributo da tabela é mostrada na
-Lista~\ref{lst:dbphi3}. Os parâmetros irão montar a sintaxe da \textit{query}
-para que a tabela ``TV'' seja atualizada com o valor equivalente à
-\textit{value}, na interseção linha ``marca'' equivalente à \textit{target} com 
-a coluna do comando equivalente à \textit{column}. 
+As demais funções basicamente chamam a função \texttt{mysql\_query()}, a qual
+recebe como parâmetros a conexão com o banco e uma \textit{string} contendo o 
+comando SQL. A função \texttt{setup()}, mostrada na Lista~\ref{lst:dbphi9} foi 
+criada para configurar o banco de dados de acordo com as necessidades deste
+trabalho, utilizando tanto funções nativas da biblioteca usada quanto as criadas
+manualmente para algumas ações específicas. Essa função, se traduzida
+literalmente para seu código SQL, resultaria na sequência de comandos descritos
+na Lista~\ref{lst:dbphi_sql}.
 
-% Code
-\lstinputlisting[style=code, language=c, firstline=100, lastline=124, 
-caption={função {\tt insert\_element()}}, label={lst:dbphi3}]
-{codes/db_phi.c}
+% Code: SQL
+\lstinputlisting[style=code, language=sql, firstline=1, lastline=32, 
+caption={Código SQL para configuração do MySQL}, label={lst:dbphi_sql}]
+{codes/bbb/setup_db.sql}
 
-A função \texttt{create\_table()}, mostrada na Lista~\ref{lst:dbphi4}, tem como 
-finalidade criar as tabelas. Ela recebe o nome da tabela a ser criada
-(\textit{table}), o nome do banco de dados onde ela será criada (\textit{db}), o
-usuário (\textit{user}), a senha desse usuário (\textit{pwd}) e a conexão
-MySQL (\textit{con}). Ela irá montar com uma sintaxe pré definida a tabela
-com os atributos \textit{marca, volume+, volume-, canal+, canal-, on, off,
-address}.
-
-% Code
-\lstinputlisting[style=code, language=c, firstline=154, lastline=187, 
-caption={função {\tt create\_table()}}, label={lst:dbphi4}]
-{codes/db_phi.c}
-
-A Lista~\ref{lst:dbphi5} mostra a função \texttt{create\_db()}, a qual tem como 
-finalidade a criação do banco de dados.  O nome do banco a ser criado, o usuário
-e a senha desse usuário são passadas como parâmetro, bem como e a conexão com o
-MySQL. Ela usa o nome \textit{name} para organizar a sintaxe que cria o banco.
-
-% Code
-\lstinputlisting[style=code, language=c, firstline=189, lastline=202,
-caption={função {\tt create\_db()}}, label={lst:dbphi5}]
-{codes/db_phi.c}
-
-%% Code
-%\lstinputlisting[style=code, language=c, firstline=205, lastline=210, 
-%caption={função {\tt finish\_with\_error()}}, label={lst:dbphi6}]
-%{codes/db_phi.c}
-%
-%A função \texttt{finish\_with\_error()}, mostrada na Lista~\ref{lst:db_6}, 
-%apenas oferece o erro padrão para o caso de a conexão MySQL seja executada com
-%erro.
-
-%% Pedro: escrota essa função handle n gostei elimine
-%Em algumas sintaxes do MySQL os atributos são passados como ``nome'', ou seja,
-%entre aspas duplas, entretanto para inserir estas aspas duplas em C não
-%é tão trivial assim caso queiramos automatizar o processo de
-%adição, portanto, esta função foi criada com a finalidade
-%específica de adicionar e manipular esta string para que ela saia "string".
-%Ela recebe apenas a string alvo (no caso \textit{$*user$}, pois o caso onde a
-%usamos é para garantir acesso a algum usuário ao banco de dados.
-
-%% Pedro: ajeita essa função GRANT no .c e inclui ela da forma que incluí 
-%% as outras aí em cima
-%\begin{lstlisting}[style=code, language=c, caption={função $grant\_db()$}, label={lst:dbphi8}]
-%int grant_db(char *user, char *db, MYSQL *con){
-%    char *grantall = "GRANT ALL ON y.* TO GUEST IDENTIFIED BY ";
-%	char *flush_command = "FLUSH PRIVILEGES";
-%
-%	char *user_handle = handle_string(user);
-%
-%	size_t grant_len = strlen(grantall)+strlen(user_handle);
-%
-%	char *grant_command = (char *) malloc((grant_len+1)* sizeof (char));
-%
-%	sprintf(grant_command, "%s%s", grantall,user_handle);
-%
-%	printf("user_handle = %s\n",user_handle);
-%	printf("%s\n",grant_command);
-%
-%	if(mysql_query(con, "GRANT ALL ON y TO GUEST IDENTIFIED BY \"phy_dev\""))
-%		finish_with_error(con);
-%
-%	printf("Grant Success!\n");
-%	
-%	if(mysql_query(con,"FLUSH PRIVILEGES"))
-%		finish_with_error(con);
-%
-%	free(result);
-%	free(grant_command);	
-%	exit(0);
-%}
-%\end{lstlisting}
-%
-%Aqui garantimos ao usuário \textit{$*user$} acesso ao banco de dados
-%\textit{$*db$}, por meio de uma conexão MySQL \textit{$*con$}. Nela usamos a
-%função \textit{$handle\_user()$} para modificar a string do usuário
-%e posteriormente usá-la para montar a sintaxe da \textit{query}.
+% Code: setup
+\lstinputlisting[style=code, language=c, firstline=228, lastline=264, 
+caption={Função \texttt{setup()}}, label={lst:dbphi9}]
+{codes/bbb/db_phi.c}
 \end{section}
 
 % Thiago -----------------------------------------------------------------------
 \newpage
 \begin{section}{Arduino: IR Tx/Rx}
 \label{app:arduino}
-\lstinputlisting[style=code, language=c, firstline=12, lastline=26,
-caption={Declarações globais}, label={lst:ard_1}]
-{codes/arduino_IR.ino}
 
-\lstinputlisting[style=code, language=c, firstline=34, lastline=68,
-caption={Função {\tt loop()}}, label={lst:ard_2}]
-{codes/arduino_IR.ino}
+\lstinputlisting[style=code, language=c, firstline=40, lastline=76,
+caption={Função {\tt ir\_dump()}}, label={lst:ard_2}]
+{codes/arduino/arduino_IR.ino}
 
-\lstinputlisting[style=code, language=c, firstline=70, lastline=83,
-caption={Função {\tt printPulses()}}, label={lst:ard_3}]
-{codes/arduino_IR.ino}
-
-\lstinputlisting[style=code, language=c, firstline=85, lastline=99,
-caption={Função {\tt pulseIR()}}, label={lst:ard_4}]
-{codes/arduino_IR.ino}
-
-\lstinputlisting[style=code, language=c, firstline=101, lastline=108,
-caption={Função {\tt sendCommand()}}, label={lst:ard_5}]
-{codes/arduino_IR.ino}
+\lstinputlisting[style=code, language=c, firstline=90, lastline=104,
+caption={Função {\tt mark()}}, label={lst:ard_4}]
+{codes/arduino/arduino_IR.ino}
 \end{section}
+
+%% Cassio -----------------------------------------------------------------------
+%\newpage
+%\begin{section}{Matlab/Octave: Analisador de Onda Quadrada}
+%\label{app:matlab}
+%\lstinputlisting[style=code, language=matlab]{codes/matlab/myanalyze.m}
+%\end{section}
+
+%% Cassio -----------------------------------------------------------------------
+%\newpage
+%\begin{section}{C: RC-6 \textit{Handler}}
+%\label{app:rc6}
+%\lstinputlisting[style=code, language=c, firstline=57, lastline=67,
+%caption={Declaração das funções}, label={lst:ir_0}]
+%{codes/bbb/ir_pwm.c}
+%
+%\lstinputlisting[style=code, language=c, firstline=133, lastline=211,
+%caption={Função \texttt{decode()}}, label={lst:ir_1}]
+%{codes/bbb/ir_pwm.c}
+%
+%\lstinputlisting[style=code, language=c, firstline=220, lastline=278,
+%caption={Função \texttt{send()}}, label={lst:ir_1}]
+%{codes/bbb/ir_pwm.c}
+%
+%\lstinputlisting[style=code, language=c, firstline=281, lastline=323,
+%caption={Função \texttt{receive()}}, label={lst:ir_1}]
+%{codes/bbb/ir_pwm.c}
+%\end{section}
 
 % Cassio -----------------------------------------------------------------------
 \newpage
-\begin{section}{Matlab/Octave: Analisador de Onda Quadrada}
-\label{app:matlab}
-\lstinputlisting[style=code, language=matlab]{codes/myanalyze.m}
+\begin{section}{Protocolo de Comunicação Duplex entre Arduino e BBB}
+\label{app:duplex}
+Como já mencionado, muitos problemas impediram que o envio do sinal IR fosse 
+implementado diretamente na BeagleBone. Assim, a solução adotada foi transmitir
+os bits de comando, através de pinos, do servidor para o Arduino, o qual possui
+um código bem funcional para o envio de sinais IR via PWM.
+
+\subsection{Rx: UNO}
+\lstinputlisting[style=code, language=c, firstline=30, lastline=71,
+caption={Código do Arduino, o qual recebe um \textit{bitstream} de 34 bits}, 
+label={lst:duplex_0}]
+{codes/arduino/DuplexTransmission.ino}
+
+\subsection{Tx: BBB}
+\lstinputlisting[style=code, language=c, %firstline=57, lastline=67,
+caption={Código em C, o qual envia um \textit{bitstream} de 34 bits}, 
+label={lst:duplex_1}]
+{codes/bbb/send2uno.c}
 \end{section}
 
-% Cassio -----------------------------------------------------------------------
-\newpage
-\begin{section}{C: RC-6 \textit{Handler}}
-\label{app:rc6}
-\lstinputlisting[style=code, language=c, firstline=57, lastline=67,
-caption={Declaração das funções}, label={lst:ir_0}]
-{codes/ir_pwm.c}
-
-\lstinputlisting[style=code, language=c, firstline=133, lastline=211,
-caption={Função \texttt{decode()}}, label={lst:ir_1}]
-{codes/ir_pwm.c}
-
-\lstinputlisting[style=code, language=c, firstline=220, lastline=278,
-caption={Função \texttt{send()}}, label={lst:ir_1}]
-{codes/ir_pwm.c}
-
-\lstinputlisting[style=code, language=c, firstline=281, lastline=323,
-caption={Função \texttt{receive()}}, label={lst:ir_1}]
-{codes/ir_pwm.c}
-\end{section}
 %%% EOF %%%

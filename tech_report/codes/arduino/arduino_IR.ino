@@ -25,13 +25,21 @@ int IRledPin = 13;
 uint16_t pulses[100][2];	// par de pulsos high e low 
 uint8_t currentpulse = 0;	// index dos pulsos sendo armazenados
 
-void setup(void) {
+void setup(void) 
+{
 	pinMode(IRledPin, OUTPUT);
 	Serial.begin(9600);
 	Serial.println("Pronto para decodificar IR!");
 }
 
-void loop(void) {
+void loop()
+{
+	ir_dump();
+}
+
+/* */
+void ir_dump(void) 
+{
 	uint16_t highpulse, lowpulse;  
 	highpulse = lowpulse = 0; 
 
@@ -43,7 +51,7 @@ void loop(void) {
 		/* Se pulso muito longo, ou nada ocorreu ou o codigo terminou */ 
 		/* Mostra os tempos de pulso no monitor serial */
 		if ((highpulse >= MAXPULSE) && (currentpulse != 0)) {
-			printPulses();
+			printPulses(); //mostra no Serial monitor
 			currentpulse=0;
 			return;
 		}
@@ -56,7 +64,7 @@ void loop(void) {
 		lowpulse++; 
 		delayMicroseconds(RESOLUTION);
 		if ((lowpulse >= MAXPULSE)  && (currentpulse != 0)) {
-			printPulses();
+			printPulses(); //mostra no Serial monitor
 			currentpulse=0;
 			return;
 		}
@@ -72,18 +80,15 @@ void printPulses(void) {
 	Serial.println("\n\r\n\rRecebido: \n\rOFF \tON");
 	for (uint8_t i = 0; i < currentpulse; i++) {
 		Serial.print(pulses[i][0] * RESOLUTION, DEC);
-		Serial.print(",");
+		Serial.print(" ");
 		Serial.print(pulses[i][1] * RESOLUTION, DEC);
 		Serial.println("");
 	}
 	delay(1000);
-
-	/* Envia o comando pelo led IR */
-	//sendCommand(currentpulse);
 }
 
 /* Envia um pulso de 38kHz para o pin por x ms, reproduzindo o comando decodificado (PWM) */
-void pulseIR(long microsecs) {
+void mark(long microsecs) {
 	cli();  // Desativa interrupcoes de background
 	while (microsecs > 0) {
 		// 38 kHz eh aproximadamente 13 us high e 13 us low
@@ -92,7 +97,7 @@ void pulseIR(long microsecs) {
 		digitalWrite(IRledPin, LOW);	// 3 us
 		delayMicroseconds(10);			// espera mais 10 us
 
-		/* subtrai 26 us do pulso */
+		/* subtrai 3+10+3+10 us do pulso */
 		microsecs -= 26;
 	}
 	sei();  // Ativa as interrupcoes
@@ -102,7 +107,7 @@ void pulseIR(long microsecs) {
 void sendCommand(uint8_t cp) {
 	for (uint8_t i = 0; i < cp; i++){
 		delayMicroseconds((pulses[i][0] * RESOLUTION));	// off
-		pulseIR((pulses[i][1] * RESOLUTION));			// on
+		mark((pulses[i][1] * RESOLUTION));			// on
 	}
 	Serial.println("Comando enviado!");
 }

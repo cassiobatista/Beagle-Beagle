@@ -16,18 +16,23 @@ end
 % threshold: expects to specify a enough range to get the entire signal ONCE
 myend = 43;
 
-% 2 consecutive maxs represent the beginning of the signal, that starts idle
-% Inside this range, extracts exactly the signal that matters without repeating
-for i=1:length(x)
-	if length(x{i}) > myend
-		[mx, idx] = max(x{i}(2:myend));
-		if mx > 2000
-			x{i} = x{i}(2:idx);
-		end
-	else
-		x{i} = x{i}(2:end);
-	end
-end
+%% 2 consecutive maxs represent the beginning of the signal, that starts idle
+%% Inside this range, extracts exactly the signal that matters without repeating
+%for i=1:length(x)
+%	if length(x{i}) > myend
+%		[mx, idx] = max(x{i}(2:myend));
+%		if mx > 2000
+%			x{i} = x{i}(2:idx);
+%		end
+%	else
+%		x{i} = x{i}(2:end);
+%	end
+%end
+
+x{1}=x{1}(2:end);
+x{2}=x{2}(2:end);
+x{3}=x{3}(2:end);
+x{4}=x{4}(2:end);
 
 % Converting from vector of durations x into step function y
 % If a piece lasts n us then it'll become a step with n high or low values
@@ -46,7 +51,7 @@ for i=1:length(x)
 end
 
 % Plot' em all
-myend = 23000;
+myend = 60000;
 color = {'b', 'r', 'g', 'k', 'm', 'y', 'c'};
 figure;
 for i=1:length(y)

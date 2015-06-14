@@ -1,4 +1,4 @@
-/* RC-6 Handler
+/* RC-6 Transceiver
 
  * Author: May, 2015
  * Cassio Trindade Batista 
@@ -70,7 +70,7 @@ int main() {
 	uint16_t x = 960; //eXtra: padding to fill duration (see func receive())
 
 	// CANAL MAIS 
-	uint16_t a[] = { 
+	uint16_t a[] = {
 			42864, 2500, 940, 340, 960, 320, 520, 320, 540, 1180, 1400, 320,
 			540, 320, 520, 340, 520, 320, 540, 320, 540, 320, 520, 320, 540,
 			320, 520, 760, 960, 340, 520, 760, 520, 320, 960, 320, 540, 320, x,
