@@ -1,0 +1,24 @@
+\select@language {brazil}
+\contentsline {section}{\numberline {1}Introdu\c c\~ao}{4}{section.1}
+\contentsline {section}{\numberline {2}Objetivos}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Reconhecimento e S\IeC {\'\i }ntese de Voz}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Controle Remoto de TV e Servidor LAMP}{5}{subsection.2.2}
+\contentsline {section}{\numberline {3}Justificativa}{6}{section.3}
+\contentsline {section}{\numberline {4}Revis\~ao Te\'orica}{7}{section.4}
+\contentsline {subsection}{\numberline {4.1}Reconhecimento e S\IeC {\'\i }ntese de Voz}{7}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Compara\c c\~ao entre Plataformas}{7}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Protocolos IR: RC-5 e RC-6}{8}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Produtos Relacionados}{10}{subsection.4.4}
+\contentsline {section}{\numberline {5}Metodologia}{11}{section.5}
+\contentsline {subsection}{\numberline {5.1}Entrada de \'Audio e Reconhecimento de Voz}{11}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}An\'alise do Sinal IR}{12}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Banco de Dados MySQL}{13}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}GPIO}{14}{subsection.5.4}
+\contentsline {section}{\numberline {6}Or\c camento}{15}{section.6}
+\contentsline {section}{\numberline {7}Dificuldades e Solu\c c\~oes}{15}{section.7}
+\contentsline {section}{\numberline {8}Trabalhos Futuros}{18}{section.8}
+\contentsline {section}{\numberline {A}C: LAMP}{20}{appendix.A}
+\contentsline {section}{\numberline {B}Arduino: IR Tx/Rx}{24}{appendix.B}
+\contentsline {section}{\numberline {C}Protocolo de Comunica\c c\~ao Duplex entre Arduino e BBB}{25}{appendix.C}
+\contentsline {subsection}{\numberline {C.1}Rx: UNO}{25}{subsection.C.1}
+\contentsline {subsection}{\numberline {C.2}Tx: BBB}{25}{subsection.C.2}

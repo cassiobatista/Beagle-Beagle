@@ -1,0 +1,100 @@
+\begin{thebibliography}{10}
+
+\bibitem{Taylor09}
+P.~Taylor, {\em Text-To-Speech Synthesis}.
+\newblock Cambridge University Press, 2009.
+
+\bibitem{Huang01}
+X.~Huang, A.~Acero, and H.~Hon, {\em Spoken Language Processing}.
+\newblock Prentice-Hall, 2001.
+
+\bibitem{cat}
+{\em Comitê de Ajudas Técnicas. Tecnologia Assistiva}.
+\newblock Brasília, Brasil: Subsecretaria Nacional de Promoção dos Direitos da
+  Pessoa com Deficiência., 2009.
+
+\bibitem{Gelderblom02}
+G.~J. Gelderblom and L.~P. de~Witte, ``The assessment of assistive technology:
+  Outcomes, effects and costs,'' IOS Press. Technology and Disability 91-94,
+  2002.
+
+\bibitem{falabrasilsite}
+``{FalaBrasil: Reconhecimento de Voz para o Português Brasileiro},'' {Visitado
+  em Julho}, 2014.
+\newblock \url{http://www.laps.ufpa.br/falabrasil/}.
+
+\bibitem{Siravenha08}
+A.~Siravenha, N.~Neto, V.~Macedo, and A.~Klautau, ``Uso de regras fonológicas
+  com determinação de vogal tônica para conversão grafema-fone em {P}ortuguês
+  {B}rasileiro,'' {\em 7th International Information and Telecommunication
+  Technologies Symposium}, 2008.
+
+\bibitem{IBGE10}
+``Perfis do censo demográfico. {V}isitado em {J}aneiro,'' 2010.
+\newblock \url{www.ibge.gov.br/}.
+
+\bibitem{Laisa12}
+L.~C. P.~C. {et. al}, ``Accessibility in digital television: Designing remote
+  controls,'' {IEEE Transactions on Consumer Electronics}, 2012.
+
+\bibitem{Wechsung09}
+I.~Wechsung and A.~B. Naumann, ``Evaluating a multimodal remote control: The
+  interplay between user experience and usability,'' {IEEE}, 2009.
+
+\bibitem{Barrena11}
+S.~B. {et. al}, ``Designing android applications with both online and offline
+  voice control of household devices,'' {IEEE}, 2011.
+
+\bibitem{voxforge}
+``{Tutorial: Create Acoustic Model},'' {Visitado em Abril}, 2015.
+\newblock \url{http://www.voxforge.org/}.
+
+\bibitem{Young00}
+S.~e. Young, {\em The HTK Book}.
+\newblock Microsoft Corporation, Version 3.0, 2000.
+
+\bibitem{juliussite}
+``{Open-Source Large Vocabulary CSR Engine Julius},'' Visitado em Julho, 2014.
+\newblock \url{http://julius.sourceforge.jp/en\_index.php}.
+
+\bibitem{andicelabs}
+``{USB Audio on the BeagleBone},'' Visitado em Abril, 2015.
+\newblock \url{http://andicelabs.com/2014/03/usb-audio-beaglebone/}.
+
+\bibitem{eSpeak}
+``{eSpeak text to speech},'' Visitado em Julho, 2014.
+\newblock \url{http://espeak.sourceforge.net/}.
+
+\bibitem{mhl}
+``{Raspberry Pi or Beaglebone Black},'' {Visitado em Abril}, 2015.
+\newblock \url{http://michaelhleonard.com/}.
+
+\bibitem{randomnerd}
+``{Arduino vs. Raspberry Pi vs BeagleBone},'' {Visitado em Abril}, 2015.
+\newblock \url{http://randomnerdtutorials.com/}.
+
+\bibitem{makezine}
+``{Arduino Uno vs BeagleBone vs Raspberry Pi},'' {Visitado em Abril}, 2015.
+\newblock \url{http://makezine.com/}.
+
+\bibitem{mundoestranho}
+``{Como funciona o controle remoto?},'' {Visitado em Abril}, 2015.
+\newblock \url{http://mundoestranho.abril.com.br/}.
+
+\bibitem{uol_hsw}
+``{Como funcionam os controles remotos},'' {Visitado em Abril}, 2015.
+\newblock \url{http://tecnologia.hsw.uol.com.br/}.
+
+\bibitem{rc5_wiki}
+``{RC-5 Philips Procotol},'' Visitado em Abril, 2015.
+\newblock \url{http://en.wikipedia.org/wiki/RC-5}.
+
+\bibitem{harmonysc}
+``{Logitech Harmony Smart Control},'' Visitado em Abril, 2015.
+\newblock \url{http://www.logitech.com/en-us/product/harmony-smart-control}.
+
+\bibitem{irdroid}
+``{IRdroid: Universal Remote for Android},'' Visitado em Abril, 2015.
+\newblock \url{http://www.irdroid.com/}.
+
+\end{thebibliography}

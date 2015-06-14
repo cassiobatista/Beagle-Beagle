@@ -1,0 +1,1067 @@
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.4.11)  14 JUN 2015 01:21
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**tech_report.tex
+(./tech_report.tex
+LaTeX2e <2011/06/27>
+Babel <3.9h> and hyphenation patterns for 78 languages loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/usr/share/texlive/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks14
+\inpenc@posthook=\toks15
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/latin1.def
+File: latin1.def 2008/03/30 v1.1d Input encoding file
+))
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2013/12/03 3.9h The Babel package
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel-portuges/portuges.ldf
+Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
+
+(/usr/share/texlive/texmf-dist/tex/generic/babel/babel.def
+File: babel.def 2013/12/03 3.9h Babel common definitions
+\babel@savecnt=\count87
+\U@D=\dimen103
+)
+\l@brazil = a dialect from \language\l@portuges 
+Package babel Info: Making " an active character on input line 145.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks16
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count88
+))
+\Gin@req@height=\dimen104
+\Gin@req@width=\dimen105
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count89
+\lst@gtempboxa=\box26
+\lst@token=\toks17
+\lst@length=\count90
+\lst@currlwidth=\dimen106
+\lst@column=\count91
+\lst@pos=\count92
+\lst@lostspace=\dimen107
+\lst@width=\dimen108
+\lst@newlines=\count93
+\lst@lineno=\count94
+\lst@maxwidth=\dimen109
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
+\c@lstnumber=\count95
+\lst@skipnumbers=\count96
+\lst@framebox=\box27
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2013/08/26 1.5b listings configuration
+))
+Package: listings 2013/08/26 1.5b (Carsten Heinz)
+
+(/usr/share/texmf/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip43
+
+For additional information on amsmath, use the `?' option.
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks18
+\ex@=\dimen110
+))
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen111
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count97
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count98
+\leftroot@=\count99
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count100
+\DOTSCASE@=\count101
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box28
+\strutbox@=\box29
+\big@size=\dimen112
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count102
+\c@MaxMatrixCols=\count103
+\dotsspace@=\muskip10
+\c@parentequation=\count104
+\dspbrk@lvl=\count105
+\tag@help=\toks19
+\row@=\count106
+\column@=\count107
+\maxfields@=\count108
+\andhelp@=\toks20
+\eqnshift@=\dimen113
+\alignsep@=\dimen114
+\tagshift@=\dimen115
+\tagwidth@=\dimen116
+\totwidth@=\dimen117
+\lineht@=\dimen118
+\@envbody=\toks21
+\multlinegap=\skip44
+\multlinetaggap=\skip45
+\mathdisplay@stack=\toks22
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+Package: hobsub-hyperref 2012/05/28 v1.13 Bundle oberdiek, subset hyperref (HO)
+
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+Package: hobsub-generic 2012/05/28 v1.13 Bundle oberdiek, subset generic (HO)
+Package: hobsub 2012/05/28 v1.13 Construct package bundles (HO)
+Package hobsub Info: Skipping package `infwarerr' (already loaded).
+Package hobsub Info: Skipping package `ltxcmds' (already loaded).
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+Package: intcalc 2007/09/27 v1.1 Expandable calculations with integers (HO)
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+Package: pdfescape 2011/11/25 v1.13 Implements pdfTeX's escape features (HO)
+Package: bigintcalc 2012/04/08 v1.3 Expandable calculations on big integers (HO
+)
+Package: bitset 2011/01/30 v1.1 Handle bit-vector datatype (HO)
+Package: uniquecounter 2011/01/30 v1.2 Provide unlimited unique counter (HO)
+)
+Package hobsub Info: Skipping package `hobsub' (already loaded).
+Package: letltxmacro 2010/09/02 v1.4 Let assignment for LaTeX macros (HO)
+Package: hopatch 2012/05/28 v1.2 Wrapper for package hooks (HO)
+Package: xcolor-patch 2011/01/30 xcolor patch
+Package: atveryend 2011/06/30 v1.8 Hooks at the very end of document (HO)
+Package atveryend Info: \enddocument detected (standard20110627).
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+Package: refcount 2011/10/16 v3.4 Data extraction from label references (HO)
+Package: hycolor 2011/01/30 v1.7 Color options for hyperref/bookmark (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/auxhook.sty
+Package: auxhook 2011/03/04 v1.3 Hooks for auxiliary files (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+)
+\@linkdim=\dimen119
+\Hy@linkcounter=\count109
+\Hy@pagecounter=\count110
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
+)
+\Hy@SavedSpaceFactor=\count111
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+Package hyperref Info: Hyper figures OFF on input line 4443.
+Package hyperref Info: Link nesting OFF on input line 4448.
+Package hyperref Info: Hyper index ON on input line 4451.
+Package hyperref Info: Plain pages OFF on input line 4458.
+Package hyperref Info: Backreferencing OFF on input line 4463.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4688.
+\c@Hy@tempcnt=\count112
+
+(/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip11
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 5041.
+\XeTeXLinkMargin=\dimen120
+\Fld@menulength=\count113
+\Field@Width=\dimen121
+\Fld@charsize=\dimen122
+Package hyperref Info: Hyper figures OFF on input line 6295.
+Package hyperref Info: Link nesting OFF on input line 6300.
+Package hyperref Info: Hyper index ON on input line 6303.
+Package hyperref Info: backreferencing OFF on input line 6310.
+Package hyperref Info: Link coloring OFF on input line 6315.
+Package hyperref Info: Link coloring with OCG OFF on input line 6320.
+Package hyperref Info: PDF/A mode OFF on input line 6325.
+LaTeX Info: Redefining \ref on input line 6365.
+LaTeX Info: Redefining \pageref on input line 6369.
+\Hy@abspage=\count114
+\c@Item=\count115
+\c@Hfootnote=\count116
+)
+
+Package hyperref Message: Driver (autodetected): hpdftex.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
+\Fld@listcount=\count117
+\c@bookmark@seq@number=\count118
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+Package: rerunfilecheck 2011/04/15 v1.7 Rerun checks for auxiliary files (HO)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
+82.
+)
+\Hy@SectionHShift=\skip46
+)
+(/usr/share/texlive/texmf-dist/tex/latex/breakurl/breakurl.sty
+Package: breakurl 2013/04/10 v1.40 Breakable hyperref URLs
+
+(/usr/share/texlive/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+Package: xkeyval 2012/10/14 v2.6b package option processing (HA)
+
+(/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
+\XKV@toks=\toks23
+\XKV@tempa@toks=\toks24
+\XKV@depth=\count119
+File: xkeyval.tex 2012/10/14 v2.6b key=value parser (HA)
+))
+
+Package breakurl Warning: You are using breakurl while processing via pdflatex.
+
+(breakurl)                \burl will be just a synonym of \url.
+(breakurl)                 on input line 48.
+
+) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2010/09/12 v5.6 Page Geometry
+\Gm@cnth=\count120
+\Gm@cntv=\count121
+\c@Gm@tempcnt=\count122
+\Gm@bindingoffset=\dimen123
+\Gm@wd@mp=\dimen124
+\Gm@odd@mp=\dimen125
+\Gm@even@mp=\dimen126
+\Gm@layoutwidth=\dimen127
+\Gm@layoutheight=\dimen128
+\Gm@layouthoffset=\dimen129
+\Gm@layoutvoffset=\dimen130
+\Gm@dimlist=\toks25
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen131
+\captionmargin@=\dimen132
+\captionwidth=\dimen133
+\caption@tempdima=\dimen134
+\caption@indent=\dimen135
+\caption@parindent=\dimen136
+\caption@hangindent=\dimen137
+)
+\c@ContinuedFloat=\count123
+Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/subcaption.sty
+Package: subcaption 2013/02/03 v1.1-62 Sub-captions (AR)
+\c@subfigure=\count124
+\c@subtable=\count125
+)
+(/usr/share/texlive/texmf-dist/tex/latex/lipsum/lipsum.sty
+Package: lipsum 2011/04/14 v1.2 150 paragraphs of Lorem Ipsum dummy text
+\c@lips@count=\count126
+)
+(/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+\fancy@headwidth=\skip47
+\f@ncyO@elh=\skip48
+\f@ncyO@erh=\skip49
+\f@ncyO@olh=\skip50
+\f@ncyO@orh=\skip51
+\f@ncyO@elf=\skip52
+\f@ncyO@erf=\skip53
+\f@ncyO@olf=\skip54
+\f@ncyO@orf=\skip55
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listing/listing.sty
+Package: listing 1999/05/25
+
+Package `listing', V1.2, <1999/05/25>
+\c@listing=\count127
+) (/usr/share/texlive/texmf-dist/tex/latex/was/gensymb.sty
+Package: gensymb 2003/07/02 v1.0 (WaS)
+)
+
+Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
+less on input line 23.
+
+
+Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
+less on input line 25.
+
+(./tech_report.aux)
+\openout1 = `tech_report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count128
+\scratchdimen=\dimen138
+\scratchbox=\box30
+\nofMPsegments=\count129
+\nofMParguments=\count130
+\everyMPshowfont=\toks26
+\MPscratchCnt=\count131
+\MPscratchDim=\dimen139
+\MPnumerator=\count132
+\makeMPintoPDFobject=\count133
+\everyMPtoPDFconversion=\toks27
+) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+)
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+\c@lstlisting=\count134
+\AtBeginShipoutBox=\box31
+Package hyperref Info: Link coloring OFF on input line 114.
+
+(/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
+)
+\c@section@level=\count135
+)
+LaTeX Info: Redefining \ref on input line 114.
+LaTeX Info: Redefining \pageref on input line 114.
+LaTeX Info: Redefining \nameref on input line 114.
+
+(./tech_report.out) (./tech_report.out)
+\@outlinefile=\write3
+\openout3 = `tech_report.out'.
+
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(76.82234pt, 460.65031pt, 76.82234pt)
+* v-part:(T,H,B)=(95.39737pt, 614.21436pt, 85.35826pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=460.65031pt
+* \textheight=614.21436pt
+* \oddsidemargin=4.55235pt
+* \evensidemargin=4.55235pt
+* \topmargin=-13.87262pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Info: Redefining \celsius on input line 114.
+Package gensymb Info: Faking symbols for \degree and \celsius on input line 114
+.
+
+Package gensymb Warning: Not defining \perthousand.
+
+LaTeX Info: Redefining \ohm on input line 114.
+Package gensymb Info: Using \Omega for \ohm on input line 114.
+
+Package gensymb Warning: Not defining \micro.
+
+(./capa.tex
+Package epstopdf Info: Source file: <Figures/logo_ufpa.eps>
+(epstopdf)                    date: 2015-04-11 18:45:37
+(epstopdf)                    size: 59924 bytes
+(epstopdf)             Output file: <Figures/logo_ufpa-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-26 16:49:28
+(epstopdf)                    size: 63069 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/logo_ufpa-eps-conv
+erted-to.pdf Figures/logo_ufpa.eps>
+(epstopdf)             \includegraphics on input line 2.
+Package epstopdf Info: Output file is already uptodate.
+
+<Figures/logo_ufpa-eps-converted-to.pdf, id=96, 357.335pt x 451.6875pt>
+File: Figures/logo_ufpa-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/logo_ufpa-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/logo_ufpa-eps-converted-to.pdf used on input l
+ine 2.
+(pdftex.def)             Requested size: 73.70573pt x 93.16858pt.
+)
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 120.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 120.
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./Figures/logo_ufpa-eps-co
+nverted-to.pdf>]
+Overfull \hbox (24.0pt too wide) in alignment at lines 122--122
+[][]
+ []
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 125.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 125.
+[2] (./tech_report.toc)
+\tf@toc=\write4
+\openout4 = `tech_report.toc'.
+
+ (./tech_report.lof)
+\tf@lof=\write5
+\openout5 = `tech_report.lof'.
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 169.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 169.
+ [3] (./chapters/cap_intro.tex
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 1.
+)
+(./chapters/cap_objetivos.tex
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 1.
+Package epstopdf Info: Source file: <Figures/schematic.eps>
+(epstopdf)                    date: 2015-06-13 21:31:52
+(epstopdf)                    size: 13296570 bytes
+(epstopdf)             Output file: <Figures/schematic-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-13 21:32:42
+(epstopdf)                    size: 159990 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/schematic-eps-conv
+erted-to.pdf Figures/schematic.eps>
+(epstopdf)             \includegraphics on input line 15.
+Package epstopdf Info: Output file is already uptodate.
+
+<Figures/schematic-eps-converted-to.pdf, id=171, 927.465pt x 532.99126pt>
+File: Figures/schematic-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/schematic-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/schematic-eps-converted-to.pdf used on input l
+ine 15.
+(pdftex.def)             Requested size: 368.52165pt x 211.78575pt.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 20.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 40.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 40.
+ [4]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 48.
+)
+(./chapters/cap_justificativa.tex
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 1.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 9.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 9.
+ [5 <./Figures/schematic-eps-converted-to.pdf>]
+
+LaTeX Warning: Citation `ada' on page 6 undefined on input line 50.
+
+)
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 178.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 178.
+ [6] (./chapters/cap_rev_teorica.tex
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 1.
+
+
+LaTeX Warning: Citation `Sefat14' on page 7 undefined on input line 18.
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 30.
+
+LaTeX Warning: Citation `Lee09' on page 7 undefined on input line 45.
+
+Package epstopdf Info: Source file: <Figures/asr_sch.eps>
+(epstopdf)                    date: 2015-04-11 18:45:37
+(epstopdf)                    size: 2411383 bytes
+(epstopdf)             Output file: <Figures/asr_sch-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-26 16:49:33
+(epstopdf)                    size: 50126 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/asr_sch-eps-conver
+ted-to.pdf Figures/asr_sch.eps>
+(epstopdf)             \includegraphics on input line 49.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/asr_sch-eps-converted-to.pdf, id=220, 825.0825pt x 377.41pt>
+File: Figures/asr_sch-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/asr_sch-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/asr_sch-eps-converted-to.pdf used on input lin
+e 49.
+(pdftex.def)             Requested size: 299.41989pt x 136.96165pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 74.
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 13.07225pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 89.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 89.
+[7]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 126.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 141.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 141.
+ [8 <./Figures/asr_sch-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Figures/sch_rc5.eps>
+(epstopdf)                    date: 2015-04-14 13:00:49
+(epstopdf)                    size: 184992 bytes
+(epstopdf)             Output file: <Figures/sch_rc5-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-26 16:49:33
+(epstopdf)                    size: 90019 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/sch_rc5-eps-conver
+ted-to.pdf Figures/sch_rc5.eps>
+(epstopdf)             \includegraphics on input line 144.
+Package epstopdf Info: Output file is already uptodate.
+
+<Figures/sch_rc5-eps-converted-to.pdf, id=253, 794.97pt x 600.2425pt>
+File: Figures/sch_rc5-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/sch_rc5-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/sch_rc5-eps-converted-to.pdf used on input lin
+e 144.
+(pdftex.def)             Requested size: 405.37451pt x 306.08298pt.
+
+
+LaTeX Warning: Citation `rc5' on page 9 undefined on input line 165.
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 179.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 179.
+[9 <./Figures/sch_rc5-eps-converted-to.pdf>]
+Package epstopdf Info: Source file: <Figures/rc6.eps>
+(epstopdf)                    date: 2015-04-25 20:32:56
+(epstopdf)                    size: 43107 bytes
+(epstopdf)             Output file: <Figures/rc6-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-26 16:49:34
+(epstopdf)                    size: 75101 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/rc6-eps-converted-
+to.pdf Figures/rc6.eps>
+(epstopdf)             \includegraphics on input line 182.
+Package epstopdf Info: Output file is already uptodate.
+
+<Figures/rc6-eps-converted-to.pdf, id=262, 686.565pt x 315.1775pt>
+File: Figures/rc6-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/rc6-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/rc6-eps-converted-to.pdf used on input line 18
+2.
+(pdftex.def)             Requested size: 299.41989pt x 137.45218pt.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 214.
+)
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 181.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 181.
+ [10 <./Figures/rc6-eps-converted-to.pdf>] (./chapters/cap_metodologia.tex
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 1.
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2013/08/26 1.5b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2013/08/26 1.5b listings language file
+)
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 36.
+
+
+LaTeX Warning: Citation `Cassio14' on page 11 undefined on input line 37.
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 94.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 94.
+[11]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 94.
+
+
+LaTeX Warning: Reference `app:matlab' on page 12 undefined on input line 102.
+
+Package epstopdf Info: Source file: <Figures/cmds.eps>
+(epstopdf)                    date: 2015-04-26 16:49:10
+(epstopdf)                    size: 25074915 bytes
+(epstopdf)             Output file: <Figures/cmds-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-26 16:49:43
+(epstopdf)                    size: 121514 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/cmds-eps-converted
+-to.pdf Figures/cmds.eps>
+(epstopdf)             \includegraphics on input line 115.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/cmds-eps-converted-to.pdf, id=304, 1607.00375pt x 830.10126pt>
+File: Figures/cmds-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/cmds-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/cmds-eps-converted-to.pdf used on input line 1
+15.
+(pdftex.def)             Requested size: 460.65031pt x 237.94928pt.
+Package epstopdf Info: Source file: <Figures/volume+.eps>
+(epstopdf)                    date: 2015-04-26 16:49:10
+(epstopdf)                    size: 25079582 bytes
+(epstopdf)             Output file: <Figures/volume+-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-04-26 16:49:52
+(epstopdf)                    size: 130181 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/volume+-eps-conver
+ted-to.pdf Figures/volume+.eps>
+(epstopdf)             \includegraphics on input line 123.
+Package epstopdf Info: Output file is already uptodate.
+
+<Figures/volume+-eps-converted-to.pdf, id=305, 1607.00375pt x 830.10126pt>
+File: Figures/volume+-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/volume+-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/volume+-eps-converted-to.pdf used on input lin
+e 123.
+(pdftex.def)             Requested size: 460.65031pt x 237.94928pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 129.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 136.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 136.
+[12 <./Figures/cmds-eps-converted-to.pdf>]
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2013/08/26 1.5b listings language file
+)
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 172.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 184.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 184.
+ [13 <./Figures/volume+-eps-converted-to.pdf>]
+
+LaTeX Warning: Citation `am335x' on page 14 undefined on input line 248.
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 268.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 268.
+[14]) (./chapters/cap_orcamento.tex
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 1.
+) (./chapters/cap_dificuldades.tex
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 1.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 35.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 35.
+ [15]
+Package epstopdf Info: Source file: <Figures/Bits.eps>
+(epstopdf)                    date: 2015-06-14 00:35:28
+(epstopdf)                    size: 2685223 bytes
+(epstopdf)             Output file: <Figures/Bits-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-14 00:47:53
+(epstopdf)                    size: 25518 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/Bits-eps-converted
+-to.pdf Figures/Bits.eps>
+(epstopdf)             \includegraphics on input line 76.
+Package epstopdf Info: Output file is already uptodate.
+
+<Figures/Bits-eps-converted-to.pdf, id=380, 597.23125pt x 418.56375pt>
+File: Figures/Bits-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/Bits-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/Bits-eps-converted-to.pdf used on input line 7
+6.
+(pdftex.def)             Requested size: 370.30539pt x 259.52599pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 77.
+See the caption package documentation for explanation.
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 81.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 81.
+[16]
+Package epstopdf Info: Source file: <Figures/Ciclo_PWM.eps>
+(epstopdf)                    date: 2015-06-14 00:35:49
+(epstopdf)                    size: 723933 bytes
+(epstopdf)             Output file: <Figures/Ciclo_PWM-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-14 01:07:44
+(epstopdf)                    size: 9588 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/Ciclo_PWM-eps-conv
+erted-to.pdf Figures/Ciclo_PWM.eps>
+(epstopdf)             \includegraphics on input line 88.
+Package epstopdf Info: Output file is already uptodate.
+
+<Figures/Ciclo_PWM-eps-converted-to.pdf, id=390, 516.93124pt x 129.48375pt>
+File: Figures/Ciclo_PWM-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/Ciclo_PWM-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/Ciclo_PWM-eps-converted-to.pdf used on input l
+ine 88.
+(pdftex.def)             Requested size: 283.17001pt x 70.93176pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 89.
+See the caption package documentation for explanation.
+
+Package epstopdf Info: Source file: <Figures/Bit_noPWM.eps>
+(epstopdf)                    date: 2015-06-14 00:35:06
+(epstopdf)                    size: 593084 bytes
+(epstopdf)             Output file: <Figures/Bit_noPWM-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-14 01:07:45
+(epstopdf)                    size: 10566 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/Bit_noPWM-eps-conv
+erted-to.pdf Figures/Bit_noPWM.eps>
+(epstopdf)             \includegraphics on input line 113.
+Package epstopdf Info: Output file is already uptodate.
+<Figures/Bit_noPWM-eps-converted-to.pdf, id=391, 283.0575pt x 193.72375pt>
+File: Figures/Bit_noPWM-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/Bit_noPWM-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/Bit_noPWM-eps-converted-to.pdf used on input l
+ine 113.
+(pdftex.def)             Requested size: 196.04129pt x 134.17204pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 114.
+See the caption package documentation for explanation.
+
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 118.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 118.
+[17 <./Figures/Bits-eps-converted-to.pdf> <./Figures/Ciclo_PWM-eps-converted-to
+.pdf>]
+Package epstopdf Info: Source file: <Figures/Bit0_Coding.eps>
+(epstopdf)                    date: 2015-06-14 00:34:49
+(epstopdf)                    size: 975056 bytes
+(epstopdf)             Output file: <Figures/Bit0_Coding-eps-converted-to.pdf>
+(epstopdf)                    date: 2015-06-14 01:07:46
+(epstopdf)                    size: 10288 bytes
+(epstopdf)             Command: <repstopdf --outfile=Figures/Bit0_Coding-eps-co
+nverted-to.pdf Figures/Bit0_Coding.eps>
+(epstopdf)             \includegraphics on input line 120.
+Package epstopdf Info: Output file is already uptodate.
+
+<Figures/Bit0_Coding-eps-converted-to.pdf, id=404, 536.0025pt x 168.63pt>
+File: Figures/Bit0_Coding-eps-converted-to.pdf Graphic file (type pdf)
+
+<use Figures/Bit0_Coding-eps-converted-to.pdf>
+Package pdftex.def Info: Figures/Bit0_Coding-eps-converted-to.pdf used on input
+ line 120.
+(pdftex.def)             Requested size: 370.30539pt x 116.4989pt.
+
+
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 121.
+See the caption package documentation for explanation.
+
+) (./chapters/cap_trab_futuros.tex
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 1.
+
+
+LaTeX Warning: Citation `nielsen04' on page 18 undefined on input line 2.
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 11.
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 11.
+) (./tech_report.bbl
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 7.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 7.
+
+[18 <./Figures/Bit_noPWM-eps-converted-to.pdf> <./Figures/Bit0_Coding-eps-conve
+rted-to.pdf>])
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 199.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 199.
+ [19] (./apendice.tex
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 2.
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 12.
+
+
+LaTeX Warning: Command \textregistered invalid in math mode on input line 12.
+
+
+LaTeX Warning: Command \textcircled invalid in math mode on input line 12.
+
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <7> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 12.
+
+LaTeX Warning: Command \textcircled invalid in math mode on input line 12.
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2013/08/26 1.5b listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
+)
+(./codes/bbb/db_phi.c)
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 37.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 37.
+ [20] (./codes/bbb/db_phi.c
+LaTeX Font Info:    Try loading font information for OMS+cmtt on input line 67.
+
+LaTeX Font Info:    No file OMScmtt.fd. on input line 67.
+
+
+LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead on input line 67.
+
+)
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 70.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 70.
+ [21] (./codes/bbb/setup_db.sql) (./codes/bbb/db_phi.c
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 254.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 254.
+ [22])
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 79.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 79.
+ [23]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 80.
+
+(./codes/arduino/arduino_IR.ino) (./codes/arduino/arduino_IR.ino)
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 121.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 121.
+ [24]
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 122.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 129.
+
+(./codes/arduino/DuplexTransmission.ino)
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 135.
+ (./codes/bbb/send2uno.c
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 3.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 3.
+ [25]
+LaTeX Font Info:    Font shape `OT1/cmtt/m/ui' in size <8> not available
+(Font)              Font shape `OT1/cmtt/m/it' tried instead on input line 26.
+))
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 202.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 202.
+Package babel Info: Redefining portuges shorthand "|
+(babel)             in language  on input line 202.
+
+[26]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 202.
+ (./tech_report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 202.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 202.
+Package rerunfilecheck Info: File `tech_report.out' has not changed.
+(rerunfilecheck)             Checksum: 757369A5C5B0EE953319F4E03B7EB4E7;1490.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 202.
+ ) 
+Here is how much of TeX's memory you used:
+ 11804 strings out of 493304
+ 168382 string characters out of 6139871
+ 551250 words of memory out of 5000000
+ 14614 multiletter control sequences out of 15000+600000
+ 10508 words of font info for 40 fonts, out of 8000000 for 9000
+ 957 hyphenation exceptions out of 8191
+ 53i,16n,99p,250b,2102s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
+e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/tex
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/font
+s/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1
+/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
+ts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+r6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmtt8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmtt9.pfb>
+Output written on tech_report.pdf (26 pages, 1060716 bytes).
+PDF statistics:
+ 918 PDF objects out of 1000 (max. 8388607)
+ 828 compressed objects within 9 object streams
+ 427 named destinations out of 1000 (max. 500000)
+ 240 words of extra memory for PDF output out of 10000 (max. 10000000)
+

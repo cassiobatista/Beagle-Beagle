@@ -1,0 +1,11 @@
+\select@language {brazil}
+\contentsline {figure}{\numberline {1}{\ignorespaces Esquem\'atico do Projeto.\relax }}{5}{figure.caption.4}
+\contentsline {figure}{\numberline {2}{\ignorespaces Esquem\'atico de um sistema ASR\relax }}{8}{figure.caption.5}
+\contentsline {figure}{\numberline {3}{\ignorespaces Esquem\'atico do protocolo RC-5 da Philips.\relax }}{9}{figure.caption.7}
+\contentsline {figure}{\numberline {4}{\ignorespaces Esquem\'atico do protocolo RC-6 da Philips.\relax }}{10}{figure.caption.8}
+\contentsline {figure}{\numberline {5}{\ignorespaces Mudan\c ca nos bits de comando ap\'os pressionar N\~AO consecutivamente 4 bot\~oes diferentes.\relax }}{12}{figure.caption.9}
+\contentsline {figure}{\numberline {6}{\ignorespaces Mudan\c ca no bit de \textit {toggle}(T) ap\'os pressionar o bot\~ao ``volume+'' por 4 vezes consecutivas.\relax }}{13}{figure.caption.10}
+\contentsline {figure}{\numberline {7}{\ignorespaces Processo de gera\c c\~ao de cada bit\relax }}{17}{figure.7}
+\contentsline {figure}{\numberline {8}{\ignorespaces Ciclo com PWM na BeagleBone Black\relax }}{17}{figure.8}
+\contentsline {figure}{\numberline {9}{\ignorespaces N\'{i}vel alto sem o PWM\relax }}{18}{figure.9}
+\contentsline {figure}{\numberline {10}{\ignorespaces Timeline do bit 0 na BeagleBone Black\relax }}{18}{figure.10}

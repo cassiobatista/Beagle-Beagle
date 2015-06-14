@@ -65,6 +65,64 @@ utilização de um servidor Apache para acesso remoto de qualquer lugar via
 cliente PHP, por exemplo, o efeito \textit{snowball} pode surgir como uma
 consequência negativa.
 
+\item Como explicado no capítulo de Revisão Teórica, um bit é representado por
+duas partes, sendo uma metade nível baixo e a outra nível alto. Cada nível ocorre
+num intervalo de 32 ciclos (ou 16 ciclos para no caso do protocolo RC-5), sendo o
+nível alto gerado pelo protocolo por modulação PWM com \textit{duty cycle} de 25\%
+do período do ciclo. 
+
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=.85\textwidth]{Figures/Bits}
+	\captionof{figure}{Processo de geração de cada bit}
+	\label{fig:bits}
+\end{minipage}
+
+Porém, a BeagleBone Black leva um tempo de 42 $\mu$s para escrever HIGH no pino,
+isto é, para gerar a parte ativa do PWM ela respondeu com um tempo maior até que
+o próprio ciclo, que demora 27.6 $\mu$s aproximadamente. Se levarmos em conta o
+tempo que a BeagleBone Black leva para escrever (chamado de $t_{set}$), tem se que: 
+
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=.65\textwidth]{Figures/Ciclo_PWM}
+	\captionof{figure}{Ciclo com PWM na BeagleBone Black}
+	\label{fig:ciclo_pwm}
+\end{minipage}
+
+Logo, este novo tempo de ciclo ir\'{a} afetar diretamente na aquisiç\~{a}o dos dados,
+pois reduzir\'{a} a frequ\^{e}ncia de amostragem e n\~{a}o ser\'{a} mais poss\'{i}vel
+transmitir os comandos em infravermelho, fazendo uma conta de quanto ir\'{a} impactar,
+tem se que:
+\begin{center}
+			$ 1s \rightarrow 36k valores \rightarrow 27 \frac{\mu s}{valor} $ \\
+			$ 1s \rightarrow n valores \rightarrow 111.6 \frac{\mu s}{valor} $	
+\end{center}		
+Resolvendo a regra de 3 inversa, tem se:
+\begin{center}
+			$ n \approx 8.96k \rightarrow f_{coding} = 8.96 kHz $ \\
+			$ \frac{f_s}{f_{coding}} \approx 4 $ 
+\end{center}	
+Com isso pode se observar que a frequ\^{e}ncia de amostragem seria 4 vezes menor que a
+desejada. Para combater este problema, foi necess\'{a}rio abrir m\~{a}o do PWM e reajustar
+como cada n\'{i}vel seria gerado, ent\~{a}o o n\'{i}vel alto (antes com PWM) passou a ser
+nada mais que o pino ativo pelo tempo de 1 ciclo ($t_{ciclo} = 27.6 \mu s$).
+
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=.45\textwidth]{Figures/Bit_noPWM}
+	\captionof{figure}{N\'{i}vel alto sem o PWM}
+	\label{fig:bit_nopwm}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+	\centering
+	\includegraphics[width=.85\textwidth]{Figures/Bit0_Coding}
+	\captionof{figure}{Timeline do bit 0 na BeagleBone Black}
+	\label{fig:bit0_coding}
+\end{minipage}
+
+
 %que usar diversas vezes alocaç\~{o}es de mem\'{o}ria (\textit{*malloc()}) e
 %\textit{sprintf()}s, tornando o c\'{o}digo, em mais espec\'{i}fico o
 %gerenciamento dos campos da mem\'{o}ria, ca\'{o}tico, apresentando algumas vezes

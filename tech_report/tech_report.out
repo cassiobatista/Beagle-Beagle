@@ -1,0 +1,23 @@
+\BOOKMARK [1][-]{section.1}{Introdu\347\343o}{}% 1
+\BOOKMARK [1][-]{section.2}{Objetivos}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Reconhecimento e S\355ntese de Voz}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Controle Remoto de TV e Servidor LAMP}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Justificativa}{}% 5
+\BOOKMARK [1][-]{section.4}{Revis\343o Te\363rica}{}% 6
+\BOOKMARK [2][-]{subsection.4.1}{Reconhecimento e S\355ntese de Voz}{section.4}% 7
+\BOOKMARK [2][-]{subsection.4.2}{Compara\347\343o entre Plataformas}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.3}{Protocolos IR: RC-5 e RC-6}{section.4}% 9
+\BOOKMARK [2][-]{subsection.4.4}{Produtos Relacionados}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Metodologia}{}% 11
+\BOOKMARK [2][-]{subsection.5.1}{Entrada de \301udio e Reconhecimento de Voz}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.2}{An\341lise do Sinal IR}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.3}{Banco de Dados MySQL}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.4}{GPIO}{section.5}% 15
+\BOOKMARK [1][-]{section.6}{Or\347amento}{}% 16
+\BOOKMARK [1][-]{section.7}{Dificuldades e Solu\347\365es}{}% 17
+\BOOKMARK [1][-]{section.8}{Trabalhos Futuros}{}% 18
+\BOOKMARK [1][-]{appendix.A}{C: LAMP}{}% 19
+\BOOKMARK [1][-]{appendix.B}{Arduino: IR Tx/Rx}{}% 20
+\BOOKMARK [1][-]{appendix.C}{Protocolo de Comunica\347\343o Duplex entre Arduino e BBB}{}% 21
+\BOOKMARK [2][-]{subsection.C.1}{Rx: UNO}{appendix.C}% 22
+\BOOKMARK [2][-]{subsection.C.2}{Tx: BBB}{appendix.C}% 23

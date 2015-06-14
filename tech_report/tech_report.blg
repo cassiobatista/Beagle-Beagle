@@ -1,0 +1,57 @@
+This is BibTeX, Version 0.99d (TeX Live 2013/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: tech_report.aux
+The style file: ieeetr.bst
+Database file #1: tech_report.bib
+Warning--I didn't find a database entry for "ada"
+Warning--I didn't find a database entry for "julius_book"
+Warning--I didn't find a database entry for "cassio14"
+Warning--I didn't find a database entry for "trello"
+Warning--I didn't find a database entry for "nielsen04"
+Warning--empty author and editor in cat
+Warning--empty booktitle in Gelderblom02
+Warning--empty booktitle in Laisa12
+Warning--empty booktitle in Wechsung09
+Warning--empty booktitle in Barrena11
+You've used 23 entries,
+            1876 wiz_defined-function locations,
+            584 strings with 6126 characters,
+and the built_in function-call counts, 3003 in all, are:
+= -- 282
+> -- 72
+< -- 0
++ -- 38
+- -- 15
+* -- 122
+:= -- 375
+add.period$ -- 41
+call.type$ -- 23
+change.case$ -- 19
+chr.to.int$ -- 0
+cite$ -- 28
+duplicate$ -- 150
+empty$ -- 438
+format.name$ -- 15
+if$ -- 795
+int.to.chr$ -- 0
+int.to.str$ -- 23
+missing$ -- 12
+newline$ -- 90
+num.names$ -- 8
+pop$ -- 172
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 52
+stack$ -- 0
+substring$ -- 0
+swap$ -- 5
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 5
+while$ -- 8
+width$ -- 25
+write$ -- 189
+(There were 10 warnings)
