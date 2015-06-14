@@ -91,17 +91,21 @@ televisão	t e l e v i z a~ w~
 %passos tomados no decorrer do trabalho será feita através da plataforma
 %Trello~\cite{trello}.\\
 
-\subsection{Análise do Sinal IR}
+\subsection{Análise do Sinal Infravermelho}
+Inicialmente, um Arduino UNO fui utilizado para verificar o tempo em que o IR
+LED permanecia ativo e inativo, armazenando-o em uma matriz de duas colunas,
+como visto no Apêndice~\ref{app:arduino}. O Octave foi utilizado para converter
+a matriz em um vetor único, no qual os índices ímpares representavam o tempo de
+duração do modo \textit{burst} do IR LED e as posições pares, o tempo em que o
+IR LED permanecia \textit{idle}. Sendo assim, o vetor no qual as durações dos
+níveis altos e baixos alternam-se entre si foi convertido para uma forma de onda
+quadrada, a qual mostra claramente as características dos protocolos descritas
+na seção anterior.
+
+\subsubsection{Philips}
 O controle RC2954201/01 da TV Philips 39PFL3008D/78 foi usado como base para a 
-análise do sinal emitido. Inicialmente, um arduino UNO fui utilizado para
-verificar o tempo em que o IR LED permanecia ativo e inativo, armazenando-o em
-uma matriz de duas colunas, como visto no Apêndice~\ref{app:arduino}. O Octave
-foi utilizado para converter a matriz em um vetor único, no qual os índices
-ímpares representavam o tempo de duração do modo \textit{burst} do IR LED e as
-posições pares, o tempo em que o IR LED permanecia \textit{idle} (Vide
-Apêndice~\ref{app:matlab}). Sendo assim, o vetor no qual as durações dos níveis
-altos e baixos alternam-se entre si foi convertido para uma forma de onda
-quadrada, semelhante à mostrada na Figura~\ref{fig:rc6}.  A
+análise do sinal emitido. 
+
 Figura~\ref{fig:cmds} mostra a forma de onda quadrada para 4 botões diferentes
 pressionados de forma não consecutiva. Pode-se notar que os sinais são
 exatamente iguais até aproximadamente $t=15ms$, onde começam a ser exibidos os
@@ -124,6 +128,17 @@ sempre que um botão é solto.
 	\caption{Mudança no bit de \textit{toggle}(T) após pressionar o botão 
 			``volume+'' por 4 vezes consecutivas.}
 	\label{fig:vol+}
+\end{figure}
+
+\subsubsection{Samsung}
+O controle da TV Samsung LT22B300LBMZD
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=\textwidth]{Figures/cmds_samsung}
+	\caption{Mudança nos bits de comando após pressionar consecutivamente 4 
+			botões diferentes.}
+	\label{fig:cmds_samsung}
 \end{figure}
 
 \subsection{Banco de Dados MySQL}

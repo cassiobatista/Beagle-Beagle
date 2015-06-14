@@ -123,7 +123,7 @@ Tabela~\ref{comparison}.
 
 % Thiago: LIRC
 
-\subsection{Protocolos IR: RC-5 e RC-6}
+\subsection{Protocolos de Comunicação via Luz Infravermelha}
 O funcionamento de controles remotos, com ênfase nos baseados em luz
 infravermelha para televisores, é explicado de de forma clara e detalhada em
 diversos tutoriais para ``curiosos'' disponíveis na Internet, como os da revista
@@ -139,13 +139,6 @@ encerra o envio de bits. Dessa forma, a chance de a informação ser reconhecida
 por mais de um aparelho é baixa (salvo o caso de serem dois equipamentos do
 mesmo tipo e da mesma empresa).
 
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=.88\textwidth]{Figures/sch_rc5}
-	\caption{Esquemático do protocolo RC-5 da Philips.}
-	\label{fig:rc5}
-\end{figure}
-
 Uma das grandes dificuldades relacionadas ao controle de equipamentos
 eletrônicos é que os 4 passos acima são apenas uma forma genérica de
 descrever a comunicação, ou seja, cada empresa praticamente segue o seu próprio
@@ -154,15 +147,28 @@ o significado dos bits é variado, a modulação e codificação usada são diferentes
 e a frequência dos pulsos pode oscilar entre 32~kHz e 42~kHz, chegando a 50~kHz
 em determinados aparelhos mais modernos. Além disso, tão rara quanto o
 seguimento de uma comunicação IR padronizada é a disponibilização de
-documentação pelos fabricantes, que também é bastante escassa. A Philips, por
-exemplo, utiliza seu próprio protocolo de comunicação, chamado RC-5. A última
+documentação pelos fabricantes, que também é bastante escassa. 
+
+Neste trabalho, serão detalhados protocolos de duas fabricantes: RC-6 e sua 
+versão pioneira RC-5, ambos da Philips; e o protocolo utilizado pela Samsung. 
+
+\subsubsection{O Protocolo da Philips: RC-5 e RC-6}
+A Philips utiliza seu próprio protocolo de comunicação, chamado RC-5. A última
 documentação foi liberada em 1992, quando ainda não existiam muitos dos
-equipamentos eletrônicos atuais, como \textit{home theaters} ou DVDs. Nesse
-padrão, os bits são codificados de acordo com o código de Manchester, onde cada
-bit, transmitido dentro de um período fixo, é representado por uma transição
-\textit{high-to-low} (0) ou \textit{low-to-high} (1). Esses padrões de dados são
-obtidos através de uma operação do tipo XOR (OU-Exclusivo) realizada entre o
-clock do dispositivo e o dado propriamente dito~\cite{rc5}.
+equipamentos eletrônicos atuais, como \textit{home theaters} ou DVDs. 
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.88\textwidth]{Figures/sch_rc5}
+	\caption{Esquemático do protocolo RC-5 da Philips.}
+	\label{fig:rc5}
+\end{figure}
+
+Nesse padrão, os bits são codificados de acordo com o código de Manchester, onde
+cada bit, transmitido dentro de um período fixo, é representado por uma
+transição \textit{high-to-low} (0) ou \textit{low-to-high} (1). Esses padrões de
+dados são obtidos através de uma operação do tipo XOR (OU-Exclusivo) realizada
+entre o clock do dispositivo e o dado propriamente dito~\cite{rc5}.
 
 A Figura~\ref{fig:rc5} mostra a informação referente ao comando ``diminuir
 volume'' contida num vetor de 14 bits. Os 11 últimos bits definem o endereço do
@@ -170,12 +176,13 @@ aparelho de destino e o comando em si. Pode-se observar que qualquer bit é
 representado por duas partes, sendo uma metade em nível baixo e a outra, em
 nível alto. Cada nível ocorre num intervalo de 32 períodos. O protocolo utiliza 
 a modulação por largura de pulsos (\textit{pulse width modulation} ou PWM). O 
-nível alto é gerado por um PWM de \textit{duty cycle} igual a 25\% do período do
-pulso. Essa percentagem define o tempo em que o IR LED permanece aceso, ou seja,
-no nível alto, o IR LED permanece ligado por período de $0,25\times1/36000~s$ e
-desligado por $0,75\times1/36000~s$, sendo o processo repetido 32 vezes. A
-economia de energia é mostrada como justificativa para explicar o motivo de o
-led piscar ao invés de se manter aceso por 100\% do período do pulso.
+nível alto é gerado por um PWM de \textit{duty cycle} que varia entre 25\% e
+33\% do período do pulso. Essa percentagem define o tempo em que o IR LED
+permanece aceso, ou seja, no nível alto, o IR LED permanece ligado por período
+de $0,25\times1/36000~s$ e desligado por $0,75\times1/36000~s$, sendo o processo
+repetido 32 vezes. A economia de energia é mostrada como justificativa para
+explicar o motivo de o led piscar ao invés de se manter aceso por 100\% do
+período do pulso.
 
 \begin{figure}[!h]
 	\centering
@@ -202,14 +209,38 @@ um bit passa de 32 para 16 pulsos, exceto para os casos especiais (AGC e
 \textit{toggle}). Por fim, os últimos 16 bits representam o endereço do aparelho
 e o referido comando a ser transmitido, respectivamente.
 
-%%\begin{align*}
-%\begin{gather*}
-%	\text{T}      = 16 \times \frac{1}{f=36000Hz} = 444.45~\mu s \\\notag
-%	\text{AGC}    = 6T + 2T = 3.556~m s \\\notag
-%	\text{Toggle} = 2T + 2T = 1.778~m s \\\notag
-%	\text{Bit}    = 1T + 1T = 888.9~\mu s \\\notag
-%	\text{Total}  = 1*\text{AGC} + 1*\text{Toggle} + 20*\text{Bit} = 23.11~m s \\
-%\end{gather*}
+\subsubsection{O Protocolo da Samsung}
+Assim como a Philips, a Samsung também utiliza seu próprio padrão para
+comunicação entre os controles e os dispositivos eletrônicos, o qual não
+possui uma nomenclatura específica. Felizmente, o documento de
+\textit{application notes} do microcontrolador S3F80KB~\cite{S3F80KB} presente
+em controles da Samsung encontra-se disponível na Internet. O
+protocolo define uma sequência de 34 bits, onde ambos os valores 0 e 1 são
+representados por uma mudança no estado e diferenciados pela distância entre o
+nível baixo dos pulsos.  Antagonicamente ao código Manchester, onde a ordem da
+transição define o valor do bit, o protocolo da Samsung sempre define os estados como
+uma transição \textit{high-to-low}, na qual é estabelecida uma duração de
+560~$\mu$s para o nível alto e duas para o nível baixo: 1690~$\mu$s para o bit
+`1' e 560~$\mu$s para o bit `0'.
+
+O nível alto do pulso dos bits normais é caracterizado por um PWM com 
+frequência de 37,9~kHz e \textit{duty cycle} que pode variar entre 33\% e 50\% 
+do período do pulso.  Aproximadamente 21 pulsos na frequência portadora resultam
+na duração de 560~$\mu$s.
+O primeiro bit, chamado de \textit{leader}, tem duração mais longa para garantir 
+o ganho no circuito receptor: 4,5~ms no nível alto e 4,5~ms no nível baixo; os
+16 bits seguintes são divididos em dois blocos exatamente iguais de 8 
+\textit{custom} bits cada; outras duas sessões de 8 bits definem o bloco de
+dado, onde o segundo bloco é o complemento dos bits do primeiro, o qual define
+os dados propriamente ditos; o 34$\degree$ e último bit é sempre baixo e encerra
+o comando.
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.75\textwidth]{Figures/samsung_protocol}
+	\caption{Esquemático do protocolo da Samsung.}
+	\label{fig:samsung}
+\end{figure}
 
 \subsection{Produtos Relacionados}
 Existem alguns produtos disponíveis no mercado com a finalidade de tornar o
@@ -233,6 +264,8 @@ já possuem o \textit{hardware} que pode ser acessado via \textit{bluetooth},
 custando US\$ 60 o mais caro. A grande vantagem é que o IRdroid, além de ser 
 baseado na biblioteca LIRC, a qual possui uma vasta quantidade de equipamentos 
 em seu banco de dados, possui código livre e disponível.
+
+% Thiago: myuremote
 
 Outras diversas soluções são aplicadas apenas à \textit{smart TVs}, onde a
 informação de controle é transmitida por \textit{wifi}. Nenhuma das aplicações
