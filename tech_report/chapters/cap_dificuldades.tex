@@ -41,8 +41,8 @@ foi conectar um roteador \textit{wifi} à porta Ethernet da BBB através
 de um cabo UTP.
 
 \item O código criado para o Arduino faz um \textit{dump} da informação captada
-pelo photosensor, verificando o tempo que ele passa ligado e desligado e
-salvando várias medidas de tempo numa matriz de inteiros, o que deixa o
+pelo \textit{photosensor}, verificando o tempo que ele passa ligado e desligado
+e salvando várias medidas de tempo numa matriz de inteiros, o que deixa o
 armazenamento dessa informação pouco viável. Após traduzir o código para que
 seja executado na BBB, o ideal seria converter os valores de tempo para um
 \textit{array} de bits (``110101010'', por exemplo) para que fosse mais fácil
@@ -65,11 +65,12 @@ utilização de um servidor Apache para acesso remoto de qualquer lugar via
 cliente PHP, por exemplo, o efeito \textit{snowball} pode surgir como uma
 consequência negativa.
 
-\item Como explicado no capítulo de Revisão Teórica, um bit é representado por
-duas partes, sendo uma metade nível baixo e a outra nível alto. Cada nível ocorre
-num intervalo de 32 ciclos (ou 16 ciclos para no caso do protocolo RC-5), sendo o
-nível alto gerado pelo protocolo por modulação PWM com \textit{duty cycle} de 25\%
-do período do ciclo. 
+\item Como explicado na seção~\ref{sec:rev_th}, um bit é representado por duas
+partes, sendo uma metade nível baixo e a outra nível alto. Para o RC-6, cada 
+nível ocorre num intervalo de 16 ciclos (ou 32 ciclos para no caso do protocolo
+RC-5), sendo o nível alto gerado pelo protocolo por modulação PWM com
+\textit{duty cycle} mínimo de 25\% do período do ciclo, tal como o mostrado na
+Figura~\ref{fig:bits}.
 
 \begin{minipage}{\linewidth}
 	\centering
@@ -78,10 +79,12 @@ do período do ciclo.
 	\label{fig:bits}
 \end{minipage}
 
-Porém, a BeagleBone Black leva um tempo de 42 $\mu$s para escrever HIGH no pino,
-isto é, para gerar a parte ativa do PWM ela respondeu com um tempo maior até que
-o próprio ciclo, que demora 27.6 $\mu$s aproximadamente. Se levarmos em conta o
-tempo que a BeagleBone Black leva para escrever (chamado de $t_{set}$), tem se que: 
+Porém, a BeagleBone Black leva um tempo de 42~$\mu$s para escrever HIGH no pino,
+isto é, para gerar a parte ativa do PWM, a plataforma responde com um tempo 
+maior do que o próprio ciclo, o qual demora 27.6~$\mu$s aproximadamente.
+Levando-se em conta o tempo que a BeagleBone leva para escrever (chamado
+de $t_{set}$), de acordo com o esquema mostrado na Figura~\ref{fig:ciclo_pwm},
+a duração do bit seria de 111,6~$\mu$s.
 
 \begin{minipage}{\linewidth}
 	\centering
@@ -106,27 +109,28 @@ Resolvendo a regra de 3 inversa, tem se:
 	n \approx 8.96k \rightarrow f_{coding} = 8.96 \ kHz \notag
 \end{equation}
 \begin{equation}
-	\frac{f_s}{f_{coding}} \approx 4 \notag 
+	\frac{f_s}{f_{coding}} = \frac{36k}{8.96k} \approx 4 \notag 
 \end{equation}
 
-Com isso pode se observar que a frequ\^{e}ncia de amostragem seria 4 vezes menor que a
-desejada. Para combater este problema, foi necess\'{a}rio abrir m\~{a}o do PWM e reajustar
-como cada n\'{i}vel seria gerado, ent\~{a}o o n\'{i}vel alto (antes com PWM) passou a ser
-nada mais que o pino ativo pelo tempo de 1 ciclo ($t_{ciclo} = 27.6 \mu s$).
-
-\begin{minipage}{\linewidth}
-	\centering
-	\includegraphics[width=.45\textwidth]{Figures/Bit_noPWM}
-	\captionof{figure}{N\'{i}vel alto sem o PWM}
-	\label{fig:bit_nopwm}
-\end{minipage}
-
-\begin{minipage}{\linewidth}
-	\centering
-	\includegraphics[width=.85\textwidth]{Figures/Bit0_Coding}
-	\captionof{figure}{Timeline do bit 0 na BeagleBone Black}
-	\label{fig:bit0_coding}
-\end{minipage}
+Com isso pode se observar que a frequ\^{e}ncia de amostragem seria 4 vezes menor
+que a desejada. 
+%Para combater este problema, foi necess\'{a}rio abrir m\~{a}o do PWM e reajustar
+%como cada n\'{i}vel seria gerado, ent\~{a}o o n\'{i}vel alto (antes com PWM) passou a ser
+%nada mais que o pino ativo pelo tempo de 1 ciclo ($t_{ciclo} = 27.6 \ \mu s$).
+%
+%\begin{minipage}{\linewidth}
+%	\centering
+%	\includegraphics[width=.45\textwidth]{Figures/Bit_noPWM}
+%	\captionof{figure}{N\'{i}vel alto sem o PWM}
+%	\label{fig:bit_nopwm}
+%\end{minipage}
+%
+%\begin{minipage}{\linewidth}
+%	\centering
+%	\includegraphics[width=.85\textwidth]{Figures/Bit0_Coding}
+%	\captionof{figure}{Timeline do bit 0 na BeagleBone Black}
+%	\label{fig:bit0_coding}
+%\end{minipage}
 
 
 %que usar diversas vezes alocaç\~{o}es de mem\'{o}ria (\textit{*malloc()}) e
