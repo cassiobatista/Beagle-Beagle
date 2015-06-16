@@ -1,5 +1,5 @@
 % Pedro ------------------------------------------------------------------------
-\begin{section}{C: LAMP}
+\begin{section}{LAMP}
 \label{app:lamp}
 Com a sensível complexidade dos comandos usados para a comunicação com a TV
 devido ao número de campos e a diferença entre eles, foi-se adotado um banco de
@@ -51,10 +51,11 @@ SELECT field FROM tv WHERE marca='branch'
 \end{lstlisting}
 
 % Code
-\lstinputlisting[style=code, language=c, firstline=39, lastline=76, 
+\lstinputlisting[style=code, language=c, firstline=39, lastline=72, 
 caption={Função \texttt{get\_element()}}, label={lst:dbphi2}]
 {codes/bbb/db_phi.c}\vspace{.5cm}
 
+\newpage
 As demais funções basicamente chamam a função \texttt{mysql\_query()}, a qual
 recebe como parâmetros a conexão com o banco e uma \textit{string} contendo o 
 comando SQL. A função \texttt{setup()}, mostrada na Lista~\ref{lst:dbphi9} foi 
@@ -65,19 +66,20 @@ literalmente para seu código SQL, resultaria na sequência de comandos descritos
 na Lista~\ref{lst:dbphi_sql}.
 
 % Code: SQL
-\lstinputlisting[style=code, language=sql, firstline=1, lastline=32, 
+\lstinputlisting[style=code, language=sql, firstline=1, lastline=49, 
 caption={Código SQL para configuração do MySQL}, label={lst:dbphi_sql}]
 {codes/bbb/setup_db.sql}
 
+\newpage
 % Code: setup
-\lstinputlisting[style=code, language=c, firstline=228, lastline=264, 
+\lstinputlisting[style=code, language=c, firstline=224, lastline=260, 
 caption={Função \texttt{setup()}}, label={lst:dbphi9}]
 {codes/bbb/db_phi.c}
 \end{section}
 
 % Thiago -----------------------------------------------------------------------
 \newpage
-\begin{section}{Arduino: IR Tx/Rx}
+\begin{section}{Recebimento e Envio de Sinais Infravermelhos}
 \label{app:arduino}
 
 \lstinputlisting[style=code, language=c, firstline=40, lastline=76,
@@ -132,6 +134,7 @@ caption={Código do Arduino, o qual recebe um \textit{bitstream} de 34 bits},
 label={lst:duplex_0}]
 {codes/arduino/DuplexTransmission.ino}
 
+\newpage
 \subsection{Tx: BBB}
 \lstinputlisting[style=code, language=c, %firstline=57, lastline=67,
 caption={Código em C, o qual envia um \textit{bitstream} de 34 bits}, 

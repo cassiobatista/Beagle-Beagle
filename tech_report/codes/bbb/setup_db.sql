@@ -8,7 +8,8 @@ DROP database if EXISTS ir_db; --delete database
 CREATE database if NOT EXISTS ir_db; --create the previous deleted one
 USE ir_db; --switch to the database created
 
-DROP table if EXISTS tv;
+DROP table if EXISTS tv; --delete table 
+-- create table with fields for the commands used
 CREATE table if NOT EXISTS tv (
 marca varchar(40) NOT null,
 vol_mais varchar(40), 
@@ -29,8 +30,6 @@ INSERT into tv(marca, vol_mais, vol_menos, ch_mais, ch_menos, on_off) values (
 "1111000001110000001000000101111110"  -- on/off
 );
 
-SELECT vol_mais FROM tv WHERE marca='samsung';
-
 -- 22 bits command length
 INSERT into tv(marca, vol_mais, vol_menos, ch_mais, ch_menos, on_off) 
 values (
@@ -41,3 +40,7 @@ values (
 "1100010000000001001101", -- canal menos
 "1100010000000000001100"  -- on/off
 );
+
+-- get_element() in C
+SELECT vol_mais FROM tv WHERE marca='samsung';
+SELECT ch_menos FROM tv WHERE marca='philips';

@@ -81,16 +81,6 @@ televisão	t e l e v i z a~ w~
 \end{minipage}
 
 % http://stackoverflow.com/questions/2661129/espeak-sapi-dll-usage-on-windows
-%A proposta do trabalho é adicionar funcionalidades ao código do Julius,
-%permitindo a produção de voz sintetizada através da incorporação da API do 
-%eSpeak e a transmissão de informação para a TV através de um LED IR conectado
-%a um GPIO. Um sensor IR ficará encarregado de receber informações de diferentes
-%controles remotos para que sejam guardadas como registros no banco de dados.
-
-%Toda a organização do trabalho, bem como a comunicação entre os membros sobre os
-%passos tomados no decorrer do trabalho será feita através da plataforma
-%Trello~\cite{trello}.\\
-
 \subsection{Análise do Sinal Infravermelho}
 Inicialmente, um Arduino UNO fui utilizado para verificar o tempo em que o IR
 LED permanecia ativo e inativo, armazenando-o em uma matriz de duas colunas,
@@ -104,19 +94,17 @@ na seção anterior.
 
 \subsubsection{Philips}
 O controle RC2954201/01 da TV Philips 39PFL3008D/78 foi usado como base para a 
-análise do sinal emitido. 
-
-Figura~\ref{fig:cmds} mostra a forma de onda quadrada para 4 botões diferentes
-pressionados de forma não consecutiva. Pode-se notar que os sinais são
-exatamente iguais até aproximadamente $t=15ms$, onde começam a ser exibidos os
-bits referentes ao comando específico. Já na Figura~\ref{fig:vol+}, o botão
-``volume mais'' foi pressionado por quatro vezes consecutivas. Percebe-se que os
-sinais são completamente idênticos, exceto o bit de \textit{toggle}, o qual muda
-sempre que um botão é solto.
+análise do sinal emitido. A Figura~\ref{fig:cmds} mostra a forma de onda
+quadrada para 4 botões diferentes pressionados de forma não consecutiva. Pode-se
+notar que os sinais são exatamente iguais até aproximadamente $t=15ms$, onde
+começam a ser exibidos os bits referentes ao comando específico. Já na
+Figura~\ref{fig:vol+}, o botão ``volume mais'' foi pressionado por quatro vezes
+consecutivas. Percebe-se que os sinais são completamente idênticos, exceto o bit
+de \textit{toggle}, o qual muda sempre que um botão é solto.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=\textwidth]{Figures/cmds}
+	\includegraphics[width=.9\textwidth]{Figures/cmds}
 	\caption{Mudança nos bits de comando após pressionar NÃO consecutivamente 
 			4 botões diferentes.}
 	\label{fig:cmds}
@@ -124,22 +112,58 @@ sempre que um botão é solto.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=\textwidth]{Figures/volume+}
+	\includegraphics[width=.9\textwidth]{Figures/volume+}
 	\caption{Mudança no bit de \textit{toggle}(T) após pressionar o botão 
 			``volume+'' por 4 vezes consecutivas.}
 	\label{fig:vol+}
 \end{figure}
 
 \subsubsection{Samsung}
-O controle da TV Samsung LT22B300LBMZD
+O controle da TV Samsung LT22B300LBMZD também foi usado para análise do sinal
+emitido à TV. A Figura~\ref{fig:cmds_samsung} mostra a forma de onda quadrada
+obtida após o pressionamento consecutivo de 4 botões diferentes. Nota-se que os
+sinais são idênticos até o final do segundo bloco \textit{custom}, o qual é
+imediatamente seguido pelos blocos de dados.
 
 \begin{figure}[!h]
 	\centering
-	\includegraphics[width=\textwidth]{Figures/cmds_samsung}
+	\includegraphics[width=.9\textwidth]{Figures/cmds_samsung}
 	\caption{Mudança nos bits de comando após pressionar consecutivamente 4 
 			botões diferentes.}
 	\label{fig:cmds_samsung}
 \end{figure}
+
+\subsection{Envio do Sinal Infravermelho}
+Nas seções seguintes, será mostrado que a atribuição de valores aos pinos da
+BeagleBone é feita através da escrita em arquivos por quaisquer linguagens de
+programação e que, apesar de prática e funcional, o tempo demandado para a
+execução desta tarefa não atende às exigências dos protocolos, os quais
+requerem faixas na ordem de microssegundos para modular os bits transmitidos. 
+Em outras palavras, a BBB acabou sendo mais lenta do que o Arduino para emitir 
+sinais à TV. 
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=.55\textwidth]{Figures/duplex_tx}
+	\caption{Protocolo de envio do \textit{bitstream} da BeagleBone para o Arduino.}
+	\label{fig:send2uno}
+\end{figure}
+
+A BeagleBone continua sendo o servidor de voz e, de acordo com o resultado
+retornado pelo sistema de reconhecimento, é realizada a busca por um vetor de
+bits no banco de dados. Essa \textit{bitstream} é transmitida bit a bit para o
+Arduino através de pinos, seguindo um protocolo tal qual o ilustrado na
+Figura~\ref{fig:send2uno}. Há dois pinos de controle e um de dados em cada
+plataforma. Quando a BBB quer transmitir, um sinal alto é colocado no pino de
+controle. Imediatamente após o Arduino perceber esse sinal, o caminho para o bit
+de dados é aberto e uma resposta é dada à BBB também na forma de um sinal alto; 
+caso o Arduino ainda esteja processando o bit de dados anterior, a 
+\textit{stream} de dados permanece fechada e um sinal baixo é enviado à BBB pelo
+canal de controle. Após finalizar o envio do bit, a BeagleBone coloca um sinal
+baixo no pino de controle. O processo é repetido para todos os bits do vetor.
+
+Em posse do vetor, o Arduino passa cada bit a função que o modula e envia de 
+acordo com o protocolo da TV em questão.
 
 \subsection{Banco de Dados MySQL}
 Como o sistema foi projetado para, futuramente, dar suporte ao controle de 
@@ -147,7 +171,7 @@ diversos aparelhos eletrônicos, a adoção de um banco de dados foi vista como
 solução para facilitar o acesso a uma maior variedade de dispositivos e, assim,
 tornar o projeto um sistema de propósito mais geral. Além disso, a segurança
 dos dados, que serão constantemente manipulados, será mantida, podendo estes ser
-recuperados apenas olhando para o banco. %(????)
+recuperados apenas olhando para o banco. 
 
 Inicialmente, apenas a entidade TELEVISÃO foi criada, onde uma tabela intitulada
 ``TV'' contém atributos como a marca do aparelho e os comandos a serem
@@ -168,7 +192,7 @@ tal, uma biblioteca especial chamada \texttt{mysql.h} foi utilizada, na qual as
 
 \begin{table}[h]
 \centering
-\caption{Tabela TV}
+\caption{Exemplo hipotético de uma tabela entitulada `TV' no banco de dados.}
 \label{tab:tv}
 \begin{tabular}{c|ccccc}
 \hline
@@ -222,13 +246,6 @@ dispostos na placa.
 \hline
 \end{tabular}
 \end{table}
-
-%\begin{figure}[!h]
-%	\centering
-%	\includegraphics[width=\textwidth]{Figures/BBBp9}
-%	\caption{Mapeamento de Pinos do Header P9 da BeagleBone}
-%	\label{fig:BBBp9}
-%\end{figure}
 
 \begin{table}[h]
 \centering

@@ -7,7 +7,7 @@
 
 #define HOST "localhost" 
 #define USER "root"  
-#define PWD   "root" 
+#define PWD   "beagle1234" 
 #define DB    "ir_db"
 
 /* Get element from table ("vol_mais", "samsung", con) */
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
 	return setup();
 }
 
-/* Get element from table, pass the column and the row ("volume+","sony",con) */
+/* Get element from table, pass the column and the row ("vol_mais","philips",con) */
 char *get_element(char *field, char *branch, MYSQL *con) 
 {
 	char *str_value; // pedro: no malloc?
@@ -59,10 +59,6 @@ char *get_element(char *field, char *branch, MYSQL *con)
 	MYSQL_RES *result = mysql_store_result(con);
 	if(result == NULL)
 		finish_with_error(con);
-
-	/* pedro: comenta aqui em uma linha soh */
-	//MYSQL_FIELD *f;
-	//int num_fields = mysql_num_fields(result);
 
 	/* pedro: funciona sem alloc pra str_value? row[0] é string? */
 	MYSQL_ROW row;

@@ -94,15 +94,21 @@ Logo, este novo tempo de ciclo ir\'{a} afetar diretamente na aquisiç\~{a}o dos d
 pois reduzir\'{a} a frequ\^{e}ncia de amostragem e n\~{a}o ser\'{a} mais poss\'{i}vel
 transmitir os comandos em infravermelho, fazendo uma conta de quanto ir\'{a} impactar,
 tem se que:
-\begin{center}
-			$ 1s \rightarrow 36k valores \rightarrow 27 \frac{\mu s}{valor} $ \\
-			$ 1s \rightarrow n valores \rightarrow 111.6 \frac{\mu s}{valor} $	
-\end{center}		
+\begin{equation}
+	1 \ s \rightarrow 36k \ valores \rightarrow 27 \ \mu s/valor \notag
+\end{equation}
+\begin{equation}
+	1 \ s \rightarrow n \ valores \rightarrow 111.6 \ \mu s/valor \notag
+\end{equation}
+
 Resolvendo a regra de 3 inversa, tem se:
-\begin{center}
-			$ n \approx 8.96k \rightarrow f_{coding} = 8.96 kHz $ \\
-			$ \frac{f_s}{f_{coding}} \approx 4 $ 
-\end{center}	
+\begin{equation}
+	n \approx 8.96k \rightarrow f_{coding} = 8.96 \ kHz \notag
+\end{equation}
+\begin{equation}
+	\frac{f_s}{f_{coding}} \approx 4 \notag 
+\end{equation}
+
 Com isso pode se observar que a frequ\^{e}ncia de amostragem seria 4 vezes menor que a
 desejada. Para combater este problema, foi necess\'{a}rio abrir m\~{a}o do PWM e reajustar
 como cada n\'{i}vel seria gerado, ent\~{a}o o n\'{i}vel alto (antes com PWM) passou a ser
