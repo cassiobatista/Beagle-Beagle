@@ -29,26 +29,30 @@
 \fi
 
 \title[ASR + TTS: Controle de Equipamentos Eletrônicos\hspace{2.10cm}\thepage/\pageref{LastPage}]
-{Uso de Reconhecedor e Sintetizador de Voz para Controle de Equipamentos Eletrônicos}
+{\Large Uso de Reconhecedor e Sintetizador de Voz Embarcados para
+Controle de Equipamentos Eletrônicos via Luz Infravermelha}
+%{Uso de Reconhecedor e Sintetizador de Voz para Controle de Equipamentos Eletrônicos}
 
-\author[Cassio, Pedro, Gabriel e Thiago]{\small
+\author[Cassio, Pedro, Gabriel e Thiago]{
+\small
 Cassio Trindade Batista\\
 Gabriel Peixoto de Carvalho\\
 Pedro Henrique C. F. Soares\\
 Thiago Barros Coelho}
 
-\institute{\scriptsize
+\institute{
+\scriptsize
 Universidade Federal do Pará\\
 Instituto de Tecnologia\\
 Faculdade de Engenharia da Computação e Telecomunicações\\
 Disciplina: Projetos de Hardware e Interfaceamento\\
 Professores: Jeferson Leite e Adalbery Castro\\
 \begin{figure}
-	\includegraphics[width=.13\textwidth]{Figures/logo_ufpa}
+	\includegraphics[width=.11\textwidth]{Figures/logo_ufpa}
 \end{figure}
-\vspace{-.5cm}
+\vspace{-.6cm}
 }
-\date{\small{30 de maio de 2015}}
+\date{\small{25 de junho de 2015}}
 
 \begin{document}
 \begin{frame}[plain]
@@ -56,39 +60,91 @@ Professores: Jeferson Leite e Adalbery Castro\\
 \end{frame}
 
 \section{Introdução}
+\subsection{Introdução}
 \begin{frame}{Introdução}
-\end{frame}
-
-\begin{frame}{ASR vs TTS}
+\begin{itemize}
+	\item 23\% dos brasileiros possuem necessidades especiais
+	\item Teclado e Mouse: Exclusão digital
+	\item Acessibilidade: Novas formas de controle
+\end{itemize}
 \begin{figure}
-	\includegraphics[width=\textwidth]{Figures/asr_tts}
+	\includegraphics[width=.7\textwidth]{Figures/accessibility}
 \end{figure}
 \end{frame}
 
-\begin{frame}{ASR vs TTS}
-\begin{figure}
-	\includegraphics[width=\textwidth]{Figures/asr_tts_soft}
-\end{figure}
+\section{Objetivos}
+\subsection{Objetivos}
+\begin{frame}{Objetivos}
+\begin{itemize}
+	\item Controlar uma TV por um smartphone Android através da voz
+	\item Servidor de voz instalado na BeagleBone Black
+	\item Microfone no cliente Android
+	\item Transmissor de Sinais Infravermelhos configurado no Arduino
+	\item Servidor LAMP para armazenamento de comandos configurado na BBB
+\end{itemize}
 \end{frame}
 
-\begin{frame}{Reconhecimento Automático de Voz}
-\begin{figure}
-	\includegraphics[width=\textwidth]{Figures/asr_sch}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Beagle Beagle Beagle}
+\begin{frame}{Esquemático do Projeto}
 \begin{figure}
 	\includegraphics[width=\textwidth]{Figures/schematic}
 \end{figure}
 \end{frame}
 
-\begin{frame}{Philips RC-5 Protocol}
+\section{Voz}
+\subsection{Voz}
+\begin{frame}{Reconhecimento \textit{vs.} Síntese}
+\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/asr_tts}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Reconhecimento \textit{vs.} Síntese}
+\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/asr_tts_soft}
+\end{figure}
+\end{frame}
+
+\begin{frame}{ASR: Reconhecimento Automático de Voz}
+\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/asr_sch}
+\end{figure}
+\end{frame}
+
+\section{Protocolo IR}
+\subsection{Protocolo IR}
+\begin{frame}{Protocolo Philips RC-5}
 \begin{figure}
 	\includegraphics[width=.9\textwidth]{Figures/sch_rc5}
 \end{figure}
 \end{frame}
 
+\begin{frame}{Protocolo Philips RC-6 (Plot)}
+\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/cmds}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Protocolo Samsung}
+\begin{figure}
+	\includegraphics[width=.9\textwidth]{Figures/samsung_protocol}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Protocolo Samsung (Plot)}
+\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/cmds_samsung}
+\end{figure}
+\end{frame}
+
+\section{Tx/Rx}
+\subsection{Tx/Rx}
+\begin{frame}{Comunicação BeagleBone $\rightarrow$ Arduino}
+\begin{figure}
+	\includegraphics[width=.65\textwidth]{Figures/duplex_tx}
+\end{figure}
+\end{frame}
+
+\section{VLW!}
 \begin{frame}{Vlw Flw!}
 \end{frame}
 \end{document}
