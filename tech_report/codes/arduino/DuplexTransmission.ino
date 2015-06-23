@@ -27,7 +27,7 @@ void loop()
 	send_samsung();
 }
 
-/**/
+/* Receive bitstream from database of BBB */
 void receive_from_bbb() 
 {
 	for(i=0; i<34; i++) 

@@ -18,6 +18,35 @@
 \usepackage{url} 
 \usepackage{hyperref}
 \usepackage{lastpage}
+\usepackage{listings}
+
+\lstset{%
+	linewidth=\textwidth,%framed box is the text size 
+	xleftmargin=.25in,
+	xrightmargin=.25in, 
+	frame=trbl, 
+	columns=flexible, 
+	captionpos=t, 
+	upquote=false,
+	basicstyle=\footnotesize\ttfamily,
+	firstnumber=1,% 
+	numberfirstline=false,% 
+	numbers=left,%
+	numberstyle=\tiny,% 
+	stepnumber=5,%
+	numbersep=5pt,% 
+	backgroundcolor=\color{green!15},% 
+	tabsize=4,% 
+	keywordstyle=\color{green!65!black},% 
+	commentstyle=\color{blue},% 
+	stringstyle=\color{magenta},% 
+	breaklines=true,% 
+	emph={label},%
+	abovecaptionskip=10pt,% 
+	belowcaptionskip={\abovecaptionskip},%
+	showstringspaces=false, 
+	literate={Ê}{{\^{E}}}1
+}%
 
 \pgfdeclareimage[width=0.85cm, height=1.10cm]{ufpa}{Figures/logo_ufpa}
 \logo{\pgfuseimage{ufpa}}
@@ -75,12 +104,24 @@ Professores: Jeferson Leite e Adalbery Castro\\
 \section{Objetivos}
 \subsection{Objetivos}
 \begin{frame}{Objetivos}
+\textcolor{blue}{Objetivo Geral}: Controle de TV via \textit{smartphone} 
+através da voz
 \begin{itemize}
-	\item Controlar uma TV por um smartphone Android através da voz
-	\item Servidor de voz instalado na BeagleBone Black
-	\item Microfone no cliente Android
-	\item Transmissor de Sinais Infravermelhos configurado no Arduino
-	\item Servidor LAMP para armazenamento de comandos configurado na BBB
+	\item BeagleBone Black
+	\begin{itemize}
+		\item Servidor de reconhecimento de fala \smallskip
+		\item Servidor de síntese de fala \smallskip
+		\item Servidor LAMP de armazenamento de comandos \smallskip
+	\end{itemize}
+	\item Arduino UNO
+	\begin{itemize}
+		\item Transmissor de Sinais Infravermelhos (IR LED) \smallskip
+		\item Receptor de Sinais Infravermelhos (IR Receiver) \smallskip
+	\end{itemize}
+	\item Android
+	\begin{itemize}
+		\item Microfone (cliente)
+	\end{itemize}
 \end{itemize}
 \end{frame}
 
@@ -110,15 +151,43 @@ Professores: Jeferson Leite e Adalbery Castro\\
 \end{figure}
 \end{frame}
 
-\begin{frame}{ASR: Reconhecimento Automático de Voz}
+\begin{frame}{ASR: Esquemático}
+ASR: \textit{Automatic Speech Recognition}
 \begin{figure}
 	\includegraphics[width=\textwidth]{Figures/asr_sch}
 \end{figure}
 \end{frame}
 
+\begin{frame}[fragile]{ASR: Gramática e Dicionário}
+\begin{lstlisting}[label={lst:gram}]
+<s> aumentar volume </s>
+<s> diminuir volume </s>
+<s> canal mais </s>
+<s> canal menos </s>
+<s> ligar televisão </s>
+<s> desligar televisão </s>
+\end{lstlisting}
+\begin{lstlisting}[label={lst:dict}]
+aumentar	a u~ m e~  t a X  
+diminuir	dZ i~ m i~ n u j X  
+volume		v o l u~ m i  
+canal		k a n a w  
+mais		m a j s
+menos		m e~ n u s
+televisão	t e l e v i z a~ w~   
+\end{lstlisting}
+\end{frame}
+
 \begin{frame}{PWM: Modulação por Largura de Pulso}
 \begin{figure}
 	\includegraphics[width=.95\textwidth]{Figures/pwm}
+\end{figure}
+\end{frame}
+
+\begin{frame}{PWM: Tensão Média}
+\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/pwm_avgvolt}
+	%\caption{Datasheet do arduino}
 \end{figure}
 \end{frame}
 
@@ -156,7 +225,33 @@ Professores: Jeferson Leite e Adalbery Castro\\
 \end{figure}
 \end{frame}
 
-\section{VLW!}
+\section{Fritzing}
+\subsection{Fritzing}
+\begin{frame}{Circuito no Fritzing}
+\begin{figure}
+	\includegraphics[width=.75\textwidth]{Figures/fritzing}
+\end{figure}
+\end{frame}
+
+%\begin{frame}[fragile]{Comunicação BeagleBone $\rightarrow$ Arduino}
+%\lstinputlisting[language=c,  firstline=36, lastline=65, basicstyle=\tiny\ttfamily]
+%{../codes/arduino/DuplexTransmission.ino}
+%\end{frame}
+%
+%\begin{frame}[fragile]{Comunicação BeagleBone $\rightarrow$ Arduino}
+%\lstinputlisting[language=c, firstline=16, lastline=40, basicstyle=\tiny\ttfamily]
+%{../codes/bbb/send2uno.c}
+%\end{frame}
+
+\section{Dificuldades}
+\subsection{Dificuldades}
+\begin{frame}{Códigos, Falhas e Dificuldades}
+\begin{figure}
+	\includegraphics[width=.60\textwidth]{Figures/dificuldades}
+\end{figure}
+\end{frame}
+
+\section{VLW FLW!}
 \begin{frame}{Obrigado!}
 \centering
 \Huge

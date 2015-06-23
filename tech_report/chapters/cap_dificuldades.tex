@@ -1,13 +1,13 @@
 \begin{section}{Dificuldades e Soluções}
 \begin{enumerate}
-\item O Ångström é o sistema operacional de fábrica da BeagleBone Black, %$^{\scriptsize{\textregistered}}$, 
-bastante referenciado em fóruns e candidato 
-principal para ser a base do projeto. Entretanto, o sistema e a nomenclatura de 
-pacotes não correspondiam com os usados nas distribuições Debian, o que 
-impossibilitava a instalação das dependências necessárias para o uso das 
-ferramentas de processamento de voz. Além disso, o Ångström também consumia 
-muito espaço de armazenamento na \textit{flash}, ocupando sozinho 1.6~GB de 2~GB 
-por conta de sua interface gráfica.
+\item O Ångström é o sistema operacional de fábrica da BeagleBone Black,
+bastante referenciado em fóruns e candidato principal para ser a base do
+projeto. Entretanto, o sistema e a nomenclatura de pacotes não correspondiam com
+os usados nas distribuições Debian, o que impossibilitava a instalação das
+dependências necessárias para o uso das ferramentas de processamento de voz.
+Além disso, o Ångström também consumia muito espaço de armazenamento na
+\textit{flash}, ocupando sozinho 1.6~GB de 2~GB por conta de sua interface
+gráfica.
 
 A opção seguinte foi o Ubuntu, pois a similaridade do sistema de pacotes
 \texttt{apt-get} com a distribuição \textit{desktop} tornaria a integração mais
@@ -112,40 +112,9 @@ Resolvendo a regra de 3 inversa, tem se:
 	\frac{f_s}{f_{coding}} = \frac{36k}{8.96k} \approx 4 \notag 
 \end{equation}
 
-Com isso pode se observar que a frequ\^{e}ncia de amostragem seria 4 vezes menor
+Com isso, pode-se observar que a frequência de amostragem seria 4 vezes menor
 que a desejada. 
 
-%Para combater este problema, foi necess\'{a}rio abrir m\~{a}o do PWM e reajustar
-%como cada n\'{i}vel seria gerado, ent\~{a}o o n\'{i}vel alto (antes com PWM) passou a ser
-%nada mais que o pino ativo pelo tempo de 1 ciclo ($t_{ciclo} = 27.6 \ \mu s$).
-%
-%\begin{minipage}{\linewidth}
-%	\centering
-%	\includegraphics[width=.45\textwidth]{Figures/Bit_noPWM}
-%	\captionof{figure}{N\'{i}vel alto sem o PWM}
-%	\label{fig:bit_nopwm}
-%\end{minipage}
-%
-%\begin{minipage}{\linewidth}
-%	\centering
-%	\includegraphics[width=.85\textwidth]{Figures/Bit0_Coding}
-%	\captionof{figure}{Timeline do bit 0 na BeagleBone Black}
-%	\label{fig:bit0_coding}
-%\end{minipage}
-
-
-%que usar diversas vezes alocaç\~{o}es de mem\'{o}ria (\textit{*malloc()}) e
-%\textit{sprintf()}s, tornando o c\'{o}digo, em mais espec\'{i}fico o
-%gerenciamento dos campos da mem\'{o}ria, ca\'{o}tico, apresentando algumas vezes
-%falha de segmentaç\~{a}o. Posteriormente, com a adiç\~{a}o de outros aparelhos e
-%mais tabelas, estas queries ficaram cada vez mais recorrentes e mais falhas
-%poderam acontecer. 
-
-%Al\'{e}m disso, por estarmos acessando o MySQL por meio de uma outra linguagem (no caso C), n\~{a}o podemos prever 
-%agora poss\'{i}veis custos computacionais que essas diversas e constantes queries poder\~{a}o gerar nas threads 
-%dentro do BeagleBone Black\textregistered. Numa poss\'{i}vel e vindoura utilizaç\~{a}o de um servidor Apache com o 
-%PHP essa comunicaç\~{a}o adicional e constante poder\'{a} resultar em significante custo computacional tornando-se um 
-%efeito \textit{snowball}, bola de neve.
 \end{enumerate}
 \end{section}
 %%% EOF %%%

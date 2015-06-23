@@ -7,4 +7,4 @@ all:
 	make clean
 
 clean:
-	rm -f *.aux *.log *.out *.dvi *.nav *.snm *.toc *.log
+	rm -f *.aux *.log *.out *.dvi *.nav *.snm *.toc *.log *.vrb

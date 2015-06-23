@@ -202,7 +202,7 @@ O código Manchester também aparece invertido, já que valor lógico alto passa
 agora a ser representado pela transição \textit{high-to-low} (1), enquanto o
 valor baixo é definido por uma mudança \textit{low-to-high} (0). O primeiro bit
 de \textit{start} tem uma duração maior, para garantir o ganho do AGC
-(\textit{Automatic Gain Controller}) no circuito receptor; já o segundo, também
+(\textit{automatic gain controller}) no circuito receptor; já o segundo, também
 de \textit{start}, é sempre mantido em valor alto para sincronização. O bit de 
 \textit{toggle}, o qual muda de estado caso uma tecla deixe de ser pressionada,
 também possui uma duração mais longa do que os outros bits comuns. O período de
@@ -231,10 +231,10 @@ na duração de 560~$\mu$s.
 O primeiro bit, chamado de \textit{leader}, tem duração mais longa para garantir 
 o ganho no circuito receptor: 4,5~ms no nível alto e 4,5~ms no nível baixo; os
 16 bits seguintes são divididos em dois blocos exatamente iguais de 8 
-\textit{custom} bits cada; outras duas sessões de 8 bits definem o bloco de
-dado, onde o segundo bloco é o complemento dos bits do primeiro, o qual define
-os dados propriamente ditos; o 34$\degree$ e último bit é sempre baixo e encerra
-o comando.
+\textit{custom} bits cada, provavelmente definindo o endereço do aparelho;
+outras duas sessões de 8 bits definem o bloco de dado, onde o segundo bloco é o
+complemento dos bits do primeiro, que define os dados propriamente ditos; o
+34$\degree$ bit é sempre baixo e encerra o comando.
 
 \begin{figure}[!h]
 	\centering
@@ -260,7 +260,7 @@ desejado.
 IRdroid é outro aplicativo que permite o controle de aparelhos televisivos com o
 celular~\cite{irdroid}. Como o próprio nome sugere, funciona apenas em
 dispositivos Android, desde que seu módulo de \textit{hardware} esteja acoplado 
-na saída de audio \textit{jack} do \textit{smartphone}. Versões mais recentes 
+na saída de áudio \textit{jack} do \textit{smartphone}. Versões mais recentes 
 já possuem o \textit{hardware} que pode ser acessado via \textit{bluetooth}, 
 custando US\$ 60 o mais caro. A grande vantagem é que o IRdroid, além de ser 
 baseado na biblioteca LIRC, a qual possui uma vasta quantidade de equipamentos 
