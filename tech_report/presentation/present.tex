@@ -94,6 +94,7 @@ Professores: Jeferson Leite e Adalbery Castro\\
 \begin{itemize}
 	\item 23\% dos brasileiros possuem necessidades especiais
 	\item Teclado e Mouse: Exclusão digital
+	\item Dificuldade em controles convencionais para deficientes
 	\item Acessibilidade: Novas formas de controle
 \end{itemize}
 \begin{figure}
@@ -105,20 +106,20 @@ Professores: Jeferson Leite e Adalbery Castro\\
 \subsection{Objetivos}
 \begin{frame}{Objetivos}
 \textcolor{blue}{Objetivo Geral}: Controle de TV via \textit{smartphone} 
-através da voz
+através da voz \medskip
 \begin{itemize}
-	\item BeagleBone Black
+	\item BeagleBone Black\smallskip
 	\begin{itemize}
 		\item Servidor de reconhecimento de fala \smallskip
 		\item Servidor de síntese de fala \smallskip
-		\item Servidor LAMP de armazenamento de comandos \smallskip
+		\item Servidor LAMP de armazenamento de comandos \medskip
 	\end{itemize}
-	\item Arduino UNO
+	\item Arduino UNO\smallskip
 	\begin{itemize}
 		\item Transmissor de Sinais Infravermelhos (IR LED) \smallskip
-		\item Receptor de Sinais Infravermelhos (IR Receiver) \smallskip
+		\item Receptor de Sinais Infravermelhos (IR Receiver) \medskip
 	\end{itemize}
-	\item Android
+	\item Android\smallskip
 	\begin{itemize}
 		\item Microfone (cliente)
 	\end{itemize}
@@ -217,13 +218,56 @@ televisão	t e l e v i z a~ w~
 \end{figure}
 \end{frame}
 
-\section{Tx/Rx}
-\subsection{Tx/Rx}
+\section{Work}
+\subsection{Work}
+\begin{frame}{Códigos, Falhas, Dificuldades...}
+\begin{figure}
+	\includegraphics[width=.60\textwidth]{Figures/dificuldades}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Dificuldades}
+\begin{itemize}
+	\item Sistema Operacional \smallskip
+	\begin{itemize}
+		\item Ångström \smallskip
+		\item Ubuntu \smallskip
+		\item Debian wheezy $\checkmark$ \medskip
+	\end{itemize}
+	\item Saída de áudio\smallskip
+	\begin{itemize}
+		\item HDMI \smallskip
+		\item USB $\checkmark$ \medskip
+	\end{itemize}
+	\item LibPWM na BeagleBone\smallskip
+	\begin{itemize}
+		\item DTO: \textit{Device Tree Overlay} \smallskip
+		\item Arduino $\checkmark$ \medskip
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
 \begin{frame}{Comunicação BeagleBone $\rightarrow$ Arduino}
 \begin{figure}
 	\includegraphics[width=.65\textwidth]{Figures/duplex_tx}
 \end{figure}
 \end{frame}
+
+\begin{frame}{Códigos}
+\begin{itemize}
+	\item Protocolo de Comunicação BBB $\rightarrow$ UNO: \smallskip
+	\begin{itemize}
+		\item \texttt{DuplexTransmission.ino} \smallskip
+		\item \texttt{send2uno.c} \medskip
+	\end{itemize}
+	\item Banco de Dados (LAMP): \smallskip
+	\begin{itemize}
+		\item \texttt{db\_phi.c} \smallskip
+		\item \texttt{setup\_db.sql} \medskip
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
 
 \section{Fritzing}
 \subsection{Fritzing}
@@ -242,14 +286,6 @@ televisão	t e l e v i z a~ w~
 %\lstinputlisting[language=c, firstline=16, lastline=40, basicstyle=\tiny\ttfamily]
 %{../codes/bbb/send2uno.c}
 %\end{frame}
-
-\section{Dificuldades}
-\subsection{Dificuldades}
-\begin{frame}{Códigos, Falhas e Dificuldades}
-\begin{figure}
-	\includegraphics[width=.60\textwidth]{Figures/dificuldades}
-\end{figure}
-\end{frame}
 
 \section{VLW FLW!}
 \begin{frame}{Obrigado!}
