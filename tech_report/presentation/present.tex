@@ -140,6 +140,12 @@ através da voz \medskip
 
 \section{Teoria}
 \subsection{Teoria}
+\begin{frame}{O que é BeagleBone Black?}
+\begin{figure}
+	\includegraphics[width=\textwidth]{Figures/beagleboneblack}
+\end{figure}
+\end{frame}
+
 \begin{frame}{Reconhecimento \textit{vs.} Síntese}
 \begin{figure}
 	\includegraphics[width=\textwidth]{Figures/asr_tts}
@@ -239,12 +245,22 @@ televisão	t e l e v i z a~ w~
 		\item HDMI \smallskip
 		\item USB $\checkmark$ \medskip
 	\end{itemize}
-	\item LibPWM na BeagleBone\smallskip
+	\item PWM na BeagleBone\smallskip
 	\begin{itemize}
 		\item DTO: \textit{Device Tree Overlay} \smallskip
 		\item Arduino $\checkmark$ \medskip
 	\end{itemize}
 \end{itemize}
+\end{frame}
+
+\begin{frame}{Por que utilizar o Arduino?}
+\begin{itemize}
+	\item Atribuir valores a arquivos é lento demais no ARM
+	\item Simulação GPIO no core i7: média de 10~$\mu$s 
+\end{itemize}
+\begin{figure}
+	\includegraphics[width=.75\textwidth]{Figures/hist_time}
+\end{figure}
 \end{frame}
 
 \begin{frame}{Comunicação BeagleBone $\rightarrow$ Arduino}
@@ -264,6 +280,15 @@ televisão	t e l e v i z a~ w~
 	\begin{itemize}
 		\item \texttt{db\_phi.c} \smallskip
 		\item \texttt{setup\_db.sql} \medskip
+	\end{itemize}
+	\item Sinais Infravermelhos
+	\begin{itemize}
+		\item \texttt{send.ino} \smallskip
+		\item \texttt{receive.ino} \medskip
+	\end{itemize}
+	\item GPIO
+	\begin{itemize}
+		\item \texttt{SimpleGPIO.c} \medskip
 	\end{itemize}
 \end{itemize}
 \end{frame}
